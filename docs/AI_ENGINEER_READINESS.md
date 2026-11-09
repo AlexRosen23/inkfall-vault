@@ -33,7 +33,7 @@ Practice references: [Anthropic, demystifying evals](https://www.anthropic.com/e
 | Observability / tracing (4/9) | OpenTelemetry GenAI spans (retrieval, chat), off by default, no content in spans | Basic |
 | Cost / latency (3/9) | Latency p50/p95 per method; per-answer token usage; Claude list-price estimate per answer | Basic |
 | MCP (1/9) | `src/inkfall/mcp_server.py`, docs/MCP_SERVER.md | Done |
-| Cloud, containers, CI/CD (5/9) | `make ci` locally; CI workflow defined but GitHub Actions disabled by owner policy | Missing (see below) |
+| Cloud, containers, CI/CD (5/9) | `make ci` locally and on GitHub Actions (Linux runner, every push and PR) | Partial: CI only, no deployment (see below) |
 
 ## Added on this branch (numbers from saved files)
 
@@ -43,7 +43,8 @@ _Rendered by `scripts/render_eval_docs.py` from the saved reports named in each 
 
 | Added | What was measured | Result | File |
 |---|---|---|---|
-| Claude provider (Anthropic Citations API, custom-content documents) | request shape, block-index → char-offset mapping, re-verification, rejection of out-of-pack / out-of-range / tampered citations and refusals | offline only: 13 tests against fixtures built from the documented response schema; **never called live** (no API key) | `tests/test_claude_citations.py` |
+| Claude provider (Anthropic Citations API, custom-content documents) | request shape, block-index → char-offset mapping, re-verification, rejection of out-of-pack / out-of-range / tampered citations and refusals | offline: 13 tests against fixtures built from the documented response schema; one live run in the next row | `tests/test_claude_citations.py` |
+| Live Claude check (claude-opus-5-5, 2026-11-09) | the 6 dev questions from `make eval-generative` | 6/6 outputs accepted; 18 sentences: 12 supported, 1 partial, 5 unsupported (5 of them uncited connecting sentences such as "The documents conflict on this point."); gold span in 5/6; **finding:** PM-007 abstained because passages were sent without their document title (fixed; not yet re-run live); p50 3083.3 ms; 14363 tokens reported | `eval/reports/generative_claude.json` |
 | Adversarial sweep with a real model, run 1 | same sweep as the extractive run, gpt-oss:20b answering | **0 leaks**, 194 generated answers, 0/187 prompts with forbidden content; **finding:** one generated answer repeated a vendor notice's instruction to AI tools (fixed: such sentences are now withheld). Run 1 started at commit 97756f8; its `git_commit` field is the HEAD when it finished (later runs record both) | `eval/reports/adversarial_generative_run1.json` |
 | Adversarial sweep with a real model, run 2 (after the fix) | 1796 probes + 898 direct reads, 12 identities | **0 leaks**; 194 generated answers; 0/187 prompts and 0 raw outputs with forbidden content; injection 20/21, generation 5/5, api 10/10 | `eval/reports/adversarial_generative.json` |
 | Faithfulness LLM judge (binary, critique first), calibrated | judge-test, n=52 (37 PASS / 15 FAIL reference labels; all FAILs synthetic) | LLM judge TPR **0.946**, TNR **0.933**; deterministic span check TPR 0.730, TNR 1.000 — against **AI-drafted labels pending owner review**; judge = generator model | `eval/reports/faithfulness.json` |
@@ -69,9 +70,11 @@ workloads during the runs (latencies are not a benchmark).
 - **Few natural failures.** Natural answers from the local model were almost all faithful, so the judge's
   true-negative rate rests mostly on synthetic negatives (changed numbers, appended fabricated sentences). Real
   subtle misreadings are under-represented.
-- **Claude provider never called live.** No API key was available. The Citations integration is tested against
-  fixtures built from the documented response schema; a live run (`make eval-claude-live` with `ANTHROPIC_API_KEY` set; 6 questions, a few cents at list price) may surface
-  differences (for example how blocks are cited across sentence boundaries, or the server-side fallback beta).
+- **Claude provider: one small live run.** Six questions through `make eval-claude-live` on 2026-11-09
+  (`eval/reports/generative_claude.json`). It found one real defect: passages were sent without their document
+  title, so a question naming the project only the title mentions was abstained on (fixed, not yet re-run live).
+  Uncited connecting sentences ("The documents conflict on this point.") count as unsupported. Six questions are
+  not a benchmark; the offline fixture tests remain the main coverage.
 - **No deployment, no cloud.** Everything runs on one Mac. No container image, no IaC; a deployment is an owner
   decision. CI does run: GitHub Actions on `ubuntu-24.04` (enabled 2026-11-09) runs the `make ci` checks on every
   pull request and push to `main`.

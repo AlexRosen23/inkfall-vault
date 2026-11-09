@@ -105,6 +105,7 @@ def test_request_uses_custom_content_documents_with_exact_stored_spans(ask, base
     for d, src in zip(docs, res["sources"], strict=True):
         assert d["source"]["type"] == "content" and d["citations"] == {"enabled": True}
         assert d["title"].startswith(src["pid"])
+        assert src["title"] in d["title"], "the document title names the subject a mid-document passage may not"
         for blk in d["source"]["content"]:
             assert blk["type"] == "text" and blk["text"].strip() == blk["text"] and blk["text"]
             assert blk["text"] in texts[src["pid"]]["text"]  # every block is a slice of the authorized passage

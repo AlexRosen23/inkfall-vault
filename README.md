@@ -19,7 +19,7 @@ The three organizations and all 45 documents are fictional.
 | **Status** | Working local demo. The build spec's phases 1–5 ([#1](https://github.com/AlexRosen23/inkfall-vault/pull/1)–[#3](https://github.com/AlexRosen23/inkfall-vault/pull/3)) and the AI Engineer readiness additions ([#4](https://github.com/AlexRosen23/inkfall-vault/pull/4)) are merged. Those additions are a Claude Citations provider, an MCP server, a real-model adversarial run, a calibrated faithfulness judge and tracing. Contradiction detection is partial, and login uses fixture identities. |
 | **Stack** | Python 3.12 (uv), FastAPI, SQLAlchemy, SQLite FTS5, sentence-transformers (`all-MiniLM-L6-v2`, CPU), Next.js 16 / React 19 / TypeScript, pytest. Opt-in: Anthropic SDK, MCP Python SDK, OpenTelemetry |
 | **Run it** | `make setup && make serve`, then open http://127.0.0.1:5110 |
-| **Verified** | README checked on 2026-11-09 against `main` at `02a5c9c`, merged into this branch. The quick start, the 100 tests and `make ci` were rerun on that tree. |
+| **Verified** | README checked on 2026-11-09 against `main` at `10aee90`, merged into this branch. The quick start, the 101 tests and `make ci` were rerun on that tree. |
 | **License** | MIT ([LICENSE](LICENSE)) |
 
 ### For AI Engineer reviewers
@@ -147,7 +147,7 @@ command, commit and machine.
 | Prompt-injection flagging in documents and questions | Partial (regex heuristic) | Adversarial injection section 20/21. Safety rests on authorization and output validation, not on this flag. |
 | Optional local generation (LM Studio / Ollama), validated per sentence | Working, optional | Validator: `tests/test_generation.py` plus a scripted malicious model (5/5 attacks handled). Real models: a 6-question sample with Qwen3.6-35B in LM Studio (`eval/reports/generative.json`), and gpt-oss:20b in Ollama answering the full adversarial sweep (next row). |
 | Adversarial sweep with a real model writing the answers | Working | `eval/reports/adversarial_generative.json` (gpt-oss:20b, 2026-11-09): 0 leaks, 194 generated answers, 0 of 187 prompts with forbidden content. The first run found the model echoing an injected instruction. That run is kept as `adversarial_generative_run1.json`, and the fix is below. |
-| Claude via the Anthropic Citations API (opt-in) | **Partial: tested offline only** | `tests/test_claude_citations.py` uses fixtures built from the documented response schema. Never called live yet: `make eval-claude-live` (paid, 6 questions) records one once an `ANTHROPIC_API_KEY` is set. It's never auto-selected. |
+| Claude via the Anthropic Citations API (opt-in) | **Partial: one small live run** | `tests/test_claude_citations.py` uses fixtures built from the documented response schema. One live run on 2026-11-09 (`make eval-claude-live`, claude-opus-5-5, 6 dev questions) → `eval/reports/generative_claude.json`: 6/6 accepted, 12 of 18 sentences supported. It found a real defect, fixed but not yet re-run live (see Results). It's never auto-selected. |
 | Faithfulness LLM judge, calibrated | Working, with caveats | `eval/reports/faithfulness.json`: judge-test TPR 0.946 / TNR 0.933 (n=52). The reference labels are AI-drafted and pending owner review, the judge is the same model as the generator, and every test-split FAIL label is a synthetic negative. |
 | Permission-aware MCP server (stdio: `search`, `fetch_document`, `cite`) | Working | `tests/test_mcp_server.py`: 449 identity × unreadable-version pairs fetch and cite as missing, 0 forbidden canaries in 449 searches, plus a real stdio subprocess. See [docs/MCP_SERVER.md](docs/MCP_SERVER.md). |
 | OpenTelemetry GenAI spans | Working, off by default | `tests/test_telemetry.py`. Spans never carry question, document, prompt or output text. |
@@ -321,6 +321,8 @@ zero-leak tests had to pass before any LLM feature was added. Each phase is a co
 | Rerank ablation | Cross-encoder over hybrid, measured as no gain; recorded as a negative result | [PR #3](https://github.com/AlexRosen23/inkfall-vault/pull/3) |
 | AI Engineer readiness | Claude Citations provider (offline-tested), real-model adversarial sweep, faithfulness judge calibrated against reference labels, MCP server, OWASP LLM Top 10 mapping, OpenTelemetry spans, walkthrough video | [PR #4](https://github.com/AlexRosen23/inkfall-vault/pull/4) |
 | License | MIT `LICENSE` file, added when the repo went public | [PR #7](https://github.com/AlexRosen23/inkfall-vault/pull/7) |
+| CI seed fix + live Claude check | Seed the database before the adversarial step in CI; `make eval-claude-live` (opt-in, paid) | [PR #8](https://github.com/AlexRosen23/inkfall-vault/pull/8) |
+| First live Claude run | The owner's 6-question run, committed unedited; document titles sent with each passage; token-total fix | [PR #9](https://github.com/AlexRosen23/inkfall-vault/pull/9) |
 | This write-up + Linux CI | This README; CI moved from `macos-15` to `ubuntu-24.04` with CPU-only torch; Actions enabled | [PR #6](https://github.com/AlexRosen23/inkfall-vault/pull/6) |
 
 ### Key decisions and trade-offs
@@ -444,6 +446,15 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
   - p50 latency about 100 s per question.
 
   This is a small sample and not a headline claim.
+- **Live Claude sample** (`eval/reports/generative_claude.json`, `make eval-claude-live`, claude-opus-5-5 through
+  the Citations API, run by the owner on 2026-11-09, same 6 dev questions):
+  - 6 of 6 outputs accepted; the gold span was cited in 5 of 6;
+  - of 18 sentences, 12 supported, 1 partial and 5 unsupported. All 5 unsupported sentences are uncited
+    connecting sentences such as "The documents conflict on this point.";
+  - p50 latency 3.1 s; 14,363 tokens, summed from the per-question usage (the file's own total reads 0 because of
+    a counting bug, since fixed);
+  - **finding:** PM-007 abstained wrongly. Passages were sent to Claude titled by section heading only, and only
+    the document title names the project. Titles now carry the source title, but the fix hasn't been re-run live.
 - **Faithfulness judge:** read the TPR/TNR as agreement with AI-drafted labels, not with human judgment. The
   labels were written by a separate Claude Code subagent, blind to the answers' origin, and are pending owner
   review (`eval/faithfulness/owner_review.csv`). The judge is the same model as the generator. All 15 FAIL labels
@@ -476,8 +487,9 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
   subtle misreadings. Safety rests on authorization and validation, not on the flag.
 - **The faithfulness judge isn't validated against people yet.** Its reference labels are AI-drafted and
   pending owner review, it shares a model with the generator, and its test-split negatives are all synthetic.
-- **The Claude provider has never run live.** It's tested only against fixtures built from the documented
-  response schema. `make eval-claude-live` records a live run, but it needs an API key.
+- **The Claude provider has one small live run.** Six questions on 2026-11-09; the fixture tests remain the main
+  coverage. The PM-007 fix (document titles) hasn't been re-run live, and the validator counts uncited connecting
+  sentences as unsupported.
 - **The MCP server trusts whoever starts it.** One identity per process, with no client authentication.
 - **Time-to-task savings are not measured.**
 - More gaps are listed in [docs/SECURITY_LIMITATIONS.md](docs/SECURITY_LIMITATIONS.md): storage is unencrypted
@@ -493,7 +505,8 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
    the evidence can't satisfy.
 4. Owner review of the 30-item faithfulness CSV, then re-report the judge against human labels, with naturally
    wrong answers among the negatives.
-5. One live Claude Citations run (`make eval-claude-live`, 6 dev questions), to confirm the fixtures match real responses.
+5. Re-run `make eval-claude-live` to confirm the PM-007 title fix, and decide whether uncited connecting sentences
+   should count as unsupported.
 6. Real authentication (OIDC) and TLS behind a reverse proxy, before anything other than fictional data comes
    near it.
 7. A Postgres backend (tsvector plus pgvector) behind `search.py`, with the same isolation suite run against it.
@@ -520,7 +533,7 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
 make test
 ```
 
-This runs the dataset validator and the full pytest suite: **100 tests, all passing** on 2026-11-09 (this
+This runs the dataset validator and the full pytest suite: **101 tests, all passing** on 2026-11-09 (this
 branch, i.e. `main` at `02a5c9c` plus this PR's CI change). `make security-test` runs the isolation, security and generation suites, then the adversarial sweep.
 `make ci` runs everything the CI workflow would: Ruff, the TypeScript typecheck and ESLint, the dataset check,
 pytest, the adversarial sweep, the production web build and the license gate. It passed locally on 2026-11-09.
