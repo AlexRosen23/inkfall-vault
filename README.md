@@ -11,7 +11,8 @@ audit trail. A brief only leaves the team after a second person approves it.
 
 ## For AI Engineer reviewers
 
-A 60-second path through the repo. One command after `make setup && make seed`:
+A 60-second path through the repo. One command after `make setup && make seed` (no model, no API key; the MCP
+isolation sweep makes it take a few minutes on CPU):
 
 ```bash
 uv run pytest tests/test_claude_citations.py tests/test_mcp_server.py tests/test_generation.py -q
