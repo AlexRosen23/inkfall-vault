@@ -45,8 +45,9 @@ eval: ## Run the gold set through BM25/dense/hybrid(/rerank) and write eval/repo
 	$(UV) run python -m inkfall.evaluate
 	$(UV) run python scripts/render_eval_docs.py
 
-eval-docs: ## Re-render docs/RETRIEVAL_EVAL.md + docs/RAG_EVALUATION.md from the saved report
+eval-docs: ## Re-render eval docs, resume metrics and the authorization matrix from saved reports/policy
 	$(UV) run python scripts/render_eval_docs.py
+	$(UV) run python scripts/render_authz_matrix.py
 
 eval-generative: ## Opt-in: 6 dev questions through a local LM Studio/Ollama model (slow; ~1-2 min each)
 	$(UV) run python -m inkfall.eval_generative
@@ -73,6 +74,9 @@ ci: ## What .github/workflows/ci.yml runs (Actions are disabled on the repo; run
 	$(UV) run python -m inkfall.adversarial
 	cd web && npm run build
 	$(MAKE) licenses
+
+openapi: ## Regenerate the committed OpenAPI snapshot (docs/openapi.json)
+	$(UV) run python -c "import json; from inkfall.api import create_app; json.dump(create_app().openapi(), open('docs/openapi.json','w'), indent=1)"
 
 clean: ## Remove generated local data (database, outbox) - corpus and reports are kept
 	rm -rf data .pytest_cache .ruff_cache web/.next

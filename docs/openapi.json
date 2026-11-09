@@ -744,6 +744,22 @@
      }
     }
    }
+  },
+  "/api/eval/adversarial": {
+   "get": {
+    "summary": "Adversarial Report",
+    "operationId": "adversarial_report_api_eval_adversarial_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
   }
  },
  "components": {

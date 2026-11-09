@@ -99,7 +99,7 @@ def main() -> None:
            "## How to read this", "",
            "- Metrics are document-version level: a hit means the exact gold version (e.g. `CV-MSA-ORION@2`) was "
            "retrieved for the asking user on the question's as-of date.",
-           "- Each identity can read roughly 7-15 documents, so **Recall@5 saturates**; MRR@10 and nDCG@10 are the "
+           "- Each identity can read only 3-15 document versions in total, so **Recall@5 saturates**; MRR@10 and nDCG@10 are the "
            "informative ranking metrics. Precision@5 is capped by the number of relevant docs per question (1-2).",
            "- Thresholds and heuristics were tuned on the **dev** split only. The **test** split was not used for "
            f"tuning. Questions per split: {counts}.",

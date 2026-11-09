@@ -312,6 +312,17 @@ def _units(kind: str, values: set[str]) -> dict[str, set[str]]:
     return out
 
 
+def _amendment_covers(base: Passage, cands: list[Passage], best: dict, kind: str, units: list[str]) -> bool:
+    """True when an in-force amendment of `base` in the evidence states a value of the same kind and unit."""
+    for amd in cands:
+        if amd.amends_key != base.doc_key or not best.get(amd.pid):
+            continue
+        vals = best[amd.pid][3][kind]
+        if vals and set(_units(kind, vals)) & set(units):
+            return True
+    return False
+
+
 def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], top: int = 6) -> tuple[list[Conflict], list[str]]:
     """Testable contradiction rule (no model involved). Two passages conflict when ALL hold:
     1. both versions are in force on the as-of date and belong to different documents;
@@ -360,10 +371,11 @@ def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], to
                     overrides.append(f"{amd.ref} amends {base.ref}: the {kind} differs; the amendment governs "
                                      f"from {amd.effective_date}.")
                     continue
-                if a.doc_key in amended or b.doc_key in amended:
-                    base = a if a.doc_key in amended else b
-                    overrides.append(f"{base.ref} has an in-force amendment in the evidence; its original {kind} "
-                                     "is not treated as a contradiction.")
+                base = next((x for x in (a, b) if x.doc_key in amended and _amendment_covers(
+                    x, cands, best, kind, common)), None)
+                if base is not None:
+                    overrides.append(f"{base.ref} has an in-force amendment in the evidence that restates this {kind}; "
+                                     "its original value is not treated as a contradiction.")
                     continue
                 conflicts.append(Conflict(
                     kind, _cite(a, sa0, sa1, texts[a.version_id]), _cite(b, sb0, sb1, texts[b.version_id]),
