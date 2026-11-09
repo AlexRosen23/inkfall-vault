@@ -1,0 +1,412 @@
+{
+  "dataset": "inkfall-seed",
+  "dataset_version": "648f953504a95e33",
+  "documents": 45,
+  "entries": [
+    {
+      "ref": "CV-AMEND-HALDEN-01@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-amend-halden-01.v1.md",
+      "doc_type": "amendment",
+      "classification": "confidential",
+      "effective_date": "2026-02-01",
+      "sha256": "d2c920e995ad73741eca25447569bdb4ad055eafcb7e6180a87cc248b61ce38d"
+    },
+    {
+      "ref": "CV-AMEND-ORION-01@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-amend-orion-01.v1.md",
+      "doc_type": "amendment",
+      "classification": "confidential",
+      "effective_date": "2026-01-15",
+      "sha256": "64196b47d6683fec78239f2522ce4b67b225726f04a06efea8dd2fcb7b63321b"
+    },
+    {
+      "ref": "CV-CREDIT-FACILITY@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-credit-facility.v1.md",
+      "doc_type": "report",
+      "classification": "restricted",
+      "effective_date": "2025-06-30",
+      "sha256": "b365c710a95777778892f347dd55c9a6a65123b95d3ad6c32b19d8709d427d4c"
+    },
+    {
+      "ref": "CV-INC-2026-0914@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-inc-2026-0914.v1.md",
+      "doc_type": "incident_note",
+      "classification": "internal",
+      "effective_date": "2026-09-15",
+      "sha256": "2b4ce38c61f7cd267cbebbf48273ca0974660bcce8786126724b19a5209eb5a9"
+    },
+    {
+      "ref": "CV-MEMO-BOARD-LIQUIDITY@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-memo-board-liquidity.v1.md",
+      "doc_type": "memo",
+      "classification": "restricted",
+      "effective_date": "2026-09-15",
+      "sha256": "cb1a4a080a6e8f577488978eba07b735bf60d0f513c7b6d6e7ace98d3d6c2495"
+    },
+    {
+      "ref": "CV-MSA-HALDEN@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-msa-halden.v1.md",
+      "doc_type": "contract",
+      "classification": "confidential",
+      "effective_date": "2024-09-01",
+      "sha256": "77777cb1d70348a06a7f529f9eea40152581507c5e844dc8d6f0ec12f9fdab72"
+    },
+    {
+      "ref": "CV-MSA-ORION@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-msa-orion.v1.md",
+      "doc_type": "contract",
+      "classification": "confidential",
+      "effective_date": "2023-03-01",
+      "sha256": "73b5ee0800f06a16ef960810c432eefefeab672b033e57dc77ae25af81b18e95"
+    },
+    {
+      "ref": "CV-MSA-ORION@2",
+      "tenant": "corvane",
+      "file": "corvane/cv-msa-orion.v2.md",
+      "doc_type": "contract",
+      "classification": "confidential",
+      "effective_date": "2025-03-01",
+      "sha256": "88cced5e2c5b88e171f2a9c52860041e83c508923c677a8d94815f00546482be"
+    },
+    {
+      "ref": "CV-MSA-VANTOR@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-msa-vantor.v1.md",
+      "doc_type": "contract",
+      "classification": "confidential",
+      "effective_date": "2024-06-01",
+      "sha256": "73d5bece7c8f5bad38f3c2ab4736b515d13d648df42643fd373465c74c4efde3"
+    },
+    {
+      "ref": "CV-NOTICE-HALDEN-PRICE@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-notice-halden-price.v1.md",
+      "doc_type": "notice",
+      "classification": "public",
+      "effective_date": "2027-01-01",
+      "sha256": "b1ab66900276a012aada1d51b876ce53801d9c7c9d67cf60fa9b9d26e64c6614"
+    },
+    {
+      "ref": "CV-POL-TREASURY@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-pol-treasury.v1.md",
+      "doc_type": "policy",
+      "classification": "restricted",
+      "effective_date": "2024-01-01",
+      "sha256": "72c7eab4921b9d69f632e6f538b8e3043e7a37dffb8e9f3657e156e32b6c9aa2"
+    },
+    {
+      "ref": "CV-POL-TREASURY@2",
+      "tenant": "corvane",
+      "file": "corvane/cv-pol-treasury.v2.md",
+      "doc_type": "policy",
+      "classification": "restricted",
+      "effective_date": "2026-04-01",
+      "sha256": "a5fdb32911a169f095409565c4b417deb7b765cfcbcba4043911dfccb2e5484e"
+    },
+    {
+      "ref": "CV-RPT-ORION-RCA@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-rpt-orion-rca.v1.md",
+      "doc_type": "report",
+      "classification": "internal",
+      "effective_date": "2026-09-22",
+      "sha256": "8b78fdd1ec36a87e03a35172fa0fd93cabd8337b3b232b635097c6f5f8949cef"
+    },
+    {
+      "ref": "CV-SCHED-ORION-PRICING@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-sched-orion-pricing.v1.md",
+      "doc_type": "schedule",
+      "classification": "confidential",
+      "effective_date": "2024-01-01",
+      "sha256": "e408f511d6bd9beb061a6b4f90b46a23970a20359edb3fbda74ccd5801b9a348"
+    },
+    {
+      "ref": "CV-SLA-ORION@1",
+      "tenant": "corvane",
+      "file": "corvane/cv-sla-orion.v1.md",
+      "doc_type": "sla",
+      "classification": "internal",
+      "effective_date": "2023-03-01",
+      "sha256": "63a251044733ac70b9dcf4b6c4e92f830443e2e01e3df076d106ef8d0dd8110a"
+    },
+    {
+      "ref": "LF-AMD-BRIGHTWATER-01@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-amd-brightwater-01.v1.md",
+      "doc_type": "amendment",
+      "classification": "confidential",
+      "effective_date": "2026-02-01",
+      "sha256": "fcb78c97dcf715f091713d88f7aa27455db457831a633f7de45e94c442b96e7d"
+    },
+    {
+      "ref": "LF-AMD-CALDERWOOD-01@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-amd-calderwood-01.v1.md",
+      "doc_type": "amendment",
+      "classification": "confidential",
+      "effective_date": "2026-06-01",
+      "sha256": "7e36209472d3de11414d3d4e659c5be455dbce459198051386f55daa2b1c453c"
+    },
+    {
+      "ref": "LF-ENG-CALDERWOOD@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-eng-calderwood.v1.md",
+      "doc_type": "engagement_letter",
+      "classification": "confidential",
+      "effective_date": "2024-01-15",
+      "sha256": "18925d29867e8337f1022106faf0a2020b3e3a28fde0ec8863211e6f3708279a"
+    },
+    {
+      "ref": "LF-ENG-CALDERWOOD@2",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-eng-calderwood.v2.md",
+      "doc_type": "engagement_letter",
+      "classification": "confidential",
+      "effective_date": "2025-09-01",
+      "sha256": "464d6567eb76624580d5229736708c89152b612a8057373ac868e21991deea82"
+    },
+    {
+      "ref": "LF-HARROW-HOLD@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-harrow-hold.v1.md",
+      "doc_type": "notice",
+      "classification": "restricted",
+      "effective_date": "2026-08-31",
+      "sha256": "74a843291a9ee7a592b9d9225b6719813f8451b7c68e40a3f3d24ad450da31e6"
+    },
+    {
+      "ref": "LF-HARROW-SETTLEMENT@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-harrow-settlement.v1.md",
+      "doc_type": "memo",
+      "classification": "restricted",
+      "effective_date": "2026-09-18",
+      "sha256": "cb0e6d34699b46068c13ed99adb2b4c089e92f8ff94c4aa86c8e7b25a58423a7"
+    },
+    {
+      "ref": "LF-LIT-PEMBERTON@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-lit-pemberton.v1.md",
+      "doc_type": "report",
+      "classification": "confidential",
+      "effective_date": "2026-10-05",
+      "sha256": "1f18f014c166711903d6ea78a6ce0ebe4ea8c6082cd16e41018e88a10d49587c"
+    },
+    {
+      "ref": "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-memo-brightwater-notice.v1.md",
+      "doc_type": "memo",
+      "classification": "confidential",
+      "effective_date": "2026-03-10",
+      "sha256": "f2b7bc9bd15a69b7a4916a9f6eb1b2c9b1d00c9943675335bac1fbe285893666"
+    },
+    {
+      "ref": "LF-MSA-BRIGHTWATER@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-msa-brightwater.v1.md",
+      "doc_type": "contract",
+      "classification": "confidential",
+      "effective_date": "2023-03-01",
+      "sha256": "f2540d3a9dd81da204cbe479f1466dfd71b7dbb89932f1f78a0b705799934458"
+    },
+    {
+      "ref": "LF-MSA-BRIGHTWATER@2",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-msa-brightwater.v2.md",
+      "doc_type": "contract",
+      "classification": "confidential",
+      "effective_date": "2025-07-01",
+      "sha256": "92e0a7b50e876c838302f6e0d94b279949bacdc6496590a1f1612a9d3826cd4c"
+    },
+    {
+      "ref": "LF-MSA-HALVERSEN@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-msa-halversen.v1.md",
+      "doc_type": "contract",
+      "classification": "confidential",
+      "effective_date": "2024-05-01",
+      "sha256": "88769b6c6d6695ec40794e13767ef7ffe303e01b066dfc67a8d707f31cc10f59"
+    },
+    {
+      "ref": "LF-PARTNERS-MINUTES-2026-05@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-partners-minutes-2026-05.v1.md",
+      "doc_type": "minutes",
+      "classification": "restricted",
+      "effective_date": "2026-05-20",
+      "sha256": "2cf7b36bde45abc1d819f3a995fee33c00a167297e222af714f4c1a140b42ea1"
+    },
+    {
+      "ref": "LF-POL-BILLING@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-pol-billing.v1.md",
+      "doc_type": "policy",
+      "classification": "internal",
+      "effective_date": "2025-02-01",
+      "sha256": "57d14f43f9e01d6fc903be9d874d39ffa188a3a131eaeec7b0eb5cfa7eb0a7fe"
+    },
+    {
+      "ref": "LF-POL-RETENTION@1",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-pol-retention.v1.md",
+      "doc_type": "policy",
+      "classification": "public",
+      "effective_date": "2024-06-01",
+      "sha256": "c8c1a2ebbae8551d7bebfb16cd1625463eaf7263aadf7d31cb725aef3b9b5dad"
+    },
+    {
+      "ref": "LF-POL-RETENTION@2",
+      "tenant": "lanternfield",
+      "file": "lanternfield/lf-pol-retention.v2.md",
+      "doc_type": "policy",
+      "classification": "internal",
+      "effective_date": "2027-03-01",
+      "sha256": "cfaed09ad153711eb8d0ceec660acfbd7ce3029c78685d27b9437f0193b31eab"
+    },
+    {
+      "ref": "PM-BOARD-MINUTES-2025-12@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-board-minutes-2025-12.v1.md",
+      "doc_type": "minutes",
+      "classification": "restricted",
+      "effective_date": "2025-12-18",
+      "sha256": "cdbcd22123083e6da932a949d7c35add2f8256e19944b9171336083790e5d2c1"
+    },
+    {
+      "ref": "PM-BOARD-MINUTES-2026-09@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-board-minutes-2026-09.v1.md",
+      "doc_type": "minutes",
+      "classification": "restricted",
+      "effective_date": "2026-09-24",
+      "sha256": "20bceeadf2a36560dfda9eb4a95d22b9d56e6749e9e14cdcc5ab10823a4f74f0"
+    },
+    {
+      "ref": "PM-BOARD-RES-2026-07@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-board-res-2026-07.v1.md",
+      "doc_type": "memo",
+      "classification": "restricted",
+      "effective_date": "2026-07-16",
+      "sha256": "32ae29770fdd52917160a48e281fbd5969e93802cb1b0641cbcf79c72da03e32"
+    },
+    {
+      "ref": "PM-INCIDENT-EASTBANK@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-incident-eastbank.v1.md",
+      "doc_type": "incident_note",
+      "classification": "internal",
+      "effective_date": "2026-03-14",
+      "sha256": "95dfe3dfe5357baf2d63c179a771838bc50ad179ad8fa0ab44da9fd7ec0d5ea5"
+    },
+    {
+      "ref": "PM-MAINT-CONTRACT-A1@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-maint-contract-a1.v1.md",
+      "doc_type": "amendment",
+      "classification": "confidential",
+      "effective_date": "2025-10-01",
+      "sha256": "063156dd3f45a0a5373531d02bf99037d15813a299cde0461d2d79b8aa9b47b2"
+    },
+    {
+      "ref": "PM-MAINT-CONTRACT@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-maint-contract.v1.md",
+      "doc_type": "contract",
+      "classification": "confidential",
+      "effective_date": "2024-03-01",
+      "sha256": "8487de2c998f8f2d31edf270b71205267d18f0f4a21891777929e404bffd3711"
+    },
+    {
+      "ref": "PM-OPS-MEMO-RECORDS@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-ops-memo-records.v1.md",
+      "doc_type": "memo",
+      "classification": "internal",
+      "effective_date": "2024-08-12",
+      "sha256": "227a59ef1dd95539bdcfb0d0e72b4ce4c715b353f98429d6f8eb967da8ca47f4"
+    },
+    {
+      "ref": "PM-PROCUREMENT@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-procurement-policy.v1.md",
+      "doc_type": "policy",
+      "classification": "confidential",
+      "effective_date": "2023-06-01",
+      "sha256": "6308d2e34e020ec462f2176d7f305a19913f203b0c156d4d6c7118115a33463c"
+    },
+    {
+      "ref": "PM-PROCUREMENT@2",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-procurement-policy.v2.md",
+      "doc_type": "policy",
+      "classification": "confidential",
+      "effective_date": "2025-09-01",
+      "sha256": "1b9fca76223171ad4e19ae1e827ae3a624442a55d6efc36b256747f910e23dec"
+    },
+    {
+      "ref": "PM-REMOTE-WORK@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-remote-work-policy.v1.md",
+      "doc_type": "policy",
+      "classification": "internal",
+      "effective_date": "2027-01-01",
+      "sha256": "cd0317e4947e1063b48bd75f3ab84d4f2b77ad247a2d37ee119a492479bb967f"
+    },
+    {
+      "ref": "PM-RETENTION@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-retention-policy.v1.md",
+      "doc_type": "policy",
+      "classification": "public",
+      "effective_date": "2023-03-01",
+      "sha256": "3c7b92e207fdf190b13bcaf8abfbfe54bf45521216ad2ac14b76bd539f4519ce"
+    },
+    {
+      "ref": "PM-RETENTION@2",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-retention-policy.v2.md",
+      "doc_type": "policy",
+      "classification": "public",
+      "effective_date": "2025-07-01",
+      "sha256": "c577f63a0a7386ad54a8c9774b2d509178151f1a10b3821d25a836ddaeaa3614"
+    },
+    {
+      "ref": "PM-SLA-TELEMETRY-A1@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-sla-telemetry-a1.v1.md",
+      "doc_type": "amendment",
+      "classification": "internal",
+      "effective_date": "2025-04-01",
+      "sha256": "6b96e256f29ebe88fc559a7ac429f00a9f705d22d5c0bdf5013011222bcc0c0f"
+    },
+    {
+      "ref": "PM-SLA-TELEMETRY@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-sla-telemetry.v1.md",
+      "doc_type": "sla",
+      "classification": "internal",
+      "effective_date": "2024-01-15",
+      "sha256": "f971a1e58f87ba27cc0ddde176cdb0bb3b2ebbf13df618eeaba880a4c7d07ce4"
+    },
+    {
+      "ref": "PM-TELEMETRY-REPORT@1",
+      "tenant": "pellmoor",
+      "file": "pellmoor/pm-telemetry-report.v1.md",
+      "doc_type": "report",
+      "classification": "internal",
+      "effective_date": "2026-03-20",
+      "sha256": "8b4fd1efa5c5caf9c4fbe2866b144c82fef7fef097101a473a3d1a7352d7ffbd"
+    }
+  ]
+}
