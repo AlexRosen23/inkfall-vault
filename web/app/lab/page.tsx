@@ -282,6 +282,8 @@ function GenericReport({ data }: { data: unknown }) {
 export default function LabPage() {
   const report = useLoad<EvalReport>("/api/eval/report");
   const adversarial = useLoad<unknown>("/api/eval/adversarial");
+  const advGenerative = useLoad<unknown>("/api/eval/adversarial-generative");
+  const faithfulness = useLoad<unknown>("/api/eval/faithfulness");
   const reviews = useLoad<ReviewsResponse>("/api/reviews");
   const [split, setSplit] = useState("all");
   const [catMethod, setCatMethod] = useState("");
@@ -485,6 +487,20 @@ export default function LabPage() {
           {adversarial.error && !adversarial.missing && <p className="error small" role="alert">{adversarial.error}</p>}
           {!adversarial.data && !adversarial.error && <p className="muted small">Loading…</p>}
           {adversarial.data !== undefined && <GenericReport data={adversarial.data} />}
+        </Section>
+        <Section title="Answer faithfulness: LLM judge vs reference labels" kicker="/api/eval/faithfulness" className="span-all">
+          <p className="small muted">
+            Reference labels are AI-drafted (Claude Code) and pending owner review; the judge and the generator are the same
+            local model with different prompts. TPR = PASS recall, TNR = FAIL recall.
+          </p>
+          {faithfulness.missing && <p className="muted small">Not run yet (make eval-faithfulness).</p>}
+          {faithfulness.error && !faithfulness.missing && <p className="error small" role="alert">{faithfulness.error}</p>}
+          {faithfulness.data !== undefined && <GenericReport data={faithfulness.data} />}
+        </Section>
+        <Section title="Adversarial suite with a real local model" kicker="/api/eval/adversarial-generative" className="span-all">
+          {advGenerative.missing && <p className="muted small">Not run yet (make security-test-generative).</p>}
+          {advGenerative.error && !advGenerative.missing && <p className="error small" role="alert">{advGenerative.error}</p>}
+          {advGenerative.data !== undefined && <GenericReport data={advGenerative.data} />}
         </Section>
         <Section title="Human review labels" kicker="/api/reviews">
           {reviews.error && <p className="error small" role="alert">{reviews.error}</p>}

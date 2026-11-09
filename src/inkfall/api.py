@@ -659,9 +659,23 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
 
     @app.get("/api/eval/adversarial")
     def adversarial_report(user: User = Depends(current_user)):
-        rep = _read_json(EVAL_DIR / "reports" / "adversarial.json")
+        return _tenant_filtered_adversarial(user, "adversarial.json", "make security-test")
+
+    @app.get("/api/eval/adversarial-generative")
+    def adversarial_generative_report(user: User = Depends(current_user)):
+        return _tenant_filtered_adversarial(user, "adversarial_generative.json", "make security-test-generative")
+
+    @app.get("/api/eval/faithfulness")
+    def faithfulness_report(user: User = Depends(current_user)):
+        rep = _read_json(EVAL_DIR / "reports" / "faithfulness.json")
         if rep is None:
-            raise HTTPException(404, "no_report: run make security-test")
+            raise HTTPException(404, "no_report: run make eval-faithfulness")
+        return rep  # aggregate counts and rates only; no questions, answers or document text
+
+    def _tenant_filtered_adversarial(user: User, name: str, cmd: str):
+        rep = _read_json(EVAL_DIR / "reports" / name)
+        if rep is None:
+            raise HTTPException(404, f"no_report: run {cmd}")
         cases = []
         for cs in rep.get("cases", []):
             asker = st.directory.users.get(cs.get("user") or "")

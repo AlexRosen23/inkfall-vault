@@ -6,7 +6,7 @@ WEB_PORT ?= 5111
 
 MCP_USER ?= dana.whitcombe
 
-.PHONY: mcp help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
+.PHONY: mcp security-test-generative eval-faithfulness help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*?## ' '{printf "  %-16s %s\n", $$1, $$2}'
@@ -59,6 +59,17 @@ eval-docs: ## Re-render eval docs, resume metrics and the authorization matrix f
 
 eval-generative: ## Opt-in: 6 dev questions through a local LM Studio/Ollama model (slow; ~1-2 min each)
 	$(UV) run python -m inkfall.eval_generative
+	$(UV) run python scripts/render_eval_docs.py
+
+LOCAL_LLM ?= gpt-oss:20b
+JUDGE_PROMPT ?= v2
+
+security-test-generative: ## Opt-in, slow (~1-2 h): adversarial sweep with a real local model answering (Ollama, $(LOCAL_LLM))
+	INKFALL_LLM_MODEL=$(LOCAL_LLM) $(UV) run python -m inkfall.adversarial --generate ollama
+
+eval-faithfulness: ## Opt-in, slow: re-judge the saved answers (test split, frozen prompt) and rebuild faithfulness.json
+	INKFALL_LLM_MODEL=$(LOCAL_LLM) $(UV) run python -m inkfall.eval_faithfulness judge --split test --prompt $(JUDGE_PROMPT)
+	$(UV) run python -m inkfall.eval_faithfulness report --prompt $(JUDGE_PROMPT) --dev-versions v1,v2
 	$(UV) run python scripts/render_eval_docs.py
 
 rerank-model: ## Opt-in: download the ~90 MB cross-encoder for the rerank experiment
