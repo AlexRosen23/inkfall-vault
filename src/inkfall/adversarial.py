@@ -97,6 +97,7 @@ class Recording(Provider):
 
 def run(out: Path | None = None, generate: str | None = None) -> dict:
     t0 = time.perf_counter()
+    commit_at_start = _git_commit()
     directory = load_directory()
     rec: Recording | None = None
     orig_get_provider = service.get_provider
@@ -225,6 +226,8 @@ def run(out: Path | None = None, generate: str | None = None) -> dict:
                                       "the instruction is never repeated as an answer sentence",
                           "observed": {"pattern_detects_fixture": detectable, "flagged_sources": flagged,
                                        "mode": body["mode"], "injection_in_answer": quoted_fx,
+                                       "withheld_instruction_sentences":
+                                           body.get("generation", {}).get("withheld_instruction_sentences"),
                                        "authorized_docs_before": len(before), "authorized_docs_after": len(after)},
                           "passed": ok})
 
@@ -319,11 +322,7 @@ def run(out: Path | None = None, generate: str | None = None) -> dict:
                       "expected": "429 after the limit", "observed": {"codes": codes}, "passed": codes[-1] == 429})
     shutil.rmtree(tmp, ignore_errors=True)
     service.get_provider = orig_get_provider
-    try:
-        commit = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True,  # noqa: S607
-                                text=True, check=False).stdout.strip()
-    except OSError:
-        commit = ""
+    commit = _git_commit()
     by_section: dict[str, dict] = {}
     for cs in cases:
         b = by_section.setdefault(cs["section"], {"passed": 0, "total": 0})
@@ -331,7 +330,9 @@ def run(out: Path | None = None, generate: str | None = None) -> dict:
         b["passed"] += int(cs["passed"])
     report = {
         "generated_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
-        "provenance": {"git_commit": commit, "command": "make security-test (python -m inkfall.adversarial)",
+        "provenance": {"git_commit": commit, "git_commit_at_start": commit_at_start,
+                       "command": ("python -m inkfall.adversarial --generate " + generate) if generate
+                       else "make security-test (python -m inkfall.adversarial)",
                        "dataset_version": json.loads((EVAL_DIR / "dataset_manifest.json").read_text())["dataset_version"],
                        "wall_seconds": round(time.perf_counter() - t0, 1),
                        "note": "Generation attacks use a scripted malicious model, not a real LLM."
@@ -355,6 +356,14 @@ def run(out: Path | None = None, generate: str | None = None) -> dict:
     out = out or (EVAL_DIR / "reports" / ("adversarial_generative.json" if rec else "adversarial.json"))
     out.write_text(json.dumps(report, indent=1) + "\n")
     return report
+
+
+def _git_commit() -> str:
+    try:
+        return subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=ROOT, capture_output=True,  # noqa: S607
+                              text=True, check=False).stdout.strip()
+    except OSError:
+        return ""
 
 
 def _gen_tally(stats: dict, body: dict) -> None:

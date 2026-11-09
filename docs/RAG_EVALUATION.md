@@ -96,6 +96,43 @@ _From `eval/reports/generative.json` (2026-11-09T05:15:07+00:00): qwen3.6-35b-a3
 - Questions: 6; outputs accepted: 6; rejected by the validator: 0; generated sentences: 13 (supported 10, partial 2, unsupported 1).
 - Latency per question: p50 99911.1 ms, p95 135228.7 ms. Tokens (estimate, chars/4): prompt 3621, completion 621; reported by the server: 15801. Billed cost: $0 (local model).
 
+## Adversarial run with a real local model
+
+Not run in this report (`python -m inkfall.adversarial --generate ollama`).
+
+## Answer faithfulness: binary LLM judge calibrated against reference labels
+
+_From `eval/reports/faithfulness.json` (2026-11-09T17:51:43+00:00, commit `96eecc8`); answers from `eval/reports/faithfulness_answers.json` (2026-11-09T16:43:26+00:00)._
+
+**Criterion:** every claim in the answer is supported by the spans it cites (binary PASS/FAIL). Positive class = PASS. Method after Hamel Husain's LLM-judge guide: binary verdict with a written critique, labels split into judge-dev (answers to dev-split gold questions) and judge-test (test-split questions), prompt changed only after reading judge-dev disagreements, then frozen and run once on judge-test; true-positive and true-negative rates reported separately.
+
+- Generator: **gpt-oss:20b** via ollama (local). Judge: the **same model** with a different prompt (`eval/faithfulness/judge_prompt_v2.txt`). **Limitation:** a judge that shares the generator's model can share its blind spots (self-preference); the TNR below is mostly measured on synthetic negatives for that reason.
+- Reference labels: `eval/faithfulness/labels.jsonl`, **claude-code (AI), pending owner review**. They were written blind (opaque ids, shuffled) by a separate Claude Code subagent from a written rubric; they are not human expert labels. Agreement below is agreement with AI-drafted reference labels. 30 items are in `eval/faithfulness/owner_review.csv` for the owner to confirm.
+- Labels: 84 (62 PASS, 22 FAIL). Natural answers were almost all faithful, so seeded synthetic negatives (a changed number, or an appended fabricated sentence citing the same passage) were added; they are reported separately.
+
+| Split / subset | Grader | n | ref PASS / FAIL | TPR | TNR | Agreement |
+|---|---|---|---|---|---|---|
+| judge-dev, all (prompt v1) | LLM judge | 32 | 25 / 7 | 0.880 (22/25) | 0.857 (6/7) | 0.875 |
+| judge-dev, all (prompt v2) | LLM judge | 32 | 25 / 7 | 0.880 (22/25) | 0.857 (6/7) | 0.875 |
+| **judge-test, all** | LLM judge | 52 | 37 / 15 | 0.946 (35/37) | 0.933 (14/15) | 0.942 |
+| judge-test, all | deterministic span check | 52 | 37 / 15 | 0.730 (27/37) | 1.000 (15/15) | 0.808 |
+| **judge-test, natural** | LLM judge | 37 | 37 / 0 | 0.946 (35/37) | n/a (0/0) | 0.946 |
+| judge-test, natural | deterministic span check | 37 | 37 / 0 | 0.730 (27/37) | n/a (0/0) | 0.730 |
+| **judge-test, synthetic** | LLM judge | 15 | 0 / 15 | n/a (0/0) | 0.933 (14/15) | 0.933 |
+| judge-test, synthetic | deterministic span check | 15 | 0 / 15 | n/a (0/0) | 1.000 (15/15) | 1.000 |
+
+Pass rate on natural judge-test answers: reference labels 100.0%, judge raw 94.6%, judge corrected for its measured TPR/TNR 100.0%.
+
+**Deterministic metrics on the same natural answers** (existing code grader, `generate.support_level`; no LLM):
+
+- 63 generated answers (49 gold questions produced no generated answer: abstained before the model was called, or the model abstained).
+- Sentences: 73 — supported 57, partial 8, unsupported 8.
+- Answers with every sentence 'supported': 47/63; answers containing a gold answer span: 53/63.
+- Citations re-verified against stored text + ACL: 92/92.
+- Latency: generation p50 5037.8 ms (max 14787.8); judge p50 28239.8 ms. Judge parse errors on test: 0.
+
+Reading the two graders together: the deterministic check is strict about surface form, so it marks faithful paraphrases ('USD 30 million' for 'USD 30,000,000') and derived values (a computed monthly bill) as unsupported; the LLM judge accepts those but has to be measured against labels before its pass rate means anything.
+
 ## Findings during the build (each fixed and covered by a test or the adversarial run)
 
 1. A test client kept the last login's cookie and the server preferred cookies over the bearer header, so requests ran as the wrong identity. Not an authorization bypass, but the precedence was wrong: the explicit Authorization header now wins.

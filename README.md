@@ -28,6 +28,13 @@ Then look at:
 4. **Security mapping**: [docs/OWASP_LLM_TOP10.md](docs/OWASP_LLM_TOP10.md).
 
 <!-- reviewers:start -->
+
+Headline numbers (rendered from saved runs by `scripts/render_eval_docs.py`):
+
+- Retrieval, held-out test split: hybrid MRR@10 **0.966**, citation validity **100.0%**, abstention F1 0.923 (`eval/reports/latest.json`).
+- Permission isolation: **0 leaks** in 1796 search probes + 898 direct reads (`eval/reports/adversarial.json`).
+- Faithfulness LLM judge on judge-test: TPR **0.946**, TNR **0.933** (n=52; natural answers only: n=37, TPR 0.946) against **AI-drafted reference labels pending owner review**; judge = generator model (`eval/reports/faithfulness.json`).
+
 <!-- reviewers:end -->
 
 What this does and does not show, with gaps: [docs/AI_ENGINEER_READINESS.md](docs/AI_ENGINEER_READINESS.md).
@@ -74,6 +81,8 @@ _From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit 
 | Latency p50 / p95 (ms) | 4.4 / 8.1 | 18.9 / 42.1 | 19.8 / 40.3 | 195.7 / 319.0 | n/a |
 
 Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 20/21, generation 5/5, api 10/10; documented quality miss: XT-017.
+
+Answer faithfulness (gpt-oss:20b answers, binary LLM judge): judge-test TPR **0.946** / TNR **0.933** (n=52) against AI-drafted reference labels pending owner review; 47/63 natural answers pass the deterministic span check.
 
 Recall@5 is 1.0 for every method because each identity can read only 3-15 versions; read MRR/nDCG. Contradiction detection is weak on held-out questions and is not claimed as a strength.
 

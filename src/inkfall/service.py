@@ -65,7 +65,9 @@ def run_query(session: Session, user: User, directory: Directory, question: str,
                 g = generate(provider, question, pack, texts)
                 if g.ok:
                     _reverify(session, user, directory, g)
+                withheld = _withhold_instructions(g) if g.ok else 0
                 telemetry.record_generation(span, g)
+            gen_info["withheld_instruction_sentences"] = withheld
             remote = getattr(provider, "native_citations", False)
             gen_info.update(status="ok" if g.ok else "rejected", rejected_reason=g.rejected_reason, model=g.model,
                             provider=g.provider, latency_ms=round(g.latency_ms, 1),
@@ -132,6 +134,16 @@ def _reverify(session: Session, user: User, directory: Directory, g) -> None:
             if not ok:
                 g.ok, g.rejected_reason, g.sentences = False, f"citation failed re-verification: {why}", []
                 return
+
+
+def _withhold_instructions(g) -> int:
+    """A generated sentence that repeats instruction-like text from a source (e.g. a vendor notice telling 'AI tools'
+    what to do) is withheld from the answer, the same rule the extractive path applies to source sentences. Found by
+    the real-model adversarial run: gpt-oss:20b paraphrased an injected notice into an answer sentence."""
+    kept = [s_ for s_ in g.sentences if not ev.detect_injection(s_.text)]
+    n = len(g.sentences) - len(kept)
+    g.sentences = kept
+    return n
 
 
 def _ranked(hits) -> list[int]:
