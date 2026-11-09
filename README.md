@@ -73,7 +73,7 @@ Walkthrough video (40 s, recorded with Playwright): [docs/media/walkthrough.webm
 
 <!-- results:start -->
 
-_From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit `2180604`) and `adversarial.json` (2026-11-09T05:04:40+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
+_From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit `2180604`) and `adversarial.json` (2026-11-09T19:13:36+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
 
 | | BM25 | Dense | Hybrid (RRF) | Hybrid + rerank | Title-only baseline |
 |---|---|---|---|---|---|
