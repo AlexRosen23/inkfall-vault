@@ -1,5 +1,5 @@
-# CI definition. GitHub Actions is DISABLED on this private repository (owner policy: enabling Actions
-# needs explicit approval). The same checks run locally with `make ci`.
+# CI definition. Runs on GitHub Actions (enabled with the owner's approval on 2026-11-09, when the repository
+# went public). The same checks run locally with `make ci`.
 name: ci
 on:
   pull_request:
@@ -32,6 +32,8 @@ jobs:
         run: uv run python scripts/validate_dataset.py
       - name: Tests (ACL/isolation, injection, citations, ingestion, retrieval, API contract)
         run: uv run pytest
+      - name: Seed the demo database (the adversarial run copies data/inkfall.db)
+        run: uv run python -m inkfall.seed
       - name: Adversarial evaluation
         run: uv run python -m inkfall.adversarial
       - name: Web build

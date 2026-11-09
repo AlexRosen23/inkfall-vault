@@ -135,8 +135,8 @@ the Next.js dev server on **5111**. No LLM is needed; to try local generation, l
 | `make security-test-generative` | opt-in, slow: the adversarial sweep with `gpt-oss:20b` (Ollama) writing every answer |
 | `make eval-faithfulness` | opt-in, slow: re-judge the saved answers with the frozen judge prompt → `eval/reports/faithfulness.json` |
 
-CI is defined in `.github/workflows/ci.yml` but **GitHub Actions is disabled** on this private repository; run
-`make ci` locally.
+CI (`.github/workflows/ci.yml`) runs on GitHub Actions for pull requests and pushes to `main`; `make ci` runs the
+same checks locally.
 
 ## Demo identities (fictional)
 
