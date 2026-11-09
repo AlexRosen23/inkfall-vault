@@ -184,6 +184,20 @@ def main() -> None:
             "invented number, mislabelling correct sentences as unsupported; markers are stripped before checking.",
             "6. LM Studio's Qwen3.6 build ignores every client-side switch to disable hidden reasoning, so short token "
             "budgets produced no JSON; the budget is now 4,096 tokens and an unparseable output falls back to extractive.",
+            "7. With a real model answering the adversarial sweep (run 1, kept in "
+            "`eval/reports/adversarial_generative_run1.json`), gpt-oss:20b paraphrased a vendor notice's instruction to "
+            "AI tools into an answer sentence. No leak, but the extractive path's rule (never repeat an embedded "
+            "instruction as an answer) was not enforced on generated text; generated sentences that match the "
+            "injection patterns are now withheld, and run 2 re-checks it.",
+            "8. The deterministic support check marks faithful paraphrases ('USD 30 million' for 'USD 30,000,000') and "
+            "derived values (a computed monthly bill) as unsupported"
+            + (f": on judge-test it caught {fa['test']['all']['deterministic']['tn']} of "
+               f"{fa['test']['all']['deterministic']['ref_fail']} FAIL labels but passed only "
+               f"{fa['test']['natural']['deterministic']['tp']} of {fa['test']['natural']['deterministic']['ref_pass']} "
+               "faithful natural answers" if fa else "")
+            + ". It stays as a strict, cheap first pass; the calibrated LLM judge is the second.",
+            "9. The one-port static UI uses trailing-slash URLs (`/login/`), and the 401 handler compared against "
+            "`/login`, so a signed-out browser reloaded the login page in a loop. Both checks now accept either form.",
             ""]
     (ROOT / "docs" / "RAG_EVALUATION.md").write_text("\n".join(rag))
 
