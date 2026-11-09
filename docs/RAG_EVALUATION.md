@@ -87,9 +87,12 @@ _From `eval/reports/adversarial.json` (2026-11-09T05:04:40+00:00, commit `4adb7d
 | api | upload-binary-as-text | upload 'x.txt' | quarantined, content not stored | yes |
 | api | rate-limit | 7 requests with limit 5/min | 429 after the limit | yes |
 
-## Optional local generation
+## Optional local generation (`make eval-generative`)
 
-Not run in this report (`make eval-generative` needs LM Studio or Ollama and takes ~1-2 minutes per question with the local 35B model).
+_From `eval/reports/generative.json` (2026-11-09T05:15:07+00:00): qwen3.6-35b-a3b-mlx via lmstudio on this Mac. Small sample; not used for any headline claim._
+
+- Questions: 6; outputs accepted: 6; rejected by the validator: 0; generated sentences: 13 (supported 10, partial 2, unsupported 1).
+- Latency per question: p50 99911.1 ms, p95 135228.7 ms. Tokens (estimate, chars/4): prompt 3621, completion 621; reported by the server: 15801. Billed cost: $0 (local model).
 
 ## Findings during the build (each fixed and covered by a test or the adversarial run)
 

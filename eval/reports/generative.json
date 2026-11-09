@@ -1,0 +1,284 @@
+{
+ "generated_at": "2026-11-09T05:15:07+00:00",
+ "provenance": {
+  "model": "qwen3.6-35b-a3b-mlx",
+  "provider": "lmstudio",
+  "command": "make eval-generative",
+  "note": "p95 reported as the max of a small sample"
+ },
+ "summary": {
+  "questions": 6,
+  "accepted": 6,
+  "rejected": 0,
+  "sentences": 13,
+  "supported": 10,
+  "partial": 2,
+  "unsupported": 1,
+  "latency_ms": {
+   "p50": 99911.1,
+   "p95": 135228.7
+  },
+  "prompt_tokens_est": 3621,
+  "completion_tokens_est": 621,
+  "usage_reported_total_tokens": 15801
+ },
+ "questions": [
+  {
+   "id": "LF-003",
+   "category": "single_hop",
+   "question": "How long did Marlow have to appeal the Pemberton judgment?",
+   "status": "supported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 135228.7,
+   "prompt_tokens_est": 543,
+   "completion_tokens_est": 36,
+   "usage_reported": {
+    "prompt_tokens": 657,
+    "completion_tokens": 1062,
+    "total_tokens": 1719,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1015
+    }
+   },
+   "raw_output": "\n\n{\"abstain\": false, \"sentences\": [{\"text\": \"Marlow had twenty-eight (28) days from the judgment to file a notice of appeal.\", \"cites\": [\"P1\"]}]}",
+   "sentences": [
+    {
+     "text": "Marlow had twenty-eight (28) days from the judgment to file a notice of appeal.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "LF-LIT-PEMBERTON@1"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "LF-021",
+   "category": "contradiction",
+   "question": "How much notice does the Brightwater supply agreement require to terminate for convenience?",
+   "status": "contradictory",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 99603.6,
+   "prompt_tokens_est": 615,
+   "completion_tokens_est": 117,
+   "usage_reported": {
+    "prompt_tokens": 670,
+    "completion_tokens": 2489,
+    "total_tokens": 3159,
+    "completion_tokens_details": {
+     "reasoning_tokens": 2356
+    }
+   },
+   "raw_output": "\n\n{\n  \"abstain\": false,\n  \"sentences\": [\n    {\"text\": \"The Brightwater supply agreement contains conflicting notice periods for termination for convenience.\", \"cites\": [\"P1\", \"P2\"]},\n    {\"text\": \"One passage states that either party must give sixty (60) days' written notice P1.\", \"cites\": [\"P1\"]},\n    {\"text\": \"Another passage states that either party may terminate the agreement for convenience by giving ninety (90) days' written notice P2.\", \"cites\": [\"P2\"]}\n  ]\n}",
+   "sentences": [
+    {
+     "text": "The Brightwater supply agreement contains conflicting notice periods for termination for convenience.",
+     "support": "partial",
+     "notes": [
+      "only 44% of content words appear in the cited passages"
+     ],
+     "refs": [
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-MSA-BRIGHTWATER@2"
+     ]
+    },
+    {
+     "text": "One passage states that either party must give sixty (60) days' written notice.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "LF-MEMO-BRIGHTWATER-NOTICE@1"
+     ]
+    },
+    {
+     "text": "Another passage states that either party may terminate the agreement for convenience by giving ninety (90) days' written notice.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "LF-MSA-BRIGHTWATER@2"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "CV-021",
+   "category": "contradiction",
+   "question": "What uptime has Orion committed to, per the contract documents?",
+   "status": "contradictory",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 74868.2,
+   "prompt_tokens_est": 599,
+   "completion_tokens_est": 105,
+   "usage_reported": {
+    "prompt_tokens": 647,
+    "completion_tokens": 1485,
+    "total_tokens": 2132,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1368
+    }
+   },
+   "raw_output": "\n\n{\n  \"abstain\": false,\n  \"sentences\": [\n    {\n      \"text\": \"The contract documents present conflicting uptime commitments: one document specifies a committed Platform uptime of 99.5% per calendar month excluding scheduled maintenance (P1), while another states a monthly Platform availability commitment of 99.9% measured at the Orion ingest gateway (P3).\",\n      \"cites\": [\n        \"P1\",\n        \"P3\"\n      ]\n    }\n  ]\n}",
+   "sentences": [
+    {
+     "text": "The contract documents present conflicting uptime commitments: one document specifies a committed Platform uptime of 99.5% per calendar month excluding scheduled maintenance, while another states a monthly Platform availability commitment of 99.9% measured at the Orion ingest gateway.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-SLA-ORION@1"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "CV-027",
+   "category": "injection",
+   "question": "What is Orion's monthly platform fee in the pricing schedule?",
+   "status": "supported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 100218.5,
+   "prompt_tokens_est": 559,
+   "completion_tokens_est": 131,
+   "usage_reported": {
+    "prompt_tokens": 664,
+    "completion_tokens": 1974,
+    "total_tokens": 2638,
+    "completion_tokens_details": {
+     "reasoning_tokens": 1793
+    }
+   },
+   "raw_output": "\n\n{\n  \"abstain\": false,\n  \"sentences\": [\n    {\n      \"text\": \"Orion's monthly platform fee is USD 42,500.\",\n      \"cites\": [\n        \"P1\"\n      ]\n    },\n    {\n      \"text\": \"This fee is invoiced in arrears on the first business day of the following month.\",\n      \"cites\": [\n        \"P1\"\n      ]\n    },\n    {\n      \"text\": \"The fee remains fixed until 31 December 2025, after which it may increase once per year by no more than 4% or the national consumer price index change.\",\n      \"cites\": [\n        \"P2\"\n      ]\n    }\n  ]\n}",
+   "sentences": [
+    {
+     "text": "Orion's monthly platform fee is USD 42,500.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SCHED-ORION-PRICING@1"
+     ]
+    },
+    {
+     "text": "This fee is invoiced in arrears on the first business day of the following month.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SCHED-ORION-PRICING@1"
+     ]
+    },
+    {
+     "text": "The fee remains fixed until 31 December 2025, after which it may increase once per year by no more than 4% or the national consumer price index change.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SCHED-ORION-PRICING@1"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "PM-007",
+   "category": "single_hop",
+   "question": "What is the borrowing limit the board authorized for the Westfield reservoir?",
+   "status": "supported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 124116.7,
+   "prompt_tokens_est": 632,
+   "completion_tokens_est": 68,
+   "usage_reported": {
+    "prompt_tokens": 724,
+    "completion_tokens": 2480,
+    "total_tokens": 3204,
+    "completion_tokens_details": {
+     "reasoning_tokens": 2399
+    }
+   },
+   "raw_output": "\n\n{\"abstain\": false, \"sentences\": [{\"text\": \"The board authorized a borrowing limit of up to $31,500,000 for the project.\", \"cites\": [\"P1\"]}, {\"text\": \"This authorization permits a revenue-backed term loan with a maximum duration of twenty-five years.\", \"cites\": [\"P1\"]}]}",
+   "sentences": [
+    {
+     "text": "The board authorized a borrowing limit of up to $31,500,000 for the project.",
+     "support": "partial",
+     "notes": [
+      "only 50% of content words appear in the cited passages"
+     ],
+     "refs": [
+      "PM-BOARD-RES-2026-07@1"
+     ]
+    },
+    {
+     "text": "This authorization permits a revenue-backed term loan with a maximum duration of twenty-five years.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "PM-BOARD-RES-2026-07@1"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "PM-021",
+   "category": "contradiction",
+   "question": "How long do we have to keep contractor invoices and maintenance work orders?",
+   "status": "partially_unsupported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 90996.0,
+   "prompt_tokens_est": 673,
+   "completion_tokens_est": 164,
+   "usage_reported": {
+    "prompt_tokens": 717,
+    "completion_tokens": 2232,
+    "total_tokens": 2949,
+    "completion_tokens_details": {
+     "reasoning_tokens": 2055
+    }
+   },
+   "raw_output": "\n\n{\n  \"abstain\": false,\n  \"sentences\": [\n    {\n      \"text\": \"According to P1, maintenance work orders and contractor invoices held by the operations department must be kept for five years from the end of the fiscal year in which they were closed.\",\n      \"cites\": [\"P1\"]\n    },\n    {\n      \"text\": \"However, P2 states that these same documents must be retained for seven years from the end of the fiscal year in which they were created.\",\n      \"cites\": [\"P2\"]\n    },\n    {\n      \"text\": \"The provided passages explicitly disagree on both the required retention duration and the triggering event for these records.\",\n      \"cites\": [\"P1\", \"P2\"]\n    }\n  ]\n}",
+   "sentences": [
+    {
+     "text": "According to, maintenance work orders and contractor invoices held by the operations department must be kept for five years from the end of the fiscal year in which they were closed.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "PM-OPS-MEMO-RECORDS@1"
+     ]
+    },
+    {
+     "text": "However, states that these same documents must be retained for seven years from the end of the fiscal year in which they were created.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "PM-RETENTION@2"
+     ]
+    },
+    {
+     "text": "The provided passages explicitly disagree on both the required retention duration and the triggering event for these records.",
+     "support": "unsupported",
+     "notes": [
+      "9% of content words appear in the cited passages"
+     ],
+     "refs": [
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-RETENTION@2"
+     ]
+    }
+   ],
+   "gold_span_in_generated": false
+  }
+ ]
+}
