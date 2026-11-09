@@ -61,6 +61,11 @@ numbers are reported separately, and they are worse for conflict detection, whic
 It saturates because each identity can read only 3-15 document versions (all versions, any date). MRR@10 and nDCG@10 are the informative
 metrics, compared against a title-only baseline. A larger corpus is the obvious next step.
 
+**11b. Did reranking help?**
+No. A cross-encoder (`ms-marco-MiniLM-L6-v2`) over the top 20 hybrid hits scored MRR@10 0.955 against hybrid's 0.966 on
+held-out questions, lowered abstention F1, and cost about ten times the latency. It is trained on web search passages,
+not clauses; I report the ablation instead of shipping it by default.
+
 **12. Why is contradiction detection weak on the test split?**
 The rule needs the question's subject in both documents, a shared concept, and same-unit values that disagree.
 Held-out phrasings often ask in ways that miss the value type or the shared concept. It is a deliberately

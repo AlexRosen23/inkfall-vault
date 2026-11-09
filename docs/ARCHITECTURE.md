@@ -104,7 +104,7 @@ sequenceDiagram
 | Lexical | SQLite FTS5 (`porter unicode61`), bm25 with weights title 2, heading 3, body 1; each query term quoted (no FTS operator injection); small plain-language synonym map |
 | Dense | `sentence-transformers/all-MiniLM-L6-v2` (Apache-2.0, 384-d), normalized, cosine in NumPy over authorized chunks only |
 | Hybrid | Reciprocal-rank fusion, k = 60 |
-| Rerank | `cross-encoder/ms-marco-MiniLM-L6-v2`, opt-in (`make rerank-model`); recorded as skipped when absent |
+| Rerank | `cross-encoder/ms-marco-MiniLM-L6-v2` over the top 20 hybrid hits, opt-in (`make rerank-model`); measured: no gain over hybrid on this corpus at ~10x latency (docs/RETRIEVAL_EVAL.md) |
 | Source pack | top 6 chunks, max 3 per version |
 
 ## Where the security boundary is
