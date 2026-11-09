@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import csv
 import datetime as dt
+import hashlib
 import json
 import random
 import re
@@ -220,6 +221,19 @@ def render_for_judge(item: dict) -> str:
     return "\n".join(parts)
 
 
+def answer_hash(item: dict) -> str:
+    """Labels are tied to the exact answer text + cited spans they were written for."""
+    return hashlib.sha256(render_for_judge(item).encode("utf-8")).hexdigest()[:16]
+
+
+def check_labels_match(items: dict, labels: dict) -> None:
+    stale = [i for i, lab in labels.items() if i in items and lab.get("answer_sha256") != answer_hash(items[i])]
+    missing = [i for i in labels if i not in items]
+    if stale or missing:
+        raise SystemExit(f"labels do not match the saved answers (stale: {stale[:5]}, missing: {missing[:5]}); "
+                         "answers were regenerated after labelling - relabel before reporting")
+
+
 def run_judge(item: dict, prompt: str, judge: OpenAICompatible) -> dict:
     raw, meta = judge.complete(prompt, render_for_judge(item), max_tokens=4096)
     try:
@@ -306,6 +320,7 @@ def report(version: str, dev_versions: list[str]) -> dict:
     data = json.loads(ANSWERS.read_text())
     items = {it["item_id"]: it for it in data["items"]}
     labels = load_labels()
+    check_labels_match(items, labels)
     jt = json.loads((REPORTS / f"faithfulness_judge_test_{version}.json").read_text())
     jd = {v: json.loads((REPORTS / f"faithfulness_judge_dev_{v}.json").read_text()) for v in dev_versions}
 
@@ -320,12 +335,11 @@ def report(version: str, dev_versions: list[str]) -> dict:
         return out
 
     test_block = block(jt["rows"], "test")
-    nat_test = [i for i, it in items.items() if it["split"] == "test" and it["kind"] == "natural"]
     jr_test = {r["item_id"]: r for r in jt["rows"]}
-    judge_pass_rate = (sum(jr_test[i]["verdict"] == "PASS" for i in nat_test if i in jr_test) / len(nat_test)
-                       if nat_test else 0.0)
-    ref_pass_rate = (sum(labels[i]["label"] == "PASS" for i in nat_test if i in labels) / len(nat_test)
-                     if nat_test else 0.0)
+    nat_test = [i for i, it in items.items() if it["split"] == "test" and it["kind"] == "natural"
+                and i in jr_test and i in labels]
+    judge_pass_rate = (sum(jr_test[i]["verdict"] == "PASS" for i in nat_test) / len(nat_test)) if nat_test else 0.0
+    ref_pass_rate = (sum(labels[i]["label"] == "PASS" for i in nat_test) / len(nat_test)) if nat_test else 0.0
     nat = [it for it in items.values() if it["kind"] == "natural"]
     sents = [s for it in nat for s in it["sentences"]]
     det = {
@@ -355,9 +369,13 @@ def report(version: str, dev_versions: list[str]) -> dict:
         "positive_class": "PASS",
         "dev_iterations": {v: block(jd[v]["rows"], "dev") for v in dev_versions},
         "test": test_block,
-        "test_pass_rates_natural": {"reference_labels": round(ref_pass_rate, 3), "judge_raw": round(judge_pass_rate, 3),
+        "test_pass_rates_natural": {"n": len(nat_test), "reference_labels": round(ref_pass_rate, 3),
+                                    "judge_raw": round(judge_pass_rate, 3),
                                     "judge_corrected": corrected_pass_rate(judge_pass_rate, test_block["all"]["judge"]["tpr"],
-                                                                           test_block["all"]["judge"]["tnr"])},
+                                                                           test_block["all"]["judge"]["tnr"]),
+                                    "correction_note": "Rogan-Gladen correction using TPR/TNR from all judge-test "
+                                                       "items; TNR comes mostly from synthetic negatives, so the "
+                                                       "correction is optimistic for subtle natural failures"},
         "deterministic_metrics_natural": det,
         "judge_parse_errors_test": sum(r.get("parse_error", False) for r in jt["rows"]),
         "latency_ms": {"generation_p50": round(statistics.median(gen_lat), 1) if gen_lat else None,

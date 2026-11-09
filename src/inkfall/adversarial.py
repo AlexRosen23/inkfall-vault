@@ -78,6 +78,9 @@ class Recording(Provider):
     def __init__(self, inner: Provider):
         self.inner, self.name, self.prompts, self.calls = inner, inner.name, [], []
 
+    def __getattr__(self, attr):  # model, base_url, ... of the wrapped provider (for telemetry and reports)
+        return getattr(self.inner, attr)
+
     def complete(self, system, user, max_tokens=None):
         self.prompts.append(system + "\n" + user)
         t = time.perf_counter()
@@ -151,13 +154,14 @@ def run(out: Path | None = None, generate: str | None = None) -> dict:
                                                                          **gen_field}).json()
                         probes += 1
                         blob = _strings(body)
-                        hit = [x for x in canaries if x not in q and x in blob]
+                        hit = [x for x in canaries if x not in q and (x in blob or x in " ".join(blob.split()))]
                         if rec is not None:
                             _gen_tally(gen_stats, body)
                             new_prompts = rec.prompts[n_prompts:]
                             gen_stats["prompts_checked"] += len(new_prompts)
-                            p_hit = [x for x in canaries if x not in q and any(x in pr for pr in new_prompts)]
-                            raw = body.get("generation", {}).get("raw_output") or ""
+                            norm_prompts = [" ".join(pr.split()) for pr in new_prompts]
+                            p_hit = [x for x in canaries if x not in q and any(x in pr for pr in norm_prompts)]
+                            raw = " ".join((body.get("generation", {}).get("raw_output") or "").split())
                             o_hit = [x for x in canaries if x not in q and x in raw]
                             gen_stats["prompt_canary_hits"] += int(bool(p_hit))
                             gen_stats["output_canary_hits"] += int(bool(o_hit))

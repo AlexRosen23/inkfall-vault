@@ -63,18 +63,9 @@ def run_query(session: Session, user: User, directory: Directory, question: str,
                                      getattr(provider, "max_tokens", LLM_MAX_TOKENS),
                                      getattr(provider, "base_url", None)) as span:
                 g = generate(provider, question, pack, texts)
+                if g.ok:
+                    _reverify(session, user, directory, g)
                 telemetry.record_generation(span, g)
-            if g.ok:
-                # Re-verify every citation with the same check used for reviews and briefs: the asker may read the
-                # version and the quote equals the stored text at those offsets. One failure rejects the output.
-                for s_ in g.sentences:
-                    for c in s_.citations:
-                        ok, why = verify_citation(session, user, directory, c.version_id, c.char_start, c.char_end, c.quote)
-                        if not ok:
-                            g.ok, g.rejected_reason, g.sentences = False, f"citation failed re-verification: {why}", []
-                            break
-                    if not g.ok:
-                        break
             remote = getattr(provider, "native_citations", False)
             gen_info.update(status="ok" if g.ok else "rejected", rejected_reason=g.rejected_reason, model=g.model,
                             provider=g.provider, latency_ms=round(g.latency_ms, 1),
@@ -130,6 +121,17 @@ def run_query(session: Session, user: User, directory: Directory, question: str,
         "ranked_version_ids": _ranked(sr.hits),
         "ranked_refs": [views[vid].ref for vid in _ranked(sr.hits)],
     }
+
+
+def _reverify(session: Session, user: User, directory: Directory, g) -> None:
+    """Re-verify every generated citation with the same check used for reviews and briefs: the asker may read the
+    version and the quote equals the stored text at those offsets. One failure rejects the whole output."""
+    for s_ in g.sentences:
+        for c in s_.citations:
+            ok, why = verify_citation(session, user, directory, c.version_id, c.char_start, c.char_end, c.quote)
+            if not ok:
+                g.ok, g.rejected_reason, g.sentences = False, f"citation failed re-verification: {why}", []
+                return
 
 
 def _ranked(hits) -> list[int]:

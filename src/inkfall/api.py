@@ -686,6 +686,8 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         iso["leak_examples"] = [e for e in iso.get("leak_examples", [])
                                 if st.directory.users.get(e.get("user", "")) and
                                 st.directory.users[e["user"]].tenant == user.tenant]
+        visible = {cs.get("id") for cs in cases}
+        rep = {**rep, "quality_misses": [q for q in rep.get("quality_misses", []) if q in visible]}
         return {**{k: v for k, v in rep.items() if k not in ("cases", "isolation")}, "isolation": iso,
                 "cases": cases, "visibility": "Counts cover all tenants; case details limited to your tenant."}
 

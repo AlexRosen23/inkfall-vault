@@ -133,7 +133,8 @@ def build_request(question: str, pack: list[Passage], texts: dict[int, str],
 
 
 def _norm(s: str) -> str:
-    return " ".join(s.split())
+    # Whitespace-insensitive: the API may join multi-block cited_text with or without separators.
+    return "".join(s.split())
 
 
 def map_citation(c: dict, layout: list[list[Block]]) -> list[Block]:
@@ -148,7 +149,7 @@ def map_citation(c: dict, layout: list[list[Block]]) -> list[Block]:
     if not (isinstance(s, int) and isinstance(e, int) and 0 <= s < e <= len(blocks)):
         raise CitationMappingError(f"block range [{s!r}, {e!r}) outside document {d} ({len(blocks)} blocks)")
     covered = blocks[s:e]
-    if _norm(c.get("cited_text", "")) != _norm(" ".join(b.text for b in covered)):
+    if _norm(c.get("cited_text", "")) != _norm("".join(b.text for b in covered)):
         raise CitationMappingError("cited_text does not match the stored text of the cited blocks")
     return covered
 
