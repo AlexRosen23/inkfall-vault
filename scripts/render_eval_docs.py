@@ -469,8 +469,12 @@ def faithfulness_section(fa) -> list[str]:
            "frozen and run once on judge-test; true-positive and true-negative rates reported separately.", "",
            f"- Generator: **{pv['generator']['model']}** via {pv['generator']['provider']} (local). Judge: the **same "
            f"model** with a different prompt (`{pv['judge_prompt']}`). **Limitation:** a judge that shares the "
-           "generator's model can share its blind spots (self-preference); the TNR below is mostly measured on "
-           "synthetic negatives for that reason.",
+           "generator's model can share its blind spots (self-preference). On judge-test every FAIL label is a synthetic "
+           "negative, so the TNR says how well the judge catches changed numbers and fabricated sentences, not subtle "
+           "natural misreadings.",
+           "- Prompt iteration: v2 added three rules after reading the v1 judge-dev disagreements. Aggregate dev "
+           "agreement did not change (the disagreements moved to different items), so the tie was broken in favour of "
+           "the more explicit v2, which was then frozen before the single judge-test run.",
            f"- Reference labels: `{pv['labels_file']}`, **{pv['labeler']}**. They were written blind (opaque ids, "
            "shuffled) by a separate Claude Code subagent from a written rubric; they are not human expert labels. "
            "Agreement below is agreement with AI-drafted reference labels. 30 items are in "
@@ -487,7 +491,8 @@ def faithfulness_section(fa) -> list[str]:
     pr = fa["test_pass_rates_natural"]
     out += ["", f"Pass rate on natural judge-test answers: reference labels {f(pr['reference_labels'], True)}, judge raw "
                 f"{f(pr['judge_raw'], True)}, judge corrected for its measured TPR/TNR "
-                f"{f(pr['judge_corrected'], True) if pr['judge_corrected'] is not None else 'n/a'}.", "",
+                f"{f(pr['judge_corrected'], True) if pr['judge_corrected'] is not None else 'n/a'} "
+                "(Rogan-Gladen; optimistic, because the TNR it uses comes from synthetic negatives).", "",
             "**Deterministic metrics on the same natural answers** (existing code grader, `generate.support_level`; no LLM):", "",
             f"- {dm['natural_answers']} generated answers ({dm['skipped_questions']} gold questions produced no generated "
             "answer: abstained before the model was called, or the model abstained).",
