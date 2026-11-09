@@ -73,7 +73,7 @@ audit-deps: ## Known-vulnerability scan of Python and npm dependencies
 licenses: ## Dependency license inventory (fails on GPL/AGPL in runtime deps)
 	$(UV) run python scripts/check_licenses.py
 
-ci: ## What .github/workflows/ci.yml runs (Actions are disabled on the repo; run this locally)
+ci: ## What .github/workflows/ci.yml runs on GitHub (ubuntu-24.04); run it locally before opening a PR
 	$(MAKE) lint
 	$(UV) run python scripts/validate_dataset.py
 	$(UV) run pytest

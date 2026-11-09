@@ -27,7 +27,7 @@ properties hold on this code and dataset. They do not make it production-secure,
 | Injection | Regex flagging is heuristic and bypassable; safety rests on authorization + output validation. |
 | Generation faithfulness | Lexical/numeric support checks catch invented numbers and missing citations, not subtle misreadings. Stripping echoed passage markers can leave awkward prose ("According to, ..."). |
 | Monitoring | No alerting, SIEM export, or anomaly detection on the audit log. |
-| Supply chain | Dependencies pinned; `make audit-deps` runs pip-audit/npm audit on demand; no SBOM signing, no CI (Actions disabled by policy). |
+| Supply chain | Dependencies pinned; `make audit-deps` runs pip-audit/npm audit on demand; no SBOM signing; CI runs tests and the adversarial sweep on every PR, but no dependency audit in CI. |
 | Evaluation | 45 documents and 112 questions written for this project; small and self-authored, so metrics are optimistic about real-world corpora. |
 
 ## Reporting

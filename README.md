@@ -118,7 +118,7 @@ command, commit and machine.
 | PostgreSQL backend | **Not built** | SQLite only. Postgres isn't installed on the build machine, so a backend couldn't be built or tested. |
 | OCR and Office formats | Not built | Only the PDF text layer is parsed. |
 | Time-to-task savings for analysts | Not measured | Would need a timed study with real people; a protocol is in [docs/CUSTOMER_CASE_STUDY.md](docs/CUSTOMER_CASE_STUDY.md). |
-| GitHub Actions CI | Defined, not enabled | `.github/workflows/ci.yml` exists; Actions are off on this repo. `make ci` runs the same steps locally. |
+| GitHub Actions CI | Working (enabled 2026-11-09) | `.github/workflows/ci.yml` runs the `make ci` steps on `ubuntu-24.04` for every pull request and every push to `main`; see the Actions tab. |
 
 ## Quick start
 
@@ -419,7 +419,7 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
 | `docs/` | Design, security and evaluation write-ups (listed under Related), plus `openapi.json` |
 | `resume_evidence/` | `metrics.json`: each claim with its metric, source, verify command and status |
 | `run.sh`, `Makefile` | One-port launcher and every project command |
-| `.github/workflows/ci.yml` | CI definition (Actions not enabled) |
+| `.github/workflows/ci.yml` | CI workflow (Linux runner, mirrors `make ci`) |
 
 ## Testing and CI
 
@@ -432,10 +432,11 @@ This runs the dataset validator and the full pytest suite: **75 tests, all passi
 `make ci` runs everything the CI workflow would: Ruff, the TypeScript typecheck and ESLint, the dataset check,
 pytest, the adversarial sweep, the production web build and the license gate. It passed locally on 2026-11-09.
 
-**GitHub Actions: defined, not enabled.** `.github/workflows/ci.yml` mirrors `make ci`, but Actions are turned
-off on this private repository. The workflow uses a `macos-15` runner, which GitHub bills at 10× the Linux
-rate, and whether to enable it is still the owner's decision. Until then, `make ci` is the check, run locally
-before each merge. There is no Dependabot configuration.
+**GitHub Actions: enabled (since 2026-11-09).** `.github/workflows/ci.yml` runs the same steps as `make ci` on
+an `ubuntu-24.04` runner, for every pull request and every push to `main`. The workflow originally used
+`macos-15`, which GitHub bills at 10× the Linux rate, so it was switched to Linux before Actions was turned on.
+On Linux, torch is installed from PyTorch's CPU-only index (`[tool.uv.sources]` in `pyproject.toml`), so the
+run doesn't download CUDA libraries. macOS installs are unchanged. There is no Dependabot configuration.
 
 ## Related
 
