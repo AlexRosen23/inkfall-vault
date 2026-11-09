@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { api, errorText } from "@/lib/api";
+import { api, errorText, routePath } from "@/lib/api";
 import type { Me, SystemInfo } from "@/lib/types";
 
 interface SessionValue {
@@ -93,7 +93,7 @@ function Header({ me, system }: SessionValue) {
         </Link>
         <nav aria-label="Primary" className="primary-nav">
           {NAV.map((n) => (
-            <Link key={n.href} href={n.href} aria-current={pathname === n.href ? "page" : undefined}>
+            <Link key={n.href} href={n.href} aria-current={routePath(pathname) === n.href ? "page" : undefined}>
               {n.label}
             </Link>
           ))}
@@ -123,7 +123,7 @@ function Header({ me, system }: SessionValue) {
 
 export function Shell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isLogin = pathname === "/login";
+  const isLogin = routePath(pathname) === "/login";
   const [session, setSession] = useState<SessionValue | null>(null);
   const [error, setError] = useState<string | null>(null);
 

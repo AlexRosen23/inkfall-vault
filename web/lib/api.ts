@@ -53,13 +53,21 @@ export async function api<T>(path: string, init?: { method?: string; body?: unkn
   }
   if (!res.ok) {
     const { code, message } = describe(res.status, body);
-    if (res.status === 401 && typeof window !== "undefined" && window.location.pathname !== "/login") {
+    if (res.status === 401 && typeof window !== "undefined" && routePath(window.location.pathname) !== "/login") {
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- deliberate full reload: drop all in-memory state from the previous identity
       window.location.assign("/login");
     }
     throw new ApiError(res.status, code, message, res.headers.get("X-Request-ID"));
   }
   return body as T;
+}
+
+/**
+ * A route path without its trailing slash. The one-port build is a static export with `trailingSlash: true`, so the
+ * browser is on "/login/" there and on "/login" under `next dev`; compare routes only through this.
+ */
+export function routePath(pathname: string | null): string {
+  return (pathname ?? "/").replace(/(.)\/+$/, "$1");
 }
 
 export function errorText(err: unknown): string {
