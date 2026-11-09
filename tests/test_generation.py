@@ -133,7 +133,9 @@ def test_validate_output_requires_list():
 def test_passage_markers_are_not_counted_as_invented_numbers(run):
     """Regression: '(P1)' echoed into prose once made correct sentences look unsupported."""
     def marked(prompt):
-        p = pids(prompt)[0]
+        import re
+        p = next(m.group(1) for m in re.finditer(r'<passage id="(P\d+)"[^>]*>\n(.*?)\n</passage>', prompt, re.S)
+                 if "99.9%" in m.group(2))
         return json.dumps({"sentences": [{"text": f"Orion commits to a monthly Platform availability of 99.9% ({p}).",
                                           "cites": [p]}]})
 
