@@ -136,6 +136,8 @@ def main() -> None:
         sys.exit("set INKFALL_MCP_USER (or --user) to a demo identity, e.g. dana.whitcombe")
     if not db_path().exists():
         sys.exit(f"database {db_path()} not found; run `make seed` first")
+    from . import telemetry
+    telemetry.configure()  # INKFALL_OTEL=otlp only (console output would corrupt the stdio protocol)
     build_server(args.user).run("stdio")
 
 

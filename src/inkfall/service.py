@@ -11,8 +11,10 @@ from dataclasses import asdict
 from sqlalchemy.orm import Session
 
 from . import evidence as ev
+from . import telemetry
 from .access import VersionView, authorized_versions, get_authorized_version
 from .claude_citations import cost_usd, get_claude
+from .config import LLM_MAX_TOKENS
 from .generate import generate
 from .identities import Directory, User
 from .providers import get_provider
@@ -35,7 +37,10 @@ def run_query(session: Session, user: User, directory: Directory, question: str,
     question = normalize_query(question)
     views_list = authorized_versions(session, user, directory, as_of, include_history, collection)
     views = {v.version.id: v for v in views_list}
-    sr = search(session, user.tenant, question, views_list, method, k)
+    with telemetry.retrieval_span(method, k, len(views_list)) as span:
+        sr = search(session, user.tenant, question, views_list, method, k)
+        span.set_attribute("inkfall.retrieval.candidates", sr.candidates)
+        span.set_attribute("inkfall.retrieval.hits", len(sr.hits))
     pack = ev.build_pack(session, sr.hits, views)
     texts = _texts(views)
     extractive = ev.extractive_answer(question, pack, texts)
@@ -54,7 +59,11 @@ def run_query(session: Session, user: User, directory: Directory, question: str,
             gen_info["status"] = ("Claude unavailable (ANTHROPIC_API_KEY not set); showing extractive evidence"
                                   if generate_mode == "claude" else "no local model detected; showing extractive evidence")
         else:
-            g = generate(provider, question, pack, texts)
+            with telemetry.chat_span(provider.name, getattr(provider, "model", "") or "unknown",
+                                     getattr(provider, "max_tokens", LLM_MAX_TOKENS),
+                                     getattr(provider, "base_url", None)) as span:
+                g = generate(provider, question, pack, texts)
+                telemetry.record_generation(span, g)
             if g.ok:
                 # Re-verify every citation with the same check used for reviews and briefs: the asker may read the
                 # version and the quote equals the stored text at those offsets. One failure rejects the output.

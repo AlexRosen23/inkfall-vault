@@ -28,7 +28,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from . import audit, claude_citations, contract, embed, providers
+from . import audit, claude_citations, contract, embed, providers, telemetry
 from .access import authorized_versions, get_authorized_version
 from .config import (
     DATA_DIR,
@@ -154,6 +154,7 @@ class State:
 
 def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MINUTE) -> FastAPI:
     st = State(db_file)
+    telemetry.configure()  # off unless INKFALL_OTEL=console|otlp
 
     @asynccontextmanager
     async def lifespan(_app):

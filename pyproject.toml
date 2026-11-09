@@ -16,12 +16,17 @@ dependencies = [
     "httpx==0.28.1",
     "anthropic==2.3.0",
     "mcp==2.3.0",
+    "opentelemetry-api==1.45.1",
+    "opentelemetry-sdk==1.45.1",
 ]
 
 [project.optional-dependencies]
 dense = [
     "sentence-transformers==6.2.0",
     "torch==2.15.0",
+]
+otlp = [
+    "opentelemetry-exporter-otlp-proto-http==1.45.1",
 ]
 
 [dependency-groups]

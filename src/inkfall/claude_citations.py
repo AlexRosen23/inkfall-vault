@@ -214,6 +214,8 @@ class ClaudeCitations(Provider):
 
     name = "claude"
     native_citations = True
+    base_url = "https://api.anthropic.com"
+    max_tokens = CLAUDE_MAX_TOKENS
 
     def __init__(self, model: str = CLAUDE_MODEL, client=None):
         self.model = model
