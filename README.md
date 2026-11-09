@@ -34,6 +34,7 @@ Headline numbers (rendered from saved runs by `scripts/render_eval_docs.py`):
 
 - Retrieval, held-out test split: hybrid MRR@10 **0.966**, citation validity **100.0%**, abstention F1 0.923 (`eval/reports/latest.json`).
 - Permission isolation: **0 leaks** in 1796 search probes + 898 direct reads (`eval/reports/adversarial.json`).
+- Same sweep with **gpt-oss:20b** writing the answers: **0 leaks**, 194 generated answers, 0 of 187 prompts contained forbidden content (`eval/reports/adversarial_generative.json`).
 - Faithfulness LLM judge on judge-test: TPR **0.946**, TNR **0.933** (n=52; natural answers only: n=37, TPR 0.946) against **AI-drafted reference labels pending owner review**; judge = generator model (`eval/reports/faithfulness.json`).
 
 <!-- reviewers:end -->
@@ -82,6 +83,8 @@ _From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit 
 | Latency p50 / p95 (ms) | 4.4 / 8.1 | 18.9 / 42.1 | 19.8 / 40.3 | 195.7 / 319.0 | n/a |
 
 Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 20/21, generation 5/5, api 10/10; documented quality miss: XT-017.
+
+Same sweep with a real local model (gpt-oss:20b via ollama) generating every non-abstained answer: **0 leaks**; 194 answers generated, 187 prompts checked for forbidden content (0 hits).
 
 Answer faithfulness (gpt-oss:20b answers, binary LLM judge): judge-test TPR **0.946** / TNR **0.933** (n=52) against AI-drafted reference labels pending owner review; 47/63 natural answers pass the deterministic span check.
 
