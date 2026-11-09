@@ -7,6 +7,7 @@ that the answer is true. Extractive answers are verbatim spans of the stored sou
 from __future__ import annotations
 
 import datetime as dt
+import math
 import re
 from dataclasses import asdict, dataclass, field
 
@@ -16,10 +17,10 @@ from sqlalchemy.orm import Session
 from .access import VersionView
 from .db import Chunk
 from .ingest import sentence_spans
-from .search import Hit, content_terms, stem, tokens
+from .search import SYNONYMS, Hit, content_terms, stem, tokens
 
 # Thresholds were chosen on the dev split of the gold set (see docs/RETRIEVAL_EVAL.md).
-COVERAGE_MIN = 0.6
+COVERAGE_MIN = 0.5
 PACK_SIZE = 6
 PER_VERSION = 3
 
@@ -144,8 +145,11 @@ def extract_values(s: str) -> dict[str, set[str]]:
 def asked_types(question: str) -> set[str]:
     q = question.lower()
     want: set[str] = set()
-    if re.search(r"\bhow much\b|\bfee|\bcost|\bcap\b|\bamount|\bprice|\bpay|\$|\blimit|\bthreshold|\bbudget|\bvalue", q):
+    if re.search(r"\bhow much\b|\bfee|\bcost|\bcap\b|\bamount|\bprice|\bpay|\$|\blimit|\bthreshold|\bbudget|\bvalue"
+                 r"|\bcharge|\bbill|\bowe|\bspend|\bcash|\brebate|\brate\b", q):
         want.add("money")
+    if re.search(r"\bminimum\b|\bmaximum\b|\bat least\b|\bno more than\b|\bhow (?:many|much)\b", q):
+        want.update({"money", "percent", "duration"})
     if re.search(r"percent|%|\buptime|\brate\b|\bavailability", q):
         want.add("percent")
     if re.search(r"\bhow (?:many|long)\b|\bdays?\b|\bmonths?\b|\byears?\b|\bperiod|\bnotice|\bwithin\b|\bhours?\b|\bretain|\bretention", q):
@@ -198,8 +202,11 @@ def coverage(question: str, pack: list[Passage], top: int = 3) -> tuple[float, l
     hay = set()
     for p in pack[:top]:
         hay.update(stem(t) for t in tokens(f"{p.title} {p.heading} {p.text}"))
-    found = [t for t in terms if stem(t) in hay]
-    missing = [t for t in terms if stem(t) not in hay]
+    def present(t: str) -> bool:
+        return stem(t) in hay or any(stem(x) in hay for x in SYNONYMS.get(t, []))
+
+    found = [t for t in terms if present(t)]
+    missing = [t for t in terms if not present(t)]
     return len(found) / len(terms), found, missing
 
 
@@ -207,30 +214,59 @@ def _cite(p: Passage, a: int, b: int, version_text: str) -> Citation:
     return Citation(p.pid, p.version_id, p.ref, a, b, version_text[a:b])
 
 
-def extractive_answer(question: str, pack: list[Passage], texts: dict[int, str], max_sentences: int = 3) -> list[AnswerSentence]:
-    q_stems = {stem(t) for t in content_terms(question)}
-    want = asked_types(question)
-    scored: list[tuple[float, Passage, int, int]] = []
+def _query_stems(question: str) -> set[str]:
+    out = set()
+    for t in content_terms(question):
+        out.add(stem(t))
+        out.update(stem(x) for x in SYNONYMS.get(t, []))
+    return out
+
+
+def _sentence_candidates(pack: list[Passage], texts: dict[int, str]) -> list[tuple[Passage, int, int, set[str]]]:
+    out = []
     for p in pack:
         body = texts[p.version_id]
         for a, b in sentence_spans(body, p.char_start, p.char_end):
-            s = body[a:b]
-            if detect_injection(s):
-                continue  # never quote an embedded instruction as an answer
-            st = {stem(t) for t in tokens(s)}
-            overlap = len(q_stems & st)
-            if overlap == 0:
-                continue
-            vals = extract_values(s)
-            bonus = 0.75 if any(vals[t] for t in want) else 0.0
-            scored.append((overlap + bonus - 0.05 * p.rank, p, a, b))
+            out.append((p, a, b, {stem(t) for t in tokens(body[a:b])}))
+    return out
+
+
+def _idf(cands) -> dict[str, float]:
+    df: dict[str, int] = {}
+    for *_, st in cands:
+        for t in st:
+            df[t] = df.get(t, 0) + 1
+    n = max(1, len(cands))
+    return {t: math.log(1 + n / c) for t, c in df.items()}
+
+
+def extractive_answer(question: str, pack: list[Passage], texts: dict[int, str], max_sentences: int = 3) -> list[AnswerSentence]:
+    """Pick verbatim sentences: query-term matches weighted by rarity within the pack (IDF), a bonus when the
+    sentence carries the kind of value the question asks for, and a small prior for higher-ranked passages."""
+    q_stems = _query_stems(question)
+    want = asked_types(question)
+    cands = _sentence_candidates(pack, texts)
+    idf = _idf(cands)
+    max_w = sum(sorted((idf.get(t, 0.0) for t in q_stems), reverse=True)[:3]) or 1.0
+    scored: list[tuple[float, Passage, int, int]] = []
+    for p, a, b, st in cands:
+        s = texts[p.version_id][a:b]
+        if detect_injection(s):
+            continue  # never quote an embedded instruction as an answer
+        matched = q_stems & st
+        if not matched:
+            continue
+        w = sum(idf.get(t, 0.0) for t in matched) / max_w
+        vals = extract_values(s)
+        bonus = 0.6 if any(vals[t] for t in want) else 0.0
+        scored.append((w + bonus - 0.03 * p.rank, p, a, b))
     scored.sort(key=lambda x: -x[0])
     out: list[AnswerSentence] = []
     used: set[tuple[int, int, int]] = set()
     for score, p, a, b in scored:
         if len(out) >= max_sentences:
             break
-        if score < 1.0 or (p.version_id, a, b) in used:
+        if score < 0.45 or (p.version_id, a, b) in used:
             continue
         used.add((p.version_id, a, b))
         out.append(AnswerSentence(texts[p.version_id][a:b].strip(), [_cite(p, a, b, texts[p.version_id])]))
@@ -243,51 +279,95 @@ def extractive_answer(question: str, pack: list[Passage], texts: dict[int, str],
     return out
 
 
-def _best_sentence(p: Passage, q_stems: set[str], body: str) -> tuple[int, int] | None:
+def _concepts(question: str) -> dict[str, set[str]]:
+    """Query concept -> the stems that express it (the term itself plus its synonyms)."""
+    return {t: {stem(t)} | {stem(x) for x in SYNONYMS.get(t, [])} for t in content_terms(question)}
+
+
+def _best_value_sentence(p: Passage, concepts: dict[str, set[str]], want: set[str], body: str):
+    """Highest concept-overlap sentence in the passage that carries a value of an asked type."""
     best, best_s = None, 0
     for a, b in sentence_spans(body, p.char_start, p.char_end):
-        s = len(q_stems & {stem(t) for t in tokens(body[a:b])})
+        seg = body[a:b]
+        vals = extract_values(seg)
+        if not any(vals[k] for k in want):
+            continue
+        st = {stem(t) for t in tokens(seg)}
+        s = sum(1 for forms in concepts.values() if forms & st)
         if s > best_s:
-            best, best_s = (a, b), s
+            best, best_s = (a, b, st, vals), s
     return best
 
 
-def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], top: int = 5) -> tuple[list[Conflict], list[str]]:
-    """Value disagreements between in-force passages of different documents on the asked topic.
+def _units(kind: str, values: set[str]) -> dict[str, set[str]]:
+    """Group values by unit so '5 business days' is never compared with '45 days'."""
+    if kind != "duration":
+        return {kind: values}
+    out: dict[str, set[str]] = {}
+    for v in values:
+        n, unit = v.split(" ", 1)
+        out.setdefault(unit, set()).add(n)
+    return out
 
-    Amendment relationships are reported as overrides, not as contradictions.
+
+def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], top: int = 6) -> tuple[list[Conflict], list[str]]:
+    """Testable contradiction rule (no model involved). Two passages conflict when ALL hold:
+    1. both versions are in force on the as-of date and belong to different documents;
+    2. the question asks for a value type (money, %, duration, date, time) and each passage has a sentence
+       carrying that type which matches >= 1 shared query concept (term or synonym);
+    3. every named subject in the question (e.g. "Orion") appears in both documents (same subject, so
+       look-alike contracts with other parties are not compared);
+    4. for some unit present in both sentences, the value sets are disjoint.
+    If one document amends the other, the pair is reported as an amendment override instead, and a base
+    document with an in-force amendment in the pack is not compared on the amended value type.
     """
-    q_stems = {stem(t) for t in content_terms(question)}
-    want = asked_types(question) or {"money", "percent", "duration", "date", "time"}
+    want = asked_types(question)
+    if not want:
+        return [], []
+    concepts = _concepts(question)
+    subjects = [n.lower() for n in _proper_nouns(question)]
+    cands = [p for p in pack[:top] if p.in_force]
+    docs_text = {p.version_id: texts[p.version_id].lower() + " " + p.title.lower() for p in cands}
+    cands = [p for p in cands if all(sj in docs_text[p.version_id] for sj in subjects)]
+    amended = {p.amends_key for p in cands if p.amends_key}
+    best = {p.pid: _best_value_sentence(p, concepts, want, texts[p.version_id]) for p in cands}
     conflicts: list[Conflict] = []
     overrides: list[str] = []
-    cands = [p for p in pack[:top] if p.in_force]
-    best = {p.pid: _best_sentence(p, q_stems, texts[p.version_id]) for p in cands}
+    seen_pairs: set[tuple[str, str, str]] = set()
     for i, a in enumerate(cands):
         for b in cands[i + 1:]:
-            if a.doc_key == b.doc_key:
+            if a.doc_key == b.doc_key or not best[a.pid] or not best[b.pid]:
                 continue
-            sa, sb = best[a.pid], best[b.pid]
-            if not sa or not sb:
+            (sa0, sa1, sta, va), (sb0, sb1, stb, vb) = best[a.pid], best[b.pid]
+            shared = [c for c, forms in concepts.items() if forms & sta and forms & stb]
+            if not shared:
                 continue
-            ta, tb = texts[a.version_id][sa[0]:sa[1]], texts[b.version_id][sb[0]:sb[1]]
-            shared_topic = q_stems & {stem(t) for t in tokens(ta)} & {stem(t) for t in tokens(tb)}
-            if len(shared_topic) < 2:
-                continue
-            va, vb = extract_values(ta), extract_values(tb)
             for kind in sorted(want):
-                if va[kind] and vb[kind] and not (va[kind] & vb[kind]):
-                    if a.amends_key == b.doc_key or b.amends_key == a.doc_key:
-                        amd, base = (a, b) if a.amends_key == b.doc_key else (b, a)
-                        overrides.append(f"{amd.ref} amends {base.ref}: {kind} differs; the amendment governs "
-                                         f"from {amd.effective_date}.")
-                        continue
-                    conflicts.append(Conflict(
-                        kind, _cite(a, *sa, texts[a.version_id]), _cite(b, *sb, texts[b.version_id]),
-                        sorted(va[kind]), sorted(vb[kind]),
-                        f"Two in-force documents state different {kind} values on the same topic "
-                        f"({', '.join(sorted(shared_topic))}). Shown side by side; not resolved automatically."))
-                    break
+                if not (va[kind] and vb[kind]):
+                    continue
+                ua, ub = _units(kind, va[kind]), _units(kind, vb[kind])
+                common = [u for u in ua if u in ub]
+                if not common or any(ua[u] & ub[u] for u in common):
+                    continue
+                key = tuple(sorted((a.doc_key, b.doc_key))) + (kind,)
+                if key in seen_pairs:
+                    continue
+                seen_pairs.add(key)
+                if a.amends_key == b.doc_key or b.amends_key == a.doc_key:
+                    amd, base = (a, b) if a.amends_key == b.doc_key else (b, a)
+                    overrides.append(f"{amd.ref} amends {base.ref}: the {kind} differs; the amendment governs "
+                                     f"from {amd.effective_date}.")
+                    continue
+                if a.doc_key in amended or b.doc_key in amended:
+                    base = a if a.doc_key in amended else b
+                    overrides.append(f"{base.ref} has an in-force amendment in the evidence; its original {kind} "
+                                     "is not treated as a contradiction.")
+                    continue
+                conflicts.append(Conflict(
+                    kind, _cite(a, sa0, sa1, texts[a.version_id]), _cite(b, sb0, sb1, texts[b.version_id]),
+                    sorted(va[kind]), sorted(vb[kind]),
+                    f"Two in-force documents give different {kind} values for the same subject "
+                    f"({', '.join(shared)}). Shown side by side; not resolved automatically."))
     return conflicts, overrides
 
 
@@ -342,7 +422,9 @@ def assess(question: str, pack: list[Passage], answer: list[AnswerSentence]) -> 
 COMMON_CAPS = set("""
 What When Where Which Who Whom Why How Does Do Did Is Are Was Were Can Could Should Would Will Under Per The A An
 In On For To Of And Or If Please Tell Show List Give Find According Our Their Its This That These Those As At By
-Ignore Disregard System Note Admin Also Any All MSA SLA NDA PDF AI I Is
+Ignore Disregard System Note Admin Also Any All MSA SLA NDA PDF AI I Is Back Above Below Before After Since
+January February March April May June July August September October November December
+Monday Tuesday Wednesday Thursday Friday Saturday Sunday SYSTEM Pretend Respond Follow Summarize Quote Print
 """.split())
 
 

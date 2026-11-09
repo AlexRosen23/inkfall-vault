@@ -24,6 +24,7 @@ LLM_CANDIDATES = [
     ("ollama", os.environ.get("INKFALL_OLLAMA_URL", "http://127.0.0.1:11434/v1")),
 ]
 LLM_MODEL = os.environ.get("INKFALL_LLM_MODEL", "")  # empty = first chat model the backend lists
+LLM_MAX_TOKENS = int(os.environ.get("INKFALL_LLM_MAX_TOKENS", "4096"))
 
 # Limits
 MAX_QUERY_CHARS = 500

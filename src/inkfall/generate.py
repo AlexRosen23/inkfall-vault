@@ -107,7 +107,8 @@ def validate_output(raw: str, pack: list[Passage], texts: dict[int, str]) -> Gen
         unknown = [c for c in cites if c not in by_pid]
         if unknown:
             return GenerationResult(False, rejected_reason=f"cited passage ids not in the authorized pack: {unknown}")
-        text = s["text"].strip()[:600]
+        # Models often echo passage markers ("... P1.", "[P2]") into the prose; they are citations, not claims.
+        text = re.sub(r"\s*\[?\b(?:P\d+)(?:\s*[,/]?\s*P\d+)*\]?(?=[\s.;,]|$)", "", s["text"]).strip()[:600]
         if not cites:
             out.append(AnswerSentence(text, [], "unsupported", ["no citation"]))
             continue

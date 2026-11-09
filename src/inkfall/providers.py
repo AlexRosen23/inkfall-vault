@@ -14,7 +14,7 @@ from dataclasses import dataclass
 
 import httpx
 
-from .config import LLM_CANDIDATES, LLM_MODEL
+from .config import LLM_CANDIDATES, LLM_MAX_TOKENS, LLM_MODEL
 
 
 @dataclass
@@ -35,15 +35,19 @@ class Provider:
 
 
 class OpenAICompatible(Provider):
-    def __init__(self, name: str, base_url: str, model: str, timeout: float = 120.0):
+    def __init__(self, name: str, base_url: str, model: str, timeout: float = 300.0):
         self.name, self.base_url, self.model, self.timeout = name, base_url.rstrip("/"), model, timeout
 
-    def complete(self, system: str, user: str, max_tokens: int = 700) -> tuple[str, dict]:
+    def complete(self, system: str, user: str, max_tokens: int = LLM_MAX_TOKENS) -> tuple[str, dict]:
         t0 = time.perf_counter()
         body = {
             "model": self.model, "temperature": 0, "max_tokens": max_tokens,
-            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+            # "/no_think" asks Qwen3-style models to skip hidden reasoning. LM Studio's Qwen3.6 build ignores it
+            # (measured 2026-11-08), so the token budget is sized for reasoning + the JSON answer.
+            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user + "\n/no_think"}],
         }
+        if self.name == "ollama":
+            body["think"] = False
         r = httpx.post(f"{self.base_url}/chat/completions", json=body, timeout=self.timeout)
         r.raise_for_status()
         data = r.json()

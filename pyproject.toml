@@ -55,6 +55,7 @@ ignore = ["S101", "S311", "E501"]
 [tool.ruff.lint.per-file-ignores]
 "tests/*" = ["S"]
 "scripts/*" = ["S"]
+"src/inkfall/evaluate.py" = ["S603", "S607"]
 
 [tool.ruff.lint.flake8-bugbear]
 extend-immutable-calls = ["fastapi.Depends"]

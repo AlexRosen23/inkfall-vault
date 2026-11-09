@@ -253,7 +253,7 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         user = st.directory.users.get(body.username)
         if user is None:
             with tx(s):
-                audit.log(s, rid(request), "login_denied", "denied", None, None, username=body.username)
+                audit.log(s, rid(request), "login_denied", "denied", None, None, attempted=body.username)
             raise HTTPException(401, "unknown_identity")
         token = secrets.token_urlsafe(32)
         with tx(s):

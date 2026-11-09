@@ -28,7 +28,10 @@ were what when where which while who whom why will with would you your about any
 QUESTION_FILLER = set("""
 tell show find give list explain describe say says said state states stated according document documents doc
 please much many long often whether exactly currently current currently version versions clause clauses section
+need needs want wants don get gets put keep give take make happen back now today ago anymore still
+january february march april may june july august september october november december
 """.split())
+YEAR = re.compile(r"^(?:19|20)\d\d$")
 TOKEN = re.compile(r"[a-z0-9]+(?:[.,][0-9]+)*%?")
 RRF_K = 60
 
@@ -62,10 +65,34 @@ def tokens(s: str) -> list[str]:
     return TOKEN.findall(s.lower())
 
 
+# Small, generic contracts/policy vocabulary map used for query expansion (lexical search, coverage and
+# sentence scoring). Plain-language phrasings map to the terms documents actually use.
+SYNONYMS: dict[str, list[str]] = {
+    "roll": ["renew", "renewal"], "rollover": ["renew", "renewal"], "end": ["terminate", "termination", "expire"],
+    "cancel": ["terminate", "termination"], "leave": ["terminate", "termination"], "quit": ["terminate"],
+    "charge": ["price", "fee", "fees"], "bill": ["fee", "fees", "invoice"], "cost": ["price", "fee"],
+    "owe": ["fee", "payable", "liable"], "late": ["overdue", "due"], "pay": ["payment", "payable"],
+    "uptime": ["availability", "available"], "availability": ["uptime"], "outage": ["unavailable", "incident"],
+    "begin": ["start", "started", "commenced"], "start": ["began", "commenced"], "cap": ["limit", "liability"],
+    "keep": ["retain", "retention"], "store": ["retain", "retention"], "delete": ["destroy", "disposal"],
+    "fine": ["penalty"], "boss": ["manager"], "deadline": ["within", "due"], "wfh": ["remote"],
+}
+
+
+def expanded_terms(s: str) -> list[str]:
+    terms = content_terms(s)
+    out = list(terms)
+    for t in terms:
+        for syn in SYNONYMS.get(t, []):
+            if syn not in out:
+                out.append(syn)
+    return out
+
+
 def content_terms(s: str) -> list[str]:
     seen: list[str] = []
     for t in tokens(s):
-        if t in STOPWORDS or t in QUESTION_FILLER or len(t) < 2:
+        if t in STOPWORDS or t in QUESTION_FILLER or len(t) < 2 or YEAR.match(t):
             continue
         if t not in seen:
             seen.append(t)
@@ -76,12 +103,15 @@ def stem(t: str) -> str:
     """Tiny suffix stripper for term-coverage checks (FTS5 uses Porter for ranking)."""
     for suf in ("ations", "ation", "ings", "ing", "ies", "ied", "es", "ed", "s", "ly"):
         if len(t) > len(suf) + 3 and t.endswith(suf):
-            return t[: -len(suf)] + ("y" if suf in ("ies", "ied") else "")
+            base = t[: -len(suf)] + ("y" if suf in ("ies", "ied") else "")
+            if suf in ("ed", "ing", "ings") and len(base) > 3 and base[-1] == base[-2] and base[-1] not in "aeiouls":
+                base = base[:-1]  # committed -> commit, stopped -> stop
+            return base
     return t
 
 
 def fts_query(q: str) -> str | None:
-    terms = content_terms(q)
+    terms = expanded_terms(q)
     if not terms:
         return None
     # Each term quoted -> no FTS operator injection from user text.
