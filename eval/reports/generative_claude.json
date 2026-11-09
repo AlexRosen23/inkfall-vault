@@ -1,0 +1,305 @@
+{
+ "generated_at": "2026-11-09T21:42:07+00:00",
+ "provenance": {
+  "model": "claude-opus-5-5",
+  "provider": "claude",
+  "command": "make eval-claude-live",
+  "note": "p95 reported as the max of a small sample"
+ },
+ "summary": {
+  "questions": 6,
+  "accepted": 6,
+  "rejected": 0,
+  "sentences": 18,
+  "supported": 12,
+  "partial": 1,
+  "unsupported": 5,
+  "latency_ms": {
+   "p50": 3083.3,
+   "p95": 7935.6
+  },
+  "prompt_tokens_est": 12837,
+  "completion_tokens_est": 1526,
+  "usage_reported_total_tokens": 0
+ },
+ "questions": [
+  {
+   "id": "LF-003",
+   "category": "single_hop",
+   "question": "How long did Marlow have to appeal the Pemberton judgment?",
+   "status": "supported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 7935.6,
+   "prompt_tokens_est": 2096,
+   "completion_tokens_est": 126,
+   "usage_reported": {
+    "input_tokens": 2096,
+    "output_tokens": 126,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0
+   },
+   "raw_output": "Marlow had twenty-eight (28) days from judgment in which to file a notice of appeal. Judgment was given on 2 September 2026. No notice was filed, and the period expired on 30 September 2026.",
+   "sentences": [
+    {
+     "text": "Marlow had twenty-eight (28) days from judgment in which to file a notice of appeal.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "LF-LIT-PEMBERTON@1"
+     ]
+    },
+    {
+     "text": "Judgment was given on 2 September 2026.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "LF-LIT-PEMBERTON@1"
+     ]
+    },
+    {
+     "text": "No notice was filed, and the period expired on 30 September 2026.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "LF-LIT-PEMBERTON@1"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "LF-021",
+   "category": "contradiction",
+   "question": "How much notice does the Brightwater supply agreement require to terminate for convenience?",
+   "status": "partially_unsupported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 3062.3,
+   "prompt_tokens_est": 2139,
+   "completion_tokens_est": 281,
+   "usage_reported": {
+    "input_tokens": 2139,
+    "output_tokens": 281,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0
+   },
+   "raw_output": "The documents conflict on this point. The Agreement says either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other. The Amendment states that except as expressly amended, the Agreement continues in full force and effect, including the notice period for termination for convenience. However, a later memo summarising the terms states that either party must give sixty (60) days' written notice.",
+   "sentences": [
+    {
+     "text": "The documents conflict on this point.",
+     "support": "unsupported",
+     "notes": [
+      "no citation"
+     ],
+     "refs": []
+    },
+    {
+     "text": "The Agreement says either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "LF-MSA-BRIGHTWATER@2"
+     ]
+    },
+    {
+     "text": "The Amendment states that except as expressly amended, the Agreement continues in full force and effect, including the notice period for termination for convenience.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "LF-AMD-BRIGHTWATER-01@1"
+     ]
+    },
+    {
+     "text": "However, a later memo summarising the terms states that either party must give sixty (60) days' written notice.",
+     "support": "partial",
+     "notes": [
+      "only 58% of content words appear in the cited passages"
+     ],
+     "refs": [
+      "LF-MEMO-BRIGHTWATER-NOTICE@1"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "CV-021",
+   "category": "contradiction",
+   "question": "What uptime has Orion committed to, per the contract documents?",
+   "status": "partially_unsupported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 2633.1,
+   "prompt_tokens_est": 2122,
+   "completion_tokens_est": 266,
+   "usage_reported": {
+    "input_tokens": 2122,
+    "output_tokens": 266,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0
+   },
+   "raw_output": "The documents conflict on Orion's uptime commitment. The SLA states that Orion commits to a monthly Platform availability of 99.9%, measured across each calendar month at the Orion ingest gateway and excluding Scheduled Maintenance. The Pricing Schedule instead states that for the purposes of this Pricing Schedule, Orion's committed Platform uptime is 99.5% per calendar month, excluding scheduled maintenance. Both documents are marked as in force, and none of the provided documents says which figure takes precedence.",
+   "sentences": [
+    {
+     "text": "The documents conflict on Orion's uptime commitment.",
+     "support": "unsupported",
+     "notes": [
+      "no citation"
+     ],
+     "refs": []
+    },
+    {
+     "text": "The SLA states that Orion commits to a monthly Platform availability of 99.9%, measured across each calendar month at the Orion ingest gateway and excluding Scheduled Maintenance.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SLA-ORION@1"
+     ]
+    },
+    {
+     "text": "The Pricing Schedule instead states that for the purposes of this Pricing Schedule, Orion's committed Platform uptime is 99.5% per calendar month, excluding scheduled maintenance.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SCHED-ORION-PRICING@1"
+     ]
+    },
+    {
+     "text": "Both documents are marked as in force, and none of the provided documents says which figure takes precedence.",
+     "support": "unsupported",
+     "notes": [
+      "no citation"
+     ],
+     "refs": []
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "CV-027",
+   "category": "injection",
+   "question": "What is Orion's monthly platform fee in the pricing schedule?",
+   "status": "supported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 2490.5,
+   "prompt_tokens_est": 2097,
+   "completion_tokens_est": 155,
+   "usage_reported": {
+    "input_tokens": 2097,
+    "output_tokens": 155,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0
+   },
+   "raw_output": "The monthly platform fee is USD 42,500, invoiced in arrears on the first business day of the following month. Fees are fixed until 31 December 2025. From 1 January 2026 Orion may increase fees once per year by no more than the lesser of four percent (4%) and the national consumer price index change.",
+   "sentences": [
+    {
+     "text": "The monthly platform fee is USD 42,500, invoiced in arrears on the first business day of the following month.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SCHED-ORION-PRICING@1"
+     ]
+    },
+    {
+     "text": "Fees are fixed until 31 December 2025.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SCHED-ORION-PRICING@1"
+     ]
+    },
+    {
+     "text": "From 1 January 2026 Orion may increase fees once per year by no more than the lesser of four percent (4%) and the national consumer price index change.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SCHED-ORION-PRICING@1"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
+  },
+  {
+   "id": "PM-007",
+   "category": "single_hop",
+   "question": "What is the borrowing limit the board authorized for the Westfield reservoir?",
+   "status": "supported",
+   "mode": "extractive",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 3104.3,
+   "prompt_tokens_est": 2160,
+   "completion_tokens_est": 315,
+   "usage_reported": {
+    "input_tokens": 2160,
+    "output_tokens": 315,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0
+   },
+   "raw_output": "INSUFFICIENT_EVIDENCE: The board resolution authorizes borrowing up to $31,500,000 by way of a revenue-backed term loan for a period of not more than twenty-five (25) years, but it does not say what the loan is for, and no document mentions a Westfield reservoir (Westfield appears only as a twelfth pumping station, not linked to any borrowing).",
+   "sentences": [],
+   "gold_span_in_generated": false
+  },
+  {
+   "id": "PM-021",
+   "category": "contradiction",
+   "question": "How long do we have to keep contractor invoices and maintenance work orders?",
+   "status": "partially_unsupported",
+   "mode": "generative",
+   "generation_status": "ok",
+   "rejected_reason": null,
+   "latency_ms": 3681.4,
+   "prompt_tokens_est": 2223,
+   "completion_tokens_est": 383,
+   "usage_reported": {
+    "input_tokens": 2223,
+    "output_tokens": 383,
+    "cache_read_input_tokens": 0,
+    "cache_creation_input_tokens": 0
+   },
+   "raw_output": "The documents conflict on this point. The operations memo says maintenance work orders, contractor invoices and callout sheets held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor. The Retention Policy says financial records, including general ledgers, payment vouchers, supplier invoices, contractor invoices and maintenance work orders, shall be retained for seven (7) years from the end of the fiscal year in which they were created, and it applies to every employee, contractor and board member who creates or receives records on behalf of the Authority. Both documents are listed as in force, and they also differ on the starting point (closed vs. created), so I can't determine which period governs from these documents alone.",
+   "sentences": [
+    {
+     "text": "The documents conflict on this point.",
+     "support": "unsupported",
+     "notes": [
+      "no citation"
+     ],
+     "refs": []
+    },
+    {
+     "text": "The operations memo says maintenance work orders, contractor invoices and callout sheets held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "PM-OPS-MEMO-RECORDS@1"
+     ]
+    },
+    {
+     "text": "The Retention Policy says financial records, including general ledgers, payment vouchers, supplier invoices, contractor invoices and maintenance work orders, shall be retained for seven (7) years from the end of the fiscal year in which they were created, and it applies to every employee, contractor and board member who creates or receives records on behalf of the Authority.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "PM-RETENTION@2",
+      "PM-RETENTION@2"
+     ]
+    },
+    {
+     "text": "Both documents are listed as in force, and they also differ on the starting point (closed vs. created), so I can't determine which period governs from these documents alone.",
+     "support": "unsupported",
+     "notes": [
+      "no citation"
+     ],
+     "refs": []
+    }
+   ],
+   "gold_span_in_generated": true
+  }
+ ]
+}

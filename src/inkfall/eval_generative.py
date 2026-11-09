@@ -23,6 +23,14 @@ from .service import run_query
 DEFAULT_IDS = ["LF-003", "LF-021", "CV-021", "CV-027", "PM-007", "PM-021"]
 
 
+def _reported_total(usage: dict | None) -> int:
+    """Total tokens a provider reported: OpenAI-style `total_tokens`, else Anthropic-style input + output."""
+    u = usage or {}
+    if "total_tokens" in u:
+        return int(u["total_tokens"] or 0)
+    return int(u.get("input_tokens") or 0) + int(u.get("output_tokens") or 0)
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--ids", default=",".join(DEFAULT_IDS))
@@ -68,7 +76,7 @@ def main() -> None:
                "latency_ms": {"p50": round(statistics.median(lat), 1), "p95": round(max(lat), 1)},
                "prompt_tokens_est": sum(r["prompt_tokens_est"] for r in rows),
                "completion_tokens_est": sum(r["completion_tokens_est"] for r in rows),
-               "usage_reported_total_tokens": sum((r["usage_reported"] or {}).get("total_tokens", 0) for r in rows)}
+               "usage_reported_total_tokens": sum(_reported_total(r["usage_reported"]) for r in rows)}
     out = {"generated_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
            "provenance": {"model": getattr(prov, "model", "?"), "provider": prov.name,
                           "command": "make eval-claude-live" if prov.name == "claude" else "make eval-generative",

@@ -96,6 +96,14 @@ _From `eval/reports/generative.json` (2026-11-09T05:15:07+00:00): qwen3.6-35b-a3
 - Questions: 6; outputs accepted: 6; rejected by the validator: 0; generated sentences: 13 (supported 10, partial 2, unsupported 1).
 - Latency per question: p50 99911.1 ms, p95 135228.7 ms. Tokens (estimate, chars/4): prompt 3621, completion 621; reported by the server: 15801. Billed cost: $0 (local model).
 
+## Live Claude check (`make eval-claude-live`)
+
+_From `eval/reports/generative_claude.json` (2026-11-09): claude-opus-5-5 through the Anthropic Citations API, the same 6 dev questions as above. One run; not used for any headline claim._
+
+- Outputs accepted: 6/6; generated sentences: 18 (supported 12, partial 1, unsupported 5). 5 of the unsupported sentences carry no citation at all: connecting sentences that say the sources conflict or that the governing figure can't be determined. The validator still counts them as unsupported.
+- Gold answer span present in 5/6 answers. Abstained: PM-007. None of the 6 passages it was given mentions a reservoir (they are cut from numbered sections); only the document title ("Westfield Reservoir Financing") does, and the title was not sent. Fixed after this run (each document's title now includes the source title); the fix has not been re-run live.
+- Latency per question: p50 3083.3 ms, p95 (max) 7935.6 ms. Tokens reported by the API: 14363 (input + output, summed per question; the run's own summary field read 0 because of a summing bug fixed afterwards).
+
 ## Adversarial run with a real local model (`python -m inkfall.adversarial --generate ollama`)
 
 _From `eval/reports/adversarial_generative.json` (2026-11-09T18:56:19+00:00, report commit `c3efedb`, wall time 3027.8 s)._
