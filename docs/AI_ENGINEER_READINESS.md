@@ -70,10 +70,11 @@ workloads during the runs (latencies are not a benchmark).
   true-negative rate rests mostly on synthetic negatives (changed numbers, appended fabricated sentences). Real
   subtle misreadings are under-represented.
 - **Claude provider never called live.** No API key was available. The Citations integration is tested against
-  fixtures built from the documented response schema; a live run (`ANTHROPIC_API_KEY=… generate=claude`) may surface
+  fixtures built from the documented response schema; a live run (`make eval-claude-live` with `ANTHROPIC_API_KEY` set; 6 questions, a few cents at list price) may surface
   differences (for example how blocks are cited across sentence boundaries, or the server-side fallback beta).
-- **No deployment, no cloud, no CI.** Everything runs on one Mac. No container image, no IaC, GitHub Actions
-  disabled by owner policy. A deployment and a CI run are owner decisions.
+- **No deployment, no cloud.** Everything runs on one Mac. No container image, no IaC; a deployment is an owner
+  decision. CI does run: GitHub Actions on `ubuntu-24.04` (enabled 2026-11-09) runs the `make ci` checks on every
+  pull request and push to `main`.
 - **Small, self-authored data.** 45 fictional documents and 112 questions written for this project; numbers are
   optimistic relative to a real corpus.
 - **No agent loop.** The MCP server provides tools for someone else's agent; there is no multi-step agent with

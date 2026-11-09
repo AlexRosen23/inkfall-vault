@@ -19,7 +19,7 @@ The three organizations and all 45 documents are fictional.
 | **Status** | Working local demo. The build spec's phases 1–5 ([#1](https://github.com/AlexRosen23/inkfall-vault/pull/1)–[#3](https://github.com/AlexRosen23/inkfall-vault/pull/3)) and the AI Engineer readiness additions ([#4](https://github.com/AlexRosen23/inkfall-vault/pull/4)) are merged. Those additions are a Claude Citations provider, an MCP server, a real-model adversarial run, a calibrated faithfulness judge and tracing. Contradiction detection is partial, and login uses fixture identities. |
 | **Stack** | Python 3.12 (uv), FastAPI, SQLAlchemy, SQLite FTS5, sentence-transformers (`all-MiniLM-L6-v2`, CPU), Next.js 16 / React 19 / TypeScript, pytest. Opt-in: Anthropic SDK, MCP Python SDK, OpenTelemetry |
 | **Run it** | `make setup && make serve`, then open http://127.0.0.1:5110 |
-| **Verified** | README checked on 2026-11-09 against `main` at `4e9233e`, merged into this branch. The quick start, the 99 tests and `make ci` were rerun on that tree. |
+| **Verified** | README checked on 2026-11-09 against `main` at `02a5c9c`, merged into this branch. The quick start, the 100 tests and `make ci` were rerun on that tree. |
 | **License** | MIT ([LICENSE](LICENSE)) |
 
 ### For AI Engineer reviewers
@@ -147,7 +147,7 @@ command, commit and machine.
 | Prompt-injection flagging in documents and questions | Partial (regex heuristic) | Adversarial injection section 20/21. Safety rests on authorization and output validation, not on this flag. |
 | Optional local generation (LM Studio / Ollama), validated per sentence | Working, optional | Validator: `tests/test_generation.py` plus a scripted malicious model (5/5 attacks handled). Real models: a 6-question sample with Qwen3.6-35B in LM Studio (`eval/reports/generative.json`), and gpt-oss:20b in Ollama answering the full adversarial sweep (next row). |
 | Adversarial sweep with a real model writing the answers | Working | `eval/reports/adversarial_generative.json` (gpt-oss:20b, 2026-11-09): 0 leaks, 194 generated answers, 0 of 187 prompts with forbidden content. The first run found the model echoing an injected instruction. That run is kept as `adversarial_generative_run1.json`, and the fix is below. |
-| Claude via the Anthropic Citations API (opt-in) | **Partial: tested offline only** | `tests/test_claude_citations.py` uses fixtures built from the documented response schema. Never called live: that needs an `ANTHROPIC_API_KEY`, and it's never auto-selected. |
+| Claude via the Anthropic Citations API (opt-in) | **Partial: tested offline only** | `tests/test_claude_citations.py` uses fixtures built from the documented response schema. Never called live yet: `make eval-claude-live` (paid, 6 questions) records one once an `ANTHROPIC_API_KEY` is set. It's never auto-selected. |
 | Faithfulness LLM judge, calibrated | Working, with caveats | `eval/reports/faithfulness.json`: judge-test TPR 0.946 / TNR 0.933 (n=52). The reference labels are AI-drafted and pending owner review, the judge is the same model as the generator, and every test-split FAIL label is a synthetic negative. |
 | Permission-aware MCP server (stdio: `search`, `fetch_document`, `cite`) | Working | `tests/test_mcp_server.py`: 449 identity × unreadable-version pairs fetch and cite as missing, 0 forbidden canaries in 449 searches, plus a real stdio subprocess. See [docs/MCP_SERVER.md](docs/MCP_SERVER.md). |
 | OpenTelemetry GenAI spans | Working, off by default | `tests/test_telemetry.py`. Spans never carry question, document, prompt or output text. |
@@ -223,6 +223,7 @@ answers extractively, which is the default.
 | `make security-test` | Isolation, security and generation suites, then the adversarial sweep → `eval/reports/adversarial.json` |
 | `make eval` | Gold set × BM25/dense/hybrid(/rerank) → `eval/reports/latest.json`, then re-renders the eval docs |
 | `make eval-generative` | Opt-in: 6 dev questions through a local model (slow, 1–2 minutes each) |
+| `make eval-claude-live` | Opt-in, **paid**: the same 6 questions through Claude's Citations API (needs `ANTHROPIC_API_KEY`) → `eval/reports/generative_claude.json` |
 | `make rerank-model` | Opt-in: download the ~90 MB cross-encoder for the rerank ablation |
 | `make ci` | Lint, typecheck, dataset check, tests, adversarial sweep, web build, license gate |
 | `make mcp` | MCP server on stdio (`MCP_USER=dana.whitcombe` by default) |
@@ -476,7 +477,7 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
 - **The faithfulness judge isn't validated against people yet.** Its reference labels are AI-drafted and
   pending owner review, it shares a model with the generator, and its test-split negatives are all synthetic.
 - **The Claude provider has never run live.** It's tested only against fixtures built from the documented
-  response schema; a live run needs an API key.
+  response schema. `make eval-claude-live` records a live run, but it needs an API key.
 - **The MCP server trusts whoever starts it.** One identity per process, with no client authentication.
 - **Time-to-task savings are not measured.**
 - More gaps are listed in [docs/SECURITY_LIMITATIONS.md](docs/SECURITY_LIMITATIONS.md): storage is unencrypted
@@ -492,7 +493,7 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
    the evidence can't satisfy.
 4. Owner review of the 30-item faithfulness CSV, then re-report the judge against human labels, with naturally
    wrong answers among the negatives.
-5. One live Claude Citations run on the dev split, to confirm the fixtures match real responses.
+5. One live Claude Citations run (`make eval-claude-live`, 6 dev questions), to confirm the fixtures match real responses.
 6. Real authentication (OIDC) and TLS behind a reverse proxy, before anything other than fictional data comes
    near it.
 7. A Postgres backend (tsvector plus pgvector) behind `search.py`, with the same isolation suite run against it.
@@ -519,8 +520,8 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
 make test
 ```
 
-This runs the dataset validator and the full pytest suite: **99 tests, all passing** on 2026-11-09 (this
-branch, i.e. `main` at `4e9233e` plus the CI change). `make security-test` runs the isolation, security and generation suites, then the adversarial sweep.
+This runs the dataset validator and the full pytest suite: **100 tests, all passing** on 2026-11-09 (this
+branch, i.e. `main` at `02a5c9c` plus this PR's CI change). `make security-test` runs the isolation, security and generation suites, then the adversarial sweep.
 `make ci` runs everything the CI workflow would: Ruff, the TypeScript typecheck and ESLint, the dataset check,
 pytest, the adversarial sweep, the production web build and the license gate. It passed locally on 2026-11-09.
 

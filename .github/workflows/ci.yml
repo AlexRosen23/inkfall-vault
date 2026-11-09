@@ -1,6 +1,7 @@
 # CI: the same checks as `make ci` (lint, typecheck, dataset integrity, tests, adversarial eval, web build,
-# licenses) on a Linux runner. torch comes from PyTorch's CPU-only index on Linux (pyproject [tool.uv.sources]),
-# so no CUDA libraries are downloaded. Locally, run `make ci`.
+# licenses) on a Linux runner. Runs on GitHub Actions, enabled with the owner's approval on 2026-11-09. torch comes
+# from PyTorch's CPU-only index on Linux (pyproject [tool.uv.sources]), so no CUDA libraries are downloaded.
+# Locally, run `make ci`.
 name: ci
 on:
   pull_request:
