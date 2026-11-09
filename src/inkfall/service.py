@@ -53,7 +53,7 @@ def run_query(session: Session, user: User, directory: Directory, question: str,
             gen_info.update(status="ok" if g.ok else "rejected", rejected_reason=g.rejected_reason, model=g.model,
                             provider=g.provider, latency_ms=round(g.latency_ms, 1),
                             prompt_tokens_est=g.prompt_tokens_est, completion_tokens_est=g.completion_tokens_est,
-                            usage_reported=g.usage_reported, model_abstained=g.abstained,
+                            usage_reported=g.usage_reported, model_abstained=g.abstained, raw_output=g.raw_output,
                             cost_note="local model: $0 billed; token counts are chars/4 estimates")
             if g.ok and g.sentences:
                 answer, mode = g.sentences, "generative"

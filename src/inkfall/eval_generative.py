@@ -47,7 +47,7 @@ def main() -> None:
                      "mode": res["mode"], "generation_status": g.get("status"), "rejected_reason": g.get("rejected_reason"),
                      "latency_ms": round((time.perf_counter() - t0) * 1000, 1),
                      "prompt_tokens_est": g.get("prompt_tokens_est", 0), "completion_tokens_est": g.get("completion_tokens_est", 0),
-                     "usage_reported": g.get("usage_reported", {}),
+                     "usage_reported": g.get("usage_reported", {}), "raw_output": g.get("raw_output", ""),
                      "sentences": [{"text": a["text"], "support": a["support"], "notes": a["notes"],
                                     "refs": [c["ref"] for c in a["citations"]]} for a in sents],
                      "gold_span_in_generated": any(sp in " ".join(a["text"] for a in sents) for sp in q.answer_spans)})

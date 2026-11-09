@@ -29,6 +29,8 @@ Rules:
 Reply with JSON only: {"abstain": false, "sentences": [{"text": "...", "cites": ["P1"]}]}"""
 
 NUM = re.compile(r"\d[\d,]*(?:\.\d+)?")
+# Passage markers echoed into prose: "P1", "[P2]", "(P3)", "(P1, P4)", "P1P5". They are citations, not claims.
+MARKERS = re.compile(r"\s*[\[(]?\bP\d+(?:\s*[,/;&]?\s*(?:and\s+)?P\d+)*[\])]?(?=[\s.;,:)]|$)")
 
 
 @dataclass
@@ -43,6 +45,7 @@ class GenerationResult:
     prompt_tokens_est: int = 0
     completion_tokens_est: int = 0
     usage_reported: dict = field(default_factory=dict)
+    raw_output: str = ""
 
 
 def build_prompt(question: str, pack: list[Passage]) -> str:
@@ -108,7 +111,7 @@ def validate_output(raw: str, pack: list[Passage], texts: dict[int, str]) -> Gen
         if unknown:
             return GenerationResult(False, rejected_reason=f"cited passage ids not in the authorized pack: {unknown}")
         # Models often echo passage markers ("... P1.", "[P2]") into the prose; they are citations, not claims.
-        text = re.sub(r"\s*\[?\b(?:P\d+)(?:\s*[,/]?\s*P\d+)*\]?(?=[\s.;,]|$)", "", s["text"]).strip()[:600]
+        text = MARKERS.sub("", s["text"]).strip()[:600]
         if not cites:
             out.append(AnswerSentence(text, [], "unsupported", ["no citation"]))
             continue
@@ -125,6 +128,7 @@ def generate(provider: Provider, question: str, pack: list[Passage], texts: dict
     except Exception as exc:  # noqa: BLE001 - provider/network failures degrade to extractive
         return GenerationResult(False, rejected_reason=f"provider error ({type(exc).__name__})", provider=provider.name)
     res = validate_output(raw, pack, texts)
+    res.raw_output = raw[:8000]
     res.model, res.provider, res.latency_ms = meta.get("model"), meta.get("provider"), meta.get("latency_ms", 0.0)
     res.prompt_tokens_est = estimate_tokens(SYSTEM + prompt)
     res.completion_tokens_est = estimate_tokens(raw)

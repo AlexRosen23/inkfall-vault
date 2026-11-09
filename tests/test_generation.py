@@ -128,3 +128,15 @@ def test_parse_json_block_strips_reasoning():
 
 def test_validate_output_requires_list():
     assert not validate_output('{"sentences": "nope"}', [], {}).ok
+
+
+def test_passage_markers_are_not_counted_as_invented_numbers(run):
+    """Regression: '(P1)' echoed into prose once made correct sentences look unsupported."""
+    def marked(prompt):
+        p = pids(prompt)[0]
+        return json.dumps({"sentences": [{"text": f"Orion commits to a monthly Platform availability of 99.9% ({p}).",
+                                          "cites": [p]}]})
+
+    res, _ = run("dana.whitcombe", "What availability does the Orion SLA commit to?", marked)
+    assert res["answer"][0]["support"] == "supported", res["answer"][0]
+    assert "(P" not in res["answer"][0]["text"]
