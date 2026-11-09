@@ -279,7 +279,9 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         t = st.directory.tenants[user.tenant]
         return {"username": user.username, "display_name": user.display_name, "title": user.title,
                 "tenant": user.tenant, "tenant_name": t.name, "roles": list(user.roles), "groups": list(user.groups),
-                "clearance": user.clearance, "collections": list(t.collections)}
+                "clearance": user.clearance, "collections": list(t.collections),
+                # ACL group names of the caller's own tenant, for the admin upload form (labels only, no content)
+                "tenant_groups": list(t.groups) if user.has_role("admin") else []}
 
     @app.get("/api/auth/me")
     def me(user: User = Depends(current_user)):
