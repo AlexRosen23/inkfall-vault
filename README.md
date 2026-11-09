@@ -66,15 +66,18 @@ make seed
 ```
 
 ```bash
-make demo
+make serve
 ```
 
-Open http://127.0.0.1:5111 and pick an identity. Ports: API **5110**, web **5111** (`make api` / `make web`
-separately). No LLM is needed; to try local generation, load a chat model in LM Studio (port 1234) or Ollama
+Open http://127.0.0.1:5110 and pick an identity. `make serve` (= `./run.sh`) serves the API, the read-only project
+contract (`/health`, `/capabilities`, `/runs`) and the built UI from one process on **5110**; it seeds the database
+and builds the UI first if they are missing. For development with hot reload, `make demo` runs the API on 5110 and
+the Next.js dev server on **5111**. No LLM is needed; to try local generation, load a chat model in LM Studio (port 1234) or Ollama
 (11434) and choose "Local model" in the scope panel.
 
 | Command | Does |
 |---|---|
+| `make serve` | one-port app on 127.0.0.1:5110 (what the Constellation world opens) |
 | `make test` | dataset validation + full test suite |
 | `make security-test` | isolation/security/generation suites + adversarial eval → `eval/reports/adversarial.json` |
 | `make eval` | gold set × BM25/dense/hybrid(/rerank) → `eval/reports/latest.json` + rendered docs |

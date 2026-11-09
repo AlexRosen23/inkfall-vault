@@ -85,4 +85,10 @@ document *content* → model prompt (documents may contain instructions), model 
   output validation.
 - **Local model output.** The validator checks citations and lexical/numeric support; it cannot prove a fluent
   sentence is a faithful paraphrase. Generated text is labelled and per-sentence support is shown.
+- **Unauthenticated contract.** `/health`, `/capabilities` and `/runs` answer without a session on 127.0.0.1. They are
+  built from saved aggregate reports only (no tenant data), which a test checks; a future field added carelessly
+  could change that, so the test asserts against every document key, title and opening line.
+- **Framing.** The UI pages may be framed by 127.0.0.1/localhost ports 4520/4521 (the owner's Constellation). Any
+  other local process listening on those ports could frame the UI too; it would still need a session, and session
+  cookies are SameSite=Strict.
 - **No encryption at rest**, no TLS (localhost only), no backup of `data/`, single-process in-memory rate limiter.

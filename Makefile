@@ -4,7 +4,7 @@ UV ?= uv
 API_PORT ?= 5110
 WEB_PORT ?= 5111
 
-.PHONY: help setup setup-offline seed api web demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
+.PHONY: help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*?## ' '{printf "  %-16s %s\n", $$1, $$2}'
@@ -28,7 +28,13 @@ api: ## Run the API on 127.0.0.1:$(API_PORT)
 web: ## Run the web app on 127.0.0.1:$(WEB_PORT) (proxies /api to the API)
 	cd web && INKFALL_API=http://127.0.0.1:$(API_PORT) npx next dev --hostname 127.0.0.1 --port $(WEB_PORT)
 
-demo: ## Seed if needed, then run API + web together (Ctrl-C stops both)
+serve: ## One port: API + read-only contract + built UI on 127.0.0.1:$(API_PORT) (what the Constellation launcher runs)
+	./run.sh
+
+web-export: ## Rebuild the static UI that `make serve` / run.sh serve (web/out)
+	cd web && INKFALL_EXPORT=1 ./node_modules/.bin/next build
+
+demo: ## Dev mode: seed if needed, then API (:5110) + Next dev server (:5111, hot reload) together (Ctrl-C stops both)
 	@test -f data/inkfall.db || $(MAKE) seed
 	@trap 'kill 0' EXIT; $(MAKE) api & sleep 2; $(MAKE) web
 
