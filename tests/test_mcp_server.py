@@ -117,6 +117,7 @@ def test_authorized_read_and_cite_roundtrip(base_db, directory, versions):
     async def go():
         async with Client(build_server("dana.whitcombe", base_db, directory)) as c:
             doc = await c.call_tool("fetch_document", {"version_id": mine["id"]})
+            assert not doc.is_error, text_of(doc)
             body = doc.structured_content["text"]
             i = body.index("99.9%")
             good = await c.call_tool("cite", {"version_id": mine["id"], "char_start": i, "char_end": i + 5,

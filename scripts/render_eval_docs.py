@@ -340,7 +340,8 @@ def render_readiness_block(path: Path, adv, advg, run1, fa) -> None:
                  f"answering | **{run1['isolation']['leaks']} leaks**, {g1['answers_generated']} generated answers, "
                  f"{g1['prompt_canary_hits']}/{g1['prompts_checked']} prompts with forbidden content; **finding:** "
                  "one generated answer repeated a vendor notice's instruction to AI tools (fixed: such sentences are "
-                 "now withheld) | `eval/reports/adversarial_generative_run1.json` |")
+                 "now withheld). Run 1 started at commit 97756f8; its `git_commit` field is the HEAD when it "
+                 "finished (later runs record both) | `eval/reports/adversarial_generative_run1.json` |")
     if advg:
         g = advg["generation_run"]
         L.append(f"| Adversarial sweep with a real model, run 2 (after the fix) | {advg['isolation']['search_probes']} "

@@ -23,7 +23,7 @@ import datetime as dt
 import os
 import sys
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Any
 
 from mcp.server.mcpserver import MCPServer
 from mcp.server.mcpserver.exceptions import ToolError
@@ -63,7 +63,7 @@ def build_server(username: str, db: Path | None = None, directory: Directory | N
         query: Annotated[str, Field(min_length=1, max_length=MAX_QUERY_CHARS, description="Natural-language question")],
         as_of: Annotated[str | None, Field(description="ISO date to evaluate which versions are in force")] = None,
         method: Annotated[str, Field(pattern="^(bm25|dense|hybrid)$")] = "hybrid",
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Search the documents this server's identity may read. Returns verbatim answer sentences with exact
         citations (version_id + character offsets), the top source passages, and trust signals. Abstains when the
         evidence is thin."""
@@ -88,7 +88,7 @@ def build_server(username: str, db: Path | None = None, directory: Directory | N
         }
 
     @server.tool(annotations=READ_ONLY)
-    def fetch_document(version_id: Annotated[int, Field(ge=1, description="Document version id from search")]) -> dict:
+    def fetch_document(version_id: Annotated[int, Field(ge=1, description="Document version id from search")]) -> dict[str, Any]:
         """Fetch the full text and metadata of one document version, if this server's identity may read it.
         Missing and forbidden versions both return the same not_found error."""
         with S() as s:
@@ -113,7 +113,7 @@ def build_server(username: str, db: Path | None = None, directory: Directory | N
         char_start: Annotated[int, Field(ge=0)],
         char_end: Annotated[int, Field(ge=1)],
         quote: Annotated[str | None, Field(max_length=4000, description="Text you claim is at these offsets")] = None,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Check a citation: the identity may read the version and the quote equals the stored text at
         [char_start, char_end). Returns the exact stored quote when valid."""
         with S() as s:

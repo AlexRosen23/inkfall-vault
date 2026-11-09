@@ -342,6 +342,6 @@ def test_new_eval_endpoints_do_not_leak_other_tenants(client, tokens, directory)
     f = client.get("/api/eval/faithfulness", headers=tokens["ava.lindqvist"])
     if f.status_code == 200:
         blob = f.text
-        for marker in ('"question"', '"sentences"', '"passage_text"', "CV-", "PM-"):
+        for marker in ('"question"', '"passage_text"', '"critique"', '"answer"', "CV-", "PM-"):
             assert marker not in blob
     assert client.get("/api/eval/faithfulness").status_code == 401
