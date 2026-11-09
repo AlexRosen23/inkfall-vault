@@ -1,0 +1,26 @@
+{
+ "_fixture": "FIXTURE built by hand from the documented Messages API response schema for custom-content document citations (https://platform.claude.com/docs/en/build-with-claude/citations, retrieved 2026-11-09). It is NOT a recorded live API response: no ANTHROPIC_API_KEY was available when it was written. Citations with a '_find' key are resolved at test time against the request the code actually built (document_index / start_block_index / end_block_index / cited_text / document_title are filled from the block that contains the '_find' text), so the fixture follows whatever the authorized pack is.",
+ "question": "What monthly availability does the Orion SLA commit to and what service credit applies below 99.9%?",
+ "user": "dana.whitcombe",
+ "response": {
+  "id": "msg_fixture_0001",
+  "type": "message",
+  "role": "assistant",
+  "model": "claude-opus-5-5",
+  "content": [
+   {
+    "type": "text",
+    "text": "INSUFFICIENT_EVIDENCE: the documents do not state the requested figure."
+   }
+  ],
+  "stop_reason": "end_turn",
+  "stop_sequence": null,
+  "stop_details": null,
+  "usage": {
+   "input_tokens": 1830,
+   "output_tokens": 96,
+   "cache_read_input_tokens": 0,
+   "cache_creation_input_tokens": 0
+  }
+ }
+}

@@ -28,7 +28,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from . import audit, contract, embed, providers
+from . import audit, claude_citations, contract, embed, providers
 from .access import authorized_versions, get_authorized_version
 from .config import (
     DATA_DIR,
@@ -91,7 +91,7 @@ class AskIn(Strict):
     method: Literal["bm25", "dense", "hybrid", "rerank"] = "hybrid"
     collection: str | None = Field(default=None, max_length=64)
     include_history: bool = False
-    generate: Literal["extractive", "generative", "lmstudio", "ollama"] = "extractive"
+    generate: Literal["extractive", "generative", "lmstudio", "ollama", "claude"] = "extractive"
 
 
 class ReviewIn(Strict):
@@ -601,7 +601,7 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         return {"embedding": embed.status(),
                 "reranker": {"model_id": embed.RERANK_MODEL_ID, "downloaded": embed.reranker_available(),
                              "note": "opt-in experiment (make rerank-model)"},
-                "generation_backends": [p.__dict__ for p in providers.detect()],
+                "generation_backends": [p.__dict__ for p in providers.detect()] + [claude_citations.info().__dict__],
                 "dataset_version": man.get("dataset_version"), "documents": man.get("documents")}
 
     @app.get("/api/eval/report")

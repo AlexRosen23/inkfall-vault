@@ -925,7 +925,8 @@
        "extractive",
        "generative",
        "lmstudio",
-       "ollama"
+       "ollama",
+       "claude"
       ],
       "title": "Generate",
       "default": "extractive"
