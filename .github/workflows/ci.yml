@@ -34,6 +34,8 @@ jobs:
         run: uv run python scripts/validate_dataset.py
       - name: Tests (ACL/isolation, injection, citations, ingestion, retrieval, API contract)
         run: uv run pytest
+      - name: Seed database (the adversarial sweep runs against data/inkfall.db; tests build their own)
+        run: uv run python -m inkfall.seed
       - name: Adversarial evaluation
         run: uv run python -m inkfall.adversarial
       - name: Web build

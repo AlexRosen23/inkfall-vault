@@ -342,6 +342,12 @@
   "ecosystem": "pypi"
  },
  {
+  "name": "PyJWT",
+  "version": "2.15.1",
+  "license": "MIT",
+  "ecosystem": "pypi"
+ },
+ {
   "name": "PyYAML",
   "version": "6.0.3",
   "license": "MIT License",
@@ -372,8 +378,20 @@
   "ecosystem": "pypi"
  },
  {
+  "name": "anthropic",
+  "version": "2.3.0",
+  "license": "Apache Software License",
+  "ecosystem": "pypi"
+ },
+ {
   "name": "anyio",
   "version": "4.16.0",
+  "license": "MIT",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "attrs",
+  "version": "26.1.0",
   "license": "MIT",
   "ecosystem": "pypi"
  },
@@ -387,6 +405,12 @@
   "name": "certifi",
   "version": "2026.10.23",
   "license": "Mozilla Public License 2.0 (MPL 2.0)",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "cffi",
+  "version": "2.1.1",
+  "license": "MIT-0",
   "ecosystem": "pypi"
  },
  {
@@ -408,6 +432,12 @@
   "ecosystem": "pypi"
  },
  {
+  "name": "cryptography",
+  "version": "50.0.2",
+  "license": "Apache-2.0 OR BSD-3-Clause",
+  "ecosystem": "pypi"
+ },
+ {
   "name": "cyclonedx-python-lib",
   "version": "11.12.0",
   "license": "Apache Software License",
@@ -417,6 +447,12 @@
   "name": "defusedxml",
   "version": "0.7.1",
   "license": "Python Software Foundation License",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "docstring_parser",
+  "version": "0.18.0",
+  "license": "MIT License",
   "ecosystem": "pypi"
  },
  {
@@ -435,6 +471,12 @@
   "name": "fsspec",
   "version": "2026.9.0",
   "license": "BSD-3-Clause",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "googleapis-common-protos",
+  "version": "1.76.0",
+  "license": "Apache-2.0",
   "ecosystem": "pypi"
  },
  {
@@ -498,9 +540,27 @@
   "ecosystem": "pypi"
  },
  {
+  "name": "jiter",
+  "version": "0.19.0",
+  "license": "MIT",
+  "ecosystem": "pypi"
+ },
+ {
   "name": "joblib",
   "version": "1.6.0",
   "license": "BSD-3-Clause",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "jsonschema",
+  "version": "4.26.0",
+  "license": "MIT",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "jsonschema-specifications",
+  "version": "2025.9.1",
+  "license": "MIT",
   "ecosystem": "pypi"
  },
  {
@@ -512,6 +572,18 @@
  {
   "name": "markdown-it-py",
   "version": "4.2.0",
+  "license": "MIT License",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "mcp",
+  "version": "2.3.0",
+  "license": "MIT License",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "mcp-types",
+  "version": "2.3.0",
   "license": "MIT License",
   "ecosystem": "pypi"
  },
@@ -553,7 +625,49 @@
  },
  {
   "name": "opentelemetry-api",
-  "version": "1.45.2",
+  "version": "1.45.1",
+  "license": "Apache-2.0",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "opentelemetry-exporter-http-transport",
+  "version": "0.66b1",
+  "license": "Apache-2.0",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "opentelemetry-exporter-otlp-common",
+  "version": "0.66b1",
+  "license": "Apache-2.0",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "opentelemetry-exporter-otlp-proto-common",
+  "version": "1.45.1",
+  "license": "Apache-2.0",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "opentelemetry-exporter-otlp-proto-http",
+  "version": "1.45.1",
+  "license": "Apache-2.0",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "opentelemetry-proto",
+  "version": "1.45.1",
+  "license": "Apache-2.0",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "opentelemetry-sdk",
+  "version": "1.45.1",
+  "license": "Apache-2.0",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "opentelemetry-semantic-conventions",
+  "version": "0.66b1",
   "license": "Apache-2.0",
   "ecosystem": "pypi"
  },
@@ -618,9 +732,21 @@
   "ecosystem": "pypi"
  },
  {
+  "name": "protobuf",
+  "version": "7.36.2",
+  "license": "3-Clause BSD License",
+  "ecosystem": "pypi"
+ },
+ {
   "name": "py-serializable",
   "version": "2.2.0",
   "license": "Apache Software License",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "pycparser",
+  "version": "3.12",
+  "license": "BSD-3-Clause",
   "ecosystem": "pypi"
  },
  {
@@ -654,6 +780,18 @@
   "ecosystem": "pypi"
  },
  {
+  "name": "python-multipart",
+  "version": "0.0.33",
+  "license": "Apache-2.0",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "referencing",
+  "version": "0.37.0",
+  "license": "MIT",
+  "ecosystem": "pypi"
+ },
+ {
   "name": "regex",
   "version": "2026.11.9",
   "license": "Apache-2.0 AND CNRI-Python",
@@ -669,6 +807,12 @@
   "name": "rich",
   "version": "15.0.0",
   "license": "MIT License",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "rpds-py",
+  "version": "2026.9.1",
+  "license": "MIT",
   "ecosystem": "pypi"
  },
  {
@@ -714,9 +858,21 @@
   "ecosystem": "pypi"
  },
  {
+  "name": "sniffio",
+  "version": "1.3.1",
+  "license": "Apache Software License; MIT License",
+  "ecosystem": "pypi"
+ },
+ {
   "name": "sortedcontainers",
   "version": "2.4.0",
   "license": "Apache Software License",
+  "ecosystem": "pypi"
+ },
+ {
+  "name": "sse-starlette",
+  "version": "3.7.0",
+  "license": "BSD-3-Clause",
   "ecosystem": "pypi"
  },
  {

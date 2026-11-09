@@ -122,6 +122,9 @@ def validate_output(raw: str, pack: list[Passage], texts: dict[int, str]) -> Gen
 
 
 def generate(provider: Provider, question: str, pack: list[Passage], texts: dict[int, str]) -> GenerationResult:
+    if getattr(provider, "native_citations", False):
+        # Claude Citations API: citations come back as structured block indices (see claude_citations.py).
+        return provider.generate_cited(question, pack, texts)  # type: ignore[attr-defined]
     prompt = build_prompt(question, pack)
     try:
         raw, meta = provider.complete(SYSTEM, prompt)

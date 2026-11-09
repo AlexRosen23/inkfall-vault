@@ -4,7 +4,9 @@ UV ?= uv
 API_PORT ?= 5110
 WEB_PORT ?= 5111
 
-.PHONY: help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
+MCP_USER ?= dana.whitcombe
+
+.PHONY: mcp security-test-generative eval-faithfulness help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*?## ' '{printf "  %-16s %s\n", $$1, $$2}'
@@ -43,6 +45,7 @@ test: ## Full test suite (unit, isolation, security, generation guardrails, API 
 	$(UV) run pytest
 
 security-test: ## Isolation + security + generation-guardrail suites, then the adversarial eval
+	@test -f data/inkfall.db || $(MAKE) seed
 	$(UV) run pytest tests/test_authz.py tests/test_isolation.py tests/test_api_security.py tests/test_generation.py -s
 	$(UV) run python -m inkfall.adversarial
 
@@ -57,6 +60,17 @@ eval-docs: ## Re-render eval docs, resume metrics and the authorization matrix f
 
 eval-generative: ## Opt-in: 6 dev questions through a local LM Studio/Ollama model (slow; ~1-2 min each)
 	$(UV) run python -m inkfall.eval_generative
+	$(UV) run python scripts/render_eval_docs.py
+
+LOCAL_LLM ?= gpt-oss:20b
+JUDGE_PROMPT ?= v2
+
+security-test-generative: ## Opt-in, slow (~1-2 h): adversarial sweep with a real local model answering (Ollama, $(LOCAL_LLM))
+	INKFALL_LLM_MODEL=$(LOCAL_LLM) $(UV) run python -m inkfall.adversarial --generate ollama
+
+eval-faithfulness: ## Opt-in, slow: re-judge the saved answers (test split, frozen prompt) and rebuild faithfulness.json
+	INKFALL_LLM_MODEL=$(LOCAL_LLM) $(UV) run python -m inkfall.eval_faithfulness judge --split test --prompt $(JUDGE_PROMPT)
+	$(UV) run python -m inkfall.eval_faithfulness report --prompt $(JUDGE_PROMPT) --dev-versions v1,v2
 	$(UV) run python scripts/render_eval_docs.py
 
 rerank-model: ## Opt-in: download the ~90 MB cross-encoder for the rerank experiment
@@ -74,12 +88,16 @@ licenses: ## Dependency license inventory (fails on GPL/AGPL in runtime deps)
 	$(UV) run python scripts/check_licenses.py
 
 ci: ## What .github/workflows/ci.yml runs on GitHub (ubuntu-24.04); run it locally before opening a PR
+	@test -f data/inkfall.db || $(MAKE) seed
 	$(MAKE) lint
 	$(UV) run python scripts/validate_dataset.py
 	$(UV) run pytest
 	$(UV) run python -m inkfall.adversarial
 	cd web && npm run build
 	$(MAKE) licenses
+
+mcp: ## Permission-aware MCP server on stdio, identity bound at launch (MCP_USER=dana.whitcombe by default)
+	INKFALL_MCP_USER=$(MCP_USER) $(UV) run python -m inkfall.mcp_server
 
 openapi: ## Regenerate the committed OpenAPI snapshot (docs/openapi.json)
 	$(UV) run python -c "import json; from inkfall.api import create_app; json.dump(create_app().openapi(), open('docs/openapi.json','w'), indent=1)"

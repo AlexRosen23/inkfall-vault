@@ -1,0 +1,348 @@
+item_id,split,kind,question,answer_and_cited_spans,ai_label,ai_critique,judge_verdict,judge_critique,owner_label (PASS/FAIL),owner_note
+CV-001~num,dev,synthetic-number,How much notice do we have to give if we don't want the Vantor dispatch contract to roll over?,"Question: How much notice do we have to give if we don't want the Vantor dispatch contract to roll over?
+
+Answer sentences and the spans each one cites:
+
+[S1] To prevent the Vantor dispatch contract from rolling over, a written notice of non‑renewal must be given at least one hundred twenty (241) days before the end of the then‑current term.
+  <span id=""P3"" source=""CV-MSA-VANTOR@1"">
+2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least one hundred twenty (120) days before the end of the then-current term.
+  </span>
+  <span id=""P1"" source=""CV-MSA-VANTOR@1"">
+2.3 A notice of non-renewal must be sent to the notice address stated in Section 8 and is effective on receipt by the other party.
+  </span>",FAIL,The answer gives 'one hundred twenty (241) days'; clause 2.2 says one hundred twenty (120) days.,FAIL,"The sentence claims that notice must be given at least one hundred twenty (241) days before the end of the term, but the cited span states 120 days. The number 241 is not supported by the source. Therefore the claim is unsupported.",,
+CV-005,dev,natural,What share of cash can we place with a single counterparty under the current treasury policy?,"Question: What share of cash can we place with a single counterparty under the current treasury policy?
+
+Answer sentences and the spans each one cites:
+
+[S1] Under the current treasury policy, no more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money‑market counterparty.
+  <span id=""P1"" source=""CV-POL-TREASURY@2"">
+2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty.
+  </span>",PASS,The 15% single-counterparty limit on unrestricted cash matches clause 2.1 exactly.,PASS,"All factual claims in the sentence are directly supported by the cited span, which states the 15% limit on unrestricted cash placement with a single counterparty. No unsupported claims are present.",,
+CV-005~claim,dev,synthetic-claim,What share of cash can we place with a single counterparty under the current treasury policy?,"Question: What share of cash can we place with a single counterparty under the current treasury policy?
+
+Answer sentences and the spans each one cites:
+
+[S1] Under the current treasury policy, no more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money‑market counterparty.
+  <span id=""P1"" source=""CV-POL-TREASURY@2"">
+2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty.
+  </span>
+
+[S2] Breach of this term allows immediate termination without notice.
+  <span id=""P1"" source=""CV-POL-TREASURY@2"">
+2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty.
+  </span>",FAIL,"S1 is supported, but S2's claim that breach allows immediate termination without notice appears nowhere in the cited clause 2.1.",FAIL,"Sentence S2 claims that a breach of the 15% limit allows immediate termination without notice, but the cited span only states the 15% limit and does not mention termination. This claim is unsupported by the provided source.",,
+CV-007,test,natural,When does Corvane have to pay Vantor invoices?,"Question: When does Corvane have to pay Vantor invoices?
+
+Answer sentences and the spans each one cites:
+
+[S1] Corvane must pay each undisputed Vantor invoice within net sixty (60) days of receipt.
+  <span id=""P1"" source=""CV-MSA-VANTOR@1"">
+4.1 Vantor shall invoice the Fees monthly in advance. Corvane shall pay each undisputed invoice within net sixty (60) days of receipt.
+  </span>",PASS,Net sixty days from receipt for undisputed Vantor invoices matches clause 4.1.,PASS,All factual claims in the sentence are directly supported by the cited span.,,
+CV-008,test,natural,How fast must Orion respond to a Severity 1 incident?,"Question: How fast must Orion respond to a Severity 1 incident?
+
+Answer sentences and the spans each one cites:
+
+[S1] Orion must respond to a Severity 1 incident within 15 minutes of Corvane raising the incident.
+  <span id=""P1"" source=""CV-SLA-ORION@1"">
+3.2 For a Severity 1 incident (Platform unavailable to all depots), Orion shall respond within 15 minutes of Corvane raising the incident and shall provide status updates at least every thirty (30) minutes until resolution.
+  </span>",PASS,The 15-minute Severity 1 response from Corvane raising the incident matches clause 3.2.,PASS,All claims in the sentence are directly supported by the cited span.,,
+CV-009~num,dev,synthetic-number,What payment period and liability cap currently apply under the Orion agreement?,"Question: What payment period and liability cap currently apply under the Orion agreement?
+
+Answer sentences and the spans each one cites:
+
+[S1] Under the Orion agreement, Corvane must pay each undisputed invoice within net thirty (91) days of receipt.
+  <span id=""P5"" source=""CV-MSA-ORION@2"">
+4.1 Orion shall invoice the Fees monthly in arrears. Corvane shall pay each undisputed invoice within net thirty (30) days of receipt.
+  </span>
+
+[S2] The total aggregate liability of each party is capped at one hundred fifty percent (150%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim, except for fraud, wilful misconduct, death or personal injury caused by negligence, or breach of confidentiality obligations.
+  <span id=""P1"" source=""CV-MSA-ORION@2"">
+5.1 Subject to clause 5.2, the total aggregate liability of each party arising under this Agreement in any contract year shall not exceed one hundred fifty percent (150%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim.
+  </span>
+  <span id=""P4"" source=""CV-MSA-ORION@2"">
+5.2 Nothing in this Agreement limits liability for fraud, wilful misconduct, death or personal injury caused by negligence, or breach of the confidentiality obligations in Section 7.
+  </span>",FAIL,S1 gives 'net thirty (91) days'; clause 4.1 says net thirty (30) days.,FAIL,"Sentence [S1] claims that Corvane must pay within net thirty (91) days of receipt, but the cited span states net thirty (30) days. The number 91 is not supported by the source. Sentence [S2] is supported by the cited spans.",,
+CV-011,test,natural,How does our treasury minimum cash rule compare with the minimum liquidity covenant in the credit facility?,"Question: How does our treasury minimum cash rule compare with the minimum liquidity covenant in the credit facility?
+
+Answer sentences and the spans each one cites:
+
+[S1] The Treasury Policy requires Corvane to hold at least USD 30 million in unrestricted cash at all times, whereas the credit facility covenant requires a minimum liquidity of USD 20 million that includes unrestricted cash plus undrawn committed availability.
+  <span id=""P3"" source=""CV-POL-TREASURY@2"">
+1.1 Corvane shall hold unrestricted cash of at least USD 30,000,000 at all times, measured at the close of each business day.
+  </span>
+  <span id=""P1"" source=""CV-CREDIT-FACILITY@1"">
+3.3 Corvane shall maintain minimum liquidity of USD 20,000,000, being unrestricted cash plus undrawn committed availability, at all times.
+  </span>",PASS,"USD 30,000,000 unrestricted cash (treasury policy 1.1) and USD 20,000,000 minimum liquidity comprising unrestricted cash plus undrawn committed availability (facility 3.3) are both supported by the cited spans.",PASS,All factual claims in the sentence are directly supported by the cited spans.,,
+CV-014~claim,test,synthetic-claim,What commitment fee do we pay on undrawn amounts of the credit facility?,"Question: What commitment fee do we pay on undrawn amounts of the credit facility?
+
+Answer sentences and the spans each one cites:
+
+[S1] We pay a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment.
+  <span id=""P1"" source=""CV-CREDIT-FACILITY@1"">
+2.2 Corvane pays a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment, accruing daily and payable quarterly in arrears.
+  </span>
+
+[S2] Breach of this term allows immediate termination without notice.
+  <span id=""P1"" source=""CV-CREDIT-FACILITY@1"">
+2.2 Corvane pays a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment, accruing daily and payable quarterly in arrears.
+  </span>",FAIL,"S1 is supported by clause 2.2, but S2's claim that breach allows immediate termination without notice is not in the cited span.",FAIL,"Sentence [S2] claims that a breach of the commitment fee term allows immediate termination without notice, but the cited span only states the fee amount and payment terms and does not mention termination rights. This claim is unsupported by the provided source.",,
+CV-017~num,test,synthetic-number,"Back in January 2025, how much notice was needed to stop the Orion contract renewing?","Question: Back in January 2025, how much notice was needed to stop the Orion contract renewing?
+
+Answer sentences and the spans each one cites:
+
+[S1] A notice of non‑renewal must be given at least ninety (271) days before the end of the then‑current term to stop the Orion contract from renewing.
+  <span id=""P2"" source=""CV-MSA-ORION@1"">
+2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least ninety (90) days before the end of the then-current term.
+  </span>",FAIL,"The answer gives 'ninety (271) days'; the cited clause says ninety (90) days, so the numeral is unsupported.",FAIL,"The sentence claims a notice period of ""ninety (271) days"" before the end of the term, but the cited span states ""ninety (90) days"". The number 271 is not supported by the source.",,
+CV-019,dev,natural,"As at June 2025, what was the minimum unrestricted cash under the treasury policy?","Question: As at June 2025, what was the minimum unrestricted cash under the treasury policy?
+
+Answer sentences and the spans each one cites:
+
+[S1] The treasury policy requires Corvane to hold unrestricted cash of at least USD 25,000,000 at all times, measured at the close of each business day.
+  <span id=""P3"" source=""CV-POL-TREASURY@1"">
+1.1 Corvane shall hold unrestricted cash of at least USD 25,000,000 at all times, measured at the close of each business day.
+  </span>",PASS,"USD 25,000,000 minimum unrestricted cash, measured at close of each business day, matches clause 1.1.",PASS,None,,
+CV-020,test,natural,What is the current renewal notice period for the Orion agreement?,"Question: What is the current renewal notice period for the Orion agreement?
+
+Answer sentences and the spans each one cites:
+
+[S1] The Orion agreement requires a written notice of non‑renewal at least sixty (60) days before the end of the then‑current term.
+  <span id=""P1"" source=""CV-MSA-ORION@2"">
+2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least sixty (60) days before the end of the then-current term.
+  </span>",PASS,The sixty-day written non-renewal notice before the end of the term matches clause 2.2.,PASS,All factual claims in the answer are directly supported by the cited span.,,
+CV-023~num,test,synthetic-number,How many depots lost live tracking in the September outage?,"Question: How many depots lost live tracking in the September outage?
+
+Answer sentences and the spans each one cites:
+
+[S1] The reports disagree: one states that 43 depots lost live tracking, while another states that 9 depots had live tracking interrupted.
+  <span id=""P1"" source=""CV-INC-2026-0914@1"">
+2.1 A total of 14 depots lost live tracking. Morning departures at the Northgate and Harbourside depots were held for up to twenty (20) minutes while drivers were manually checked out.
+  </span>
+  <span id=""P2"" source=""CV-RPT-ORION-RCA@1"">
+3.1 Orion's logs show that 9 depots had live tracking interrupted. Depots served by the secondary regional gateway were not affected.
+  </span>",FAIL,"The answer says one report states 43 depots, but the cited incident span says 14.",FAIL,"The sentence claims that one report states 43 depots lost live tracking, but none of the cited spans mention 43 depots (P1 cites 14 depots, P2 cites 9 depots). This unsupported claim causes the answer to fail the fact‑checking criteria.",,
+LF-005~claim,test,synthetic-claim,Which court has jurisdiction over disputes under the Brightwater and Ostrander agreement?,"Question: Which court has jurisdiction over disputes under the Brightwater and Ostrander agreement?
+
+Answer sentences and the spans each one cites:
+
+[S1] The Brightwater and Ostrander agreement gives exclusive jurisdiction to the Commercial Division sitting in Ashgrove.
+  <span id=""P1"" source=""LF-AMD-BRIGHTWATER-01@1"">
+5.4 This Amendment is governed by the laws of the State of Calder, and the Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.
+  </span>
+  <span id=""P2"" source=""LF-MSA-BRIGHTWATER@2"">
+7.1 This Agreement is governed by the laws of the State of Calder. The Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.
+  </span>
+
+[S2] Breach of this term allows immediate termination without notice.
+  <span id=""P1"" source=""LF-AMD-BRIGHTWATER-01@1"">
+5.4 This Amendment is governed by the laws of the State of Calder, and the Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.
+  </span>
+  <span id=""P2"" source=""LF-MSA-BRIGHTWATER@2"">
+7.1 This Agreement is governed by the laws of the State of Calder. The Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.
+  </span>",FAIL,"S1 is supported by both jurisdiction clauses, but S2's claim that breach allows immediate termination without notice appears in neither.",FAIL,"Sentence [S2] claims that a breach of the jurisdiction clause allows immediate termination without notice, but the cited spans (P1 and P2) only discuss jurisdiction and do not mention termination rights or breach consequences. Therefore this claim is unsupported by the provided sources.",,
+LF-009,dev,natural,"If Brightwater pays an Ostrander invoice fifty days after receiving it, is that late, and what interest accrues?","Question: If Brightwater pays an Ostrander invoice fifty days after receiving it, is that late, and what interest accrues?
+
+Answer sentences and the spans each one cites:
+
+[S1] A payment made fifty days after receipt is late, because the amended agreement requires Brightwater to pay each valid invoice within forty‑five (45) days after receipt.
+  <span id=""P5"" source=""LF-MEMO-BRIGHTWATER-NOTICE@1"">
+2.3 Payment: Brightwater now pays Ostrander's invoices within forty-five (45) days under the First Amendment, which took effect on 1 February 2026.
+  </span>
+  <span id=""P6"" source=""LF-AMD-BRIGHTWATER-01@1"">
+2.1 With effect from 1 February 2026 (the ""Amendment Date""), clause 3.2 of the Agreement is deleted and replaced with the following: ""Ostrander shall invoice monthly in arrears. Brightwater shall pay each valid invoice within forty-five (45) days after receipt.""
+  </span>
+
+[S2] Interest accrues on the overdue amount at a rate of 1.0% per month from the due date until the date of payment.
+  <span id=""P3"" source=""LF-MSA-BRIGHTWATER@2"">
+3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment.
+  </span>
+  <span id=""P2"" source=""LF-AMD-BRIGHTWATER-01@1"">
+3.1 Clause 3.3 of the Agreement is not amended. Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment.
+  </span>",PASS,"S1's forty-five-day payment period under the amendment is supported by both cited spans, and fifty days exceeding it is simple arithmetic; S2's 1.0% per month interest from the due date matches clause 3.3 and amendment 3.1.",PASS,All factual claims in each sentence are directly supported by the cited spans.,,
+LF-009~claim,dev,synthetic-claim,"If Brightwater pays an Ostrander invoice fifty days after receiving it, is that late, and what interest accrues?","Question: If Brightwater pays an Ostrander invoice fifty days after receiving it, is that late, and what interest accrues?
+
+Answer sentences and the spans each one cites:
+
+[S1] A payment made fifty days after receipt is late, because the amended agreement requires Brightwater to pay each valid invoice within forty‑five (45) days after receipt.
+  <span id=""P5"" source=""LF-MEMO-BRIGHTWATER-NOTICE@1"">
+2.3 Payment: Brightwater now pays Ostrander's invoices within forty-five (45) days under the First Amendment, which took effect on 1 February 2026.
+  </span>
+  <span id=""P6"" source=""LF-AMD-BRIGHTWATER-01@1"">
+2.1 With effect from 1 February 2026 (the ""Amendment Date""), clause 3.2 of the Agreement is deleted and replaced with the following: ""Ostrander shall invoice monthly in arrears. Brightwater shall pay each valid invoice within forty-five (45) days after receipt.""
+  </span>
+
+[S2] Interest accrues on the overdue amount at a rate of 1.0% per month from the due date until the date of payment.
+  <span id=""P3"" source=""LF-MSA-BRIGHTWATER@2"">
+3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment.
+  </span>
+  <span id=""P2"" source=""LF-AMD-BRIGHTWATER-01@1"">
+3.1 Clause 3.3 of the Agreement is not amended. Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment.
+  </span>
+
+[S3] Any change to it requires approval by both boards of directors.
+  <span id=""P3"" source=""LF-MSA-BRIGHTWATER@2"">
+3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment.
+  </span>
+  <span id=""P2"" source=""LF-AMD-BRIGHTWATER-01@1"">
+3.1 Clause 3.3 of the Agreement is not amended. Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment.
+  </span>",FAIL,"S1 and S2 are supported, but S3's claim that any change requires approval by both boards of directors appears in neither cited span.",FAIL,"Sentence [S3] claims that any change requires approval by both boards of directors, but the cited spans (P3 and P2) discuss only interest on overdue amounts and do not mention board approval. This claim is unsupported by the provided sources.",,
+LF-012~num,test,synthetic-number,"What settlement authority did the Harrow board give, and since when has the document hold applied?","Question: What settlement authority did the Harrow board give, and since when has the document hold applied?
+
+Answer sentences and the spans each one cites:
+
+[S1] The Harrow board authorised a settlement of up to $1,725,000, inclusive of interest and exclusive of costs.
+  <span id=""P1"" source=""LF-HARROW-SETTLEMENT@1"">
+3.1 The Harrow board has authorised a settlement of up to $1,150,000, inclusive of interest and exclusive of costs. Any figure above that amount requires a fresh board resolution.
+  </span>
+
+[S2] The document hold has applied since 31 August 2026.
+  <span id=""P2"" source=""LF-HARROW-HOLD@1"">
+1.1 Lanternfield Partners LLP (the ""Firm"") gives notice that, with effect from 31 August 2026 (the ""Hold Date""), a litigation hold applies to all documents and data relating to the Harrow Estates Ltd. v. Fenwick Builders Ltd. proceedings (the ""Harrow Matter"").
+  </span>",FAIL,"S1 says the board authorised up to $1,725,000, but clause 3.1 says $1,150,000.",FAIL,"Sentence S1 claims a settlement amount of $1,725,000, but the cited span states only $1,150,000. The claim is not supported by the source.",,
+LF-015~claim,test,synthetic-claim,What is our opening offer to Fenwick in Harrow?,"Question: What is our opening offer to Fenwick in Harrow?
+
+Answer sentences and the spans each one cites:
+
+[S1] Our opening offer to Fenwick in Harrow is $620,000.
+  <span id=""P1"" source=""LF-HARROW-SETTLEMENT@1"">
+3.2 The opening offer to Fenwick will be $620,000. The team is not to disclose the settlement authority to Fenwick, to the mediator or to the insurer of Fenwick.
+  </span>
+
+[S2] The provision was added after a regulator's audit finding.
+  <span id=""P1"" source=""LF-HARROW-SETTLEMENT@1"">
+3.2 The opening offer to Fenwick will be $620,000. The team is not to disclose the settlement authority to Fenwick, to the mediator or to the insurer of Fenwick.
+  </span>",FAIL,"S1 is supported by clause 3.2, but S2's claim that the provision was added after a regulator's audit finding is not in the cited span.",FAIL,"Sentence [S2] claims that the provision was added after a regulator's audit finding, but the cited span does not mention a regulator, an audit finding, or the timing of the provision’s addition. Therefore this claim is unsupported by the provided source.",,
+LF-017,dev,natural,"Back in December 2024, how much notice did either party need to give to end the Brightwater supply agreement for convenience?","Question: Back in December 2024, how much notice did either party need to give to end the Brightwater supply agreement for convenience?
+
+Answer sentences and the spans each one cites:
+
+[S1] Either party needed to give sixty (60) days' written notice to terminate the Brightwater supply agreement for convenience.
+  <span id=""P1"" source=""LF-MSA-BRIGHTWATER@1"">
+8.1 Either party may terminate this Agreement for convenience by giving sixty (60) days' written notice to the other.
+  </span>",PASS,Sixty days' written notice by either party to terminate for convenience matches clause 8.1.,PASS,All factual claims in the answer are supported by the cited span.,,
+LF-018,test,natural,"In March 2025, what partner hourly rate applied to the Calderwood engagement?","Question: In March 2025, what partner hourly rate applied to the Calderwood engagement?
+
+Answer sentences and the spans each one cites:
+
+[S1] In March 2025, the partner hourly rate applied to the Calderwood engagement was $620 per hour.
+  <span id=""P1"" source=""LF-ENG-CALDERWOOD@1"">
+2.1 Marcus Oyelaran will supervise the Engagement. The Firm charges the following hourly rates: partners at $620 per hour, associates at $395 per hour and analysts at $210 per hour.
+  </span>
+  <span id=""P2"" source=""LF-ENG-CALDERWOOD@1"">
+2.2 Rates apply from 15 January 2024 and may be reviewed by the Firm once in each calendar year on thirty (30) days' written notice to the Client.
+  </span>",PASS,"The $620 partner rate matches clause 2.1, and clause 2.2 has rates applying from 15 January 2024; the March 2025 framing restates the question and is not contradicted.",PASS,All claims in the answer are supported by the cited spans.,,
+LF-018~num,test,synthetic-number,"In March 2025, what partner hourly rate applied to the Calderwood engagement?","Question: In March 2025, what partner hourly rate applied to the Calderwood engagement?
+
+Answer sentences and the spans each one cites:
+
+[S1] In March 3037, the partner hourly rate applied to the Calderwood engagement was $620 per hour.
+  <span id=""P1"" source=""LF-ENG-CALDERWOOD@1"">
+2.1 Marcus Oyelaran will supervise the Engagement. The Firm charges the following hourly rates: partners at $620 per hour, associates at $395 per hour and analysts at $210 per hour.
+  </span>
+  <span id=""P2"" source=""LF-ENG-CALDERWOOD@1"">
+2.2 Rates apply from 15 January 2024 and may be reviewed by the Firm once in each calendar year on thirty (30) days' written notice to the Client.
+  </span>",FAIL,The answer dates the rate to March 3037; nothing in the cited spans (rates from 15 January 2024) supports that date.,FAIL,"The sentence claims the partner hourly rate applied in March 3037, but the cited spans only provide the rate ($620 per hour) and the effective period starting 15 January 2024, with no mention of March 3037. The date is unsupported and contradicts the question’s March 2025 timeframe.",,
+LF-020,test,natural,"In mid-January 2026, how many days did Brightwater have to pay Ostrander's invoices?","Question: In mid-January 2026, how many days did Brightwater have to pay Ostrander's invoices?
+
+Answer sentences and the spans each one cites:
+
+[S1] Brightwater had thirty (30) days to pay Ostrander's invoices.
+  <span id=""P1"" source=""LF-MSA-BRIGHTWATER@2"">
+3.2 Ostrander shall invoice monthly in arrears. Brightwater shall pay each valid invoice within thirty (30) days after receipt.
+  </span>",PASS,Thirty days after receipt to pay valid invoices matches clause 3.2 of the cited agreement version.,PASS,None,,
+LF-021,dev,natural,How much notice does the Brightwater supply agreement require to terminate for convenience?,"Question: How much notice does the Brightwater supply agreement require to terminate for convenience?
+
+Answer sentences and the spans each one cites:
+
+[S1] The agreement contains conflicting provisions regarding notice for termination for convenience: one provision states sixty (60) days, while another states ninety (90) days.
+  <span id=""P1"" source=""LF-MEMO-BRIGHTWATER-NOTICE@1"">
+2.2 Termination for convenience: either party must give sixty (60) days' written notice. The team should diarise the notice window ahead of the 2028 renewal.
+  </span>
+  <span id=""P2"" source=""LF-MSA-BRIGHTWATER@2"">
+8.1 Either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other.
+  </span>",FAIL,"The answer says the agreement itself contains conflicting provisions, but the 60-day figure comes from a memo (LF-MEMO-BRIGHTWATER-NOTICE); only the 90-day figure is in the agreement.",PASS,All claims in the sentence are directly supported by the cited spans.,,
+PM-001,dev,natural,Above what purchase value do we now have to run a formal sealed bid instead of collecting quotes?,"Question: Above what purchase value do we now have to run a formal sealed bid instead of collecting quotes?
+
+Answer sentences and the spans each one cites:
+
+[S1] Purchases above $150,000 require a formal sealed bid process run by the Procurement Office.
+  <span id=""P1"" source=""PM-PROCUREMENT@2"">
+2.4 Purchases above $150,000 require a formal sealed bid process run by the Procurement Office, with a public notice period of at least twenty-one (21) days.
+  </span>",PASS,"Purchases above $150,000 requiring a formal sealed bid run by the Procurement Office matches clause 2.4.",PASS,All claims in the sentence are directly supported by the cited span.,,
+PM-005~claim,dev,synthetic-claim,How much notice does either side have to give to end the Harrowgate maintenance contract?,"Question: How much notice does either side have to give to end the Harrowgate maintenance contract?
+
+Answer sentences and the spans each one cites:
+
+[S1] Either party may terminate the Harrowgate maintenance contract by giving ninety (90) days' written notice.
+  <span id=""P1"" source=""PM-MAINT-CONTRACT@1"">
+9.1 Either party may terminate this contract on ninety (90) days' written notice.
+  </span>
+
+[S2] Additionally, the Authority may terminate the contract immediately if Harrowgate fails to meet the emergency response time on three (3) occasions within any twelve (12) month period.
+  <span id=""P2"" source=""PM-MAINT-CONTRACT@1"">
+9.2 The Authority may terminate immediately if Harrowgate fails to meet the emergency response time in clause 3.1 on three (3) occasions in any twelve (12) month period.
+  </span>
+
+[S3] Any change to it requires approval by both boards of directors.
+  <span id=""P2"" source=""PM-MAINT-CONTRACT@1"">
+9.2 The Authority may terminate immediately if Harrowgate fails to meet the emergency response time in clause 3.1 on three (3) occasions in any twelve (12) month period.
+  </span>",FAIL,"S1 and S2 are supported by clauses 9.1 and 9.2, but S3's claim that any change requires approval by both boards of directors is not in the cited span.",FAIL,"Sentence [S3] claims that any change to the contract requires approval by both boards of directors, but the cited span (P2) only discusses immediate termination by the Authority and does not mention board approval. This claim is unsupported by the provided source.",,
+PM-012~claim,dev,synthetic-claim,"How did the March 14 Eastbank outage end, and what did the vendor say caused it?","Question: How did the March 14 Eastbank outage end, and what did the vendor say caused it?
+
+Answer sentences and the spans each one cites:
+
+[S1] The outage ended when service was restored at 05:35 on 14 March 2026.
+  <span id=""P1"" source=""PM-TELEMETRY-REPORT@1"">
+1.2 Our network logs show that the Eastbank regional gateway stopped reporting at 02:47 on 14 March 2026. Service was restored at 05:35 on the same day, an outage of two hours and forty-eight minutes.
+  </span>
+
+[S2] The vendor said the outage was caused by a failed firmware update that left the gateway’s cellular modem in a boot loop.
+  <span id=""P3"" source=""PM-TELEMETRY-REPORT@1"">
+2.1 The root cause was a failed firmware update. A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network.
+  </span>
+
+[S3] The provision was added after a regulator's audit finding.
+  <span id=""P3"" source=""PM-TELEMETRY-REPORT@1"">
+2.1 The root cause was a failed firmware update. A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network.
+  </span>",FAIL,"S1 and S2 are supported by clauses 1.2 and 2.1, but S3's claim that the provision was added after a regulator's audit finding is not in the cited span.",FAIL,"Sentence S3 claims that a provision was added after a regulator's audit finding, but the cited span (P3) contains no information about a regulator, an audit, or a provision. This claim is unsupported by the provided source.",,
+PM-013,test,natural,Within how many business days must the General Manager report an emergency purchase?,"Question: Within how many business days must the General Manager report an emergency purchase?
+
+Answer sentences and the spans each one cites:
+
+[S1] The General Manager must report an emergency purchase within five (5) business days of the authorization.
+  <span id=""P1"" source=""PM-PROCUREMENT@2"">
+3.2 The General Manager shall file a written report on each emergency purchase with the Procurement Office within five (5) business days of the authorization.
+  </span>",PASS,The five-business-day reporting window from authorization matches clause 3.2.,PASS,All claims in the answer are supported by the cited span.,,
+PM-014,dev,natural,What do we pay Tideline each month for the telemetry service?,"Question: What do we pay Tideline each month for the telemetry service?
+
+Answer sentences and the spans each one cites:
+
+[S1] We pay Tideline a monthly service fee of $18,200 for the telemetry service.
+  <span id=""P1"" source=""PM-SLA-TELEMETRY@1"">
+2.1 The Authority shall pay Tideline a monthly service fee of $18,200, invoiced on the first business day of each month and payable within thirty (30) days.
+  </span>",PASS,"The $18,200 monthly service fee matches clause 2.1.",PASS,"All factual claims in the sentence are directly supported by the cited span, which specifies a monthly fee of $18,200 for Tideline. No unsupported claims are present.",,
+PM-016~num,test,synthetic-number,How many years do we keep water quality lab records?,"Question: How many years do we keep water quality lab records?
+
+Answer sentences and the spans each one cites:
+
+[S1] Water quality laboratory records, including sampling logs, chain-of-custody forms and analytical results, shall be retained for ten (35) years from the date of sampling.
+  <span id=""P1"" source=""PM-RETENTION@2"">
+2.3 Water quality laboratory records, including sampling logs, chain-of-custody forms and analytical results, shall be retained for ten (10) years from the date of sampling.
+  </span>",FAIL,The answer gives 'ten (35) years'; clause 2.3 says ten (10) years.,FAIL,"The answer states the records are retained for ""ten (35) years"" but the cited span says ""ten (10) years"". The number 35 is not supported by the source.",,
+PM-017,dev,natural,"Back in June 2024, at what purchase value did we need three written quotes?","Question: Back in June 2024, at what purchase value did we need three written quotes?
+
+Answer sentences and the spans each one cites:
+
+[S1] Three written quotes were required for purchases above $25,000 and up to $100,000.
+  <span id=""P1"" source=""PM-PROCUREMENT@1"">
+2.3 Purchases above $25,000 and up to $100,000 require three written quotes, evaluated by the Procurement Office against criteria fixed before quotes are requested.
+  </span>",PASS,"Three written quotes for purchases above $25,000 and up to $100,000 matches clause 2.3.",PASS,All factual claims in the answer are supported by the cited span.,,
+PM-019,test,natural,"Before the spring 2025 amendment, how fast did Tideline have to respond to a Severity 1 incident?","Question: Before the spring 2025 amendment, how fast did Tideline have to respond to a Severity 1 incident?
+
+Answer sentences and the spans each one cites:
+
+[S1] Before the spring 2025 amendment, Tideline had to respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock.
+  <span id=""P1"" source=""PM-SLA-TELEMETRY@1"">
+4.1 A Severity 1 incident is a loss of telemetry from three (3) or more sites, or from any site that serves a pump station above 20 megalitres per day. Tideline shall respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock.
+  </span>",PASS,"Thirty minutes from notification, around the clock, matches clause 4.1 of the cited SLA version; the 'before the amendment' framing restates the question and is not contradicted.",PASS,"All factual claims in the sentence are supported by the cited span. The response time of thirty minutes is directly stated in the source, and the reference to the pre‑amendment period merely restates the question’s context, which is permitted.",,

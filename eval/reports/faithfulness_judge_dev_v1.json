@@ -1,0 +1,307 @@
+{
+ "generated_at": "2026-11-09T17:08:12+00:00",
+ "provenance": {
+  "git_commit": "8e748c6",
+  "command": "python -m inkfall.eval_faithfulness judge --split dev --prompt v1 --backend ollama",
+  "judge": {
+   "provider": "ollama",
+   "model": "gpt-oss:20b",
+   "prompt_version": "v1",
+   "prompt_file": "eval/faithfulness/judge_prompt_v1.txt"
+  },
+  "answers_file": "eval/reports/faithfulness_answers.json",
+  "answers_generated_at": "2026-11-09T16:43:26+00:00",
+  "wall_seconds": 1078.5,
+  "limitation": "judge and generator are the same model (different prompts)"
+ },
+ "rows": [
+  {
+   "item_id": "CV-001",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 17967.3,
+   "tokens": 838
+  },
+  {
+   "item_id": "CV-005",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 16752.8,
+   "tokens": 638
+  },
+  {
+   "item_id": "CV-009",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 40609.7,
+   "tokens": 1037
+  },
+  {
+   "item_id": "CV-013",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "None",
+   "parse_error": false,
+   "latency_ms": 39590.3,
+   "tokens": 708
+  },
+  {
+   "item_id": "CV-019",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 29849.6,
+   "tokens": 654
+  },
+  {
+   "item_id": "CV-021",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited spans: one span states 99.5% uptime and another states 99.9% uptime, indicating conflicting commitments.",
+   "parse_error": false,
+   "latency_ms": 50979.0,
+   "tokens": 799
+  },
+  {
+   "item_id": "CV-022",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims are supported.",
+   "parse_error": false,
+   "latency_ms": 48533.1,
+   "tokens": 1065
+  },
+  {
+   "item_id": "CV-027",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims are supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 27306.7,
+   "tokens": 602
+  },
+  {
+   "item_id": "LF-001",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "The cited span states the price is $0.21 per carton, which directly supports the claim that Brightwater is charged that amount under the current Ostrander supply deal. No unsupported facts are present.",
+   "parse_error": false,
+   "latency_ms": 36971.0,
+   "tokens": 1093
+  },
+  {
+   "item_id": "LF-003",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 41847.8,
+   "tokens": 631
+  },
+  {
+   "item_id": "LF-006",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "None",
+   "parse_error": false,
+   "latency_ms": 22393.5,
+   "tokens": 640
+  },
+  {
+   "item_id": "LF-009",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in each sentence are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 36918.0,
+   "tokens": 1151
+  },
+  {
+   "item_id": "LF-011",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 49126.4,
+   "tokens": 1090
+  },
+  {
+   "item_id": "LF-013",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims are supported.",
+   "parse_error": false,
+   "latency_ms": 32340.8,
+   "tokens": 774
+  },
+  {
+   "item_id": "LF-016",
+   "kind": "natural",
+   "verdict": "FAIL",
+   "critique": "The sentence claims that the billing manager can write off up to $500 on a single invoice without a partner's approval, but the cited span only states that amounts not exceeding $500 may be written off by the billing manager and does not mention partner approval. The partner\u2011approval claim is unsupported.",
+   "parse_error": false,
+   "latency_ms": 24400.8,
+   "tokens": 707
+  },
+  {
+   "item_id": "LF-017",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 36884.2,
+   "tokens": 616
+  },
+  {
+   "item_id": "LF-021",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 38663.7,
+   "tokens": 670
+  },
+  {
+   "item_id": "PM-001",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 28688.2,
+   "tokens": 641
+  },
+  {
+   "item_id": "PM-005",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 31548.6,
+   "tokens": 789
+  },
+  {
+   "item_id": "PM-007",
+   "kind": "natural",
+   "verdict": "FAIL",
+   "critique": "The cited span states a borrowing limit of $31,500,000 but does not mention the Westfield reservoir, so the claim that the board authorized that limit for the Westfield reservoir is not supported by the cited source.",
+   "parse_error": false,
+   "latency_ms": 31329.8,
+   "tokens": 734
+  },
+  {
+   "item_id": "PM-009",
+   "kind": "natural",
+   "verdict": "FAIL",
+   "critique": "The answer claims that the requested information cannot be determined from the available text, implying that the credit for a missed Severity\u202f1 response is unknown. However, the cited spans (P1 and P3) explicitly state that a missed Severity\u202f1 response earns a credit of 5% of the monthly fee. This claim is unsupported by the cited evidence.",
+   "parse_error": false,
+   "latency_ms": 76538.6,
+   "tokens": 1504
+  },
+  {
+   "item_id": "PM-012",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in each sentence are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 36323.8,
+   "tokens": 822
+  },
+  {
+   "item_id": "PM-014",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 27457.7,
+   "tokens": 664
+  },
+  {
+   "item_id": "PM-017",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 23806.9,
+   "tokens": 638
+  },
+  {
+   "item_id": "PM-020",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims are supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 20711.2,
+   "tokens": 597
+  },
+  {
+   "item_id": "PM-021",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in both sentences are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 34818.2,
+   "tokens": 937
+  },
+  {
+   "item_id": "CV-001~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "The sentence claims that a written notice of non\u2011renewal must be given at least one hundred twenty (241) days before the end of the term, but the cited span states 120 days. This numerical claim is not supported by the source.",
+   "parse_error": false,
+   "latency_ms": 26571.0,
+   "tokens": 976
+  },
+  {
+   "item_id": "CV-005~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence S2 claims that a breach of the 15% limit allows immediate termination without notice, but the cited span only states the 15% limit and does not mention breach or termination. This claim is unsupported by the provided source.",
+   "parse_error": false,
+   "latency_ms": 23017.7,
+   "tokens": 817
+  },
+  {
+   "item_id": "CV-009~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "Sentence [S1] claims Corvane must pay within net thirty (91) days, but the cited span states net thirty (30) days. This discrepancy means the claim is not supported by the source.",
+   "parse_error": false,
+   "latency_ms": 24213.9,
+   "tokens": 1019
+  },
+  {
+   "item_id": "LF-009~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence [S3] claims that any change requires approval by both boards of directors, but the cited spans (P3 and P2) discuss only interest on overdue amounts and do not mention board approval. Therefore this claim is unsupported.",
+   "parse_error": false,
+   "latency_ms": 40016.6,
+   "tokens": 1362
+  },
+  {
+   "item_id": "PM-005~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence S3 claims that any change to the contract requires approval by both boards of directors, but the cited span (P2) only discusses immediate termination by the Authority and does not mention board approval. Therefore, the claim is unsupported.",
+   "parse_error": false,
+   "latency_ms": 26380.6,
+   "tokens": 942
+  },
+  {
+   "item_id": "PM-012~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence S3 claims that a provision was added after a regulator's audit finding, but the cited span (P3) contains no information about a regulator, an audit, or a provision. Therefore this claim is unsupported.",
+   "parse_error": false,
+   "latency_ms": 35792.6,
+   "tokens": 979
+  }
+ ]
+}

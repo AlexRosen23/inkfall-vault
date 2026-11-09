@@ -53,7 +53,7 @@ export async function api<T>(path: string, init?: { method?: string; body?: unkn
   }
   if (!res.ok) {
     const { code, message } = describe(res.status, body);
-    if (res.status === 401 && typeof window !== "undefined" && window.location.pathname !== "/login") {
+    if (res.status === 401 && typeof window !== "undefined" && window.location.pathname.replace(/\/+$/, "") !== "/login") {
       // eslint-disable-next-line @next/next/no-location-assign-relative-destination -- deliberate full reload: drop all in-memory state from the previous identity
       window.location.assign("/login");
     }

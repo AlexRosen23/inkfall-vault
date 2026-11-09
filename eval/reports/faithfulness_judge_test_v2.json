@@ -1,0 +1,487 @@
+{
+ "generated_at": "2026-11-09T17:50:43+00:00",
+ "provenance": {
+  "git_commit": "96eecc8",
+  "command": "python -m inkfall.eval_faithfulness judge --split test --prompt v2 --backend ollama",
+  "judge": {
+   "provider": "ollama",
+   "model": "gpt-oss:20b",
+   "prompt_version": "v2",
+   "prompt_file": "eval/faithfulness/judge_prompt_v2.txt"
+  },
+  "answers_file": "eval/reports/faithfulness_answers.json",
+  "answers_generated_at": "2026-11-09T16:43:26+00:00",
+  "wall_seconds": 1569.2,
+  "limitation": "judge and generator are the same model (different prompts)"
+ },
+ "rows": [
+  {
+   "item_id": "CV-002",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 36219.8,
+   "tokens": 896
+  },
+  {
+   "item_id": "CV-004",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 52317.0,
+   "tokens": 836
+  },
+  {
+   "item_id": "CV-007",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 37730.2,
+   "tokens": 954
+  },
+  {
+   "item_id": "CV-008",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 21233.5,
+   "tokens": 805
+  },
+  {
+   "item_id": "CV-011",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 28635.3,
+   "tokens": 989
+  },
+  {
+   "item_id": "CV-014",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 28489.1,
+   "tokens": 796
+  },
+  {
+   "item_id": "CV-015",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are supported by the cited span, which specifies that availability between 99.0% and 99.5% entitles a 10% service credit. The example of 99.3% falls within that range and is therefore implied by the cited rule.",
+   "parse_error": false,
+   "latency_ms": 31488.8,
+   "tokens": 1063
+  },
+  {
+   "item_id": "CV-016",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 7795.9,
+   "tokens": 778
+  },
+  {
+   "item_id": "CV-017",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited span, which states a 90\u2011day notice requirement for non\u2011renewal. No unsupported claims are present.",
+   "parse_error": false,
+   "latency_ms": 28019.3,
+   "tokens": 1018
+  },
+  {
+   "item_id": "CV-018",
+   "kind": "natural",
+   "verdict": "FAIL",
+   "critique": "The answer asserts that the uptime target applied specifically to early January 2026, but the cited span only states a monthly availability of 99.5% measured at the gateway and excluding scheduled maintenance, with no reference to the time period early January 2026. This temporal claim is unsupported by the cited source.",
+   "parse_error": false,
+   "latency_ms": 18621.3,
+   "tokens": 1099
+  },
+  {
+   "item_id": "CV-020",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 27276.6,
+   "tokens": 980
+  },
+  {
+   "item_id": "CV-023",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 24364.9,
+   "tokens": 1004
+  },
+  {
+   "item_id": "LF-002",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "None",
+   "parse_error": false,
+   "latency_ms": 17224.7,
+   "tokens": 762
+  },
+  {
+   "item_id": "LF-004",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 21353.6,
+   "tokens": 740
+  },
+  {
+   "item_id": "LF-005",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 31483.7,
+   "tokens": 1001
+  },
+  {
+   "item_id": "LF-008",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 33954.5,
+   "tokens": 941
+  },
+  {
+   "item_id": "LF-010",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 26364.7,
+   "tokens": 884
+  },
+  {
+   "item_id": "LF-012",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims are supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 29732.6,
+   "tokens": 1089
+  },
+  {
+   "item_id": "LF-014",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 19550.5,
+   "tokens": 769
+  },
+  {
+   "item_id": "LF-015",
+   "kind": "natural",
+   "verdict": "FAIL",
+   "critique": "The sentence claims the opening offer is $620,000 specifically for Fenwick in Harrow, but the cited span only states the opening offer to Fenwick will be $620,000 without mentioning Harrow. The location claim is unsupported by the cited text.",
+   "parse_error": false,
+   "latency_ms": 51423.0,
+   "tokens": 1097
+  },
+  {
+   "item_id": "LF-018",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 75775.6,
+   "tokens": 1532
+  },
+  {
+   "item_id": "LF-020",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "None",
+   "parse_error": false,
+   "latency_ms": 16863.5,
+   "tokens": 761
+  },
+  {
+   "item_id": "LF-022",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the single sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 14638.8,
+   "tokens": 921
+  },
+  {
+   "item_id": "LF-023",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 9939.1,
+   "tokens": 808
+  },
+  {
+   "item_id": "PM-002",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 8586.5,
+   "tokens": 779
+  },
+  {
+   "item_id": "PM-003",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the sentence are supported by the cited span and its source name, which indicates the motion occurred in September 2026.",
+   "parse_error": false,
+   "latency_ms": 48407.5,
+   "tokens": 1267
+  },
+  {
+   "item_id": "PM-004",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 17202.2,
+   "tokens": 734
+  },
+  {
+   "item_id": "PM-006",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 18980.6,
+   "tokens": 860
+  },
+  {
+   "item_id": "PM-008",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "",
+   "parse_error": false,
+   "latency_ms": 29260.4,
+   "tokens": 1025
+  },
+  {
+   "item_id": "PM-011",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in both sentences are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 24561.0,
+   "tokens": 1011
+  },
+  {
+   "item_id": "PM-013",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 37515.1,
+   "tokens": 843
+  },
+  {
+   "item_id": "PM-016",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All claims in the answer are directly supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 35122.2,
+   "tokens": 841
+  },
+  {
+   "item_id": "PM-018",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "None",
+   "parse_error": false,
+   "latency_ms": 64173.2,
+   "tokens": 807
+  },
+  {
+   "item_id": "PM-019",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are supported by the cited span. The response time of thirty minutes is directly stated in the source, and the reference to the pre\u2011amendment period merely restates the question\u2019s context, which is permitted.",
+   "parse_error": false,
+   "latency_ms": 71071.8,
+   "tokens": 1627
+  },
+  {
+   "item_id": "PM-022",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in each sentence are directly supported by the cited spans.",
+   "parse_error": false,
+   "latency_ms": 28460.4,
+   "tokens": 1060
+  },
+  {
+   "item_id": "PM-023",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are supported by the cited span.",
+   "parse_error": false,
+   "latency_ms": 41383.7,
+   "tokens": 1071
+  },
+  {
+   "item_id": "PM-028",
+   "kind": "natural",
+   "verdict": "PASS",
+   "critique": "All factual claims in the sentence are directly supported by the cited span, and the restatement of the question\u2019s subject (Eastbank gateway outage) is permissible.",
+   "parse_error": false,
+   "latency_ms": 32445.9,
+   "tokens": 1126
+  },
+  {
+   "item_id": "CV-014~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence [S2] claims that a breach of the commitment fee term allows immediate termination without notice, but the cited span only states the fee amount and payment terms and does not mention termination rights. This claim is unsupported by the provided source.",
+   "parse_error": false,
+   "latency_ms": 19352.1,
+   "tokens": 937
+  },
+  {
+   "item_id": "CV-017~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "The sentence claims a notice period of \"ninety (271) days\" before the end of the term, but the cited span states \"ninety (90) days\". The number 271 is not supported by the source.",
+   "parse_error": false,
+   "latency_ms": 17897.4,
+   "tokens": 988
+  },
+  {
+   "item_id": "CV-020~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence [S2] claims that the notice obligation binds every affiliate of both parties, but the cited span does not mention affiliates. This is an unsupported claim.",
+   "parse_error": false,
+   "latency_ms": 14466.0,
+   "tokens": 997
+  },
+  {
+   "item_id": "CV-023~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "The sentence claims that one report states 43 depots lost live tracking, but none of the cited spans mention 43 depots (P1 cites 14 depots, P2 cites 9 depots). This unsupported claim causes the answer to fail the fact\u2011checking criteria.",
+   "parse_error": false,
+   "latency_ms": 34427.2,
+   "tokens": 1083
+  },
+  {
+   "item_id": "LF-002~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence S2 claims that any change to the mediation requires approval by both boards of directors, but the cited span does not mention boards of directors or any approval requirement. Therefore this claim is unsupported.",
+   "parse_error": false,
+   "latency_ms": 26955.8,
+   "tokens": 945
+  },
+  {
+   "item_id": "LF-005~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence [S2] claims that a breach of the jurisdiction clause allows immediate termination without notice, but the cited spans (P1 and P2) only discuss jurisdiction and do not mention termination rights or breach consequences. Therefore this claim is unsupported by the provided sources.",
+   "parse_error": false,
+   "latency_ms": 14698.0,
+   "tokens": 1084
+  },
+  {
+   "item_id": "LF-012~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "Sentence S1 claims a settlement amount of $1,725,000, but the cited span states only $1,150,000. The claim is not supported by the source.",
+   "parse_error": false,
+   "latency_ms": 19937.6,
+   "tokens": 958
+  },
+  {
+   "item_id": "LF-015~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence [S2] claims that the provision was added after a regulator's audit finding, but the cited span does not mention a regulator, an audit finding, or the timing of the provision\u2019s addition. Therefore this claim is unsupported by the provided source.",
+   "parse_error": false,
+   "latency_ms": 21894.2,
+   "tokens": 953
+  },
+  {
+   "item_id": "LF-018~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "The sentence claims the partner hourly rate applied in March 3037, but the cited spans only provide the rate ($620 per hour) and the effective period starting 15 January 2024, with no mention of March 3037. The date is unsupported and contradicts the question\u2019s March 2025 timeframe.",
+   "parse_error": false,
+   "latency_ms": 47988.1,
+   "tokens": 1099
+  },
+  {
+   "item_id": "LF-022~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence [S2] claims that any change requires approval by both boards of directors, but the cited span (the clause about invoice dispute) contains no mention of boards of directors or any approval requirement. Therefore this claim is unsupported by the provided source.",
+   "parse_error": false,
+   "latency_ms": 23932.2,
+   "tokens": 1047
+  },
+  {
+   "item_id": "PM-002~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "The claim that Tideline must deliver at least 303.5% uptime is not supported by the cited span, which states a requirement of 99.5% uptime. The number 303.5% does not appear in the source and is inconsistent with the cited text.",
+   "parse_error": false,
+   "latency_ms": 20706.9,
+   "tokens": 855
+  },
+  {
+   "item_id": "PM-008~num",
+   "kind": "synthetic-number",
+   "verdict": "PASS",
+   "critique": "All factual claims in the answer are supported by the cited span. The span confirms that Tamsin Reyes was the shift operator at 02:10 on 14\u202fMarch\u202f2026, which is during the March\u202f2026 Eastbank telemetry loss. No unsupported claims are present.",
+   "parse_error": false,
+   "latency_ms": 58632.4,
+   "tokens": 1304
+  },
+  {
+   "item_id": "PM-016~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "The answer states the records are retained for \"ten (35) years\" but the cited span says \"ten (10) years\". The number 35 is not supported by the source.",
+   "parse_error": false,
+   "latency_ms": 35863.9,
+   "tokens": 908
+  },
+  {
+   "item_id": "PM-019~claim",
+   "kind": "synthetic-claim",
+   "verdict": "FAIL",
+   "critique": "Sentence S2 claims that any change requires approval by both boards of directors, but the cited span (PM\u2011SLA\u2011TELEMETRY@1) contains no information about board approval. Therefore this claim is unsupported.",
+   "parse_error": false,
+   "latency_ms": 30726.7,
+   "tokens": 1006
+  },
+  {
+   "item_id": "PM-022~num",
+   "kind": "synthetic-number",
+   "verdict": "FAIL",
+   "critique": "Sentence [S1] claims telemetry loss began at 7:10 on 14 March 2026, but the cited spans (P1 and P2) state the loss began at 02:10. This claim is not supported by the provided sources.",
+   "parse_error": false,
+   "latency_ms": 33873.8,
+   "tokens": 1306
+  }
+ ]
+}

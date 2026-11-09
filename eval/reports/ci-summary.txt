@@ -1,0 +1,17 @@
+make ci summary (local; GitHub Actions disabled by owner policy)
+run finished: 2026-11-09T19:14:36Z; code commit: c0f183e (HEAD~1; the next commit only added the video)
+machine: Apple M5 Pro, 48 GB, macOS 27.0.1, Python 3.12.15, Node 24; OMP_NUM_THREADS=2
+
+All checks passed!
+documents: 45 {'corvane': 15, 'lanternfield': 15, 'pellmoor': 15}
+questions: 112 {'abstain': 9, 'contradiction': 9, 'injection': 15, 'multi_hop': 12, 'numeric': 12, 'permission': 19, 'single_hop': 24, 'temporal': 12}
+99 passed in 346.77s (0:05:46)
+isolation: 12 identities, 1796 search probes, 898 direct reads, leaks=0
+injection   20/21 passed
+generation  5/5 passed
+api         10/10 passed
+SECURITY: ALL PASSED
+quality misses (no leak, wrong behaviour; documented): XT-017
+✓ Compiled successfully in 8.3s
+162 runtime packages inventoried -> eval/reports/licenses.json
+exit 0

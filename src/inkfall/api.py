@@ -28,7 +28,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from . import audit, contract, embed, providers
+from . import audit, claude_citations, contract, embed, providers, telemetry
 from .access import authorized_versions, get_authorized_version
 from .config import (
     DATA_DIR,
@@ -91,7 +91,7 @@ class AskIn(Strict):
     method: Literal["bm25", "dense", "hybrid", "rerank"] = "hybrid"
     collection: str | None = Field(default=None, max_length=64)
     include_history: bool = False
-    generate: Literal["extractive", "generative", "lmstudio", "ollama"] = "extractive"
+    generate: Literal["extractive", "generative", "lmstudio", "ollama", "claude"] = "extractive"
 
 
 class ReviewIn(Strict):
@@ -154,6 +154,7 @@ class State:
 
 def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MINUTE) -> FastAPI:
     st = State(db_file)
+    telemetry.configure()  # off unless INKFALL_OTEL=console|otlp
 
     @asynccontextmanager
     async def lifespan(_app):
@@ -601,7 +602,7 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         return {"embedding": embed.status(),
                 "reranker": {"model_id": embed.RERANK_MODEL_ID, "downloaded": embed.reranker_available(),
                              "note": "opt-in experiment (make rerank-model)"},
-                "generation_backends": [p.__dict__ for p in providers.detect()],
+                "generation_backends": [p.__dict__ for p in providers.detect()] + [claude_citations.info().__dict__],
                 "dataset_version": man.get("dataset_version"), "documents": man.get("documents")}
 
     @app.get("/api/eval/report")
@@ -658,9 +659,23 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
 
     @app.get("/api/eval/adversarial")
     def adversarial_report(user: User = Depends(current_user)):
-        rep = _read_json(EVAL_DIR / "reports" / "adversarial.json")
+        return _tenant_filtered_adversarial(user, "adversarial.json", "make security-test")
+
+    @app.get("/api/eval/adversarial-generative")
+    def adversarial_generative_report(user: User = Depends(current_user)):
+        return _tenant_filtered_adversarial(user, "adversarial_generative.json", "make security-test-generative")
+
+    @app.get("/api/eval/faithfulness")
+    def faithfulness_report(user: User = Depends(current_user)):
+        rep = _read_json(EVAL_DIR / "reports" / "faithfulness.json")
         if rep is None:
-            raise HTTPException(404, "no_report: run make security-test")
+            raise HTTPException(404, "no_report: run make eval-faithfulness")
+        return rep  # aggregate counts and rates only; no questions, answers or document text
+
+    def _tenant_filtered_adversarial(user: User, name: str, cmd: str):
+        rep = _read_json(EVAL_DIR / "reports" / name)
+        if rep is None:
+            raise HTTPException(404, f"no_report: run {cmd}")
         cases = []
         for cs in rep.get("cases", []):
             asker = st.directory.users.get(cs.get("user") or "")
@@ -671,6 +686,8 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         iso["leak_examples"] = [e for e in iso.get("leak_examples", [])
                                 if st.directory.users.get(e.get("user", "")) and
                                 st.directory.users[e["user"]].tenant == user.tenant]
+        visible = {cs.get("id") for cs in cases}
+        rep = {**rep, "quality_misses": [q for q in rep.get("quality_misses", []) if q in visible]}
         return {**{k: v for k, v in rep.items() if k not in ("cases", "isolation")}, "isolation": iso,
                 "cases": cases, "visibility": "Counts cover all tenants; case details limited to your tenant."}
 
