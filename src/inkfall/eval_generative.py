@@ -12,6 +12,7 @@ import json
 import statistics
 import time
 
+from .claude_citations import get_claude
 from .config import EVAL_DIR, db_path
 from .db import make_engine, session_factory
 from .gold import load_gold
@@ -27,7 +28,12 @@ def main() -> None:
     ap.add_argument("--ids", default=",".join(DEFAULT_IDS))
     ap.add_argument("--backend", default="auto")
     args = ap.parse_args()
-    prov = get_provider(None if args.backend == "auto" else args.backend)
+    if args.backend == "claude":  # remote + paid: only on an explicit request, and only with ANTHROPIC_API_KEY set
+        prov = get_claude()
+        if prov is None:
+            raise SystemExit("ANTHROPIC_API_KEY is not set; the Claude live check needs it (nothing run, nothing spent)")
+    else:
+        prov = get_provider(None if args.backend == "auto" else args.backend)
     if prov is None:
         raise SystemExit("no local generation backend detected (LM Studio :1234 / Ollama :11434); nothing run")
     directory = load_directory()
@@ -64,10 +70,12 @@ def main() -> None:
                "completion_tokens_est": sum(r["completion_tokens_est"] for r in rows),
                "usage_reported_total_tokens": sum((r["usage_reported"] or {}).get("total_tokens", 0) for r in rows)}
     out = {"generated_at": dt.datetime.now(dt.UTC).isoformat(timespec="seconds"),
-           "provenance": {"model": getattr(prov, "model", "?"), "provider": prov.name, "command": "make eval-generative",
+           "provenance": {"model": getattr(prov, "model", "?"), "provider": prov.name,
+                          "command": "make eval-claude-live" if prov.name == "claude" else "make eval-generative",
                           "note": "p95 reported as the max of a small sample"},
            "summary": summary, "questions": rows}
-    (EVAL_DIR / "reports" / "generative.json").write_text(json.dumps(out, indent=1) + "\n")
+    out_name = "generative_claude.json" if prov.name == "claude" else "generative.json"
+    (EVAL_DIR / "reports" / out_name).write_text(json.dumps(out, indent=1) + "\n")
     print(json.dumps(summary))
 
 

@@ -129,6 +129,7 @@ the Next.js dev server on **5111**. No LLM is needed; to try local generation, l
 | `make security-test` | isolation/security/generation suites + adversarial eval → `eval/reports/adversarial.json` |
 | `make eval` | gold set × BM25/dense/hybrid(/rerank) → `eval/reports/latest.json` + rendered docs |
 | `make eval-generative` | opt-in: 6 dev questions through the local model (slow) |
+| `make eval-claude-live` | opt-in, **paid**: the same 6 questions through Claude's Citations API (needs `ANTHROPIC_API_KEY`) → `eval/reports/generative_claude.json` |
 | `make ci` | lint, typecheck, tests, adversarial eval, web build, license gate |
 | `make mcp` | MCP server on stdio (`MCP_USER=dana.whitcombe` by default) |
 | `make security-test-generative` | opt-in, slow: the adversarial sweep with `gpt-oss:20b` (Ollama) writing every answer |
