@@ -40,7 +40,11 @@ Headline numbers (rendered from saved runs by `scripts/render_eval_docs.py`):
 <!-- reviewers:end -->
 
 What this does and does not show, with gaps: [docs/AI_ENGINEER_READINESS.md](docs/AI_ENGINEER_READINESS.md).
-Walkthrough video: [docs/media/walkthrough.webm](docs/media/walkthrough.webm).
+Walkthrough video (40 s, recorded with Playwright): [docs/media/walkthrough.webm](docs/media/walkthrough.webm).
+
+| Generated answer (gpt-oss:20b), each sentence checked | Citation verified against stored text | Faithfulness judge calibration |
+|---|---|---|
+| ![Generated answer with support label](docs/media/generated-answer.png) | ![Side-by-side citation verification](docs/media/citation-verified.png) | ![Judge TPR/TNR table](docs/media/faithfulness-console.png) |
 
 ## What it demonstrates
 

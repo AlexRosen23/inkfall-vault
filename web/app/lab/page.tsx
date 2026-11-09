@@ -313,15 +313,15 @@ function FaithfulnessTable({ data }: { data: FaithReport }) {
         {data.provenance.generator.provider}). Labels: {data.provenance.labeler}.
       </p>
       <div className="table-wrap">
-        <table className="data">
+        <table className="table compact">
           <thead>
             <tr><th>Split / subset</th><th>Grader</th><th>n</th><th>ref PASS / FAIL</th><th>TPR</th><th>TNR</th><th>Agreement</th></tr>
           </thead>
           <tbody>
             {rows.map(([split, grader, c]) => (
               <tr key={split + grader}>
-                <td>{split}</td><td>{grader}</td><td>{c.n}</td><td>{c.ref_pass} / {c.ref_fail}</td>
-                <td>{rate(c.tpr)}</td><td>{rate(c.tnr)}</td><td>{rate(c.agreement)}</td>
+                <td>{split}</td><td>{grader}</td><td className="num">{c.n}</td><td>{c.ref_pass} / {c.ref_fail}</td>
+                <td className="num">{rate(c.tpr)}</td><td className="num">{rate(c.tnr)}</td><td className="num">{rate(c.agreement)}</td>
               </tr>
             ))}
           </tbody>
