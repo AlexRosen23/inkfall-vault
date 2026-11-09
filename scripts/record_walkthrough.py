@@ -5,6 +5,9 @@ Run the app first on a free port with the local model selected, e.g.:
 
     INKFALL_API_PORT=5112 INKFALL_LLM_MODEL=gpt-oss:20b ./run.sh
     python scripts/record_walkthrough.py --base http://127.0.0.1:5112 --out docs/media
+
+Playwright writes VP8 at a high bitrate (~6.5 MB for 40 s); the committed file was re-encoded to VP9 with the
+ffmpeg build that ships with Playwright: ffmpeg-mac -i in.webm -c:v libvpx-vp9 -b:v 0 -crf 42 -cpu-used 4 out.webm
 """
 
 from __future__ import annotations
