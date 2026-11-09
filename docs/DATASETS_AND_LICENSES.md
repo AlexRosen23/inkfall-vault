@@ -27,6 +27,15 @@
 | `sentence-transformers/all-MiniLM-L6-v2` | dense retrieval (384-d) | Apache-2.0 | ~90 MB | yes (`make setup` downloads it) |
 | `cross-encoder/ms-marco-MiniLM-L6-v2` | rerank ablation (measured 2026-11-09: no gain here) | Apache-2.0 | ~90 MB | no (`make rerank-model`) |
 | Any local OpenAI-compatible chat model (tested: `qwen3.6-35b-a3b-mlx` in LM Studio) | optional generative summaries | the model's own license | user-provided | no |
+| `gpt-oss:20b` via Ollama | generator **and** judge in the faithfulness eval; generator in the real-model adversarial run | Apache-2.0 (OpenAI gpt-oss) | ~14 GB | no (user-provided) |
+| `claude-opus-5-5` (Anthropic API) | optional Claude Citations provider; never called in tests or evals here | Anthropic commercial terms | remote | no (needs `ANTHROPIC_API_KEY`) |
+
+## Faithfulness reference labels
+
+- `eval/faithfulness/labels.jsonl`: 84 PASS/FAIL labels with critiques for generated answers
+  (`eval/reports/faithfulness_answers.json`). **Labeler: claude-code (AI), pending owner review.** Written blind
+  (shuffled, opaque ids) by a separate Claude Code subagent from a written rubric. Not human labels.
+- `eval/faithfulness/owner_review.csv`: 30 of them for the owner to confirm or correct.
 
 ## Software
 
