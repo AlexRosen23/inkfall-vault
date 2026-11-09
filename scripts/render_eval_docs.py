@@ -304,7 +304,38 @@ def main() -> None:
         pre, rest = txt.split(a, 1)
         post = rest.split(b, 1)[1]
         readme.write_text(pre + "\n".join(lines) + post)
+    render_reviewer_block(readme, rep, adv, advg, fa)
     print("rendered docs/RETRIEVAL_EVAL.md, docs/RAG_EVALUATION.md, resume_evidence/metrics.json, README results")
+
+
+def render_reviewer_block(readme: Path, rep, adv, advg, fa) -> None:
+    """README 'For AI Engineer reviewers' headline numbers (between reviewers:start/end markers)."""
+    a, b = "<!-- reviewers:start -->", "<!-- reviewers:end -->"
+    txt = readme.read_text()
+    if a not in txt or b not in txt:
+        return
+    hy = rep["summary"].get("test", {}).get("hybrid", {})
+    lines = [a, "", "Headline numbers (rendered from saved runs by `scripts/render_eval_docs.py`):", ""]
+    lines.append(f"- Retrieval, held-out test split: hybrid MRR@10 **{f(hy.get('mrr_at_10'))}**, citation validity "
+                 f"**{f(hy.get('citation_validity'), True)}**, abstention F1 {f(hy.get('abstention', {}).get('f1'))} "
+                 "(`eval/reports/latest.json`).")
+    if adv:
+        lines.append(f"- Permission isolation: **{adv['isolation']['leaks']} leaks** in {adv['isolation']['search_probes']} "
+                     f"search probes + {adv['isolation']['direct_read_attempts']} direct reads (`eval/reports/adversarial.json`).")
+    if advg:
+        gr = advg["generation_run"]
+        lines.append(f"- Same sweep with **{gr['model']}** writing the answers: **{advg['isolation']['leaks']} leaks**, "
+                     f"{gr['answers_generated']} generated answers, {gr['prompt_canary_hits']} of {gr['prompts_checked']} "
+                     "prompts contained forbidden content (`eval/reports/adversarial_generative.json`).")
+    if fa:
+        jt = fa["test"]["all"]["judge"]
+        nat = fa["test"]["natural"]["judge"]
+        lines.append(f"- Faithfulness LLM judge on judge-test: TPR **{f(jt['tpr'])}**, TNR **{f(jt['tnr'])}** (n={jt['n']}; "
+                     f"natural answers only: n={nat['n']}, TPR {f(nat['tpr'])}) against **AI-drafted reference labels "
+                     "pending owner review**; judge = generator model (`eval/reports/faithfulness.json`).")
+    lines += ["", b]
+    pre, rest = txt.split(a, 1)
+    readme.write_text(pre + "\n".join(lines) + rest.split(b, 1)[1])
 
 
 def advg_section(advg) -> list[str]:

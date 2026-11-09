@@ -9,6 +9,30 @@ audit trail. A brief only leaves the team after a second person approves it.
 > any real firm or vendor. A tested local demo, not a production-secure or certified system; see
 > [docs/SECURITY_LIMITATIONS.md](docs/SECURITY_LIMITATIONS.md).
 
+## For AI Engineer reviewers
+
+A 60-second path through the repo. One command after `make setup && make seed`:
+
+```bash
+uv run pytest tests/test_claude_citations.py tests/test_mcp_server.py tests/test_generation.py -q
+```
+
+Then look at:
+
+1. **Claude Citations API, mapped to stored offsets**: [`src/inkfall/claude_citations.py`](src/inkfall/claude_citations.py)
+   (each authorized span is one custom-content block; citations are re-verified against stored text and the ACL).
+2. **Permission-aware MCP server**: [`src/inkfall/mcp_server.py`](src/inkfall/mcp_server.py) and
+   [docs/MCP_SERVER.md](docs/MCP_SERVER.md) (identity bound at launch; forbidden = missing).
+3. **Evals with a calibrated judge**: [docs/RAG_EVALUATION.md](docs/RAG_EVALUATION.md) (faithfulness section),
+   [`src/inkfall/eval_faithfulness.py`](src/inkfall/eval_faithfulness.py).
+4. **Security mapping**: [docs/OWASP_LLM_TOP10.md](docs/OWASP_LLM_TOP10.md).
+
+<!-- reviewers:start -->
+<!-- reviewers:end -->
+
+What this does and does not show, with gaps: [docs/AI_ENGINEER_READINESS.md](docs/AI_ENGINEER_READINESS.md).
+Walkthrough video: [docs/media/walkthrough.webm](docs/media/walkthrough.webm).
+
 ## What it demonstrates
 
 - **Authorization before retrieval.** A deterministic policy (tenant, clearance, ACL groups, ethical walls) builds
@@ -23,6 +47,12 @@ audit trail. A brief only leaves the team after a second person approves it.
   rule-based contradiction detection and flagged prompt-injection text, plus abstention when evidence is thin.
 - **Optional local generation, validated.** LM Studio / Ollama are detected, never required. The model sees only
   authorized passages, has no tools, and its output is rejected or labelled when citations or numbers do not hold up.
+- **Claude with native citations (opt-in).** The Anthropic Citations API with one custom-content block per
+  authorized span; Claude's block-index citations map back to stored character offsets and are re-verified. Tested
+  offline with fixtures built from the documented response schema; never auto-selected, needs `ANTHROPIC_API_KEY`.
+- **MCP server.** Read-only `search` / `fetch_document` / `cite` tools over stdio with the identity bound at launch.
+- **Measured faithfulness.** A binary LLM judge for "every claim is supported by its cited spans", calibrated
+  (TPR/TNR) against reference labels on a held-out split, next to the deterministic span-support metrics.
 - **Human in the loop.** Citation-backed briefs need a different reviewer's approval before the (local) release;
   correct / incorrect / partial labels on citations are stored for error analysis.
 
@@ -83,6 +113,9 @@ the Next.js dev server on **5111**. No LLM is needed; to try local generation, l
 | `make eval` | gold set × BM25/dense/hybrid(/rerank) → `eval/reports/latest.json` + rendered docs |
 | `make eval-generative` | opt-in: 6 dev questions through the local model (slow) |
 | `make ci` | lint, typecheck, tests, adversarial eval, web build, license gate |
+| `make mcp` | MCP server on stdio (`MCP_USER=dana.whitcombe` by default) |
+| `make security-test-generative` | opt-in, slow: the adversarial sweep with `gpt-oss:20b` (Ollama) writing every answer |
+| `make eval-faithfulness` | opt-in, slow: re-judge the saved answers with the frozen judge prompt → `eval/reports/faithfulness.json` |
 
 CI is defined in `.github/workflows/ci.yml` but **GitHub Actions is disabled** on this private repository; run
 `make ci` locally.
@@ -101,7 +134,8 @@ CI is defined in `.github/workflows/ci.yml` but **GitHub Actions is disabled** o
 [Authorization matrix](docs/AUTHORIZATION_MATRIX.md) · [Security limitations](docs/SECURITY_LIMITATIONS.md) ·
 [API & auth contract](docs/API_AND_AUTH_CONTRACT.md) · [Retrieval eval](docs/RETRIEVAL_EVAL.md) ·
 [RAG eval](docs/RAG_EVALUATION.md) · [Datasets & licenses](docs/DATASETS_AND_LICENSES.md) ·
-[Engineering decisions](docs/ENGINEERING_DECISIONS.md) · [Customer problem](docs/CUSTOMER_PROBLEM.md) ·
+[Engineering decisions](docs/ENGINEERING_DECISIONS.md) · [OWASP LLM Top 10 mapping](docs/OWASP_LLM_TOP10.md) ·
+[MCP server](docs/MCP_SERVER.md) · [AI Engineer readiness](docs/AI_ENGINEER_READINESS.md) · [Customer problem](docs/CUSTOMER_PROBLEM.md) ·
 [Case study (synthetic)](docs/CUSTOMER_CASE_STUDY.md) · [Demo walkthrough](docs/DEMO_WALKTHROUGH.md) ·
 [Recruiter pitch](docs/RECRUITER_PITCH.md) · [Interview defense](docs/INTERVIEW_DEFENSE.md) ·
 [Contributing](CONTRIBUTING.md)
@@ -109,7 +143,8 @@ CI is defined in `.github/workflows/ci.yml` but **GitHub Actions is disabled** o
 ## Layout
 
 ```
-src/inkfall/   authz, access, ingest, search, evidence, generate/providers, service, api, audit, evaluate, adversarial
+src/inkfall/   authz, access, ingest, search, evidence, generate/providers, claude_citations, service, api, audit,
+               evaluate, adversarial, eval_faithfulness, mcp_server, telemetry
 web/           Next.js evidence-chamber UI (proxies /api to :5110)
 corpus/        45 fictional documents + identities.yaml
 eval/          gold questions, dataset manifest, saved reports
