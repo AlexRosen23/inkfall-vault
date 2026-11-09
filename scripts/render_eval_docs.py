@@ -167,6 +167,21 @@ def main() -> None:
     else:
         rag += ["## Optional local generation", "", "Not run in this report (`make eval-generative` needs LM Studio or "
                 "Ollama and takes ~1-2 minutes per question with the local 35B model).", ""]
+    rag += ["## Findings during the build (each fixed and covered by a test or the adversarial run)", "",
+            "1. A test client kept the last login's cookie and the server preferred cookies over the bearer header, so "
+            "requests ran as the wrong identity. Not an authorization bypass, but the precedence was wrong: the explicit "
+            "Authorization header now wins.",
+            "2. The evaluator's own 'readable' set was computed as of today, so a question about a 2027-effective policy "
+            "looked like a leak. Leaks are now judged on the ACL decision alone.",
+            "3. The injection detector missed \"ignore *their* access rules\" in a vendor notice; patterns were generalized "
+            "and every fixture is now checked by the adversarial run.",
+            "4. Amendment handling suppressed a real memo-vs-agreement notice conflict because an unrelated amendment "
+            "(payment terms) was in the evidence; overrides now require the amendment to restate the same quantity.",
+            "5. The local model echoed passage markers like \"(P1)\" into prose and the numeric check treated the 1 as an "
+            "invented number, mislabelling correct sentences as unsupported; markers are stripped before checking.",
+            "6. LM Studio's Qwen3.6 build ignores every client-side switch to disable hidden reasoning, so short token "
+            "budgets produced no JSON; the budget is now 4,096 tokens and an unparseable output falls back to extractive.",
+            ""]
     (ROOT / "docs" / "RAG_EVALUATION.md").write_text("\n".join(rag))
 
     # ---------------------------------------------------------------- resume evidence
@@ -216,7 +231,42 @@ def main() -> None:
            "generated_at": rep["generated_at"], "dataset_version": pv["dataset_version"], "claims": claims}
     (ROOT / "resume_evidence").mkdir(exist_ok=True)
     (ROOT / "resume_evidence" / "metrics.json").write_text(json.dumps(out, indent=2) + "\n")
-    print("rendered docs/RETRIEVAL_EVAL.md, docs/RAG_EVALUATION.md, resume_evidence/metrics.json")
+    # ---------------------------------------------------------------- README results block
+    readme = ROOT / "README.md"
+    txt = readme.read_text()
+    a, b = "<!-- results:start -->", "<!-- results:end -->"
+    if a in txt and b in txt:
+        lines = [a, "", f"_From saved runs: `eval/reports/latest.json` ({rep['generated_at']}, commit `{pv['git_commit']}`)"
+                 + (f" and `adversarial.json` ({adv['generated_at']})" if adv else "") + ". Held-out **test** split, "
+                 f"{t.get('hybrid', {}).get('questions')} questions; CPU only ({mach['cpu']})._", "",
+                 "| | BM25 | Dense | Hybrid (RRF) | Title-only baseline |", "|---|---|---|---|---|"]
+        def g(m, k, pct=False):
+            v = (t.get(m) or {}).get(k)
+            return f(v, pct)
+        lines += [f"| MRR@10 | {g('bm25', 'mrr_at_10')} | {g('dense', 'mrr_at_10')} | {g('hybrid', 'mrr_at_10')} | {f(base.get('mrr_at_10'))} |",
+                  f"| nDCG@10 | {g('bm25', 'ndcg_at_10')} | {g('dense', 'ndcg_at_10')} | {g('hybrid', 'ndcg_at_10')} | n/a |",
+                  f"| Citation validity | {g('bm25', 'citation_validity', True)} | {g('dense', 'citation_validity', True)} | {g('hybrid', 'citation_validity', True)} | n/a |",
+                  f"| Answer support (gold span in cited text) | {g('bm25', 'answer_support_rate', True)} | {g('dense', 'answer_support_rate', True)} | {g('hybrid', 'answer_support_rate', True)} | n/a |",
+                  "| Abstention F1 | " + " | ".join(f((t.get(m) or {}).get('abstention', {}).get('f1')) for m in ('bm25', 'dense', 'hybrid')) + " | n/a |",
+                  "| Conflicts found / expected (false alarms) | " + " | ".join(
+                      f"{(t.get(m) or {}).get('conflicts', {}).get('flagged')}/{(t.get(m) or {}).get('conflicts', {}).get('expected')} "
+                      f"({(t.get(m) or {}).get('conflicts', {}).get('false_alarms_on_other_answerable')})" for m in ('bm25', 'dense', 'hybrid')) + " | n/a |",
+                  "| Leaks | " + " | ".join(str((t.get(m) or {}).get('leaks')) for m in ('bm25', 'dense', 'hybrid')) + " | n/a |",
+                  "| Latency p50 / p95 (ms) | " + " | ".join(f"{(t.get(m) or {}).get('latency_ms', {}).get('p50')} / {(t.get(m) or {}).get('latency_ms', {}).get('p95')}" for m in ('bm25', 'dense', 'hybrid')) + " | n/a |",
+                  ""]
+        if adv:
+            iso = adv["isolation"]
+            lines.append(f"Adversarial run: **{iso['leaks']} leaks** across {iso['identities']} identities, "
+                         f"{iso['search_probes']} targeted search probes and {iso['direct_read_attempts']} direct reads; "
+                         + ", ".join(f"{k} {v['passed']}/{v['total']}" for k, v in adv["sections"].items())
+                         + (f"; documented quality miss: {', '.join(adv['quality_misses'])}" if adv.get("quality_misses") else "")
+                         + ".")
+        lines += ["", "Recall@5 is 1.0 for every method because each identity can read only 3-15 versions; read MRR/nDCG. "
+                  "Contradiction detection is weak on held-out questions and is not claimed as a strength.", "", b]
+        pre, rest = txt.split(a, 1)
+        post = rest.split(b, 1)[1]
+        readme.write_text(pre + "\n".join(lines) + post)
+    print("rendered docs/RETRIEVAL_EVAL.md, docs/RAG_EVALUATION.md, resume_evidence/metrics.json, README results")
 
 
 if __name__ == "__main__":
