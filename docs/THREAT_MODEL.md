@@ -3,6 +3,8 @@
 Scope: the local demo as shipped in this repository (FastAPI on 127.0.0.1:5110, Next.js on 127.0.0.1:5111,
 SQLite, optional local LLM at 127.0.0.1:1234 / :11434). All data is fictional. This is a tested local demo,
 **not** a production-secure or certified system; see [SECURITY_LIMITATIONS.md](SECURITY_LIMITATIONS.md).
+LLM-specific risks are mapped to code and tests in [OWASP_LLM_TOP10.md](OWASP_LLM_TOP10.md); the MCP server's
+security model is in [MCP_SERVER.md](MCP_SERVER.md).
 
 ## Assets
 
@@ -83,6 +85,10 @@ document *content* → model prompt (documents may contain instructions), model 
 - **Regex injection detection** is a signal, not a boundary. It initially missed "ignore *their* access rules"
   (fixed and covered by the adversarial run); new phrasings will get past it. The boundary is authorization +
   output validation.
+- **Claude provider (opt-in).** Choosing "Claude" sends the authorized source pack to the Anthropic API, a third
+  party. It is never auto-selected, needs ANTHROPIC_API_KEY, and is off in every test and eval in this repo.
+- **MCP clients.** The MCP server trusts whoever starts it (stdio) and binds one identity per process; it adds no
+  authentication of its own.
 - **Local model output.** The validator checks citations and lexical/numeric support; it cannot prove a fluent
   sentence is a faithful paraphrase. Generated text is labelled and per-sentence support is shown.
 - **Unauthenticated contract.** `/health`, `/capabilities` and `/runs` answer without a session on 127.0.0.1. They are

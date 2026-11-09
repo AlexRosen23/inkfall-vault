@@ -4,7 +4,9 @@ UV ?= uv
 API_PORT ?= 5110
 WEB_PORT ?= 5111
 
-.PHONY: help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
+MCP_USER ?= dana.whitcombe
+
+.PHONY: mcp help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*?## ' '{printf "  %-16s %s\n", $$1, $$2}'
@@ -80,6 +82,9 @@ ci: ## What .github/workflows/ci.yml runs (Actions are disabled on the repo; run
 	$(UV) run python -m inkfall.adversarial
 	cd web && npm run build
 	$(MAKE) licenses
+
+mcp: ## Permission-aware MCP server on stdio, identity bound at launch (MCP_USER=dana.whitcombe by default)
+	INKFALL_MCP_USER=$(MCP_USER) $(UV) run python -m inkfall.mcp_server
 
 openapi: ## Regenerate the committed OpenAPI snapshot (docs/openapi.json)
 	$(UV) run python -c "import json; from inkfall.api import create_app; json.dump(create_app().openapi(), open('docs/openapi.json','w'), indent=1)"
