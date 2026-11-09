@@ -1,6 +1,6 @@
 """Render docs/RETRIEVAL_EVAL.md, docs/RAG_EVALUATION.md and resume_evidence/metrics.json from the
 saved reports (eval/reports/latest.json, adversarial.json, adversarial_generative.json, generative.json,
-faithfulness.json). No number is typed by hand."""
+generative_claude.json, faithfulness.json). No number is typed by hand."""
 
 from __future__ import annotations
 
@@ -74,6 +74,23 @@ def failures(rep: dict, method: str = "hybrid", split: str = "test", limit: int 
         if len(out) >= limit:
             break
     return ["| ID | Category | Failure | Question | Gold refs | Top retrieved |", "|---|---|---|---|---|---|", *out]
+
+
+def claude_live(cl: dict | None) -> dict | None:
+    """Figures for the recorded live Claude run, all derived from eval/reports/generative_claude.json."""
+    if not cl:
+        return None
+    from inkfall.eval_generative import _reported_total  # same rule the fixed summarizer uses
+
+    qs, s = cl["questions"], cl["summary"]
+    sents = [x for q in qs for x in q["sentences"]]
+    return {
+        "s": s, "model": cl["provenance"]["model"], "at": cl["generated_at"][:10],
+        "uncited": sum(x["support"] == "unsupported" and "no citation" in x["notes"] for x in sents),
+        "gold": sum(bool(q.get("gold_span_in_generated")) for q in qs),
+        "abstained": [q["id"] for q in qs if str(q.get("raw_output", "")).startswith("INSUFFICIENT_EVIDENCE")],
+        "tokens": sum(_reported_total(q.get("usage_reported")) for q in qs),
+    }
 
 
 def main() -> None:
@@ -169,6 +186,26 @@ def main() -> None:
     else:
         rag += ["## Optional local generation", "", "Not run in this report (`make eval-generative` needs LM Studio or "
                 "Ollama and takes ~1-2 minutes per question with the local 35B model).", ""]
+    cl = claude_live(load("generative_claude.json"))
+    if cl:
+        g = cl["s"]
+        rag += ["## Live Claude check (`make eval-claude-live`)", "",
+                f"_From `eval/reports/generative_claude.json` ({cl['at']}): {cl['model']} through the Anthropic "
+                "Citations API, the same 6 dev questions as above. One run; not used for any headline claim._", "",
+                f"- Outputs accepted: {g['accepted']}/{g['questions']}; generated sentences: {g['sentences']} "
+                f"(supported {g['supported']}, partial {g['partial']}, unsupported {g['unsupported']}). "
+                f"{cl['uncited']} of the unsupported sentences carry no citation at all: connecting sentences that say "
+                "the sources conflict or that the governing figure can't be determined. The validator still counts "
+                "them as unsupported.",
+                f"- Gold answer span present in {cl['gold']}/{g['questions']} answers. "
+                + (f"Abstained: {', '.join(cl['abstained'])}. None of the 6 passages it was given mentions a reservoir "
+                   "(they are cut from numbered sections); only the document title (\"Westfield Reservoir "
+                   "Financing\") does, and the title was not sent. Fixed "
+                   "after this run (each document's title now includes the source title); the fix has not been "
+                   "re-run live." if cl["abstained"] else ""),
+                f"- Latency per question: p50 {g['latency_ms']['p50']} ms, p95 (max) {g['latency_ms']['p95']} ms. "
+                f"Tokens reported by the API: {cl['tokens']} (input + output, summed per question; the run's own "
+                f"summary field read {g['usage_reported_total_tokens']} because of a summing bug fixed afterwards).", ""]
     rag += advg_section(advg) + faithfulness_section(fa)
     rag += ["## Findings during the build (each fixed and covered by a test or the adversarial run)", "",
             "1. A test client kept the last login's cookie and the server preferred cookies over the bearer header, so "
@@ -332,8 +369,20 @@ def render_readiness_block(path: Path, adv, advg, run1, fa) -> None:
          "| Added | What was measured | Result | File |", "|---|---|---|---|"]
     L.append("| Claude provider (Anthropic Citations API, custom-content documents) | request shape, block-index → "
              "char-offset mapping, re-verification, rejection of out-of-pack / out-of-range / tampered citations and "
-             "refusals | offline only: 13 tests against fixtures built from the documented response schema; **never "
-             "called live** (no API key) | `tests/test_claude_citations.py` |")
+             "refusals | offline: 13 tests against fixtures built from the documented response schema; one live run in "
+             "the next row | `tests/test_claude_citations.py` |")
+    cl = claude_live(load("generative_claude.json"))
+    if cl:
+        g = cl["s"]
+        L.append(f"| Live Claude check ({cl['model']}, {cl['at']}) | the 6 dev questions from `make eval-generative` "
+                 f"| {g['accepted']}/{g['questions']} outputs accepted; {g['sentences']} sentences: {g['supported']} "
+                 f"supported, {g['partial']} partial, {g['unsupported']} unsupported ({cl['uncited']} of them uncited "
+                 "connecting sentences such as \"The documents conflict on this point.\"); "
+                 f"gold span in {cl['gold']}/{g['questions']}; "
+                 + (f"**finding:** {', '.join(cl['abstained'])} abstained because passages were sent without their "
+                    "document title (fixed; not yet re-run live); " if cl["abstained"] else "")
+                 + f"p50 {g['latency_ms']['p50']} ms; {cl['tokens']} tokens reported | "
+                 "`eval/reports/generative_claude.json` |")
     if run1:
         g1 = run1["generation_run"]
         L.append(f"| Adversarial sweep with a real model, run 1 | same sweep as the extractive run, {g1['model']} "

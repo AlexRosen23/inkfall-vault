@@ -62,7 +62,8 @@ Walkthrough video (40 s, recorded with Playwright): [docs/media/walkthrough.webm
   authorized passages, has no tools, and its output is rejected or labelled when citations or numbers do not hold up.
 - **Claude with native citations (opt-in).** The Anthropic Citations API with one custom-content block per
   authorized span; Claude's block-index citations map back to stored character offsets and are re-verified. Tested
-  offline with fixtures built from the documented response schema; never auto-selected, needs `ANTHROPIC_API_KEY`.
+  offline with fixtures built from the documented response schema, plus one recorded 6-question live run
+  (`make eval-claude-live`); never auto-selected, needs `ANTHROPIC_API_KEY`.
 - **MCP server.** Read-only `search` / `fetch_document` / `cite` tools over stdio with the identity bound at launch.
 - **Measured faithfulness.** A binary LLM judge for "every claim is supported by its cited spans", calibrated
   (TPR/TNR) against reference labels on a held-out split, next to the deterministic span-support metrics.
