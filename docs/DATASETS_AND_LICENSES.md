@@ -25,7 +25,7 @@
 | Model | Use | License | Size | Default |
 |---|---|---|---|---|
 | `sentence-transformers/all-MiniLM-L6-v2` | dense retrieval (384-d) | Apache-2.0 | ~90 MB | yes (`make setup` downloads it) |
-| `cross-encoder/ms-marco-MiniLM-L6-v2` | rerank experiment | Apache-2.0 | ~90 MB | no (`make rerank-model`) |
+| `cross-encoder/ms-marco-MiniLM-L6-v2` | rerank ablation (measured 2026-11-09: no gain here) | Apache-2.0 | ~90 MB | no (`make rerank-model`) |
 | Any local OpenAI-compatible chat model (tested: `qwen3.6-35b-a3b-mlx` in LM Studio) | optional generative summaries | the model's own license | user-provided | no |
 
 ## Software

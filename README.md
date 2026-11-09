@@ -15,7 +15,7 @@ audit trail. A brief only leaves the team after a second person approves it.
   each user's authorized view *before* BM25, embeddings, snippets, prompts or logs see any content. Forbidden and
   missing objects look identical (404).
 - **Hybrid retrieval, measured.** SQLite FTS5/BM25 (one index per tenant), local `all-MiniLM-L6-v2` embeddings,
-  reciprocal-rank fusion; an opt-in cross-encoder rerank experiment. Compared on 112 gold questions with a
+  reciprocal-rank fusion; a cross-encoder rerank ablation (measured: no gain on this corpus, ~10x latency). Compared on 112 gold questions with a
   dev/test split and a no-RAG title-only baseline.
 - **Exact citations.** Immutable, checksummed versions; every cited sentence maps to stored character offsets and
   is re-verified whenever it comes back to the server.
@@ -30,18 +30,18 @@ audit trail. A brief only leaves the team after a second person approves it.
 
 <!-- results:start -->
 
-_From saved runs: `eval/reports/latest.json` (2026-11-09T05:03:56+00:00, commit `4adb7df`) and `adversarial.json` (2026-11-09T05:04:40+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
+_From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit `2180604`) and `adversarial.json` (2026-11-09T05:04:40+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
 
-| | BM25 | Dense | Hybrid (RRF) | Title-only baseline |
-|---|---|---|---|---|
-| MRR@10 | 0.938 | 0.962 | 0.966 | 0.818 |
-| nDCG@10 | 0.950 | 0.973 | 0.971 | n/a |
-| Citation validity | 100.0% | 100.0% | 100.0% | n/a |
-| Answer support (gold span in cited text) | 85.4% | 85.4% | 87.8% | n/a |
-| Abstention F1 | 0.857 | 0.923 | 0.923 | n/a |
-| Conflicts found / expected (false alarms) | 2/5 (6) | 2/5 (4) | 2/5 (6) | n/a |
-| Leaks | 0 | 0 | 0 | n/a |
-| Latency p50 / p95 (ms) | 3.2 / 4.7 | 11.7 / 15.9 | 11.9 / 15.5 | n/a |
+| | BM25 | Dense | Hybrid (RRF) | Hybrid + rerank | Title-only baseline |
+|---|---|---|---|---|---|
+| MRR@10 | 0.938 | 0.962 | 0.966 | 0.955 | 0.818 |
+| nDCG@10 | 0.950 | 0.973 | 0.971 | 0.968 | n/a |
+| Citation validity | 100.0% | 100.0% | 100.0% | 100.0% | n/a |
+| Answer support (gold span in cited text) | 85.4% | 85.4% | 87.8% | 87.2% | n/a |
+| Abstention F1 | 0.857 | 0.923 | 0.923 | 0.846 | n/a |
+| Conflicts found / expected (false alarms) | 2/5 (6) | 2/5 (4) | 2/5 (6) | 3/5 (6) | n/a |
+| Leaks | 0 | 0 | 0 | 0 | n/a |
+| Latency p50 / p95 (ms) | 4.4 / 8.1 | 18.9 / 42.1 | 19.8 / 40.3 | 195.7 / 319.0 | n/a |
 
 Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 20/21, generation 5/5, api 10/10; documented quality miss: XT-017.
 

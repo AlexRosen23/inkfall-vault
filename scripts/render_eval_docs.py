@@ -222,6 +222,12 @@ def main() -> None:
         {"claim": "Sub-100 ms retrieval on CPU", "metric": f"hybrid p95 {hy.get('latency_ms', {}).get('p95')} ms (test split, "
                    f"{mach['cpu']})", "source": "eval/reports/latest.json#summary.test.hybrid.latency_ms",
          "verify": "make eval", "status": "verified on this machine only"},
+        {"claim": "Cross-encoder reranking evaluated as an ablation",
+         "metric": (f"hybrid+rerank MRR@10 {f(t['rerank']['mrr_at_10'])} vs hybrid {f(hy.get('mrr_at_10'))}; p50 "
+                    f"{t['rerank']['latency_ms']['p50']} ms vs {hy.get('latency_ms', {}).get('p50')} ms (test split): no gain on this corpus")
+         if t.get("rerank") else None,
+         "source": "eval/reports/latest.json#summary.test.rerank", "verify": "make rerank-model && make eval",
+         "status": ("verified (negative result: reranking did not help here)" if t.get("rerank") else "not run")},
         {"claim": "Time-to-task reduction for analysts", "metric": None, "source": None, "verify": None,
          "status": "planned - needs a timed user study; no number is claimed"},
         {"claim": "Production deployment / real customers", "metric": None, "source": None, "verify": None,
@@ -236,23 +242,25 @@ def main() -> None:
     txt = readme.read_text()
     a, b = "<!-- results:start -->", "<!-- results:end -->"
     if a in txt and b in txt:
+        MS = [m for m in ("bm25", "dense", "hybrid", "rerank") if m in t]
+        LABEL = {"bm25": "BM25", "dense": "Dense", "hybrid": "Hybrid (RRF)", "rerank": "Hybrid + rerank"}
         lines = [a, "", f"_From saved runs: `eval/reports/latest.json` ({rep['generated_at']}, commit `{pv['git_commit']}`)"
                  + (f" and `adversarial.json` ({adv['generated_at']})" if adv else "") + ". Held-out **test** split, "
                  f"{t.get('hybrid', {}).get('questions')} questions; CPU only ({mach['cpu']})._", "",
-                 "| | BM25 | Dense | Hybrid (RRF) | Title-only baseline |", "|---|---|---|---|---|"]
+                 "| | " + " | ".join(LABEL[m] for m in MS) + " | Title-only baseline |", "|---|" + "---|" * (len(MS) + 1)]
         def g(m, k, pct=False):
             v = (t.get(m) or {}).get(k)
             return f(v, pct)
-        lines += [f"| MRR@10 | {g('bm25', 'mrr_at_10')} | {g('dense', 'mrr_at_10')} | {g('hybrid', 'mrr_at_10')} | {f(base.get('mrr_at_10'))} |",
-                  f"| nDCG@10 | {g('bm25', 'ndcg_at_10')} | {g('dense', 'ndcg_at_10')} | {g('hybrid', 'ndcg_at_10')} | n/a |",
-                  f"| Citation validity | {g('bm25', 'citation_validity', True)} | {g('dense', 'citation_validity', True)} | {g('hybrid', 'citation_validity', True)} | n/a |",
-                  f"| Answer support (gold span in cited text) | {g('bm25', 'answer_support_rate', True)} | {g('dense', 'answer_support_rate', True)} | {g('hybrid', 'answer_support_rate', True)} | n/a |",
-                  "| Abstention F1 | " + " | ".join(f((t.get(m) or {}).get('abstention', {}).get('f1')) for m in ('bm25', 'dense', 'hybrid')) + " | n/a |",
-                  "| Conflicts found / expected (false alarms) | " + " | ".join(
-                      f"{(t.get(m) or {}).get('conflicts', {}).get('flagged')}/{(t.get(m) or {}).get('conflicts', {}).get('expected')} "
-                      f"({(t.get(m) or {}).get('conflicts', {}).get('false_alarms_on_other_answerable')})" for m in ('bm25', 'dense', 'hybrid')) + " | n/a |",
-                  "| Leaks | " + " | ".join(str((t.get(m) or {}).get('leaks')) for m in ('bm25', 'dense', 'hybrid')) + " | n/a |",
-                  "| Latency p50 / p95 (ms) | " + " | ".join(f"{(t.get(m) or {}).get('latency_ms', {}).get('p50')} / {(t.get(m) or {}).get('latency_ms', {}).get('p95')}" for m in ('bm25', 'dense', 'hybrid')) + " | n/a |",
+        def row(name, cell, base_cell="n/a"):
+            return f"| {name} | " + " | ".join(cell(m) for m in MS) + f" | {base_cell} |"
+        lines += [row("MRR@10", lambda m: g(m, 'mrr_at_10'), f(base.get('mrr_at_10'))),
+                  row("nDCG@10", lambda m: g(m, 'ndcg_at_10')),
+                  row("Citation validity", lambda m: g(m, 'citation_validity', True)),
+                  row("Answer support (gold span in cited text)", lambda m: g(m, 'answer_support_rate', True)),
+                  row("Abstention F1", lambda m: f((t.get(m) or {}).get('abstention', {}).get('f1'))),
+                  row("Conflicts found / expected (false alarms)", lambda m: f"{t[m]['conflicts']['flagged']}/{t[m]['conflicts']['expected']} ({t[m]['conflicts']['false_alarms_on_other_answerable']})"),
+                  row("Leaks", lambda m: str(t[m]['leaks'])),
+                  row("Latency p50 / p95 (ms)", lambda m: f"{t[m]['latency_ms']['p50']} / {t[m]['latency_ms']['p95']}"),
                   ""]
         if adv:
             iso = adv["isolation"]

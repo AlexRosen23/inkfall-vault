@@ -3,7 +3,7 @@
     "eval/reports/latest.json",
     "eval/reports/adversarial.json"
   ],
-  "generated_at": "2026-11-09T05:03:56+00:00",
+  "generated_at": "2026-11-09T05:52:59+00:00",
   "dataset_version": "648f953504a95e33",
   "claims": [
     {
@@ -50,10 +50,17 @@
     },
     {
       "claim": "Sub-100 ms retrieval on CPU",
-      "metric": "hybrid p95 15.5 ms (test split, Apple M5 Pro)",
+      "metric": "hybrid p95 40.3 ms (test split, Apple M5 Pro)",
       "source": "eval/reports/latest.json#summary.test.hybrid.latency_ms",
       "verify": "make eval",
       "status": "verified on this machine only"
+    },
+    {
+      "claim": "Cross-encoder reranking evaluated as an ablation",
+      "metric": "hybrid+rerank MRR@10 0.955 vs hybrid 0.966; p50 195.7 ms vs 19.8 ms (test split): no gain on this corpus",
+      "source": "eval/reports/latest.json#summary.test.rerank",
+      "verify": "make rerank-model && make eval",
+      "status": "verified (negative result: reranking did not help here)"
     },
     {
       "claim": "Time-to-task reduction for analysts",

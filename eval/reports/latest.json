@@ -1,14 +1,14 @@
 {
- "generated_at": "2026-11-09T05:03:56+00:00",
+ "generated_at": "2026-11-09T05:52:59+00:00",
  "provenance": {
-  "git_commit": "4adb7df",
+  "git_commit": "2180604",
   "uncommitted_changes_in_src_or_data": false,
   "dataset_version": "648f953504a95e33",
   "documents": 45,
   "gold_questions": 112,
   "split_filter": "all",
   "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
-  "reranker": null,
+  "reranker": "cross-encoder/ms-marco-MiniLM-L6-v2",
   "command": "make eval",
   "machine": {
    "platform": "macOS-27.0.1-arm64-arm-64bit",
@@ -18,17 +18,16 @@
    "python": "3.12.15",
    "device": "cpu"
   },
-  "wall_seconds": 3.3,
+  "wall_seconds": 28.9,
   "answer_mode": "extractive (no LLM)"
  },
  "methods_run": [
   "bm25",
   "dense",
-  "hybrid"
+  "hybrid",
+  "rerank"
  ],
- "methods_skipped": {
-  "rerank": "cross-encoder not downloaded (opt-in: make rerank-model)"
- },
+ "methods_skipped": {},
  "summary": {
   "dev": {
    "bm25": {
@@ -63,11 +62,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.5,
-     "p95": 6.0,
-     "max": 8.4
+     "p50": 4.6,
+     "p95": 9.3,
+     "max": 15.9
     },
-    "throughput_qps_sequential": 261.4
+    "throughput_qps_sequential": 189.59
    },
    "dense": {
     "questions": 43,
@@ -101,11 +100,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.8,
-     "p95": 14.5,
-     "max": 19.6
+     "p50": 18.4,
+     "p95": 36.6,
+     "max": 273.2
     },
-    "throughput_qps_sequential": 83.5
+    "throughput_qps_sequential": 38.28
    },
    "hybrid": {
     "questions": 43,
@@ -139,11 +138,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 12.0,
-     "p95": 14.9,
-     "max": 15.7
+     "p50": 18.6,
+     "p95": 38.3,
+     "max": 72.9
     },
-    "throughput_qps_sequential": 81.95
+    "throughput_qps_sequential": 45.69
+   },
+   "rerank": {
+    "questions": 43,
+    "answerable": 28,
+    "should_abstain": 15,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.2643,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 0.9375,
+    "ndcg_at_10": 0.9498,
+    "citations": 79,
+    "citation_validity": 1.0,
+    "answered_answerable": 27,
+    "answer_support_rate": 0.8519,
+    "unsupported_answer_rate": 0.1481,
+    "evidence_in_pack_rate": 0.8519,
+    "abstention": {
+     "precision": 0.9333,
+     "recall": 0.9333,
+     "f1": 0.9333,
+     "false_abstain_on_answerable": 1,
+     "missed_abstain": 1
+    },
+    "conflicts": {
+     "expected": 4,
+     "flagged": 4,
+     "false_alarms_on_other_answerable": 3,
+     "other_answerable": 24
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 196.0,
+     "p95": 327.7,
+     "max": 354.7
+    },
+    "throughput_qps_sequential": 4.88
    },
    "baseline_title_only": {
     "recall_at_5": 0.8929,
@@ -183,11 +220,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.2,
-     "p95": 4.7,
-     "max": 5.6
+     "p50": 4.4,
+     "p95": 8.1,
+     "max": 8.5
     },
-    "throughput_qps_sequential": 304.1
+    "throughput_qps_sequential": 216.57
    },
    "dense": {
     "questions": 69,
@@ -221,11 +258,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.7,
-     "p95": 15.9,
-     "max": 20.5
+     "p50": 18.9,
+     "p95": 42.1,
+     "max": 76.8
     },
-    "throughput_qps_sequential": 84.14
+    "throughput_qps_sequential": 43.97
    },
    "hybrid": {
     "questions": 69,
@@ -259,11 +296,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.9,
-     "p95": 15.5,
-     "max": 20.1
+     "p50": 19.8,
+     "p95": 40.3,
+     "max": 90.2
     },
-    "throughput_qps_sequential": 81.58
+    "throughput_qps_sequential": 43.29
+   },
+   "rerank": {
+    "questions": 69,
+    "answerable": 44,
+    "should_abstain": 25,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.2545,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 0.9545,
+    "ndcg_at_10": 0.9675,
+    "citations": 112,
+    "citation_validity": 1.0,
+    "answered_answerable": 39,
+    "answer_support_rate": 0.8718,
+    "unsupported_answer_rate": 0.1282,
+    "evidence_in_pack_rate": 0.9744,
+    "abstention": {
+     "precision": 0.8148,
+     "recall": 0.88,
+     "f1": 0.8462,
+     "false_abstain_on_answerable": 5,
+     "missed_abstain": 3
+    },
+    "conflicts": {
+     "expected": 5,
+     "flagged": 3,
+     "false_alarms_on_other_answerable": 6,
+     "other_answerable": 39
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 195.7,
+     "p95": 319.0,
+     "max": 553.2
+    },
+    "throughput_qps_sequential": 4.91
    },
    "baseline_title_only": {
     "recall_at_5": 0.8977,
@@ -303,11 +378,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.3,
-     "p95": 5.6,
-     "max": 8.4
+     "p50": 4.5,
+     "p95": 8.1,
+     "max": 15.9
     },
-    "throughput_qps_sequential": 286.15
+    "throughput_qps_sequential": 205.35
    },
    "dense": {
     "questions": 112,
@@ -341,11 +416,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.7,
-     "p95": 15.1,
-     "max": 20.5
+     "p50": 18.7,
+     "p95": 42.1,
+     "max": 273.2
     },
-    "throughput_qps_sequential": 83.89
+    "throughput_qps_sequential": 41.6
    },
    "hybrid": {
     "questions": 112,
@@ -379,11 +454,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 12.0,
-     "p95": 15.2,
-     "max": 20.1
+     "p50": 19.5,
+     "p95": 40.3,
+     "max": 90.2
     },
-    "throughput_qps_sequential": 81.72
+    "throughput_qps_sequential": 44.18
+   },
+   "rerank": {
+    "questions": 112,
+    "answerable": 72,
+    "should_abstain": 40,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.2583,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 0.9479,
+    "ndcg_at_10": 0.9606,
+    "citations": 191,
+    "citation_validity": 1.0,
+    "answered_answerable": 66,
+    "answer_support_rate": 0.8636,
+    "unsupported_answer_rate": 0.1364,
+    "evidence_in_pack_rate": 0.9242,
+    "abstention": {
+     "precision": 0.8571,
+     "recall": 0.9,
+     "f1": 0.878,
+     "false_abstain_on_answerable": 6,
+     "missed_abstain": 4
+    },
+    "conflicts": {
+     "expected": 9,
+     "flagged": 7,
+     "false_alarms_on_other_answerable": 9,
+     "other_answerable": 63
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 195.7,
+     "p95": 327.7,
+     "max": 553.2
+    },
+    "throughput_qps_sequential": 4.9
    },
    "baseline_title_only": {
     "recall_at_5": 0.8958,
@@ -425,11 +538,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.1,
-     "p95": 3.7,
-     "max": 3.7
+     "p50": 4.7,
+     "p95": 7.5,
+     "max": 7.5
     },
-    "throughput_qps_sequential": 330.88
+    "throughput_qps_sequential": 223.33
    },
    "dense": {
     "questions": 9,
@@ -463,11 +576,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 12.7,
-     "p95": 14.7,
-     "max": 14.7
+     "p50": 16.3,
+     "p95": 30.3,
+     "max": 30.3
     },
-    "throughput_qps_sequential": 81.15
+    "throughput_qps_sequential": 54.25
    },
    "hybrid": {
     "questions": 9,
@@ -501,11 +614,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.9,
-     "p95": 15.5,
-     "max": 15.5
+     "p50": 14.6,
+     "p95": 31.4,
+     "max": 31.4
     },
-    "throughput_qps_sequential": 79.51
+    "throughput_qps_sequential": 53.48
+   },
+   "rerank": {
+    "questions": 9,
+    "answerable": 0,
+    "should_abstain": 9,
+    "recall_at_5": null,
+    "precision_at_5": null,
+    "hit_at_5": null,
+    "mrr_at_10": null,
+    "ndcg_at_10": null,
+    "citations": 6,
+    "citation_validity": 1.0,
+    "answered_answerable": 0,
+    "answer_support_rate": null,
+    "unsupported_answer_rate": null,
+    "evidence_in_pack_rate": null,
+    "abstention": {
+     "precision": 1.0,
+     "recall": 0.7778,
+     "f1": 0.875,
+     "false_abstain_on_answerable": 0,
+     "missed_abstain": 2
+    },
+    "conflicts": {
+     "expected": 0,
+     "flagged": 0,
+     "false_alarms_on_other_answerable": 0,
+     "other_answerable": 0
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 209.5,
+     "p95": 263.7,
+     "max": 263.7
+    },
+    "throughput_qps_sequential": 5.42
    }
   },
   "contradiction": {
@@ -541,11 +692,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.2,
-     "p95": 5.6,
-     "max": 5.6
+     "p50": 4.8,
+     "p95": 8.4,
+     "max": 8.4
     },
-    "throughput_qps_sequential": 236.84
+    "throughput_qps_sequential": 199.12
    },
    "dense": {
     "questions": 9,
@@ -579,11 +730,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 13.4,
-     "p95": 17.5,
-     "max": 17.5
+     "p50": 14.4,
+     "p95": 28.0,
+     "max": 28.0
     },
-    "throughput_qps_sequential": 75.19
+    "throughput_qps_sequential": 55.66
    },
    "hybrid": {
     "questions": 9,
@@ -617,11 +768,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 12.8,
-     "p95": 17.0,
-     "max": 17.0
+     "p50": 18.5,
+     "p95": 31.6,
+     "max": 31.6
     },
-    "throughput_qps_sequential": 76.08
+    "throughput_qps_sequential": 52.08
+   },
+   "rerank": {
+    "questions": 9,
+    "answerable": 9,
+    "should_abstain": 0,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.4,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 0.9444,
+    "ndcg_at_10": 0.957,
+    "citations": 25,
+    "citation_validity": 1.0,
+    "answered_answerable": 9,
+    "answer_support_rate": 1.0,
+    "unsupported_answer_rate": 0.0,
+    "evidence_in_pack_rate": 1.0,
+    "abstention": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "false_abstain_on_answerable": 0,
+     "missed_abstain": 0
+    },
+    "conflicts": {
+     "expected": 9,
+     "flagged": 7,
+     "false_alarms_on_other_answerable": 0,
+     "other_answerable": 0
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 181.4,
+     "p95": 304.3,
+     "max": 304.3
+    },
+    "throughput_qps_sequential": 5.44
    }
   },
   "injection": {
@@ -657,11 +846,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.3,
-     "p95": 5.9,
-     "max": 5.9
+     "p50": 4.3,
+     "p95": 9.3,
+     "max": 9.3
     },
-    "throughput_qps_sequential": 303.03
+    "throughput_qps_sequential": 215.83
    },
    "dense": {
     "questions": 15,
@@ -695,11 +884,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 12.1,
-     "p95": 14.2,
-     "max": 14.2
+     "p50": 21.0,
+     "p95": 54.1,
+     "max": 54.1
     },
-    "throughput_qps_sequential": 84.46
+    "throughput_qps_sequential": 42.66
    },
    "hybrid": {
     "questions": 15,
@@ -733,11 +922,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.9,
-     "p95": 14.9,
-     "max": 14.9
+     "p50": 20.3,
+     "p95": 90.2,
+     "max": 90.2
     },
-    "throughput_qps_sequential": 83.85
+    "throughput_qps_sequential": 39.03
+   },
+   "rerank": {
+    "questions": 15,
+    "answerable": 3,
+    "should_abstain": 12,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.2,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 1.0,
+    "ndcg_at_10": 1.0,
+    "citations": 12,
+    "citation_validity": 1.0,
+    "answered_answerable": 3,
+    "answer_support_rate": 0.6667,
+    "unsupported_answer_rate": 0.3333,
+    "evidence_in_pack_rate": 1.0,
+    "abstention": {
+     "precision": 1.0,
+     "recall": 0.9167,
+     "f1": 0.9565,
+     "false_abstain_on_answerable": 0,
+     "missed_abstain": 1
+    },
+    "conflicts": {
+     "expected": 0,
+     "flagged": 0,
+     "false_alarms_on_other_answerable": 0,
+     "other_answerable": 3
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 198.8,
+     "p95": 303.3,
+     "max": 303.3
+    },
+    "throughput_qps_sequential": 4.71
    }
   },
   "multi_hop": {
@@ -773,11 +1000,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.8,
-     "p95": 5.2,
-     "max": 5.2
+     "p50": 4.4,
+     "p95": 8.1,
+     "max": 8.1
     },
-    "throughput_qps_sequential": 263.16
+    "throughput_qps_sequential": 205.13
    },
    "dense": {
     "questions": 12,
@@ -811,11 +1038,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 12.0,
-     "p95": 20.5,
-     "max": 20.5
+     "p50": 19.1,
+     "p95": 71.4,
+     "max": 71.4
     },
-    "throughput_qps_sequential": 76.82
+    "throughput_qps_sequential": 37.85
    },
    "hybrid": {
     "questions": 12,
@@ -849,11 +1076,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 13.0,
-     "p95": 20.1,
-     "max": 20.1
+     "p50": 16.9,
+     "p95": 34.6,
+     "max": 34.6
     },
-    "throughput_qps_sequential": 72.2
+    "throughput_qps_sequential": 47.23
+   },
+   "rerank": {
+    "questions": 12,
+    "answerable": 12,
+    "should_abstain": 0,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.4,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 0.9167,
+    "ndcg_at_10": 0.9355,
+    "citations": 27,
+    "citation_validity": 1.0,
+    "answered_answerable": 10,
+    "answer_support_rate": 0.9,
+    "unsupported_answer_rate": 0.1,
+    "evidence_in_pack_rate": 0.9,
+    "abstention": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "false_abstain_on_answerable": 2,
+     "missed_abstain": 0
+    },
+    "conflicts": {
+     "expected": 0,
+     "flagged": 0,
+     "false_alarms_on_other_answerable": 2,
+     "other_answerable": 12
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 195.7,
+     "p95": 343.7,
+     "max": 343.7
+    },
+    "throughput_qps_sequential": 4.58
    }
   },
   "numeric": {
@@ -889,11 +1154,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.4,
-     "p95": 4.4,
-     "max": 4.4
+     "p50": 4.6,
+     "p95": 6.9,
+     "max": 6.9
     },
-    "throughput_qps_sequential": 303.8
+    "throughput_qps_sequential": 204.08
    },
    "dense": {
     "questions": 12,
@@ -927,11 +1192,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.4,
-     "p95": 15.1,
-     "max": 15.1
+     "p50": 14.4,
+     "p95": 30.0,
+     "max": 30.0
     },
-    "throughput_qps_sequential": 83.74
+    "throughput_qps_sequential": 63.59
    },
    "hybrid": {
     "questions": 12,
@@ -965,11 +1230,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.5,
-     "p95": 14.5,
-     "max": 14.5
+     "p50": 14.0,
+     "p95": 29.6,
+     "max": 29.6
     },
-    "throughput_qps_sequential": 82.64
+    "throughput_qps_sequential": 62.4
+   },
+   "rerank": {
+    "questions": 12,
+    "answerable": 12,
+    "should_abstain": 0,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.2,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 0.9375,
+    "ndcg_at_10": 0.9526,
+    "citations": 31,
+    "citation_validity": 1.0,
+    "answered_answerable": 11,
+    "answer_support_rate": 0.9091,
+    "unsupported_answer_rate": 0.0909,
+    "evidence_in_pack_rate": 0.9091,
+    "abstention": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "false_abstain_on_answerable": 1,
+     "missed_abstain": 0
+    },
+    "conflicts": {
+     "expected": 0,
+     "flagged": 0,
+     "false_alarms_on_other_answerable": 2,
+     "other_answerable": 12
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 147.8,
+     "p95": 260.6,
+     "max": 260.6
+    },
+    "throughput_qps_sequential": 6.08
    }
   },
   "permission": {
@@ -1005,11 +1308,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 2.8,
-     "p95": 6.0,
-     "max": 6.0
+     "p50": 4.0,
+     "p95": 13.6,
+     "max": 13.6
     },
-    "throughput_qps_sequential": 313.01
+    "throughput_qps_sequential": 209.94
    },
    "dense": {
     "questions": 19,
@@ -1043,11 +1346,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.1,
-     "p95": 14.0,
-     "max": 14.0
+     "p50": 25.2,
+     "p95": 76.8,
+     "max": 76.8
     },
-    "throughput_qps_sequential": 89.2
+    "throughput_qps_sequential": 35.97
    },
    "hybrid": {
     "questions": 19,
@@ -1081,11 +1384,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.9,
-     "p95": 13.9,
-     "max": 13.9
+     "p50": 28.0,
+     "p95": 72.9,
+     "max": 72.9
     },
-    "throughput_qps_sequential": 84.26
+    "throughput_qps_sequential": 31.37
+   },
+   "rerank": {
+    "questions": 19,
+    "answerable": 0,
+    "should_abstain": 19,
+    "recall_at_5": null,
+    "precision_at_5": null,
+    "hit_at_5": null,
+    "mrr_at_10": null,
+    "ndcg_at_10": null,
+    "citations": 3,
+    "citation_validity": 1.0,
+    "answered_answerable": 0,
+    "answer_support_rate": null,
+    "unsupported_answer_rate": null,
+    "evidence_in_pack_rate": null,
+    "abstention": {
+     "precision": 1.0,
+     "recall": 0.9474,
+     "f1": 0.973,
+     "false_abstain_on_answerable": 0,
+     "missed_abstain": 1
+    },
+    "conflicts": {
+     "expected": 0,
+     "flagged": 0,
+     "false_alarms_on_other_answerable": 0,
+     "other_answerable": 0
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 260.0,
+     "p95": 553.2,
+     "max": 553.2
+    },
+    "throughput_qps_sequential": 3.8
    }
   },
   "single_hop": {
@@ -1121,11 +1462,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.1,
-     "p95": 5.0,
-     "max": 8.4
+     "p50": 4.5,
+     "p95": 8.5,
+     "max": 15.9
     },
-    "throughput_qps_sequential": 288.81
+    "throughput_qps_sequential": 189.87
    },
    "dense": {
     "questions": 24,
@@ -1159,11 +1500,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 10.6,
-     "p95": 13.4,
-     "max": 19.6
+     "p50": 18.1,
+     "p95": 31.0,
+     "max": 273.2
     },
-    "throughput_qps_sequential": 88.56
+    "throughput_qps_sequential": 33.78
    },
    "hybrid": {
     "questions": 24,
@@ -1197,11 +1538,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.3,
-     "p95": 13.4,
-     "max": 13.6
+     "p50": 19.0,
+     "p95": 29.9,
+     "max": 36.6
     },
-    "throughput_qps_sequential": 88.07
+    "throughput_qps_sequential": 49.54
+   },
+   "rerank": {
+    "questions": 24,
+    "answerable": 24,
+    "should_abstain": 0,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.2,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 0.9792,
+    "ndcg_at_10": 0.9846,
+    "citations": 55,
+    "citation_validity": 1.0,
+    "answered_answerable": 22,
+    "answer_support_rate": 0.7273,
+    "unsupported_answer_rate": 0.2727,
+    "evidence_in_pack_rate": 0.8636,
+    "abstention": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "false_abstain_on_answerable": 2,
+     "missed_abstain": 0
+    },
+    "conflicts": {
+     "expected": 0,
+     "flagged": 0,
+     "false_alarms_on_other_answerable": 4,
+     "other_answerable": 24
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 179.0,
+     "p95": 220.5,
+     "max": 273.7
+    },
+    "throughput_qps_sequential": 5.61
    }
   },
   "temporal": {
@@ -1237,11 +1616,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 3.8,
-     "p95": 6.0,
-     "max": 6.0
+     "p50": 4.4,
+     "p95": 7.6,
+     "max": 7.6
     },
-    "throughput_qps_sequential": 251.05
+    "throughput_qps_sequential": 213.52
    },
    "dense": {
     "questions": 12,
@@ -1275,11 +1654,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 11.7,
-     "p95": 15.0,
-     "max": 15.0
+     "p50": 24.1,
+     "p95": 32.5,
+     "max": 32.5
     },
-    "throughput_qps_sequential": 83.68
+    "throughput_qps_sequential": 44.59
    },
    "hybrid": {
     "questions": 12,
@@ -1313,11 +1692,49 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 12.4,
-     "p95": 15.0,
-     "max": 15.0
+     "p50": 19.6,
+     "p95": 40.3,
+     "max": 40.3
     },
-    "throughput_qps_sequential": 79.63
+    "throughput_qps_sequential": 43.94
+   },
+   "rerank": {
+    "questions": 12,
+    "answerable": 12,
+    "should_abstain": 0,
+    "recall_at_5": 1.0,
+    "precision_at_5": 0.2,
+    "hit_at_5": 1.0,
+    "mrr_at_10": 0.9167,
+    "ndcg_at_10": 0.9385,
+    "citations": 32,
+    "citation_validity": 1.0,
+    "answered_answerable": 11,
+    "answer_support_rate": 1.0,
+    "unsupported_answer_rate": 0.0,
+    "evidence_in_pack_rate": 1.0,
+    "abstention": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "false_abstain_on_answerable": 1,
+     "missed_abstain": 0
+    },
+    "conflicts": {
+     "expected": 0,
+     "flagged": 0,
+     "false_alarms_on_other_answerable": 1,
+     "other_answerable": 12
+    },
+    "leaks": 0,
+    "injection_sentences_quoted": 0,
+    "errors": 0,
+    "latency_ms": {
+     "p50": 215.3,
+     "p95": 319.0,
+     "max": 319.0
+    },
+    "throughput_qps_sequential": 4.79
    }
   }
  },
@@ -1340,7 +1757,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 8.4,
+     "latency_ms": 15.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -1371,7 +1788,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 19.6,
+     "latency_ms": 273.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -1400,7 +1817,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.4,
+     "latency_ms": 27.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -1425,6 +1842,37 @@
      "abstained": false,
      "answer_supported": true,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 273.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-MSA-VANTOR@1",
+      "CV-MSA-ORION@2",
+      "CV-MSA-HALDEN@1",
+      "CV-AMEND-HALDEN-01@1",
+      "CV-INC-2026-0914@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-MSA-HALDEN@1",
+      "CV-MSA-ORION@2",
+      "CV-MSA-VANTOR@1"
+     ],
+     "abstained": false,
+     "answer_supported": false,
+     "evidence_in_pack": false,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -1456,7 +1904,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.6,
+     "latency_ms": 8.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -1485,7 +1933,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.9,
+     "latency_ms": 25.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -1514,7 +1962,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.0,
+     "latency_ms": 25.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -1532,6 +1980,35 @@
      "ndcg_at_10": 1.0,
      "citations": 1,
      "citations_valid": 1,
+     "cited_refs": [
+      "CV-CREDIT-FACILITY@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 214.8,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-SLA-ORION@1",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-INC-2026-0914@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
      "cited_refs": [
       "CV-CREDIT-FACILITY@1"
      ],
@@ -1569,7 +2046,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.0,
+     "latency_ms": 5.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -1598,7 +2075,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.4,
+     "latency_ms": 18.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -1626,7 +2103,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.6,
+     "latency_ms": 23.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -1651,6 +2128,34 @@
      "answer_supported": false,
      "evidence_in_pack": false,
      "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 183.5,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
      "leaks": [],
      "injection_quoted": false
     }
@@ -1683,7 +2188,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 5.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -1713,7 +2218,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.9,
+     "latency_ms": 19.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -1742,7 +2247,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.6,
+     "latency_ms": 17.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -1766,6 +2271,36 @@
      "abstained": false,
      "answer_supported": false,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 218.4,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-MSA-HALDEN@1",
+      "CV-AMEND-HALDEN-01@1",
+      "CV-MSA-ORION@2",
+      "CV-MSA-VANTOR@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-AMEND-HALDEN-01@1",
+      "CV-MSA-HALDEN@1"
+     ],
+     "abstained": false,
+     "answer_supported": false,
+     "evidence_in_pack": false,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -1801,7 +2336,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 4.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -1831,7 +2366,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.4,
+     "latency_ms": 17.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -1861,10 +2396,40 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.1,
+     "latency_ms": 21.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "CV-POL-TREASURY@2",
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-CREDIT-FACILITY@1",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-POL-TREASURY@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 196.5,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "CV-POL-TREASURY@2",
       "CV-MEMO-BOARD-LIQUIDITY@1",
@@ -1917,7 +2482,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 3.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -1944,7 +2509,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 8.6,
+     "latency_ms": 15.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -1972,7 +2537,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.3,
+     "latency_ms": 14.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -1995,6 +2560,33 @@
      "abstained": false,
      "answer_supported": false,
      "evidence_in_pack": false,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 151.9,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-RPT-ORION-RCA@1",
+      "CV-INC-2026-0914@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 1,
+     "citations_valid": 1,
+     "cited_refs": [
+      "CV-RPT-ORION-RCA@1"
+     ],
+     "abstained": false,
+     "answer_supported": false,
+     "evidence_in_pack": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -2028,7 +2620,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.5,
+     "latency_ms": 4.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2058,7 +2650,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.6,
+     "latency_ms": 16.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2088,7 +2680,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 9.9,
+     "latency_ms": 19.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2108,6 +2700,35 @@
      "citations_valid": 3,
      "cited_refs": [
       "CV-AMEND-ORION-01@1",
+      "CV-MSA-VANTOR@1"
+     ],
+     "abstained": false,
+     "answer_supported": false,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 199.6,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-MSA-VANTOR@1",
+      "CV-MSA-HALDEN@1",
+      "CV-MSA-ORION@2",
+      "CV-AMEND-ORION-01@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 1,
+     "citations_valid": 1,
+     "cited_refs": [
       "CV-MSA-VANTOR@1"
      ],
      "abstained": false,
@@ -2144,7 +2765,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 8.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2171,7 +2792,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.2,
+     "latency_ms": 31.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2197,10 +2818,36 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 9.1,
+     "latency_ms": 24.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "CV-SLA-ORION@1",
+      "CV-INC-2026-0914@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-SLA-ORION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 196.6,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "CV-SLA-ORION@1",
       "CV-INC-2026-0914@1"
@@ -2252,7 +2899,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.8,
+     "latency_ms": 5.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2283,7 +2930,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.3,
+     "latency_ms": 19.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2313,7 +2960,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.8,
+     "latency_ms": 20.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2338,6 +2985,36 @@
      "abstained": false,
      "answer_supported": true,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 343.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-AMEND-ORION-01@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-MSA-ORION@2",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 0.9197207891481876,
+     "citations": 2,
+     "citations_valid": 2,
+     "cited_refs": [
+      "CV-AMEND-ORION-01@1",
+      "CV-RPT-ORION-RCA@1"
+     ],
+     "abstained": false,
+     "answer_supported": false,
+     "evidence_in_pack": false,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -2375,7 +3052,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.8,
+     "latency_ms": 8.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2406,7 +3083,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.0,
+     "latency_ms": 33.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2436,7 +3113,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.0,
+     "latency_ms": 28.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2446,6 +3123,36 @@
       "CV-SLA-ORION@1",
       "CV-SCHED-ORION-PRICING@1",
       "CV-INC-2026-0914@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-AMEND-HALDEN-01@1",
+      "CV-MSA-HALDEN@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 276.6,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-MSA-HALDEN@1",
+      "CV-AMEND-HALDEN-01@1",
+      "CV-INC-2026-0914@1",
+      "CV-SLA-ORION@1",
+      "CV-SCHED-ORION-PRICING@1"
      ],
      "recall_at_5": 1.0,
      "precision_at_5": 0.4,
@@ -2495,7 +3202,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 5.7,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -2525,7 +3232,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.8,
+     "latency_ms": 34.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -2556,10 +3263,41 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.5,
+     "latency_ms": 34.6,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-POL-TREASURY@2",
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-POL-TREASURY@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 263.0,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "CV-CREDIT-FACILITY@1",
       "CV-POL-TREASURY@2",
@@ -2617,7 +3355,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 4.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -2640,7 +3378,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.4,
+     "latency_ms": 19.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2667,7 +3405,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.8,
+     "latency_ms": 16.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2689,6 +3427,35 @@
      ],
      "abstained": false,
      "answer_supported": false,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 195.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 0.9197207891481876,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-SLA-ORION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
      "evidence_in_pack": true,
      "conflict_flagged": false,
      "leaks": [],
@@ -2726,7 +3493,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.4,
+     "latency_ms": 6.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2756,7 +3523,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.8,
+     "latency_ms": 18.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2786,7 +3553,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.5,
+     "latency_ms": 17.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2810,6 +3577,37 @@
      "abstained": false,
      "answer_supported": true,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 183.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-RPT-ORION-RCA@1",
+      "CV-MSA-ORION@2",
+      "CV-SLA-ORION@1",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-AMEND-ORION-01@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 0.25,
+     "ndcg_at_10": 0.43067655807339306,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-AMEND-ORION-01@1",
+      "CV-MSA-ORION@2",
+      "CV-SLA-ORION@1"
+     ],
+     "abstained": false,
+     "answer_supported": false,
+     "evidence_in_pack": false,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -2845,7 +3643,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.3,
+     "latency_ms": 4.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2874,7 +3672,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.2,
+     "latency_ms": 30.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2903,7 +3701,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.3,
+     "latency_ms": 29.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2928,6 +3726,36 @@
      "answer_supported": true,
      "evidence_in_pack": true,
      "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 222.4,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-SLA-ORION@1",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-MSA-VANTOR@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-MEMO-BOARD-LIQUIDITY@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
      "leaks": [],
      "injection_quoted": false
     }
@@ -2958,7 +3786,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.1,
+     "latency_ms": 5.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -2988,7 +3816,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.3,
+     "latency_ms": 18.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -3017,7 +3845,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.2,
+     "latency_ms": 19.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -3036,6 +3864,36 @@
      "citations": 3,
      "citations_valid": 3,
      "cited_refs": [
+      "CV-SLA-ORION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 260.6,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-SLA-ORION@1",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-MSA-ORION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-SCHED-ORION-PRICING@1",
       "CV-SLA-ORION@1"
      ],
      "abstained": false,
@@ -3076,7 +3934,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.6,
+     "latency_ms": 4.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3107,7 +3965,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.4,
+     "latency_ms": 19.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3136,7 +3994,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.2,
+     "latency_ms": 17.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3154,6 +4012,36 @@
      "ndcg_at_10": 1.0,
      "citations": 2,
      "citations_valid": 2,
+     "cited_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-POL-TREASURY@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 259.5,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-POL-TREASURY@2",
+      "CV-AMEND-ORION-01@1",
+      "CV-MSA-ORION@2",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
      "cited_refs": [
       "CV-CREDIT-FACILITY@1",
       "CV-POL-TREASURY@2"
@@ -3192,7 +4080,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.4,
+     "latency_ms": 5.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3223,7 +4111,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.8,
+     "latency_ms": 28.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3254,7 +4142,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.6,
+     "latency_ms": 40.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3276,6 +4164,36 @@
       "CV-MSA-ORION@1",
       "CV-SCHED-ORION-PRICING@1",
       "CV-SLA-ORION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 263.8,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-MSA-ORION@1",
+      "CV-MSA-VANTOR@1",
+      "CV-MSA-HALDEN@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 0.5,
+     "ndcg_at_10": 0.6309297535714575,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-MSA-ORION@1",
+      "CV-MSA-VANTOR@1"
      ],
      "abstained": false,
      "answer_supported": true,
@@ -3313,7 +4231,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.7,
+     "latency_ms": 5.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3343,7 +4261,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.1,
+     "latency_ms": 27.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3373,7 +4291,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.6,
+     "latency_ms": 37.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3398,6 +4316,31 @@
      "abstained": false,
      "answer_supported": true,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 319.0,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-MSA-HALDEN@1",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-SLA-ORION@1",
+      "CV-MSA-ORION@2",
+      "CV-MSA-VANTOR@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -3429,7 +4372,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 7.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3456,7 +4399,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.7,
+     "latency_ms": 32.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3485,7 +4428,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.3,
+     "latency_ms": 38.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3495,6 +4438,35 @@
       "CV-SLA-ORION@1",
       "CV-MSA-VANTOR@1",
       "CV-MSA-ORION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-POL-TREASURY@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 285.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-POL-TREASURY@1",
+      "CV-MSA-ORION@2",
+      "CV-MSA-VANTOR@1",
+      "CV-SLA-ORION@1",
+      "CV-SCHED-ORION-PRICING@1"
      ],
      "recall_at_5": 1.0,
      "precision_at_5": 0.2,
@@ -3540,7 +4512,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.8,
+     "latency_ms": 5.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3571,7 +4543,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.6,
+     "latency_ms": 25.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3601,7 +4573,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.7,
+     "latency_ms": 20.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -3627,6 +4599,36 @@
      "answer_supported": true,
      "evidence_in_pack": true,
      "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 263.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-MSA-ORION@2",
+      "CV-MSA-HALDEN@1",
+      "CV-AMEND-ORION-01@1",
+      "CV-SLA-ORION@1",
+      "CV-RPT-ORION-RCA@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-MSA-HALDEN@1",
+      "CV-MSA-ORION@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
     }
@@ -3663,7 +4665,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 5.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -3693,7 +4695,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.8,
+     "latency_ms": 24.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3722,10 +4724,40 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.9,
+     "latency_ms": 20.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-SLA-ORION@1",
+      "CV-MSA-ORION@2",
+      "CV-AMEND-ORION-01@1",
+      "CV-RPT-ORION-RCA@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
+     "cited_refs": [
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-SLA-ORION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 304.3,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "CV-SCHED-ORION-PRICING@1",
       "CV-SLA-ORION@1",
@@ -3784,7 +4816,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.1,
+     "latency_ms": 5.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -3812,7 +4844,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.5,
+     "latency_ms": 26.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -3840,7 +4872,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.2,
+     "latency_ms": 31.6,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -3859,6 +4891,34 @@
      "cited_refs": [
       "CV-INC-2026-0914@1",
       "CV-RPT-ORION-RCA@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 237.5,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-RPT-ORION-RCA@1",
+      "CV-INC-2026-0914@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-RPT-ORION-RCA@1",
+      "CV-SLA-ORION@1"
      ],
      "abstained": false,
      "answer_supported": true,
@@ -3898,7 +4958,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 8.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -3927,7 +4987,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.1,
+     "latency_ms": 28.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3955,7 +5015,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.3,
+     "latency_ms": 27.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3979,6 +5039,35 @@
      "answer_supported": true,
      "evidence_in_pack": true,
      "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 264.7,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-SLA-ORION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-SLA-ORION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
      "leaks": [],
      "injection_quoted": false
     }
@@ -4005,7 +5094,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.7,
+     "latency_ms": 5.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -4027,7 +5116,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.1,
+     "latency_ms": 30.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -4049,7 +5138,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.0,
+     "latency_ms": 31.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -4067,6 +5156,26 @@
       "CV-SCHED-ORION-PRICING@1"
      ],
      "abstained": false,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 263.7,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-AMEND-ORION-01@1",
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-MSA-ORION@2",
+      "CV-INC-2026-0914@1",
+      "CV-SLA-ORION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -4096,7 +5205,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.3,
+     "latency_ms": 5.1,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -4119,7 +5228,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.3,
+     "latency_ms": 26.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4139,7 +5248,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.7,
+     "latency_ms": 25.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -4154,6 +5263,30 @@
      "citations_valid": 0,
      "cited_refs": [],
      "abstained": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 251.7,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-POL-TREASURY@2",
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-MSA-VANTOR@1",
+      "CV-SCHED-ORION-PRICING@1"
+     ],
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-CREDIT-FACILITY@1",
+      "CV-MSA-VANTOR@1",
+      "CV-POL-TREASURY@2"
+     ],
+     "abstained": false,
      "conflict_flagged": true,
      "leaks": [],
      "injection_quoted": false
@@ -4179,7 +5312,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.9,
+     "latency_ms": 7.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -4199,7 +5332,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.4,
+     "latency_ms": 17.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4219,7 +5352,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.5,
+     "latency_ms": 26.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -4228,6 +5361,26 @@
       "CV-SLA-ORION@1",
       "CV-MSA-ORION@2",
       "CV-MSA-HALDEN@1",
+      "CV-SCHED-ORION-PRICING@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 240.7,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-MSA-VANTOR@1",
+      "CV-MSA-ORION@2",
+      "CV-MSA-HALDEN@1",
+      "CV-SLA-ORION@1",
       "CV-SCHED-ORION-PRICING@1"
      ],
      "citations": 0,
@@ -4265,7 +5418,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.1,
+     "latency_ms": 9.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -4295,7 +5448,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.6,
+     "latency_ms": 20.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -4325,7 +5478,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.6,
+     "latency_ms": 24.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -4333,6 +5486,36 @@
       "CV-SCHED-ORION-PRICING@1",
       "CV-MSA-ORION@2",
       "CV-SLA-ORION@1",
+      "CV-AMEND-ORION-01@1",
+      "CV-MSA-HALDEN@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-MSA-ORION@2",
+      "CV-SCHED-ORION-PRICING@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 278.4,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-SLA-ORION@1",
+      "CV-MSA-ORION@2",
       "CV-AMEND-ORION-01@1",
       "CV-MSA-HALDEN@1"
      ],
@@ -4383,7 +5566,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 5.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -4401,7 +5584,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.1,
+     "latency_ms": 21.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4419,7 +5602,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.5,
+     "latency_ms": 34.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -4427,6 +5610,24 @@
       "CV-SLA-ORION@1",
       "CV-INC-2026-0914@1",
       "CV-RPT-ORION-RCA@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 303.3,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-RPT-ORION-RCA@1",
+      "CV-SLA-ORION@1",
+      "CV-INC-2026-0914@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -4457,7 +5658,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.4,
+     "latency_ms": 4.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -4475,7 +5676,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.7,
+     "latency_ms": 18.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4493,7 +5694,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.2,
+     "latency_ms": 25.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -4501,6 +5702,24 @@
       "CV-SLA-ORION@1",
       "CV-RPT-ORION-RCA@1",
       "CV-INC-2026-0914@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 231.6,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-SLA-ORION@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -4531,7 +5750,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.4,
+     "latency_ms": 4.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -4548,7 +5767,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.4,
+     "latency_ms": 76.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4568,7 +5787,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.5,
+     "latency_ms": 64.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -4577,6 +5796,26 @@
       "CV-MSA-HALDEN@1",
       "CV-SLA-ORION@1",
       "CV-AMEND-HALDEN-01@1",
+      "CV-MSA-VANTOR@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 553.2,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-MSA-HALDEN@1",
+      "CV-AMEND-HALDEN-01@1",
+      "CV-MSA-ORION@2",
+      "CV-SCHED-ORION-PRICING@1",
       "CV-MSA-VANTOR@1"
      ],
      "citations": 0,
@@ -4608,7 +5847,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 6.0,
+     "latency_ms": 13.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -4628,7 +5867,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.5,
+     "latency_ms": 62.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4648,7 +5887,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.7,
+     "latency_ms": 72.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -4658,6 +5897,26 @@
       "LF-POL-BILLING@1",
       "LF-MEMO-BRIGHTWATER-NOTICE@1",
       "LF-MSA-BRIGHTWATER@2"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 354.7,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-POL-BILLING@1",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-POL-RETENTION@1",
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-MSA-HALVERSEN@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -4692,7 +5951,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.6,
+     "latency_ms": 2.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -4709,7 +5968,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.6,
+     "latency_ms": 30.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4729,7 +5988,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.3,
+     "latency_ms": 22.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -4739,6 +5998,26 @@
       "CV-MSA-VANTOR@1",
       "CV-MSA-ORION@2",
       "CV-SLA-ORION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 219.4,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-AMEND-HALDEN-01@1",
+      "CV-AMEND-ORION-01@1",
+      "CV-MSA-ORION@2",
+      "CV-MSA-VANTOR@1",
+      "CV-MSA-HALDEN@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -4769,7 +6048,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 5.6,
+     "latency_ms": 7.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -4787,7 +6066,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.6,
+     "latency_ms": 19.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4807,7 +6086,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.7,
+     "latency_ms": 28.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -4816,6 +6095,26 @@
       "PM-SLA-TELEMETRY@1",
       "PM-INCIDENT-EASTBANK@1",
       "PM-TELEMETRY-REPORT@1",
+      "PM-OPS-MEMO-RECORDS@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 327.7,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-SLA-TELEMETRY@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-INCIDENT-EASTBANK@1",
       "PM-OPS-MEMO-RECORDS@1"
      ],
      "citations": 0,
@@ -4850,7 +6149,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.9,
+     "latency_ms": 4.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -4867,7 +6166,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.0,
+     "latency_ms": 25.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4886,10 +6185,29 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.1,
+     "latency_ms": 21.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-MAINT-CONTRACT@1",
+      "PM-PROCUREMENT@2",
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-RETENTION@2"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 269.5,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-MAINT-CONTRACT@1",
       "PM-PROCUREMENT@2",
@@ -4925,7 +6243,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 1.5,
+     "latency_ms": 2.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -4939,7 +6257,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.1,
+     "latency_ms": 24.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -4957,10 +6275,28 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.1,
+     "latency_ms": 25.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "CV-SLA-ORION@1",
+      "CV-INC-2026-0914@1",
+      "CV-RPT-ORION-RCA@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 260.0,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "CV-SLA-ORION@1",
       "CV-INC-2026-0914@1",
@@ -4995,7 +6331,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.0,
+     "latency_ms": 3.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5011,7 +6347,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.4,
+     "latency_ms": 24.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5031,7 +6367,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.2,
+     "latency_ms": 22.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5040,6 +6376,26 @@
       "LF-MSA-HALVERSEN@1",
       "LF-PARTNERS-MINUTES-2026-05@1",
       "LF-MSA-BRIGHTWATER@2",
+      "LF-AMD-BRIGHTWATER-01@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 270.9,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-HALVERSEN@1",
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-PARTNERS-MINUTES-2026-05@1",
+      "LF-ENG-CALDERWOOD@2",
       "LF-AMD-BRIGHTWATER-01@1"
      ],
      "citations": 0,
@@ -5071,7 +6427,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.1,
+     "latency_ms": 5.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5091,7 +6447,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.8,
+     "latency_ms": 25.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5111,7 +6467,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.9,
+     "latency_ms": 28.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5121,6 +6477,26 @@
       "PM-MAINT-CONTRACT@1",
       "PM-BOARD-RES-2026-07@1",
       "PM-MAINT-CONTRACT-A1@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 298.8,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-MAINT-CONTRACT@1",
+      "PM-BOARD-RES-2026-07@1",
+      "PM-BOARD-MINUTES-2025-12@1",
+      "PM-BOARD-MINUTES-2026-09@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -5152,7 +6528,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.8,
+     "latency_ms": 6.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5171,7 +6547,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.2,
+     "latency_ms": 35.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5191,13 +6567,33 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.7,
+     "latency_ms": 41.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
      "top_refs": [
       "CV-INC-2026-0914@1",
       "CV-SLA-ORION@1",
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-MSA-VANTOR@1",
+      "CV-MSA-ORION@2"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 343.8,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-SLA-ORION@1",
+      "CV-INC-2026-0914@1",
       "CV-MEMO-BOARD-LIQUIDITY@1",
       "CV-MSA-VANTOR@1",
       "CV-MSA-ORION@2"
@@ -5234,7 +6630,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 3.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5250,7 +6646,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.9,
+     "latency_ms": 26.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5267,13 +6663,30 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 9.4,
+     "latency_ms": 30.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
      "top_refs": [
       "LF-POL-BILLING@1",
       "LF-POL-RETENTION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 365.5,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-POL-RETENTION@1",
+      "LF-POL-BILLING@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -5304,7 +6717,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.8,
+     "latency_ms": 5.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5320,7 +6733,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.6,
+     "latency_ms": 26.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5336,10 +6749,26 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.6,
+     "latency_ms": 63.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-RETENTION@2"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 242.0,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-RETENTION@2"
      ],
@@ -5372,7 +6801,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.7,
+     "latency_ms": 4.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5389,7 +6818,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.2,
+     "latency_ms": 26.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5406,13 +6835,30 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.6,
+     "latency_ms": 31.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
      "top_refs": [
       "CV-INC-2026-0914@1",
       "CV-SLA-ORION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 230.3,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-SLA-ORION@1",
+      "CV-INC-2026-0914@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -5443,7 +6889,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.1,
+     "latency_ms": 2.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5459,7 +6905,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.0,
+     "latency_ms": 23.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5475,10 +6921,26 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.6,
+     "latency_ms": 39.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-RETENTION@2"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 216.0,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-RETENTION@2"
      ],
@@ -5511,7 +6973,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.7,
+     "latency_ms": 3.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -5530,7 +6992,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.6,
+     "latency_ms": 29.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5547,13 +7009,30 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.2,
+     "latency_ms": 32.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
      "top_refs": [
       "LF-POL-BILLING@1",
       "LF-POL-RETENTION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 316.6,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-POL-RETENTION@1",
+      "LF-POL-BILLING@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -5584,7 +7063,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 4.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -5604,7 +7083,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.3,
+     "latency_ms": 54.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5624,7 +7103,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.9,
+     "latency_ms": 90.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5634,6 +7113,26 @@
       "LF-AMD-BRIGHTWATER-01@1",
       "LF-ENG-CALDERWOOD@2",
       "LF-POL-RETENTION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 289.4,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-HALVERSEN@1",
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-ENG-CALDERWOOD@2"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -5664,7 +7163,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.6,
+     "latency_ms": 3.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5680,7 +7179,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.7,
+     "latency_ms": 22.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5698,7 +7197,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.3,
+     "latency_ms": 20.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5706,6 +7205,24 @@
       "CV-SLA-ORION@1",
       "CV-RPT-ORION-RCA@1",
       "CV-INC-2026-0914@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 266.5,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-RPT-ORION-RCA@1",
+      "CV-INC-2026-0914@1",
+      "CV-SLA-ORION@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -5738,7 +7255,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.6,
+     "latency_ms": 5.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5758,7 +7275,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.4,
+     "latency_ms": 37.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5778,7 +7295,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.8,
+     "latency_ms": 24.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5788,6 +7305,26 @@
       "PM-TELEMETRY-REPORT@1",
       "PM-SLA-TELEMETRY@1",
       "PM-RETENTION@2"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 242.4,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-RETENTION@2",
+      "PM-SLA-TELEMETRY@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -5821,7 +7358,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.3,
+     "latency_ms": 6.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -5844,7 +7381,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.1,
+     "latency_ms": 42.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -5866,7 +7403,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.3,
+     "latency_ms": 32.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -5880,6 +7417,29 @@
      "citations": 1,
      "citations_valid": 1,
      "cited_refs": [
+      "CV-SCHED-ORION-PRICING@1"
+     ],
+     "abstained": false,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 222.6,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-SCHED-ORION-PRICING@1",
+      "CV-MSA-ORION@2",
+      "CV-INC-2026-0914@1",
+      "CV-AMEND-ORION-01@1",
+      "CV-SLA-ORION@1"
+     ],
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "CV-INC-2026-0914@1",
       "CV-SCHED-ORION-PRICING@1"
      ],
      "abstained": false,
@@ -5914,7 +7474,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 4.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5932,7 +7492,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.7,
+     "latency_ms": 23.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5950,10 +7510,28 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.9,
+     "latency_ms": 18.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "LF-POL-BILLING@1",
+      "LF-LIT-PEMBERTON@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 217.8,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "LF-POL-BILLING@1",
       "LF-LIT-PEMBERTON@1",
@@ -5988,7 +7566,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.3,
+     "latency_ms": 3.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6006,7 +7584,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.0,
+     "latency_ms": 15.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6025,13 +7603,32 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.4,
+     "latency_ms": 19.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
      "top_refs": [
       "PM-MAINT-CONTRACT@1",
       "PM-RETENTION@2",
+      "PM-PROCUREMENT@2",
+      "PM-MAINT-CONTRACT-A1@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 171.1,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-RETENTION@2",
+      "PM-MAINT-CONTRACT@1",
       "PM-PROCUREMENT@2",
       "PM-MAINT-CONTRACT-A1@1"
      ],
@@ -6067,7 +7664,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.8,
+     "latency_ms": 4.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6085,7 +7682,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.3,
+     "latency_ms": 21.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6103,7 +7700,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.1,
+     "latency_ms": 16.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6111,6 +7708,24 @@
       "CV-SLA-ORION@1",
       "CV-INC-2026-0914@1",
       "CV-RPT-ORION-RCA@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 187.0,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-SLA-ORION@1",
+      "CV-RPT-ORION-RCA@1",
+      "CV-INC-2026-0914@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -6143,7 +7758,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.5,
+     "latency_ms": 4.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6162,7 +7777,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.1,
+     "latency_ms": 22.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6182,7 +7797,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 9.8,
+     "latency_ms": 17.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6190,6 +7805,26 @@
       "CV-MEMO-BOARD-LIQUIDITY@1",
       "CV-CREDIT-FACILITY@1",
       "CV-POL-TREASURY@2",
+      "CV-MSA-ORION@2",
+      "CV-AMEND-ORION-01@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 198.8,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "CV-POL-TREASURY@2",
+      "CV-MEMO-BOARD-LIQUIDITY@1",
+      "CV-CREDIT-FACILITY@1",
       "CV-MSA-ORION@2",
       "CV-AMEND-ORION-01@1"
      ],
@@ -6224,7 +7859,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 1.2,
+     "latency_ms": 3.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6238,7 +7873,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.1,
+     "latency_ms": 16.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6256,10 +7891,28 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.3,
+     "latency_ms": 15.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "LF-LIT-PEMBERTON@1",
+      "LF-POL-RETENTION@1",
+      "LF-POL-BILLING@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 178.3,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "LF-LIT-PEMBERTON@1",
       "LF-POL-RETENTION@1",
@@ -6296,7 +7949,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.2,
+     "latency_ms": 5.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -6326,7 +7979,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.1,
+     "latency_ms": 19.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -6355,7 +8008,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.3,
+     "latency_ms": 17.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -6379,6 +8032,35 @@
      "abstained": false,
      "answer_supported": true,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 220.5,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-MSA-HALVERSEN@1",
+      "LF-POL-BILLING@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-MSA-BRIGHTWATER@2"
+     ],
+     "abstained": false,
+     "answer_supported": false,
+     "evidence_in_pack": false,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -6413,7 +8095,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 4.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -6440,7 +8122,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.6,
+     "latency_ms": 15.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -6469,7 +8151,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.6,
+     "latency_ms": 17.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -6485,6 +8167,35 @@
      "hit_at_5": 1.0,
      "mrr_at_10": 0.5,
      "ndcg_at_10": 0.6309297535714575,
+     "citations": 2,
+     "citations_valid": 2,
+     "cited_refs": [
+      "LF-HARROW-SETTLEMENT@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 170.8,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-HARROW-SETTLEMENT@1",
+      "LF-HARROW-HOLD@1",
+      "LF-MSA-HALVERSEN@1",
+      "LF-LIT-PEMBERTON@1",
+      "LF-PARTNERS-MINUTES-2026-05@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
      "citations": 2,
      "citations_valid": 2,
      "cited_refs": [
@@ -6525,7 +8236,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 2.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -6550,7 +8261,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.6,
+     "latency_ms": 20.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -6577,7 +8288,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 9.5,
+     "latency_ms": 15.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -6593,6 +8304,33 @@
      "ndcg_at_10": 1.0,
      "citations": 1,
      "citations_valid": 1,
+     "cited_refs": [
+      "LF-LIT-PEMBERTON@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 179.8,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-LIT-PEMBERTON@1",
+      "LF-POL-RETENTION@1",
+      "LF-POL-BILLING@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
      "cited_refs": [
       "LF-LIT-PEMBERTON@1"
      ],
@@ -6630,7 +8368,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.7,
+     "latency_ms": 4.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -6656,7 +8394,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.6,
+     "latency_ms": 16.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -6682,10 +8420,36 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 9.6,
+     "latency_ms": 20.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "LF-POL-RETENTION@1",
+      "LF-POL-BILLING@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
+     "cited_refs": [
+      "LF-POL-RETENTION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 179.0,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "LF-POL-RETENTION@1",
       "LF-POL-BILLING@1"
@@ -6732,7 +8496,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 4.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -6762,7 +8526,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.1,
+     "latency_ms": 18.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6787,7 +8551,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.5,
+     "latency_ms": 23.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -6812,6 +8576,31 @@
      "abstained": false,
      "answer_supported": true,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 210.2,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MSA-HALVERSEN@1",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-POL-BILLING@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 0.5,
+     "ndcg_at_10": 0.6309297535714575,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -6846,7 +8635,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 5.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -6876,7 +8665,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.3,
+     "latency_ms": 20.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -6905,7 +8694,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.7,
+     "latency_ms": 17.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -6923,6 +8712,35 @@
      "ndcg_at_10": 1.0,
      "citations": 2,
      "citations_valid": 2,
+     "cited_refs": [
+      "LF-HARROW-HOLD@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 163.5,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-HARROW-HOLD@1",
+      "LF-HARROW-SETTLEMENT@1",
+      "LF-POL-BILLING@1",
+      "LF-LIT-PEMBERTON@1",
+      "LF-MSA-HALVERSEN@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
      "cited_refs": [
       "LF-HARROW-HOLD@1"
      ],
@@ -6963,7 +8781,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.2,
+     "latency_ms": 4.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6986,7 +8804,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.3,
+     "latency_ms": 20.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7009,10 +8827,33 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.9,
+     "latency_ms": 19.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1",
+      "LF-LIT-PEMBERTON@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 178.1,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "LF-POL-BILLING@1",
       "LF-POL-RETENTION@1",
@@ -7058,7 +8899,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.5,
+     "latency_ms": 3.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -7087,7 +8928,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.4,
+     "latency_ms": 16.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -7116,7 +8957,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.6,
+     "latency_ms": 14.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -7126,6 +8967,35 @@
       "LF-MSA-HALVERSEN@1",
       "LF-POL-RETENTION@1",
       "LF-ENG-CALDERWOOD@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-PARTNERS-MINUTES-2026-05@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 134.6,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-PARTNERS-MINUTES-2026-05@1",
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-MSA-BRIGHTWATER@2"
      ],
      "recall_at_5": 1.0,
      "precision_at_5": 0.2,
@@ -7175,7 +9045,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 5.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -7206,7 +9076,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.5,
+     "latency_ms": 17.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -7237,7 +9107,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.7,
+     "latency_ms": 14.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -7253,6 +9123,37 @@
      "hit_at_5": 1.0,
      "mrr_at_10": 1.0,
      "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-MSA-BRIGHTWATER@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 187.5,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-POL-BILLING@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 0.5,
+     "ndcg_at_10": 0.6934264036172708,
      "citations": 3,
      "citations_valid": 3,
      "cited_refs": [
@@ -7298,7 +9199,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.4,
+     "latency_ms": 4.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -7328,7 +9229,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.0,
+     "latency_ms": 17.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -7359,7 +9260,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.4,
+     "latency_ms": 15.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -7385,6 +9286,37 @@
      "answer_supported": true,
      "evidence_in_pack": true,
      "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 295.5,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-PARTNERS-MINUTES-2026-05@1",
+      "LF-AMD-CALDERWOOD-01@1",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 0.5,
+     "ndcg_at_10": 0.6934264036172708,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-AMD-CALDERWOOD-01@1",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-PARTNERS-MINUTES-2026-05@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
     }
@@ -7419,7 +9351,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.4,
+     "latency_ms": 4.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -7447,7 +9379,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.0,
+     "latency_ms": 36.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -7475,7 +9407,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.3,
+     "latency_ms": 28.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -7491,6 +9423,34 @@
      "ndcg_at_10": 1.0,
      "citations": 3,
      "citations_valid": 3,
+     "cited_refs": [
+      "LF-LIT-PEMBERTON@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 230.2,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-POL-RETENTION@1",
+      "LF-LIT-PEMBERTON@1",
+      "LF-POL-BILLING@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
      "cited_refs": [
       "LF-LIT-PEMBERTON@1",
       "LF-POL-RETENTION@1"
@@ -7533,7 +9493,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.6,
+     "latency_ms": 4.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -7563,7 +9523,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.3,
+     "latency_ms": 20.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -7593,7 +9553,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.0,
+     "latency_ms": 20.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -7611,6 +9571,36 @@
      "ndcg_at_10": 1.0,
      "citations": 3,
      "citations_valid": 3,
+     "cited_refs": [
+      "LF-HARROW-HOLD@1",
+      "LF-HARROW-SETTLEMENT@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 161.4,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-HARROW-HOLD@1",
+      "LF-HARROW-SETTLEMENT@1",
+      "LF-MSA-HALVERSEN@1",
+      "LF-LIT-PEMBERTON@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
      "cited_refs": [
       "LF-HARROW-HOLD@1",
       "LF-HARROW-SETTLEMENT@1"
@@ -7651,7 +9641,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.4,
+     "latency_ms": 5.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -7682,7 +9672,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.6,
+     "latency_ms": 14.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -7713,7 +9703,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.5,
+     "latency_ms": 17.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -7735,6 +9725,37 @@
       "LF-AMD-BRIGHTWATER-01@1",
       "LF-MEMO-BRIGHTWATER-NOTICE@1",
       "LF-MSA-BRIGHTWATER@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 157.5,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MSA-HALVERSEN@1",
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-ENG-CALDERWOOD@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MSA-HALVERSEN@1"
      ],
      "abstained": false,
      "answer_supported": true,
@@ -7773,7 +9794,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.7,
+     "latency_ms": 6.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -7798,7 +9819,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.2,
+     "latency_ms": 15.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -7825,10 +9846,37 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 8.1,
+     "latency_ms": 13.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "LF-LIT-PEMBERTON@1",
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-LIT-PEMBERTON@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 147.8,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "LF-LIT-PEMBERTON@1",
       "LF-POL-BILLING@1",
@@ -7878,7 +9926,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 4.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -7907,7 +9955,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.1,
+     "latency_ms": 15.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -7936,10 +9984,39 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.3,
+     "latency_ms": 15.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "LF-HARROW-SETTLEMENT@1",
+      "LF-HARROW-HOLD@1",
+      "LF-MSA-HALVERSEN@1",
+      "LF-PARTNERS-MINUTES-2026-05@1",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 1,
+     "citations_valid": 1,
+     "cited_refs": [
+      "LF-HARROW-SETTLEMENT@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 145.8,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "LF-HARROW-SETTLEMENT@1",
       "LF-HARROW-HOLD@1",
@@ -7992,7 +10069,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 4.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8018,7 +10095,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.0,
+     "latency_ms": 13.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8044,10 +10121,36 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.6,
+     "latency_ms": 14.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-POL-BILLING@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 183.3,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "LF-POL-BILLING@1",
       "LF-POL-RETENTION@1"
@@ -8096,7 +10199,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 5.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8125,7 +10228,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.4,
+     "latency_ms": 24.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8154,7 +10257,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.8,
+     "latency_ms": 19.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8169,6 +10272,35 @@
      "hit_at_5": 1.0,
      "mrr_at_10": 1.0,
      "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-MSA-BRIGHTWATER@1",
+      "LF-MSA-HALVERSEN@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 278.3,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-HALVERSEN@1",
+      "LF-MSA-BRIGHTWATER@1",
+      "LF-ENG-CALDERWOOD@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 0.5,
+     "ndcg_at_10": 0.6309297535714575,
      "citations": 3,
      "citations_valid": 3,
      "cited_refs": [
@@ -8210,7 +10342,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.7,
+     "latency_ms": 5.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8240,7 +10372,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.2,
+     "latency_ms": 28.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8268,7 +10400,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.4,
+     "latency_ms": 22.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8288,6 +10420,36 @@
      "citations_valid": 2,
      "cited_refs": [
       "LF-ENG-CALDERWOOD@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 215.3,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-ENG-CALDERWOOD@1",
+      "LF-POL-BILLING@1",
+      "LF-MSA-HALVERSEN@1",
+      "LF-POL-RETENTION@1",
+      "LF-MSA-BRIGHTWATER@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-ENG-CALDERWOOD@1",
+      "LF-POL-BILLING@1"
      ],
      "abstained": false,
      "answer_supported": true,
@@ -8323,7 +10485,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.4,
+     "latency_ms": 4.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8350,7 +10512,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.1,
+     "latency_ms": 24.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -8372,7 +10534,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.6,
+     "latency_ms": 18.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -8389,6 +10551,33 @@
      "citations_valid": 0,
      "cited_refs": [],
      "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 164.0,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-POL-RETENTION@1",
+      "LF-POL-BILLING@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -8420,7 +10609,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.7,
+     "latency_ms": 4.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8451,7 +10640,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.0,
+     "latency_ms": 19.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8480,7 +10669,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.5,
+     "latency_ms": 20.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8500,6 +10689,35 @@
      "citations_valid": 3,
      "cited_refs": [
       "LF-ENG-CALDERWOOD@2",
+      "LF-MSA-BRIGHTWATER@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 264.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-MSA-HALVERSEN@1",
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
       "LF-MSA-BRIGHTWATER@2"
      ],
      "abstained": false,
@@ -8538,7 +10756,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 3.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -8568,7 +10786,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.5,
+     "latency_ms": 14.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -8598,7 +10816,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.7,
+     "latency_ms": 18.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -8619,6 +10837,36 @@
      "cited_refs": [
       "LF-MEMO-BRIGHTWATER-NOTICE@1",
       "LF-MSA-BRIGHTWATER@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 129.0,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MSA-HALVERSEN@1",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-ENG-CALDERWOOD@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 0.9197207891481876,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MSA-HALVERSEN@1"
      ],
      "abstained": false,
      "answer_supported": true,
@@ -8659,7 +10907,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.6,
+     "latency_ms": 4.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8690,7 +10938,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 17.5,
+     "latency_ms": 12.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8721,7 +10969,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.0,
+     "latency_ms": 17.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8729,6 +10977,37 @@
       "LF-ENG-CALDERWOOD@2",
       "LF-AMD-CALDERWOOD-01@1",
       "LF-POL-BILLING@1",
+      "LF-MSA-HALVERSEN@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 0.5,
+     "ndcg_at_10": 0.6934264036172708,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-AMD-CALDERWOOD-01@1",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-POL-BILLING@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 181.4,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-ENG-CALDERWOOD@2",
+      "LF-POL-BILLING@1",
+      "LF-AMD-CALDERWOOD-01@1",
       "LF-MSA-HALVERSEN@1",
       "LF-POL-RETENTION@1"
      ],
@@ -8781,7 +11060,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.6,
+     "latency_ms": 6.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -8811,7 +11090,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.9,
+     "latency_ms": 15.1,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -8841,13 +11120,43 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.0,
+     "latency_ms": 20.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
      "top_refs": [
       "LF-ENG-CALDERWOOD@2",
       "LF-PARTNERS-MINUTES-2026-05@1",
+      "LF-AMD-CALDERWOOD-01@1",
+      "LF-POL-BILLING@1",
+      "LF-LIT-PEMBERTON@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
+     "cited_refs": [
+      "LF-ENG-CALDERWOOD@2",
+      "LF-PARTNERS-MINUTES-2026-05@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 197.4,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-PARTNERS-MINUTES-2026-05@1",
+      "LF-ENG-CALDERWOOD@2",
       "LF-AMD-CALDERWOOD-01@1",
       "LF-POL-BILLING@1",
       "LF-LIT-PEMBERTON@1"
@@ -8895,7 +11204,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.5,
+     "latency_ms": 4.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8917,7 +11226,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.7,
+     "latency_ms": 16.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8939,7 +11248,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.4,
+     "latency_ms": 20.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8952,6 +11261,29 @@
      ],
      "citations": 2,
      "citations_valid": 2,
+     "cited_refs": [
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-MSA-BRIGHTWATER@2"
+     ],
+     "abstained": false,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 211.0,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-AMD-BRIGHTWATER-01@1",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
+      "LF-MSA-HALVERSEN@1",
+      "LF-POL-BILLING@1"
+     ],
+     "citations": 3,
+     "citations_valid": 3,
      "cited_refs": [
       "LF-AMD-BRIGHTWATER-01@1",
       "LF-MSA-BRIGHTWATER@2"
@@ -8985,7 +11317,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 3.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -9003,7 +11335,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.7,
+     "latency_ms": 16.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -9021,7 +11353,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.2,
+     "latency_ms": 13.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -9029,6 +11361,24 @@
       "LF-POL-RETENTION@1",
       "LF-LIT-PEMBERTON@1",
       "LF-POL-BILLING@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 167.9,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1",
+      "LF-LIT-PEMBERTON@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -9057,7 +11407,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 3.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -9074,7 +11424,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.5,
+     "latency_ms": 16.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -9094,7 +11444,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.5,
+     "latency_ms": 14.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -9104,6 +11454,26 @@
       "LF-HARROW-SETTLEMENT@1",
       "LF-PARTNERS-MINUTES-2026-05@1",
       "LF-MSA-HALVERSEN@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 209.5,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-LIT-PEMBERTON@1",
+      "LF-HARROW-HOLD@1",
+      "LF-MSA-HALVERSEN@1",
+      "LF-HARROW-SETTLEMENT@1",
+      "LF-POL-BILLING@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -9136,7 +11506,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.9,
+     "latency_ms": 4.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9166,7 +11536,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.2,
+     "latency_ms": 17.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9195,7 +11565,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.4,
+     "latency_ms": 22.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9203,6 +11573,36 @@
       "LF-MSA-HALVERSEN@1",
       "LF-MEMO-BRIGHTWATER-NOTICE@1",
       "LF-MSA-BRIGHTWATER@2",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-AMD-BRIGHTWATER-01@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MSA-HALVERSEN@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 190.6,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-HALVERSEN@1",
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MEMO-BRIGHTWATER-NOTICE@1",
       "LF-ENG-CALDERWOOD@2",
       "LF-AMD-BRIGHTWATER-01@1"
      ],
@@ -9252,7 +11652,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 4.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -9272,7 +11672,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.8,
+     "latency_ms": 15.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -9292,7 +11692,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.1,
+     "latency_ms": 21.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -9302,6 +11702,26 @@
       "LF-AMD-CALDERWOOD-01@1",
       "LF-ENG-CALDERWOOD@2",
       "LF-POL-RETENTION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 161.2,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-MSA-HALVERSEN@1",
+      "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1",
+      "LF-ENG-CALDERWOOD@2",
+      "LF-AMD-CALDERWOOD-01@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -9333,7 +11753,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.3,
+     "latency_ms": 3.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -9351,7 +11771,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.0,
+     "latency_ms": 12.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -9369,13 +11789,31 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.6,
+     "latency_ms": 14.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
      "top_refs": [
       "LF-LIT-PEMBERTON@1",
       "LF-POL-BILLING@1",
+      "LF-POL-RETENTION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 130.3,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-POL-BILLING@1",
+      "LF-LIT-PEMBERTON@1",
       "LF-POL-RETENTION@1"
      ],
      "citations": 0,
@@ -9407,7 +11845,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.8,
+     "latency_ms": 3.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -9427,7 +11865,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.8,
+     "latency_ms": 14.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -9447,7 +11885,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.9,
+     "latency_ms": 16.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -9457,6 +11895,26 @@
       "LF-POL-BILLING@1",
       "LF-MSA-BRIGHTWATER@2",
       "LF-POL-RETENTION@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 139.7,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "LF-ENG-CALDERWOOD@2",
+      "LF-MSA-BRIGHTWATER@2",
+      "LF-MSA-HALVERSEN@1",
+      "LF-POL-RETENTION@1",
+      "LF-POL-BILLING@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -9489,7 +11947,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 4.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -9516,7 +11974,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.3,
+     "latency_ms": 18.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9544,10 +12002,38 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.6,
+     "latency_ms": 19.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-PROCUREMENT@2",
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-MAINT-CONTRACT@1",
+      "PM-RETENTION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-PROCUREMENT@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 184.0,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-PROCUREMENT@2",
       "PM-MAINT-CONTRACT-A1@1",
@@ -9596,7 +12082,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.4,
+     "latency_ms": 5.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -9626,7 +12112,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.6,
+     "latency_ms": 30.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9655,7 +12141,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.1,
+     "latency_ms": 29.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9681,6 +12167,36 @@
      "answer_supported": true,
      "evidence_in_pack": true,
      "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 178.1,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-SLA-TELEMETRY@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-OPS-MEMO-RECORDS@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-SLA-TELEMETRY@1",
+      "PM-TELEMETRY-REPORT@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
      "leaks": [],
      "injection_quoted": false
     }
@@ -9715,7 +12231,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.8,
+     "latency_ms": 3.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9744,7 +12260,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.0,
+     "latency_ms": 16.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9773,7 +12289,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.2,
+     "latency_ms": 19.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9783,6 +12299,35 @@
       "PM-BOARD-RES-2026-07@1",
       "PM-MAINT-CONTRACT@1",
       "PM-MAINT-CONTRACT-A1@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 1,
+     "citations_valid": 1,
+     "cited_refs": [
+      "PM-BOARD-MINUTES-2026-09@1"
+     ],
+     "abstained": false,
+     "answer_supported": false,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 186.3,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-BOARD-MINUTES-2026-09@1",
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-BOARD-MINUTES-2025-12@1",
+      "PM-BOARD-RES-2026-07@1",
+      "PM-MAINT-CONTRACT@1"
      ],
      "recall_at_5": 1.0,
      "precision_at_5": 0.2,
@@ -9829,7 +12374,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.7,
+     "latency_ms": 3.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9854,7 +12399,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.9,
+     "latency_ms": 18.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9879,7 +12424,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.4,
+     "latency_ms": 15.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9893,6 +12438,31 @@
      "ndcg_at_10": 1.0,
      "citations": 2,
      "citations_valid": 2,
+     "cited_refs": [
+      "PM-RETENTION@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 129.4,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-RETENTION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
      "cited_refs": [
       "PM-RETENTION@2"
      ],
@@ -9930,7 +12500,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 3.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9958,7 +12528,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.3,
+     "latency_ms": 18.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9987,10 +12557,39 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.0,
+     "latency_ms": 16.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-MAINT-CONTRACT@1",
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-PROCUREMENT@2",
+      "PM-RETENTION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-MAINT-CONTRACT@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 137.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-MAINT-CONTRACT@1",
       "PM-MAINT-CONTRACT-A1@1",
@@ -10043,7 +12642,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.8,
+     "latency_ms": 4.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10071,7 +12670,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.3,
+     "latency_ms": 15.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10100,10 +12699,39 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.1,
+     "latency_ms": 36.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-RETENTION@2",
+      "PM-SLA-TELEMETRY@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-INCIDENT-EASTBANK@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-OPS-MEMO-RECORDS@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 137.8,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-OPS-MEMO-RECORDS@1",
       "PM-RETENTION@2",
@@ -10153,7 +12781,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 4.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10183,7 +12811,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.6,
+     "latency_ms": 14.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10213,7 +12841,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.4,
+     "latency_ms": 13.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10222,6 +12850,35 @@
       "PM-BOARD-MINUTES-2026-09@1",
       "PM-MAINT-CONTRACT-A1@1",
       "PM-BOARD-MINUTES-2025-12@1",
+      "PM-MAINT-CONTRACT@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
+     "cited_refs": [
+      "PM-BOARD-RES-2026-07@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 116.8,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-BOARD-RES-2026-07@1",
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-BOARD-MINUTES-2025-12@1",
+      "PM-BOARD-MINUTES-2026-09@1",
       "PM-MAINT-CONTRACT@1"
      ],
      "recall_at_5": 1.0,
@@ -10270,7 +12927,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 3.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10299,7 +12956,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.4,
+     "latency_ms": 13.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10328,7 +12985,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.0,
+     "latency_ms": 14.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10336,6 +12993,35 @@
       "PM-INCIDENT-EASTBANK@1",
       "PM-OPS-MEMO-RECORDS@1",
       "PM-TELEMETRY-REPORT@1",
+      "PM-SLA-TELEMETRY@1",
+      "PM-SLA-TELEMETRY-A1@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-INCIDENT-EASTBANK@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 135.0,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-OPS-MEMO-RECORDS@1",
       "PM-SLA-TELEMETRY@1",
       "PM-SLA-TELEMETRY-A1@1"
      ],
@@ -10389,7 +13075,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.2,
+     "latency_ms": 4.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10420,7 +13106,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.5,
+     "latency_ms": 15.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10450,7 +13136,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.6,
+     "latency_ms": 16.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10469,6 +13155,37 @@
      "citations": 3,
      "citations_valid": 3,
      "cited_refs": [
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-SLA-TELEMETRY@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 196.0,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-SLA-TELEMETRY@1",
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-OPS-MEMO-RECORDS@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-INCIDENT-EASTBANK@1",
       "PM-SLA-TELEMETRY-A1@1",
       "PM-SLA-TELEMETRY@1"
      ],
@@ -10512,7 +13229,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.3,
+     "latency_ms": 3.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10540,7 +13257,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.7,
+     "latency_ms": 71.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10569,7 +13286,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.1,
+     "latency_ms": 30.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10593,6 +13310,30 @@
      "abstained": false,
      "answer_supported": true,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 191.1,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-MAINT-CONTRACT@1",
+      "PM-RETENTION@2",
+      "PM-PROCUREMENT@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -10657,7 +13398,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 20.5,
+     "latency_ms": 17.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -10687,10 +13428,40 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 18.4,
+     "latency_ms": 15.7,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-BOARD-MINUTES-2025-12@1",
+      "PM-PROCUREMENT@2",
+      "PM-BOARD-MINUTES-2026-09@1",
+      "PM-BOARD-RES-2026-07@1",
+      "PM-MAINT-CONTRACT-A1@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-BOARD-MINUTES-2025-12@1",
+      "PM-PROCUREMENT@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 166.1,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-BOARD-MINUTES-2025-12@1",
       "PM-PROCUREMENT@2",
@@ -10749,7 +13520,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.2,
+     "latency_ms": 3.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10778,7 +13549,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.2,
+     "latency_ms": 14.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10807,7 +13578,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.6,
+     "latency_ms": 12.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10831,6 +13602,31 @@
      "abstained": false,
      "answer_supported": false,
      "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 111.8,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-TELEMETRY-REPORT@1",
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-SLA-TELEMETRY@1",
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-OPS-MEMO-RECORDS@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -10863,7 +13659,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.7,
+     "latency_ms": 4.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10892,7 +13688,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.1,
+     "latency_ms": 10.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10921,10 +13717,39 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.0,
+     "latency_ms": 11.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-PROCUREMENT@2",
+      "PM-MAINT-CONTRACT@1",
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-RETENTION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-MAINT-CONTRACT@1",
+      "PM-PROCUREMENT@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 104.4,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-PROCUREMENT@2",
       "PM-MAINT-CONTRACT@1",
@@ -10974,7 +13799,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.4,
+     "latency_ms": 4.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11003,7 +13828,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.8,
+     "latency_ms": 11.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -11033,7 +13858,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.3,
+     "latency_ms": 11.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -11052,6 +13877,36 @@
      "citations": 3,
      "citations_valid": 3,
      "cited_refs": [
+      "PM-SLA-TELEMETRY@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 115.7,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-SLA-TELEMETRY@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-INCIDENT-EASTBANK@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-SLA-TELEMETRY-A1@1",
       "PM-SLA-TELEMETRY@1"
      ],
      "abstained": false,
@@ -11092,7 +13947,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.5,
+     "latency_ms": 4.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -11116,7 +13971,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.5,
+     "latency_ms": 11.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -11146,10 +14001,35 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.6,
+     "latency_ms": 14.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-BOARD-MINUTES-2026-09@1",
+      "PM-BOARD-MINUTES-2025-12@1",
+      "PM-BOARD-RES-2026-07@1",
+      "PM-RETENTION@2",
+      "PM-PROCUREMENT@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 119.5,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-BOARD-MINUTES-2026-09@1",
       "PM-BOARD-MINUTES-2025-12@1",
@@ -11197,7 +14077,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.4,
+     "latency_ms": 4.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11222,7 +14102,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.3,
+     "latency_ms": 11.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -11247,10 +14127,35 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 9.6,
+     "latency_ms": 11.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-RETENTION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-RETENTION@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 74.2,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-RETENTION@2"
      ],
@@ -11298,7 +14203,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.1,
+     "latency_ms": 4.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11326,7 +14231,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.7,
+     "latency_ms": 12.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -11354,10 +14259,38 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.0,
+     "latency_ms": 13.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-PROCUREMENT@1",
+      "PM-MAINT-CONTRACT@1",
+      "PM-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-MAINT-CONTRACT@1",
+      "PM-PROCUREMENT@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 108.5,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-PROCUREMENT@1",
       "PM-MAINT-CONTRACT@1",
@@ -11406,7 +14339,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 2.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11431,7 +14364,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.2,
+     "latency_ms": 18.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -11456,10 +14389,35 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.4,
+     "latency_ms": 17.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 2,
+     "citations_valid": 2,
+     "cited_refs": [
+      "PM-RETENTION@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 115.4,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-RETENTION@1"
      ],
@@ -11507,7 +14465,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 3.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11535,7 +14493,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.7,
+     "latency_ms": 17.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -11562,7 +14520,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.8,
+     "latency_ms": 15.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -11579,6 +14537,34 @@
      "citations": 2,
      "citations_valid": 2,
      "cited_refs": [
+      "PM-SLA-TELEMETRY@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 120.0,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-SLA-TELEMETRY@1",
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-RETENTION@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-OPS-MEMO-RECORDS@1",
       "PM-SLA-TELEMETRY@1"
      ],
      "abstained": false,
@@ -11615,7 +14601,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 6.0,
+     "latency_ms": 4.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11641,7 +14627,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.9,
+     "latency_ms": 11.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -11667,10 +14653,36 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.0,
+     "latency_ms": 11.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-REMOTE-WORK@1",
+      "PM-RETENTION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-REMOTE-WORK@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 108.5,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-REMOTE-WORK@1",
       "PM-RETENTION@2"
@@ -11721,7 +14733,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.8,
+     "latency_ms": 2.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -11750,7 +14762,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.1,
+     "latency_ms": 13.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -11780,10 +14792,40 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.8,
+     "latency_ms": 11.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-RETENTION@2",
+      "PM-SLA-TELEMETRY@1",
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-TELEMETRY-REPORT@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-RETENTION@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 102.2,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-OPS-MEMO-RECORDS@1",
       "PM-RETENTION@2",
@@ -11838,7 +14880,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.6,
+     "latency_ms": 3.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11868,7 +14910,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.4,
+     "latency_ms": 13.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -11898,10 +14940,40 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.1,
+     "latency_ms": 11.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-SLA-TELEMETRY@1",
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-OPS-MEMO-RECORDS@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-TELEMETRY-REPORT@1"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": true,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 118.6,
+     "error": null,
+     "status": "contradictory",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-INCIDENT-EASTBANK@1",
       "PM-TELEMETRY-REPORT@1",
@@ -11960,7 +15032,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.2,
+     "latency_ms": 4.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11989,7 +15061,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.9,
+     "latency_ms": 14.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12018,7 +15090,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.3,
+     "latency_ms": 14.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -12033,6 +15105,35 @@
      "hit_at_5": 1.0,
      "mrr_at_10": 1.0,
      "ndcg_at_10": 0.9197207891481876,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-MAINT-CONTRACT@1",
+      "PM-PROCUREMENT@2"
+     ],
+     "abstained": false,
+     "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 120.4,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-MAINT-CONTRACT@1",
+      "PM-PROCUREMENT@2",
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-RETENTION@2"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.4,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
      "citations": 3,
      "citations_valid": 3,
      "cited_refs": [
@@ -12070,7 +15171,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 1.9,
+     "latency_ms": 2.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -12086,7 +15187,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.6,
+     "latency_ms": 14.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -12105,7 +15206,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.4,
+     "latency_ms": 13.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -12114,6 +15215,25 @@
       "PM-MAINT-CONTRACT-A1@1",
       "PM-MAINT-CONTRACT@1",
       "PM-PROCUREMENT@2"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 106.8,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-PROCUREMENT@2",
+      "PM-RETENTION@2",
+      "PM-MAINT-CONTRACT@1",
+      "PM-MAINT-CONTRACT-A1@1"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -12142,7 +15262,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.2,
+     "latency_ms": 5.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -12162,7 +15282,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.2,
+     "latency_ms": 13.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -12182,10 +15302,30 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.6,
+     "latency_ms": 12.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-SLA-TELEMETRY@1",
+      "PM-TELEMETRY-REPORT@1",
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-SLA-TELEMETRY-A1@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 128.2,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-SLA-TELEMETRY@1",
       "PM-TELEMETRY-REPORT@1",
@@ -12223,7 +15363,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.1,
+     "latency_ms": 3.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -12239,7 +15379,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 9.4,
+     "latency_ms": 14.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -12255,10 +15395,26 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.9,
+     "latency_ms": 10.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
+     "top_refs": [
+      "PM-RETENTION@2"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 81.8,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
      "top_refs": [
       "PM-RETENTION@2"
      ],
@@ -12291,7 +15447,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 4.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -12311,7 +15467,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.8,
+     "latency_ms": 10.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -12331,7 +15487,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.8,
+     "latency_ms": 11.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -12339,6 +15495,26 @@
       "PM-TELEMETRY-REPORT@1",
       "PM-INCIDENT-EASTBANK@1",
       "PM-SLA-TELEMETRY-A1@1",
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-SLA-TELEMETRY@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 147.8,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-TELEMETRY-REPORT@1",
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-RETENTION@2",
       "PM-OPS-MEMO-RECORDS@1",
       "PM-SLA-TELEMETRY@1"
      ],
@@ -12373,7 +15549,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.7,
+     "latency_ms": 2.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -12403,7 +15579,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.4,
+     "latency_ms": 11.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12432,7 +15608,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.7,
+     "latency_ms": 16.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -12455,6 +15631,37 @@
      ],
      "abstained": false,
      "answer_supported": true,
+     "evidence_in_pack": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 130.1,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-TELEMETRY-REPORT@1",
+      "PM-SLA-TELEMETRY@1",
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-OPS-MEMO-RECORDS@1"
+     ],
+     "recall_at_5": 1.0,
+     "precision_at_5": 0.2,
+     "hit_at_5": 1.0,
+     "mrr_at_10": 1.0,
+     "ndcg_at_10": 1.0,
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-SLA-TELEMETRY@1",
+      "PM-TELEMETRY-REPORT@1"
+     ],
+     "abstained": false,
+     "answer_supported": false,
      "evidence_in_pack": true,
      "conflict_flagged": false,
      "leaks": [],
@@ -12487,7 +15694,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.3,
+     "latency_ms": 4.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -12506,7 +15713,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.6,
+     "latency_ms": 12.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -12526,7 +15733,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.5,
+     "latency_ms": 14.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -12536,6 +15743,26 @@
       "PM-OPS-MEMO-RECORDS@1",
       "PM-RETENTION@2",
       "PM-SLA-TELEMETRY-A1@1"
+     ],
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 121.7,
+     "error": null,
+     "status": "insufficient_evidence",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-TELEMETRY-REPORT@1",
+      "PM-INCIDENT-EASTBANK@1",
+      "PM-SLA-TELEMETRY-A1@1",
+      "PM-OPS-MEMO-RECORDS@1",
+      "PM-RETENTION@2"
      ],
      "citations": 0,
      "citations_valid": 0,
@@ -12566,7 +15793,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.2,
+     "latency_ms": 3.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -12585,7 +15812,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.0,
+     "latency_ms": 11.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -12604,7 +15831,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.7,
+     "latency_ms": 12.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -12618,6 +15845,28 @@
      "citations_valid": 0,
      "cited_refs": [],
      "abstained": true,
+     "conflict_flagged": false,
+     "leaks": [],
+     "injection_quoted": false
+    },
+    "rerank": {
+     "latency_ms": 103.9,
+     "error": null,
+     "status": "supported",
+     "retrieval_method_used": "rerank",
+     "top_refs": [
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-PROCUREMENT@2",
+      "PM-MAINT-CONTRACT@1",
+      "PM-RETENTION@2"
+     ],
+     "citations": 3,
+     "citations_valid": 3,
+     "cited_refs": [
+      "PM-MAINT-CONTRACT-A1@1",
+      "PM-PROCUREMENT@2"
+     ],
+     "abstained": false,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
