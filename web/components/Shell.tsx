@@ -123,7 +123,8 @@ function Header({ me, system }: SessionValue) {
 
 export function Shell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const isLogin = pathname === "/login";
+  // The one-port static export uses trailing slashes ("/login/"); treat both forms as the login page.
+  const isLogin = (pathname ?? "").replace(/\/+$/, "") === "/login";
   const [session, setSession] = useState<SessionValue | null>(null);
   const [error, setError] = useState<string | null>(null);
 
