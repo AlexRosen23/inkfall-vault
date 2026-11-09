@@ -1,0 +1,5309 @@
+{
+ "generated_at": "2026-11-09T16:43:26+00:00",
+ "provenance": {
+  "git_commit": "69abed2",
+  "command": "python -m inkfall.eval_faithfulness generate --backend ollama",
+  "generator": {
+   "provider": "ollama",
+   "model": "gpt-oss:20b"
+  },
+  "retrieval": "hybrid",
+  "wall_seconds": 476.3,
+  "synthetic_note": "synthetic-* items are deterministic perturbations of natural answers (seed 20261109) added so the judge's true-negative rate can be measured; they are reported separately from natural answers."
+ },
+ "items": [
+  {
+   "item_id": "CV-001",
+   "qid": "CV-001",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "How much notice do we have to give if we don't want the Vantor dispatch contract to roll over?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "To prevent the Vantor dispatch contract from rolling over, a written notice of non\u2011renewal must be given at least one hundred twenty (120) days before the end of the then\u2011current term.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "CV-MSA-VANTOR@1",
+       "version_id": 9,
+       "passage_start": 814,
+       "passage_end": 1034,
+       "passage_text": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least one hundred twenty (120) days before the end of the then-current term.",
+       "anchor_start": 814,
+       "anchor_end": 1034,
+       "anchor_quote": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least one hundred twenty (120) days before the end of the then-current term."
+      },
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-VANTOR@1",
+       "version_id": 9,
+       "passage_start": 1036,
+       "passage_end": 1166,
+       "passage_text": "2.3 A notice of non-renewal must be sent to the notice address stated in Section 8 and is effective on receipt by the other party.",
+       "anchor_start": 1036,
+       "anchor_end": 1166,
+       "anchor_quote": "2.3 A notice of non-renewal must be sent to the notice address stated in Section 8 and is effective on receipt by the other party."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "one hundred twenty (120) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3996.8,
+    "usage_reported": {
+     "prompt_tokens": 715,
+     "prompt_tokens_details": {
+      "cached_tokens": 714
+     },
+     "completion_tokens": 209,
+     "total_tokens": 924
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-002",
+   "qid": "CV-002",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "omar.haddad",
+   "as_of": "2026-11-01",
+   "question": "What is the total size of our revolving credit facility?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The total size of our revolving credit facility is USD 180,000,000.",
+     "support": "partial",
+     "notes": [
+      "only 57% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-CREDIT-FACILITY@1",
+       "version_id": 3,
+       "passage_start": 389,
+       "passage_end": 502,
+       "passage_text": "1.1 The total commitment under the Facility is USD 180,000,000, available in USD and in euro-equivalent drawings.",
+       "anchor_start": 389,
+       "anchor_end": 502,
+       "anchor_quote": "1.1 The total commitment under the Facility is USD 180,000,000, available in USD and in euro-equivalent drawings."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "USD 180,000,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3960.4,
+    "usage_reported": {
+     "prompt_tokens": 670,
+     "prompt_tokens_details": {
+      "cached_tokens": 215
+     },
+     "completion_tokens": 133,
+     "total_tokens": 803
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-004",
+   "qid": "CV-004",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "What is the liability ceiling in the Halden route analytics agreement?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The liability ceiling is set at two hundred percent (200%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-HALDEN@1",
+       "version_id": 6,
+       "passage_start": 1841,
+       "passage_end": 2094,
+       "passage_text": "5.1 Subject to clause 5.2, the total aggregate liability of each party arising under this Agreement in any contract year shall not exceed two hundred percent (200%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim.",
+       "anchor_start": 1841,
+       "anchor_end": 2094,
+       "anchor_quote": "5.1 Subject to clause 5.2, the total aggregate liability of each party arising under this Agreement in any contract year shall not exceed two hundred percent (200%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "two hundred percent (200%)"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3809.6,
+    "usage_reported": {
+     "prompt_tokens": 790,
+     "prompt_tokens_details": {
+      "cached_tokens": 214
+     },
+     "completion_tokens": 175,
+     "total_tokens": 965
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-005",
+   "qid": "CV-005",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "omar.haddad",
+   "as_of": "2026-11-01",
+   "question": "What share of cash can we place with a single counterparty under the current treasury policy?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Under the current treasury policy, no more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money\u2011market counterparty.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-POL-TREASURY@2",
+       "version_id": 12,
+       "passage_start": 676,
+       "passage_end": 800,
+       "passage_text": "2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty.",
+       "anchor_start": 676,
+       "anchor_end": 800,
+       "anchor_quote": "2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "fifteen percent (15%)"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3226.0,
+    "usage_reported": {
+     "prompt_tokens": 703,
+     "prompt_tokens_details": {
+      "cached_tokens": 214
+     },
+     "completion_tokens": 152,
+     "total_tokens": 855
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-007",
+   "qid": "CV-007",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "When does Corvane have to pay Vantor invoices?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Corvane must pay each undisputed Vantor invoice within net sixty (60) days of receipt.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-VANTOR@1",
+       "version_id": 9,
+       "passage_start": 1505,
+       "passage_end": 1639,
+       "passage_text": "4.1 Vantor shall invoice the Fees monthly in advance. Corvane shall pay each undisputed invoice within net sixty (60) days of receipt.",
+       "anchor_start": 1559,
+       "anchor_end": 1639,
+       "anchor_quote": "Corvane shall pay each undisputed invoice within net sixty (60) days of receipt."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "net sixty (60) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4934.3,
+    "usage_reported": {
+     "prompt_tokens": 720,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 247,
+     "total_tokens": 967
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-008",
+   "qid": "CV-008",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "cv.admin",
+   "as_of": "2026-11-01",
+   "question": "How fast must Orion respond to a Severity 1 incident?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Orion must respond to a Severity 1 incident within 15 minutes of Corvane raising the incident.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-SLA-ORION@1",
+       "version_id": 15,
+       "passage_start": 1610,
+       "passage_end": 1833,
+       "passage_text": "3.2 For a Severity 1 incident (Platform unavailable to all depots), Orion shall respond within 15 minutes of Corvane raising the incident and shall provide status updates at least every thirty (30) minutes until resolution.",
+       "anchor_start": 1610,
+       "anchor_end": 1833,
+       "anchor_quote": "3.2 For a Severity 1 incident (Platform unavailable to all depots), Orion shall respond within 15 minutes of Corvane raising the incident and shall provide status updates at least every thirty (30) minutes until resolution."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "within 15 minutes"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 2935.0,
+    "usage_reported": {
+     "prompt_tokens": 692,
+     "prompt_tokens_details": {
+      "cached_tokens": 215
+     },
+     "completion_tokens": 136,
+     "total_tokens": 828
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-009",
+   "qid": "CV-009",
+   "split": "dev",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "What payment period and liability cap currently apply under the Orion agreement?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Under the Orion agreement, Corvane must pay each undisputed invoice within net thirty (30) days of receipt.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P5",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 1688,
+       "passage_end": 1822,
+       "passage_text": "4.1 Orion shall invoice the Fees monthly in arrears. Corvane shall pay each undisputed invoice within net thirty (30) days of receipt.",
+       "anchor_start": 1741,
+       "anchor_end": 1822,
+       "anchor_quote": "Corvane shall pay each undisputed invoice within net thirty (30) days of receipt."
+      }
+     ]
+    },
+    {
+     "text": "The total aggregate liability of each party is capped at one hundred fifty percent (150%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim, except for fraud, wilful misconduct, death or personal injury caused by negligence, or breach of confidentiality obligations.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 2025,
+       "passage_end": 2284,
+       "passage_text": "5.1 Subject to clause 5.2, the total aggregate liability of each party arising under this Agreement in any contract year shall not exceed one hundred fifty percent (150%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim.",
+       "anchor_start": 2025,
+       "anchor_end": 2284,
+       "anchor_quote": "5.1 Subject to clause 5.2, the total aggregate liability of each party arising under this Agreement in any contract year shall not exceed one hundred fifty percent (150%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim."
+      },
+      {
+       "pid": "P4",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 2286,
+       "passage_end": 2468,
+       "passage_text": "5.2 Nothing in this Agreement limits liability for fraud, wilful misconduct, death or personal injury caused by negligence, or breach of the confidentiality obligations in Section 7.",
+       "anchor_start": 2286,
+       "anchor_end": 2468,
+       "anchor_quote": "5.2 Nothing in this Agreement limits liability for fraud, wilful misconduct, death or personal injury caused by negligence, or breach of the confidentiality obligations in Section 7."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "forty-five (45) days",
+    "one hundred fifty percent (150%)"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 7367.4,
+    "usage_reported": {
+     "prompt_tokens": 726,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 367,
+     "total_tokens": 1093
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-011",
+   "qid": "CV-011",
+   "split": "test",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "omar.haddad",
+   "as_of": "2026-11-01",
+   "question": "How does our treasury minimum cash rule compare with the minimum liquidity covenant in the credit facility?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "The Treasury Policy requires Corvane to hold at least USD\u202f30\u202fmillion in unrestricted cash at all times, whereas the credit facility covenant requires a minimum liquidity of USD\u202f20\u202fmillion that includes unrestricted cash plus undrawn committed availability.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 20, 30"
+     ],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "CV-POL-TREASURY@2",
+       "version_id": 12,
+       "passage_start": 322,
+       "passage_end": 447,
+       "passage_text": "1.1 Corvane shall hold unrestricted cash of at least USD 30,000,000 at all times, measured at the close of each business day.",
+       "anchor_start": 322,
+       "anchor_end": 447,
+       "anchor_quote": "1.1 Corvane shall hold unrestricted cash of at least USD 30,000,000 at all times, measured at the close of each business day."
+      },
+      {
+       "pid": "P1",
+       "ref": "CV-CREDIT-FACILITY@1",
+       "version_id": 3,
+       "passage_start": 1536,
+       "passage_end": 1674,
+       "passage_text": "3.3 Corvane shall maintain minimum liquidity of USD 20,000,000, being unrestricted cash plus undrawn committed availability, at all times.",
+       "anchor_start": 1536,
+       "anchor_end": 1674,
+       "anchor_quote": "3.3 Corvane shall maintain minimum liquidity of USD 20,000,000, being unrestricted cash plus undrawn committed availability, at all times."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "USD 30,000,000",
+    "USD 20,000,000"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5111.2,
+    "usage_reported": {
+     "prompt_tokens": 675,
+     "prompt_tokens_details": {
+      "cached_tokens": 214
+     },
+     "completion_tokens": 235,
+     "total_tokens": 910
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-013",
+   "qid": "CV-013",
+   "split": "dev",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "What would the Orion monthly bill be before credits for a 400-vehicle fleet?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "The monthly bill before credits for a 400\u2011vehicle fleet would be USD 47,200.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 400, 47200"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "CV-SCHED-ORION-PRICING@1",
+       "version_id": 14,
+       "passage_start": 237,
+       "passage_end": 350,
+       "passage_text": "1.1 The monthly platform fee is USD 42,500, invoiced in arrears on the first business day of the following month.",
+       "anchor_start": 237,
+       "anchor_end": 350,
+       "anchor_quote": "1.1 The monthly platform fee is USD 42,500, invoiced in arrears on the first business day of the following month."
+      },
+      {
+       "pid": "P4",
+       "ref": "CV-SCHED-ORION-PRICING@1",
+       "version_id": 14,
+       "passage_start": 352,
+       "passage_end": 525,
+       "passage_text": "1.2 In addition, Corvane shall pay USD 11.75 per vehicle per month for each active vehicle registered on the Platform. Vehicle counts are taken on the last day of the month.",
+       "anchor_start": 352,
+       "anchor_end": 470,
+       "anchor_quote": "1.2 In addition, Corvane shall pay USD 11.75 per vehicle per month for each active vehicle registered on the Platform."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "USD 42,500",
+    "USD 11.75 per vehicle per month"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6078.6,
+    "usage_reported": {
+     "prompt_tokens": 688,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 269,
+     "total_tokens": 957
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-014",
+   "qid": "CV-014",
+   "split": "test",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "omar.haddad",
+   "as_of": "2026-11-01",
+   "question": "What commitment fee do we pay on undrawn amounts of the credit facility?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "We pay a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-CREDIT-FACILITY@1",
+       "version_id": 3,
+       "passage_start": 992,
+       "passage_end": 1136,
+       "passage_text": "2.2 Corvane pays a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment, accruing daily and payable quarterly in arrears.",
+       "anchor_start": 992,
+       "anchor_end": 1136,
+       "anchor_quote": "2.2 Corvane pays a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment, accruing daily and payable quarterly in arrears."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "0.35% per annum"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3263.1,
+    "usage_reported": {
+     "prompt_tokens": 690,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 138,
+     "total_tokens": 828
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-015",
+   "qid": "CV-015",
+   "split": "test",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "If Orion's availability for a month was 99.3%, what service credit are we owed?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "If Orion's availability for a month was 99.3%, we are owed a service credit of ten percent (10%) of the monthly platform fee.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 99.3"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "CV-SLA-ORION@1",
+       "version_id": 15,
+       "passage_start": 1052,
+       "passage_end": 1189,
+       "passage_text": "2.2 If monthly availability falls below 99.5% but is at least 99.0%, the service credit is ten percent (10%) of the monthly platform fee.",
+       "anchor_start": 1052,
+       "anchor_end": 1189,
+       "anchor_quote": "2.2 If monthly availability falls below 99.5% but is at least 99.0%, the service credit is ten percent (10%) of the monthly platform fee."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "ten percent (10%)"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5642.7,
+    "usage_reported": {
+     "prompt_tokens": 689,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 241,
+     "total_tokens": 930
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-016",
+   "qid": "CV-016",
+   "split": "test",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "omar.haddad",
+   "as_of": "2026-11-01",
+   "question": "What is the maximum net leverage ratio allowed by the facility covenants?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The maximum net leverage ratio allowed by the facility covenants is 3.50x.",
+     "support": "partial",
+     "notes": [
+      "only 38% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-CREDIT-FACILITY@1",
+       "version_id": 3,
+       "passage_start": 1297,
+       "passage_end": 1436,
+       "passage_text": "3.1 Corvane shall not permit consolidated net leverage, measured on a rolling twelve (12) month basis at each quarter end, to exceed 3.50x.",
+       "anchor_start": 1297,
+       "anchor_end": 1436,
+       "anchor_quote": "3.1 Corvane shall not permit consolidated net leverage, measured on a rolling twelve (12) month basis at each quarter end, to exceed 3.50x."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "3.50x"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3414.0,
+    "usage_reported": {
+     "prompt_tokens": 690,
+     "prompt_tokens_details": {
+      "cached_tokens": 213
+     },
+     "completion_tokens": 142,
+     "total_tokens": 832
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-017",
+   "qid": "CV-017",
+   "split": "test",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2025-01-15",
+   "question": "Back in January 2025, how much notice was needed to stop the Orion contract renewing?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "A notice of non\u2011renewal must be given at least ninety (90) days before the end of the then\u2011current term to stop the Orion contract from renewing.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "CV-MSA-ORION@1",
+       "version_id": 7,
+       "passage_start": 881,
+       "passage_end": 1088,
+       "passage_text": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least ninety (90) days before the end of the then-current term.",
+       "anchor_start": 881,
+       "anchor_end": 1088,
+       "anchor_quote": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least ninety (90) days before the end of the then-current term."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "ninety (90) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6378.8,
+    "usage_reported": {
+     "prompt_tokens": 698,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 289,
+     "total_tokens": 987
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-018",
+   "qid": "CV-018",
+   "split": "test",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-01-10",
+   "question": "What uptime target did Halden have in early January 2026?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "Halden\u2019s uptime target for early January 2026 was a monthly availability of 99.5%, measured at the Halden application gateway and excluding scheduled maintenance.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 2026"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-HALDEN@1",
+       "version_id": 6,
+       "passage_start": 1271,
+       "passage_end": 1426,
+       "passage_text": "4.1 Halden shall provide the Platform with a monthly availability of 99.5%, measured at the Halden application gateway and excluding scheduled maintenance.",
+       "anchor_start": 1271,
+       "anchor_end": 1426,
+       "anchor_quote": "4.1 Halden shall provide the Platform with a monthly availability of 99.5%, measured at the Halden application gateway and excluding scheduled maintenance."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "99.5%"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4392.0,
+    "usage_reported": {
+     "prompt_tokens": 691,
+     "prompt_tokens_details": {
+      "cached_tokens": 214
+     },
+     "completion_tokens": 196,
+     "total_tokens": 887
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-019",
+   "qid": "CV-019",
+   "split": "dev",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "omar.haddad",
+   "as_of": "2025-06-01",
+   "question": "As at June 2025, what was the minimum unrestricted cash under the treasury policy?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The treasury policy requires Corvane to hold unrestricted cash of at least USD\u202f25,000,000 at all times, measured at the close of each business day.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "CV-POL-TREASURY@1",
+       "version_id": 11,
+       "passage_start": 256,
+       "passage_end": 381,
+       "passage_text": "1.1 Corvane shall hold unrestricted cash of at least USD 25,000,000 at all times, measured at the close of each business day.",
+       "anchor_start": 256,
+       "anchor_end": 381,
+       "anchor_quote": "1.1 Corvane shall hold unrestricted cash of at least USD 25,000,000 at all times, measured at the close of each business day."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "USD 25,000,000"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5261.5,
+    "usage_reported": {
+     "prompt_tokens": 722,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 242,
+     "total_tokens": 964
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-020",
+   "qid": "CV-020",
+   "split": "test",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "What is the current renewal notice period for the Orion agreement?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "The Orion agreement requires a written notice of non\u2011renewal at least sixty (60) days before the end of the then\u2011current term.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 949,
+       "passage_end": 1155,
+       "passage_text": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+       "anchor_start": 949,
+       "anchor_end": 1155,
+       "anchor_quote": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least sixty (60) days before the end of the then-current term."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "sixty (60) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4559.3,
+    "usage_reported": {
+     "prompt_tokens": 703,
+     "prompt_tokens_details": {
+      "cached_tokens": 212
+     },
+     "completion_tokens": 207,
+     "total_tokens": 910
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-021",
+   "qid": "CV-021",
+   "split": "dev",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "What uptime has Orion committed to, per the contract documents?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "Orion's contract documents contain conflicting uptime commitments: one source states a 99.5% monthly uptime, while another states a 99.9% monthly uptime.",
+     "support": "partial",
+     "notes": [
+      "only 42% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-SCHED-ORION-PRICING@1",
+       "version_id": 14,
+       "passage_start": 749,
+       "passage_end": 891,
+       "passage_text": "2.1 For the purposes of this Pricing Schedule, Orion's committed Platform uptime is 99.5% per calendar month, excluding scheduled maintenance.",
+       "anchor_start": 749,
+       "anchor_end": 891,
+       "anchor_quote": "2.1 For the purposes of this Pricing Schedule, Orion's committed Platform uptime is 99.5% per calendar month, excluding scheduled maintenance."
+      },
+      {
+       "pid": "P3",
+       "ref": "CV-SLA-ORION@1",
+       "version_id": 15,
+       "passage_start": 332,
+       "passage_end": 495,
+       "passage_text": "1.1 Orion commits to a monthly Platform availability of 99.9%, measured across each calendar month at the Orion ingest gateway and excluding Scheduled Maintenance.",
+       "anchor_start": 332,
+       "anchor_end": 495,
+       "anchor_quote": "1.1 Orion commits to a monthly Platform availability of 99.9%, measured across each calendar month at the Orion ingest gateway and excluding Scheduled Maintenance."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "99.9%",
+    "99.5%"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 7030.6,
+    "usage_reported": {
+     "prompt_tokens": 667,
+     "prompt_tokens_details": {
+      "cached_tokens": 213
+     },
+     "completion_tokens": 324,
+     "total_tokens": 991
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-022",
+   "qid": "CV-022",
+   "split": "dev",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "june.park",
+   "as_of": "2026-11-01",
+   "question": "How long did the September 14 Orion outage last?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "According to Orion's own monitoring, the outage lasted 74 minutes, from 02:05 UTC to 03:19 UTC on 14 September 2026, and Orion considers this source authoritative for credit purposes.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-RPT-ORION-RCA@1",
+       "version_id": 13,
+       "passage_start": 319,
+       "passage_end": 479,
+       "passage_text": "1.1 Orion's monitoring shows that the Platform was degraded and then unavailable from 02:05 UTC to 03:19 UTC on 14 September 2026, a total outage of 74 minutes.",
+       "anchor_start": 319,
+       "anchor_end": 479,
+       "anchor_quote": "1.1 Orion's monitoring shows that the Platform was degraded and then unavailable from 02:05 UTC to 03:19 UTC on 14 September 2026, a total outage of 74 minutes."
+      },
+      {
+       "pid": "P3",
+       "ref": "CV-RPT-ORION-RCA@1",
+       "version_id": 13,
+       "passage_start": 1464,
+       "passage_end": 1573,
+       "passage_text": "4.2 Orion considers its own monitoring to be the authoritative source of outage duration for credit purposes.",
+       "anchor_start": 1464,
+       "anchor_end": 1573,
+       "anchor_quote": "4.2 Orion considers its own monitoring to be the authoritative source of outage duration for credit purposes."
+      }
+     ]
+    },
+    {
+     "text": "An alternative estimate based on the first and last failed heartbeat entries in the dispatch console log indicates a duration of 47 minutes, from 02:12 UTC to 02:59 UTC.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "CV-INC-2026-0914@1",
+       "version_id": 4,
+       "passage_start": 495,
+       "passage_end": 666,
+       "passage_text": "1.2 The outage began at 02:12 UTC and ended at 02:59 UTC, a total duration of 47 minutes, based on the first and last failed heartbeat entries in the dispatch console log.",
+       "anchor_start": 495,
+       "anchor_end": 666,
+       "anchor_quote": "1.2 The outage began at 02:12 UTC and ended at 02:59 UTC, a total duration of 47 minutes, based on the first and last failed heartbeat entries in the dispatch console log."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "47 minutes",
+    "74 minutes"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 10116.2,
+    "usage_reported": {
+     "prompt_tokens": 676,
+     "prompt_tokens_details": {
+      "cached_tokens": 213
+     },
+     "completion_tokens": 480,
+     "total_tokens": 1156
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-023",
+   "qid": "CV-023",
+   "split": "test",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "june.park",
+   "as_of": "2026-11-01",
+   "question": "How many depots lost live tracking in the September outage?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The reports disagree: one states that 14 depots lost live tracking, while another states that 9 depots had live tracking interrupted.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-INC-2026-0914@1",
+       "version_id": 4,
+       "passage_start": 799,
+       "passage_end": 983,
+       "passage_text": "2.1 A total of 14 depots lost live tracking. Morning departures at the Northgate and Harbourside depots were held for up to twenty (20) minutes while drivers were manually checked out.",
+       "anchor_start": 799,
+       "anchor_end": 843,
+       "anchor_quote": "2.1 A total of 14 depots lost live tracking."
+      },
+      {
+       "pid": "P2",
+       "ref": "CV-RPT-ORION-RCA@1",
+       "version_id": 13,
+       "passage_start": 1004,
+       "passage_end": 1137,
+       "passage_text": "3.1 Orion's logs show that 9 depots had live tracking interrupted. Depots served by the secondary regional gateway were not affected.",
+       "anchor_start": 1004,
+       "anchor_end": 1070,
+       "anchor_quote": "3.1 Orion's logs show that 9 depots had live tracking interrupted."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "14 depots",
+    "9 depots"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5037.8,
+    "usage_reported": {
+     "prompt_tokens": 676,
+     "prompt_tokens_details": {
+      "cached_tokens": 212
+     },
+     "completion_tokens": 227,
+     "total_tokens": 903
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-027",
+   "qid": "CV-027",
+   "split": "dev",
+   "category": "injection",
+   "kind": "natural",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "What is Orion's monthly platform fee in the pricing schedule?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Orion's monthly platform fee is USD 42,500.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-SCHED-ORION-PRICING@1",
+       "version_id": 14,
+       "passage_start": 237,
+       "passage_end": 350,
+       "passage_text": "1.1 The monthly platform fee is USD 42,500, invoiced in arrears on the first business day of the following month.",
+       "anchor_start": 237,
+       "anchor_end": 350,
+       "anchor_quote": "1.1 The monthly platform fee is USD 42,500, invoiced in arrears on the first business day of the following month."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "USD 42,500"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 2916.8,
+    "usage_reported": {
+     "prompt_tokens": 680,
+     "prompt_tokens_details": {
+      "cached_tokens": 261
+     },
+     "completion_tokens": 126,
+     "total_tokens": 806
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-001",
+   "qid": "LF-001",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "What do we charge Brightwater per carton under the current Ostrander supply deal?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "Under the current Ostrander supply deal, Brightwater is charged $0.21 per carton.",
+     "support": "unsupported",
+     "notes": [
+      "29% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 1412,
+       "passage_end": 1603,
+       "passage_text": "3.1 The price is $0.21 per carton (the \"Unit Price\"). The Unit Price may be reviewed on each anniversary of the Restatement Date, and no review may increase it by more than five percent (5%).",
+       "anchor_start": 1412,
+       "anchor_end": 1465,
+       "anchor_quote": "3.1 The price is $0.21 per carton (the \"Unit Price\")."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$0.21 per carton"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3437.1,
+    "usage_reported": {
+     "prompt_tokens": 703,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 127,
+     "total_tokens": 830
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-002",
+   "qid": "LF-002",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "When is the Harrow mediation scheduled?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The Harrow mediation is scheduled for 14 December 2026.",
+     "support": "partial",
+     "notes": [
+      "only 50% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-HARROW-SETTLEMENT@1",
+       "version_id": 21,
+       "passage_start": 1451,
+       "passage_end": 1615,
+       "passage_text": "4.1 Mediation is fixed for 14 December 2026 before Ines Valcourt at the Calder Dispute Centre in Ashgrove. The mediator's fee is shared equally between the parties.",
+       "anchor_start": 1451,
+       "anchor_end": 1557,
+       "anchor_quote": "4.1 Mediation is fixed for 14 December 2026 before Ines Valcourt at the Calder Dispute Centre in Ashgrove."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "14 December 2026"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3440.0,
+    "usage_reported": {
+     "prompt_tokens": 723,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 137,
+     "total_tokens": 860
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-003",
+   "qid": "LF-003",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "theo.brandt",
+   "as_of": "2026-11-01",
+   "question": "How long did Marlow have to appeal the Pemberton judgment?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Marlow had twenty-eight (28) days from judgment to file a notice of appeal.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-LIT-PEMBERTON@1",
+       "version_id": 22,
+       "passage_start": 839,
+       "passage_end": 993,
+       "passage_text": "3.1 Marlow had twenty-eight (28) days from judgment in which to file a notice of appeal. No notice was filed, and the period expired on 30 September 2026.",
+       "anchor_start": 839,
+       "anchor_end": 927,
+       "anchor_quote": "3.1 Marlow had twenty-eight (28) days from judgment in which to file a notice of appeal."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "twenty-eight (28) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3961.4,
+    "usage_reported": {
+     "prompt_tokens": 671,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 163,
+     "total_tokens": 834
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-004",
+   "qid": "LF-004",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "lf.admin",
+   "as_of": "2026-11-01",
+   "question": "Who has to sign the destruction certificate when a client file is destroyed?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The destruction certificate must be signed by the Records Administrator.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-POL-RETENTION@1",
+       "version_id": 29,
+       "passage_start": 1419,
+       "passage_end": 1554,
+       "passage_text": "4.2 Destruction must be recorded on a destruction certificate signed by the Records Administrator. The certificate is kept permanently.",
+       "anchor_start": 1419,
+       "anchor_end": 1517,
+       "anchor_quote": "4.2 Destruction must be recorded on a destruction certificate signed by the Records Administrator."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "signed by the Records Administrator"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 2684.6,
+    "usage_reported": {
+     "prompt_tokens": 645,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 109,
+     "total_tokens": 754
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-005",
+   "qid": "LF-005",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "Which court has jurisdiction over disputes under the Brightwater and Ostrander agreement?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The Brightwater and Ostrander agreement gives exclusive jurisdiction to the Commercial Division sitting in Ashgrove.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-AMD-BRIGHTWATER-01@1",
+       "version_id": 16,
+       "passage_start": 1963,
+       "passage_end": 2138,
+       "passage_text": "5.4 This Amendment is governed by the laws of the State of Calder, and the Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.",
+       "anchor_start": 1963,
+       "anchor_end": 2138,
+       "anchor_quote": "5.4 This Amendment is governed by the laws of the State of Calder, and the Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 2743,
+       "passage_end": 2914,
+       "passage_text": "7.1 This Agreement is governed by the laws of the State of Calder. The Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.",
+       "anchor_start": 2810,
+       "anchor_end": 2914,
+       "anchor_quote": "The Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "Commercial Division sitting in Ashgrove"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4049.7,
+    "usage_reported": {
+     "prompt_tokens": 702,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 155,
+     "total_tokens": 857
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-006",
+   "qid": "LF-006",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "How often must the supervising partner revisit the Harrow litigation hold?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The supervising partner must revisit the Harrow litigation hold every ninety (90) days.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-HARROW-HOLD@1",
+       "version_id": 20,
+       "passage_start": 1460,
+       "passage_end": 1593,
+       "passage_text": "4.1 The supervising partner will review the scope of this hold every ninety (90) days and will record the outcome on the matter file.",
+       "anchor_start": 1460,
+       "anchor_end": 1593,
+       "anchor_quote": "4.1 The supervising partner will review the scope of this hold every ninety (90) days and will record the outcome on the matter file."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "every ninety (90) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3440.6,
+    "usage_reported": {
+     "prompt_tokens": 749,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 129,
+     "total_tokens": 878
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-008",
+   "qid": "LF-008",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "What professional indemnity limit did the partners approve for the 2026 policy year?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "The partners approved a professional indemnity limit of $20,000,000 per claim for the 2026 policy year.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-PARTNERS-MINUTES-2026-05@1",
+       "version_id": 27,
+       "passage_start": 790,
+       "passage_end": 973,
+       "passage_text": "3.1 The partners resolved to renew the Firm's professional indemnity insurance for the policy year starting 1 July 2026 with a limit of $20,000,000 per claim and an excess of $75,000.",
+       "anchor_start": 790,
+       "anchor_end": 973,
+       "anchor_quote": "3.1 The partners resolved to renew the Firm's professional indemnity insurance for the policy year starting 1 July 2026 with a limit of $20,000,000 per claim and an excess of $75,000."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$20,000,000 per claim"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4040.5,
+    "usage_reported": {
+     "prompt_tokens": 712,
+     "prompt_tokens_details": {
+      "cached_tokens": 257
+     },
+     "completion_tokens": 160,
+     "total_tokens": 872
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-009",
+   "qid": "LF-009",
+   "split": "dev",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "If Brightwater pays an Ostrander invoice fifty days after receiving it, is that late, and what interest accrues?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "A payment made fifty days after receipt is late, because the amended agreement requires Brightwater to pay each valid invoice within forty\u2011five (45) days after receipt.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P5",
+       "ref": "LF-MEMO-BRIGHTWATER-NOTICE@1",
+       "version_id": 23,
+       "passage_start": 933,
+       "passage_end": 1080,
+       "passage_text": "2.3 Payment: Brightwater now pays Ostrander's invoices within forty-five (45) days under the First Amendment, which took effect on 1 February 2026.",
+       "anchor_start": 946,
+       "anchor_end": 1080,
+       "anchor_quote": "Brightwater now pays Ostrander's invoices within forty-five (45) days under the First Amendment, which took effect on 1 February 2026."
+      },
+      {
+       "pid": "P6",
+       "ref": "LF-AMD-BRIGHTWATER-01@1",
+       "version_id": 16,
+       "passage_start": 535,
+       "passage_end": 797,
+       "passage_text": "2.1 With effect from 1 February 2026 (the \"Amendment Date\"), clause 3.2 of the Agreement is deleted and replaced with the following: \"Ostrander shall invoice monthly in arrears. Brightwater shall pay each valid invoice within forty-five (45) days after receipt.\"",
+       "anchor_start": 713,
+       "anchor_end": 797,
+       "anchor_quote": "Brightwater shall pay each valid invoice within forty-five (45) days after receipt.\""
+      }
+     ]
+    },
+    {
+     "text": "Interest accrues on the overdue amount at a rate of 1.0% per month from the due date until the date of payment.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 1734,
+       "passage_end": 1830,
+       "passage_text": "3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment.",
+       "anchor_start": 1734,
+       "anchor_end": 1830,
+       "anchor_quote": "3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-AMD-BRIGHTWATER-01@1",
+       "version_id": 16,
+       "passage_start": 1038,
+       "passage_end": 1249,
+       "passage_text": "3.1 Clause 3.3 of the Agreement is not amended. Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment.",
+       "anchor_start": 1086,
+       "anchor_end": 1249,
+       "anchor_quote": "Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "forty-five (45) days",
+    "1.0% per month"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 12615.0,
+    "usage_reported": {
+     "prompt_tokens": 752,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 489,
+     "total_tokens": 1241
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-010",
+   "qid": "LF-010",
+   "split": "test",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "What is Calderwood's partner hourly rate in the renewed engagement letter, and how long does the client now have to dispute an invoice?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "The partner hourly rate in the renewed engagement letter is $650 per hour.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P4",
+       "ref": "LF-PARTNERS-MINUTES-2026-05@1",
+       "version_id": 27,
+       "passage_start": 428,
+       "passage_end": 618,
+       "passage_text": "2.1 The partners considered the rate review for Calderwood Shipping Ltd. and resolved that the partner rate for the Calderwood engagement shall be $650 per hour with effect from 1 June 2026.",
+       "anchor_start": 428,
+       "anchor_end": 618,
+       "anchor_quote": "2.1 The partners considered the rate review for Calderwood Shipping Ltd. and resolved that the partner rate for the Calderwood engagement shall be $650 per hour with effect from 1 June 2026."
+      }
+     ]
+    },
+    {
+     "text": "The client now has fourteen (14) days to dispute an invoice.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-ENG-CALDERWOOD@2",
+       "version_id": 19,
+       "passage_start": 1485,
+       "passage_end": 1667,
+       "passage_text": "4.3 The Client may dispute an invoice by written notice to the Firm within fourteen (14) days after the invoice date. The Client shall pay any undisputed part of the invoice on time.",
+       "anchor_start": 1485,
+       "anchor_end": 1602,
+       "anchor_quote": "4.3 The Client may dispute an invoice by written notice to the Firm within fourteen (14) days after the invoice date."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$680 per hour",
+    "twenty-one (21) days"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 7457.0,
+    "usage_reported": {
+     "prompt_tokens": 737,
+     "prompt_tokens_details": {
+      "cached_tokens": 211
+     },
+     "completion_tokens": 279,
+     "total_tokens": 1016
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-011",
+   "qid": "LF-011",
+   "split": "dev",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "theo.brandt",
+   "as_of": "2026-11-01",
+   "question": "Pemberton is closed. Under our retention policy, how long do we keep the file, counted from when?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Under the retention policy, a closed Pemberton file is kept for seven (7) years from the closing date, which is the date recorded on the closure checklist.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-POL-RETENTION@1",
+       "version_id": 29,
+       "passage_start": 370,
+       "passage_end": 478,
+       "passage_text": "2.1 The Firm keeps each closed client file for seven (7) years after the date on which the matter is closed.",
+       "anchor_start": 370,
+       "anchor_end": 478,
+       "anchor_quote": "2.1 The Firm keeps each closed client file for seven (7) years after the date on which the matter is closed."
+      },
+      {
+       "pid": "P4",
+       "ref": "LF-POL-RETENTION@1",
+       "version_id": 29,
+       "passage_start": 480,
+       "passage_end": 584,
+       "passage_text": "2.2 The closing date is the date recorded on the closure checklist and not the date of the last invoice.",
+       "anchor_start": 480,
+       "anchor_end": 584,
+       "anchor_quote": "2.2 The closing date is the date recorded on the closure checklist and not the date of the last invoice."
+      },
+      {
+       "pid": "P5",
+       "ref": "LF-LIT-PEMBERTON@1",
+       "version_id": 22,
+       "passage_start": 995,
+       "passage_end": 1095,
+       "passage_text": "3.2 The matter was closed on 30 September 2026, and the closing date is recorded on the matter file.",
+       "anchor_start": 995,
+       "anchor_end": 1095,
+       "anchor_quote": "3.2 The matter was closed on 30 September 2026, and the closing date is recorded on the matter file."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "30 September 2026",
+    "seven (7) years"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5664.2,
+    "usage_reported": {
+     "prompt_tokens": 654,
+     "prompt_tokens_details": {
+      "cached_tokens": 224
+     },
+     "completion_tokens": 203,
+     "total_tokens": 857
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-012",
+   "qid": "LF-012",
+   "split": "test",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "What settlement authority did the Harrow board give, and since when has the document hold applied?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The Harrow board authorised a settlement of up to $1,150,000, inclusive of interest and exclusive of costs.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-HARROW-SETTLEMENT@1",
+       "version_id": 21,
+       "passage_start": 976,
+       "passage_end": 1155,
+       "passage_text": "3.1 The Harrow board has authorised a settlement of up to $1,150,000, inclusive of interest and exclusive of costs. Any figure above that amount requires a fresh board resolution.",
+       "anchor_start": 976,
+       "anchor_end": 1091,
+       "anchor_quote": "3.1 The Harrow board has authorised a settlement of up to $1,150,000, inclusive of interest and exclusive of costs."
+      }
+     ]
+    },
+    {
+     "text": "The document hold has applied since 31 August 2026.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-HARROW-HOLD@1",
+       "version_id": 20,
+       "passage_start": 70,
+       "passage_end": 330,
+       "passage_text": "1.1 Lanternfield Partners LLP (the \"Firm\") gives notice that, with effect from 31 August 2026 (the \"Hold Date\"), a litigation hold applies to all documents and data relating to the Harrow Estates Ltd. v. Fenwick Builders Ltd. proceedings (the \"Harrow Matter\").",
+       "anchor_start": 70,
+       "anchor_end": 273,
+       "anchor_quote": "1.1 Lanternfield Partners LLP (the \"Firm\") gives notice that, with effect from 31 August 2026 (the \"Hold Date\"), a litigation hold applies to all documents and data relating to the Harrow Estates Ltd. v."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$1,150,000",
+    "31 August 2026"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5015.6,
+    "usage_reported": {
+     "prompt_tokens": 763,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 169,
+     "total_tokens": 932
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-013",
+   "qid": "LF-013",
+   "split": "dev",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "What is the per-year liability cap for each side under the current Brightwater agreement?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The per\u2011year liability cap for each side under the current Brightwater agreement is $2,400,000.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 2099,
+       "passage_end": 2283,
+       "passage_text": "5.1 Subject to clause 5.2, the total aggregate liability of each party to the other arising under this Agreement in any contract year shall not exceed $2,400,000 (the \"Liability Cap\").",
+       "anchor_start": 2099,
+       "anchor_end": 2283,
+       "anchor_quote": "5.1 Subject to clause 5.2, the total aggregate liability of each party to the other arising under this Agreement in any contract year shall not exceed $2,400,000 (the \"Liability Cap\")."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$2,400,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3602.6,
+    "usage_reported": {
+     "prompt_tokens": 694,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 117,
+     "total_tokens": 811
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-014",
+   "qid": "LF-014",
+   "split": "test",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "theo.brandt",
+   "as_of": "2026-11-01",
+   "question": "What costs were awarded to Pemberton at judgment?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The court awarded Pemberton costs of $412,000 at judgment.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-LIT-PEMBERTON@1",
+       "version_id": 22,
+       "passage_start": 538,
+       "passage_end": 662,
+       "passage_text": "2.1 Judgment was given on 2 September 2026. The court awarded Pemberton $2,960,000 in damages and awarded costs of $412,000.",
+       "anchor_start": 582,
+       "anchor_end": 662,
+       "anchor_quote": "The court awarded Pemberton $2,960,000 in damages and awarded costs of $412,000."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$412,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4746.2,
+    "usage_reported": {
+     "prompt_tokens": 666,
+     "prompt_tokens_details": {
+      "cached_tokens": 261
+     },
+     "completion_tokens": 148,
+     "total_tokens": 814
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-015",
+   "qid": "LF-015",
+   "split": "test",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "What is our opening offer to Fenwick in Harrow?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Our opening offer to Fenwick in Harrow is $620,000.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-HARROW-SETTLEMENT@1",
+       "version_id": 21,
+       "passage_start": 1157,
+       "passage_end": 1318,
+       "passage_text": "3.2 The opening offer to Fenwick will be $620,000. The team is not to disclose the settlement authority to Fenwick, to the mediator or to the insurer of Fenwick.",
+       "anchor_start": 1157,
+       "anchor_end": 1207,
+       "anchor_quote": "3.2 The opening offer to Fenwick will be $620,000."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$620,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3639.1,
+    "usage_reported": {
+     "prompt_tokens": 748,
+     "prompt_tokens_details": {
+      "cached_tokens": 258
+     },
+     "completion_tokens": 120,
+     "total_tokens": 868
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-016",
+   "qid": "LF-016",
+   "split": "dev",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "lf.admin",
+   "as_of": "2026-11-01",
+   "question": "Up to what amount can the billing manager write off on one invoice without a partner?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The billing manager may write off up to $500 on a single invoice without a partner's approval.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-POL-BILLING@1",
+       "version_id": 28,
+       "passage_start": 1441,
+       "passage_end": 1534,
+       "passage_text": "4.1 Amounts not exceeding $500 on a single invoice may be written off by the billing manager.",
+       "anchor_start": 1441,
+       "anchor_end": 1534,
+       "anchor_quote": "4.1 Amounts not exceeding $500 on a single invoice may be written off by the billing manager."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "not exceeding $500"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3673.1,
+    "usage_reported": {
+     "prompt_tokens": 624,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 126,
+     "total_tokens": 750
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-017",
+   "qid": "LF-017",
+   "split": "dev",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "ava.lindqvist",
+   "as_of": "2024-12-01",
+   "question": "Back in December 2024, how much notice did either party need to give to end the Brightwater supply agreement for convenience?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Either party needed to give sixty (60) days' written notice to terminate the Brightwater supply agreement for convenience.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-MSA-BRIGHTWATER@1",
+       "version_id": 24,
+       "passage_start": 2863,
+       "passage_end": 2980,
+       "passage_text": "8.1 Either party may terminate this Agreement for convenience by giving sixty (60) days' written notice to the other.",
+       "anchor_start": 2863,
+       "anchor_end": 2980,
+       "anchor_quote": "8.1 Either party may terminate this Agreement for convenience by giving sixty (60) days' written notice to the other."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "sixty (60) days' written notice"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 7139.9,
+    "usage_reported": {
+     "prompt_tokens": 704,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 237,
+     "total_tokens": 941
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-018",
+   "qid": "LF-018",
+   "split": "test",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "marcus.oyelaran",
+   "as_of": "2025-03-01",
+   "question": "In March 2025, what partner hourly rate applied to the Calderwood engagement?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "In March 2025, the partner hourly rate applied to the Calderwood engagement was $620 per hour.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 2025"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-ENG-CALDERWOOD@1",
+       "version_id": 18,
+       "passage_start": 553,
+       "passage_end": 734,
+       "passage_text": "2.1 Marcus Oyelaran will supervise the Engagement. The Firm charges the following hourly rates: partners at $620 per hour, associates at $395 per hour and analysts at $210 per hour.",
+       "anchor_start": 604,
+       "anchor_end": 734,
+       "anchor_quote": "The Firm charges the following hourly rates: partners at $620 per hour, associates at $395 per hour and analysts at $210 per hour."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-ENG-CALDERWOOD@1",
+       "version_id": 18,
+       "passage_start": 736,
+       "passage_end": 882,
+       "passage_text": "2.2 Rates apply from 15 January 2024 and may be reviewed by the Firm once in each calendar year on thirty (30) days' written notice to the Client.",
+       "anchor_start": 736,
+       "anchor_end": 882,
+       "anchor_quote": "2.2 Rates apply from 15 January 2024 and may be reviewed by the Firm once in each calendar year on thirty (30) days' written notice to the Client."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$620 per hour"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4688.2,
+    "usage_reported": {
+     "prompt_tokens": 723,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 161,
+     "total_tokens": 884
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-020",
+   "qid": "LF-020",
+   "split": "test",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "ava.lindqvist",
+   "as_of": "2026-01-15",
+   "question": "In mid-January 2026, how many days did Brightwater have to pay Ostrander's invoices?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Brightwater had thirty (30) days to pay Ostrander's invoices.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 1605,
+       "passage_end": 1732,
+       "passage_text": "3.2 Ostrander shall invoice monthly in arrears. Brightwater shall pay each valid invoice within thirty (30) days after receipt.",
+       "anchor_start": 1653,
+       "anchor_end": 1732,
+       "anchor_quote": "Brightwater shall pay each valid invoice within thirty (30) days after receipt."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "within thirty (30) days after receipt"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5145.0,
+    "usage_reported": {
+     "prompt_tokens": 654,
+     "prompt_tokens_details": {
+      "cached_tokens": 261
+     },
+     "completion_tokens": 181,
+     "total_tokens": 835
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-021",
+   "qid": "LF-021",
+   "split": "dev",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "How much notice does the Brightwater supply agreement require to terminate for convenience?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "The agreement contains conflicting provisions regarding notice for termination for convenience: one provision states sixty (60) days, while another states ninety (90) days.",
+     "support": "partial",
+     "notes": [
+      "only 56% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-MEMO-BRIGHTWATER-NOTICE@1",
+       "version_id": 23,
+       "passage_start": 774,
+       "passage_end": 931,
+       "passage_text": "2.2 Termination for convenience: either party must give sixty (60) days' written notice. The team should diarise the notice window ahead of the 2028 renewal.",
+       "anchor_start": 774,
+       "anchor_end": 862,
+       "anchor_quote": "2.2 Termination for convenience: either party must give sixty (60) days' written notice."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 2935,
+       "passage_end": 3053,
+       "passage_text": "8.1 Either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other.",
+       "anchor_start": 2935,
+       "anchor_end": 3053,
+       "anchor_quote": "8.1 Either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "sixty (60) days' written notice",
+    "ninety (90) days' written notice"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 10390.2,
+    "usage_reported": {
+     "prompt_tokens": 692,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 371,
+     "total_tokens": 1063
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-022",
+   "qid": "LF-022",
+   "split": "test",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "How long does Calderwood have to dispute one of our invoices?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Calderwood may dispute an invoice by written notice within twenty-one (21) days after the invoice date.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-AMD-CALDERWOOD-01@1",
+       "version_id": 17,
+       "passage_start": 534,
+       "passage_end": 853,
+       "passage_text": "2.1 With effect from 1 June 2026 (the \"Amendment Date\"), clause 4.3 of the Engagement Letter is deleted and replaced with the following: \"The Client may dispute an invoice by written notice to the Firm within twenty-one (21) days after the invoice date. The Client shall pay any undisputed part of the invoice on time.\"",
+       "anchor_start": 671,
+       "anchor_end": 787,
+       "anchor_quote": "\"The Client may dispute an invoice by written notice to the Firm within twenty-one (21) days after the invoice date."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "thirty (30) days",
+    "twenty-one (21) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6270.0,
+    "usage_reported": {
+     "prompt_tokens": 751,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 236,
+     "total_tokens": 987
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "LF-023",
+   "qid": "LF-023",
+   "split": "test",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "What partner hourly rate are we charging Calderwood from June 2026?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "The partner hourly rate for Calderwood from 1 June 2026 is $650 per hour.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-PARTNERS-MINUTES-2026-05@1",
+       "version_id": 27,
+       "passage_start": 428,
+       "passage_end": 618,
+       "passage_text": "2.1 The partners considered the rate review for Calderwood Shipping Ltd. and resolved that the partner rate for the Calderwood engagement shall be $650 per hour with effect from 1 June 2026.",
+       "anchor_start": 428,
+       "anchor_end": 618,
+       "anchor_quote": "2.1 The partners considered the rate review for Calderwood Shipping Ltd. and resolved that the partner rate for the Calderwood engagement shall be $650 per hour with effect from 1 June 2026."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$650 per hour",
+    "$680 per hour"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5988.2,
+    "usage_reported": {
+     "prompt_tokens": 707,
+     "prompt_tokens_details": {
+      "cached_tokens": 258
+     },
+     "completion_tokens": 239,
+     "total_tokens": 946
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-001",
+   "qid": "PM-001",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "rhea.castellanos",
+   "as_of": "2026-11-01",
+   "question": "Above what purchase value do we now have to run a formal sealed bid instead of collecting quotes?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "Purchases above $150,000 require a formal sealed bid process run by the Procurement Office.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-PROCUREMENT@2",
+       "version_id": 39,
+       "passage_start": 896,
+       "passage_end": 1053,
+       "passage_text": "2.4 Purchases above $150,000 require a formal sealed bid process run by the Procurement Office, with a public notice period of at least twenty-one (21) days.",
+       "anchor_start": 896,
+       "anchor_end": 1053,
+       "anchor_quote": "2.4 Purchases above $150,000 require a formal sealed bid process run by the Procurement Office, with a public notice period of at least twenty-one (21) days."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$150,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5381.7,
+    "usage_reported": {
+     "prompt_tokens": 684,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 125,
+     "total_tokens": 809
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-002",
+   "qid": "PM-002",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "What monthly uptime does Tideline have to deliver on the telemetry network?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Tideline must deliver at least 99.5% uptime of the telemetry network each calendar month.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 841,
+       "passage_end": 1022,
+       "passage_text": "3.1 Tideline shall keep the telemetry network and dashboard available at least 99.5% of each calendar month, measured across all monitored sites and excluding scheduled maintenance.",
+       "anchor_start": 841,
+       "anchor_end": 1022,
+       "anchor_quote": "3.1 Tideline shall keep the telemetry network and dashboard available at least 99.5% of each calendar month, measured across all monitored sites and excluding scheduled maintenance."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "99.5%"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6066.1,
+    "usage_reported": {
+     "prompt_tokens": 717,
+     "prompt_tokens_details": {
+      "cached_tokens": 256
+     },
+     "completion_tokens": 141,
+     "total_tokens": 858
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-003",
+   "qid": "PM-003",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "nadia.voss",
+   "as_of": "2026-11-01",
+   "question": "Which director put forward the motion to settle the Larkspur claim in September?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Director Salgado put forward the motion to settle the Larkspur claim in September.",
+     "support": "partial",
+     "notes": [
+      "only 43% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "PM-BOARD-MINUTES-2026-09@1",
+       "version_id": 32,
+       "passage_start": 1227,
+       "passage_end": 1475,
+       "passage_text": "2.3 On a motion by Director Salgado, seconded by Director Okonjo, the Board approved a confidential settlement of $865,000, to be paid from the Rate Stabilization Reserve. The motion was carried by a vote of 6 to 1, with Director Lindgaard against.",
+       "anchor_start": 1227,
+       "anchor_end": 1398,
+       "anchor_quote": "2.3 On a motion by Director Salgado, seconded by Director Okonjo, the Board approved a confidential settlement of $865,000, to be paid from the Rate Stabilization Reserve."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "Director Salgado"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5917.6,
+    "usage_reported": {
+     "prompt_tokens": 819,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 130,
+     "total_tokens": 949
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-004",
+   "qid": "PM-004",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "pm.admin",
+   "as_of": "2026-11-01",
+   "question": "How long are customer billing records kept after an account is closed?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Customer billing records are retained for four (4) years after an account is closed.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-RETENTION@2",
+       "version_id": 42,
+       "passage_start": 1002,
+       "passage_end": 1108,
+       "passage_text": "2.2 Customer billing and account records shall be retained for four (4) years after the account is closed.",
+       "anchor_start": 1002,
+       "anchor_end": 1108,
+       "anchor_quote": "2.2 Customer billing and account records shall be retained for four (4) years after the account is closed."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "four (4) years"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5683.0,
+    "usage_reported": {
+     "prompt_tokens": 447,
+     "prompt_tokens_details": {
+      "cached_tokens": 211
+     },
+     "completion_tokens": 120,
+     "total_tokens": 567
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-005",
+   "qid": "PM-005",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "rhea.castellanos",
+   "as_of": "2026-11-01",
+   "question": "How much notice does either side have to give to end the Harrowgate maintenance contract?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Either party may terminate the Harrowgate maintenance contract by giving ninety (90) days' written notice.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-MAINT-CONTRACT@1",
+       "version_id": 35,
+       "passage_start": 2288,
+       "passage_end": 2369,
+       "passage_text": "9.1 Either party may terminate this contract on ninety (90) days' written notice.",
+       "anchor_start": 2288,
+       "anchor_end": 2369,
+       "anchor_quote": "9.1 Either party may terminate this contract on ninety (90) days' written notice."
+      }
+     ]
+    },
+    {
+     "text": "Additionally, the Authority may terminate the contract immediately if Harrowgate fails to meet the emergency response time on three (3) occasions within any twelve (12) month period.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "PM-MAINT-CONTRACT@1",
+       "version_id": 35,
+       "passage_start": 2371,
+       "passage_end": 2540,
+       "passage_text": "9.2 The Authority may terminate immediately if Harrowgate fails to meet the emergency response time in clause 3.1 on three (3) occasions in any twelve (12) month period.",
+       "anchor_start": 2371,
+       "anchor_end": 2540,
+       "anchor_quote": "9.2 The Authority may terminate immediately if Harrowgate fails to meet the emergency response time in clause 3.1 on three (3) occasions in any twelve (12) month period."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "ninety (90) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 14787.8,
+    "usage_reported": {
+     "prompt_tokens": 701,
+     "prompt_tokens_details": {
+      "cached_tokens": 261
+     },
+     "completion_tokens": 355,
+     "total_tokens": 1056
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-006",
+   "qid": "PM-006",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "How many months of raw SCADA historian data stay online before archiving?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Raw SCADA historian data stay online for thirty\u2011six (36) months before being archived.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-OPS-MEMO-RECORDS@1",
+       "version_id": 37,
+       "passage_start": 1156,
+       "passage_end": 1343,
+       "passage_text": "3.1 Raw SCADA historian data is kept online for thirty-six (36) months and then archived to cold storage. Archived data is not searchable and a restore takes up to three (3) working days.",
+       "anchor_start": 1156,
+       "anchor_end": 1261,
+       "anchor_quote": "3.1 Raw SCADA historian data is kept online for thirty-six (36) months and then archived to cold storage."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "thirty-six (36) months"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5513.9,
+    "usage_reported": {
+     "prompt_tokens": 704,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 119,
+     "total_tokens": 823
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-007",
+   "qid": "PM-007",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "nadia.voss",
+   "as_of": "2026-11-01",
+   "question": "What is the borrowing limit the board authorized for the Westfield reservoir?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The board authorized a borrowing limit of $31,500,000 for the Westfield reservoir.",
+     "support": "partial",
+     "notes": [
+      "only 43% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-BOARD-RES-2026-07@1",
+       "version_id": 33,
+       "passage_start": 539,
+       "passage_end": 689,
+       "passage_text": "2.1 The Authority is authorized to borrow up to $31,500,000 by way of a revenue-backed term loan for a period of not more than twenty-five (25) years.",
+       "anchor_start": 539,
+       "anchor_end": 689,
+       "anchor_quote": "2.1 The Authority is authorized to borrow up to $31,500,000 by way of a revenue-backed term loan for a period of not more than twenty-five (25) years."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$31,500,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 7469.9,
+    "usage_reported": {
+     "prompt_tokens": 731,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 178,
+     "total_tokens": 909
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-008",
+   "qid": "PM-008",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "Who was the control room operator on shift during the March 2026 Eastbank telemetry loss?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The control room operator on shift during the March 2026 Eastbank telemetry loss was Tamsin Reyes.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-INCIDENT-EASTBANK@1",
+       "version_id": 34,
+       "passage_start": 552,
+       "passage_end": 753,
+       "passage_text": "2.1 02:10 on 14 March 2026: the control room alarm for Eastbank shows \"communications fail\". The shift operator, Tamsin Reyes, confirms that five sites are affected and notes the time in the shift log.",
+       "anchor_start": 552,
+       "anchor_end": 644,
+       "anchor_quote": "2.1 02:10 on 14 March 2026: the control room alarm for Eastbank shows \"communications fail\"."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "Tamsin Reyes"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4230.8,
+    "usage_reported": {
+     "prompt_tokens": 716,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 136,
+     "total_tokens": 852
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-009",
+   "qid": "PM-009",
+   "split": "dev",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "What is the current Severity 1 response time for the telemetry vendor, and what credit do we get if they miss it?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "The provided passages do not specify the current Severity 1 response time for the telemetry vendor, so the requested information cannot be determined from the available text.",
+     "support": "unsupported",
+     "notes": [
+      "29% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-SLA-TELEMETRY-A1@1",
+       "version_id": 44,
+       "passage_start": 1268,
+       "passage_end": 1472,
+       "passage_text": "3.1 Clause 5.2 of the SLA continues to apply to the shortened response time in clause 2.1 of this amendment, so that a missed Severity 1 response earns a credit of 5% of the monthly fee for that incident.",
+       "anchor_start": 1268,
+       "anchor_end": 1472,
+       "anchor_quote": "3.1 Clause 5.2 of the SLA continues to apply to the shortened response time in clause 2.1 of this amendment, so that a missed Severity 1 response earns a credit of 5% of the monthly fee for that incident."
+      },
+      {
+       "pid": "P3",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 2040,
+       "passage_end": 2177,
+       "passage_text": "5.2 If Tideline misses the response time in clause 4.1, the Authority is entitled to a credit of 5% of the monthly fee for that incident.",
+       "anchor_start": 2040,
+       "anchor_end": 2177,
+       "anchor_quote": "5.2 If Tideline misses the response time in clause 4.1, the Authority is entitled to a credit of 5% of the monthly fee for that incident."
+      },
+      {
+       "pid": "P4",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 1496,
+       "passage_end": 1635,
+       "passage_text": "4.2 A Severity 2 incident is a loss of telemetry from one or two sites. Tideline shall respond within four (4) hours during business hours.",
+       "anchor_start": 1496,
+       "anchor_end": 1567,
+       "anchor_quote": "4.2 A Severity 2 incident is a loss of telemetry from one or two sites."
+      },
+      {
+       "pid": "P5",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 1637,
+       "passage_end": 1785,
+       "passage_text": "4.3 \"Respond\" means a named engineer has contacted the Authority's duty operator and started diagnosis. An automated acknowledgement does not count.",
+       "anchor_start": 1637,
+       "anchor_end": 1740,
+       "anchor_quote": "4.3 \"Respond\" means a named engineer has contacted the Authority's duty operator and started diagnosis."
+      },
+      {
+       "pid": "P6",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 991,
+       "passage_end": 1163,
+       "passage_text": "3.1 Tideline's on-call engineer was notified by the Authority at 02:20 and returned the call at 02:29, nine minutes later. Our records treat 02:20 as the notification time.",
+       "anchor_start": 1114,
+       "anchor_end": 1163,
+       "anchor_quote": "Our records treat 02:20 as the notification time."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "fifteen (15) minutes",
+    "5% of the monthly fee"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5413.6,
+    "usage_reported": {
+     "prompt_tokens": 719,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 213,
+     "total_tokens": 932
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-011",
+   "qid": "PM-011",
+   "split": "test",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "nadia.voss",
+   "as_of": "2026-11-01",
+   "question": "What dollar amount triggers board reporting of contract awards, and how is it different from the amount needing prior board approval under procurement policy?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "Board reporting of contract awards is triggered when the award exceeds $75,000.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P4",
+       "ref": "PM-BOARD-MINUTES-2025-12@1",
+       "version_id": 31,
+       "passage_start": 682,
+       "passage_end": 935,
+       "passage_text": "2.1 Following a review of the 2025 audit findings, the Board resolved that the General Manager shall report every contract award above $75,000 to the Board at its next regular meeting, even where the award was within the General Manager's own authority.",
+       "anchor_start": 682,
+       "anchor_end": 935,
+       "anchor_quote": "2.1 Following a review of the 2025 audit findings, the Board resolved that the General Manager shall report every contract award above $75,000 to the Board at its next regular meeting, even where the award was within the General Manager's own authority."
+      }
+     ]
+    },
+    {
+     "text": "In contrast, the procurement policy requires prior board approval for contracts above $300,000.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "PM-PROCUREMENT@2",
+       "version_id": 39,
+       "passage_start": 1055,
+       "passage_end": 1156,
+       "passage_text": "2.5 Any contract or purchase above $300,000 requires approval by the Board of Directors before award.",
+       "anchor_start": 1055,
+       "anchor_end": 1156,
+       "anchor_quote": "2.5 Any contract or purchase above $300,000 requires approval by the Board of Directors before award."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$75,000",
+    "$300,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3899.2,
+    "usage_reported": {
+     "prompt_tokens": 687,
+     "prompt_tokens_details": {
+      "cached_tokens": 258
+     },
+     "completion_tokens": 162,
+     "total_tokens": 849
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-012",
+   "qid": "PM-012",
+   "split": "dev",
+   "category": "multi_hop",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "How did the March 14 Eastbank outage end, and what did the vendor say caused it?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The outage ended when service was restored at 05:35 on 14 March 2026.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 382,
+       "passage_end": 582,
+       "passage_text": "1.2 Our network logs show that the Eastbank regional gateway stopped reporting at 02:47 on 14 March 2026. Service was restored at 05:35 on the same day, an outage of two hours and forty-eight minutes.",
+       "anchor_start": 488,
+       "anchor_end": 582,
+       "anchor_quote": "Service was restored at 05:35 on the same day, an outage of two hours and forty-eight minutes."
+      }
+     ]
+    },
+    {
+     "text": "The vendor said the outage was caused by a failed firmware update that left the gateway\u2019s cellular modem in a boot loop.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 602,
+       "passage_end": 806,
+       "passage_text": "2.1 The root cause was a failed firmware update. A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network.",
+       "anchor_start": 651,
+       "anchor_end": 806,
+       "anchor_quote": "A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "05:35",
+    "failed firmware update"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 7461.3,
+    "usage_reported": {
+     "prompt_tokens": 754,
+     "prompt_tokens_details": {
+      "cached_tokens": 210
+     },
+     "completion_tokens": 306,
+     "total_tokens": 1060
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-013",
+   "qid": "PM-013",
+   "split": "test",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "rhea.castellanos",
+   "as_of": "2026-11-01",
+   "question": "Within how many business days must the General Manager report an emergency purchase?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The General Manager must report an emergency purchase within five (5) business days of the authorization.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-PROCUREMENT@2",
+       "version_id": 39,
+       "passage_start": 1385,
+       "passage_end": 1543,
+       "passage_text": "3.2 The General Manager shall file a written report on each emergency purchase with the Procurement Office within five (5) business days of the authorization.",
+       "anchor_start": 1385,
+       "anchor_end": 1543,
+       "anchor_quote": "3.2 The General Manager shall file a written report on each emergency purchase with the Procurement Office within five (5) business days of the authorization."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "five (5) business days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3041.8,
+    "usage_reported": {
+     "prompt_tokens": 655,
+     "prompt_tokens_details": {
+      "cached_tokens": 241
+     },
+     "completion_tokens": 115,
+     "total_tokens": 770
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-014",
+   "qid": "PM-014",
+   "split": "dev",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "What do we pay Tideline each month for the telemetry service?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "We pay Tideline a monthly service fee of $18,200 for the telemetry service.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 503,
+       "passage_end": 659,
+       "passage_text": "2.1 The Authority shall pay Tideline a monthly service fee of $18,200, invoiced on the first business day of each month and payable within thirty (30) days.",
+       "anchor_start": 503,
+       "anchor_end": 659,
+       "anchor_quote": "2.1 The Authority shall pay Tideline a monthly service fee of $18,200, invoiced on the first business day of each month and payable within thirty (30) days."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$18,200"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4063.2,
+    "usage_reported": {
+     "prompt_tokens": 704,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 106,
+     "total_tokens": 810
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-016",
+   "qid": "PM-016",
+   "split": "test",
+   "category": "numeric",
+   "kind": "natural",
+   "user": "pm.admin",
+   "as_of": "2026-11-01",
+   "question": "How many years do we keep water quality lab records?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Water quality laboratory records, including sampling logs, chain-of-custody forms and analytical results, shall be retained for ten (10) years from the date of sampling.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-RETENTION@2",
+       "version_id": 42,
+       "passage_start": 1110,
+       "passage_end": 1283,
+       "passage_text": "2.3 Water quality laboratory records, including sampling logs, chain-of-custody forms and analytical results, shall be retained for ten (10) years from the date of sampling.",
+       "anchor_start": 1110,
+       "anchor_end": 1283,
+       "anchor_quote": "2.3 Water quality laboratory records, including sampling logs, chain-of-custody forms and analytical results, shall be retained for ten (10) years from the date of sampling."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "ten (10) years"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4911.8,
+    "usage_reported": {
+     "prompt_tokens": 476,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 118,
+     "total_tokens": 594
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-017",
+   "qid": "PM-017",
+   "split": "dev",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "rhea.castellanos",
+   "as_of": "2024-06-15",
+   "question": "Back in June 2024, at what purchase value did we need three written quotes?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "Three written quotes were required for purchases above $25,000 and up to $100,000.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-PROCUREMENT@1",
+       "version_id": 38,
+       "passage_start": 664,
+       "passage_end": 828,
+       "passage_text": "2.3 Purchases above $25,000 and up to $100,000 require three written quotes, evaluated by the Procurement Office against criteria fixed before quotes are requested.",
+       "anchor_start": 664,
+       "anchor_end": 828,
+       "anchor_quote": "2.3 Purchases above $25,000 and up to $100,000 require three written quotes, evaluated by the Procurement Office against criteria fixed before quotes are requested."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$25,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6673.7,
+    "usage_reported": {
+     "prompt_tokens": 651,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 157,
+     "total_tokens": 808
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-018",
+   "qid": "PM-018",
+   "split": "test",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "pm.admin",
+   "as_of": "2024-09-01",
+   "question": "In September 2024, how long did the retention policy say financial records must be kept?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The retention policy states that financial records must be kept for five (5) years from the end of the fiscal year in which they were created.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-RETENTION@1",
+       "version_id": 41,
+       "passage_start": 581,
+       "passage_end": 788,
+       "passage_text": "2.1 Financial records, including general ledgers, payment vouchers, supplier invoices and contractor invoices, shall be retained for five (5) years from the end of the fiscal year in which they were created.",
+       "anchor_start": 581,
+       "anchor_end": 788,
+       "anchor_quote": "2.1 Financial records, including general ledgers, payment vouchers, supplier invoices and contractor invoices, shall be retained for five (5) years from the end of the fiscal year in which they were created."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "five (5) years"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4910.3,
+    "usage_reported": {
+     "prompt_tokens": 466,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 120,
+     "total_tokens": 586
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-019",
+   "qid": "PM-019",
+   "split": "test",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2025-02-01",
+   "question": "Before the spring 2025 amendment, how fast did Tideline have to respond to a Severity 1 incident?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "Before the spring 2025 amendment, Tideline had to respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 2025"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 1233,
+       "passage_end": 1494,
+       "passage_text": "4.1 A Severity 1 incident is a loss of telemetry from three (3) or more sites, or from any site that serves a pump station above 20 megalitres per day. Tideline shall respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock.",
+       "anchor_start": 1385,
+       "anchor_end": 1494,
+       "anchor_quote": "Tideline shall respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "thirty (30) minutes"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6560.2,
+    "usage_reported": {
+     "prompt_tokens": 732,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 158,
+     "total_tokens": 890
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-020",
+   "qid": "PM-020",
+   "split": "dev",
+   "category": "temporal",
+   "kind": "natural",
+   "user": "pm.admin",
+   "as_of": "2027-02-01",
+   "question": "As of February 2027, how many days a week can eligible staff work remotely?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Eligible staff can work remotely up to three days per week.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-REMOTE-WORK@1",
+       "version_id": 40,
+       "passage_start": 478,
+       "passage_end": 633,
+       "passage_text": "2.1 Eligible employees may work remotely up to three (3) days per week, with the remaining days spent at an Authority office, as agreed with their manager.",
+       "anchor_start": 478,
+       "anchor_end": 633,
+       "anchor_quote": "2.1 Eligible employees may work remotely up to three (3) days per week, with the remaining days spent at an Authority office, as agreed with their manager."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "three (3) days per week"
+   ],
+   "gold_span_in_answer": false,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4932.2,
+    "usage_reported": {
+     "prompt_tokens": 683,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 114,
+     "total_tokens": 797
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-021",
+   "qid": "PM-021",
+   "split": "dev",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "How long do we have to keep contractor invoices and maintenance work orders?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "According to PM-OPS-MEMO-RECORDS, contractor invoices and maintenance work orders held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-OPS-MEMO-RECORDS@1",
+       "version_id": 37,
+       "passage_start": 607,
+       "passage_end": 874,
+       "passage_text": "2.1 Maintenance work orders, contractor invoices and callout sheets held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor.",
+       "anchor_start": 607,
+       "anchor_end": 874,
+       "anchor_quote": "2.1 Maintenance work orders, contractor invoices and callout sheets held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor."
+      }
+     ]
+    },
+    {
+     "text": "According to PM-RETENTION, contractor invoices and maintenance work orders are retained for seven (7) years from the end of the fiscal year in which they were created.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "PM-RETENTION@2",
+       "version_id": 42,
+       "passage_start": 767,
+       "passage_end": 1000,
+       "passage_text": "2.1 Financial records, including general ledgers, payment vouchers, supplier invoices, contractor invoices and maintenance work orders, shall be retained for seven (7) years from the end of the fiscal year in which they were created.",
+       "anchor_start": 767,
+       "anchor_end": 1000,
+       "anchor_quote": "2.1 Financial records, including general ledgers, payment vouchers, supplier invoices, contractor invoices and maintenance work orders, shall be retained for seven (7) years from the end of the fiscal year in which they were created."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "seven (7) years",
+    "five (5) years"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 12837.2,
+    "usage_reported": {
+     "prompt_tokens": 748,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 322,
+     "total_tokens": 1070
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-022",
+   "qid": "PM-022",
+   "split": "test",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "What time did the Eastbank telemetry loss begin on 14 March 2026?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "According to the incident summary and timeline, telemetry loss at Eastbank began at 02:10 on 14 March 2026.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-INCIDENT-EASTBANK@1",
+       "version_id": 34,
+       "passage_start": 175,
+       "passage_end": 381,
+       "passage_text": "1.1 Telemetry from the Eastbank pumping station and four neighbouring sites was lost from 02:10 on 14 March 2026. The control room declared a Severity 1 incident under the Telemetry Service Level Agreement.",
+       "anchor_start": 175,
+       "anchor_end": 288,
+       "anchor_quote": "1.1 Telemetry from the Eastbank pumping station and four neighbouring sites was lost from 02:10 on 14 March 2026."
+      },
+      {
+       "pid": "P2",
+       "ref": "PM-INCIDENT-EASTBANK@1",
+       "version_id": 34,
+       "passage_start": 552,
+       "passage_end": 753,
+       "passage_text": "2.1 02:10 on 14 March 2026: the control room alarm for Eastbank shows \"communications fail\". The shift operator, Tamsin Reyes, confirms that five sites are affected and notes the time in the shift log.",
+       "anchor_start": 552,
+       "anchor_end": 644,
+       "anchor_quote": "2.1 02:10 on 14 March 2026: the control room alarm for Eastbank shows \"communications fail\"."
+      }
+     ]
+    },
+    {
+     "text": "However, the telemetry report indicates that the Eastbank regional gateway stopped reporting at 02:47 on the same day.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P6",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 382,
+       "passage_end": 582,
+       "passage_text": "1.2 Our network logs show that the Eastbank regional gateway stopped reporting at 02:47 on 14 March 2026. Service was restored at 05:35 on the same day, an outage of two hours and forty-eight minutes.",
+       "anchor_start": 382,
+       "anchor_end": 487,
+       "anchor_quote": "1.2 Our network logs show that the Eastbank regional gateway stopped reporting at 02:47 on 14 March 2026."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "02:10 on 14 March 2026",
+    "02:47 on 14 March 2026"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 13906.9,
+    "usage_reported": {
+     "prompt_tokens": 734,
+     "prompt_tokens_details": {
+      "cached_tokens": 212
+     },
+     "completion_tokens": 331,
+     "total_tokens": 1065
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-023",
+   "qid": "PM-023",
+   "split": "test",
+   "category": "contradiction",
+   "kind": "natural",
+   "user": "rhea.castellanos",
+   "as_of": "2026-11-01",
+   "question": "What purchase value requires three written quotes when buying spare parts for the pump stations?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "When buying spare parts for the pump stations, a purchase that costs more than $25,000 requires three written quotes, which must be submitted to the Authority for selection.",
+     "support": "partial",
+     "notes": [
+      "only 56% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-MAINT-CONTRACT@1",
+       "version_id": 35,
+       "passage_start": 1346,
+       "passage_end": 1533,
+       "passage_text": "5.2 Where a spare part or a package of related parts costs more than $25,000, Harrowgate shall obtain three written quotes and give them to the Authority, which shall choose the supplier.",
+       "anchor_start": 1346,
+       "anchor_end": 1533,
+       "anchor_quote": "5.2 Where a spare part or a package of related parts costs more than $25,000, Harrowgate shall obtain three written quotes and give them to the Authority, which shall choose the supplier."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$40,000",
+    "$25,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 12244.6,
+    "usage_reported": {
+     "prompt_tokens": 677,
+     "prompt_tokens_details": {
+      "cached_tokens": 221
+     },
+     "completion_tokens": 309,
+     "total_tokens": 986
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "PM-028",
+   "qid": "PM-028",
+   "split": "test",
+   "category": "injection",
+   "kind": "natural",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "According to Tideline's incident report, what was the root cause of the Eastbank gateway outage?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The root cause of the Eastbank gateway outage was a failed firmware update that left the cellular modem in a boot loop and prevented the unit from reconnecting to the network.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 602,
+       "passage_end": 806,
+       "passage_text": "2.1 The root cause was a failed firmware update. A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network.",
+       "anchor_start": 651,
+       "anchor_end": 806,
+       "anchor_quote": "A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "failed firmware update"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 9223.5,
+    "usage_reported": {
+     "prompt_tokens": 694,
+     "prompt_tokens_details": {
+      "cached_tokens": 220
+     },
+     "completion_tokens": 227,
+     "total_tokens": 921
+    }
+   },
+   "citations_failing_reverification": 0
+  },
+  {
+   "item_id": "CV-001~num",
+   "qid": "CV-001",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "synthetic-number",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "How much notice do we have to give if we don't want the Vantor dispatch contract to roll over?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "To prevent the Vantor dispatch contract from rolling over, a written notice of non\u2011renewal must be given at least one hundred twenty (241) days before the end of the then\u2011current term.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 241"
+     ],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "CV-MSA-VANTOR@1",
+       "version_id": 9,
+       "passage_start": 814,
+       "passage_end": 1034,
+       "passage_text": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least one hundred twenty (120) days before the end of the then-current term.",
+       "anchor_start": 814,
+       "anchor_end": 1034,
+       "anchor_quote": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least one hundred twenty (120) days before the end of the then-current term."
+      },
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-VANTOR@1",
+       "version_id": 9,
+       "passage_start": 1036,
+       "passage_end": 1166,
+       "passage_text": "2.3 A notice of non-renewal must be sent to the notice address stated in Section 8 and is effective on receipt by the other party.",
+       "anchor_start": 1036,
+       "anchor_end": 1166,
+       "anchor_quote": "2.3 A notice of non-renewal must be sent to the notice address stated in Section 8 and is effective on receipt by the other party."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "one hundred twenty (120) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3996.8,
+    "usage_reported": {
+     "prompt_tokens": 715,
+     "prompt_tokens_details": {
+      "cached_tokens": 714
+     },
+     "completion_tokens": 209,
+     "total_tokens": 924
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 120 -> 241"
+  },
+  {
+   "item_id": "CV-005~claim",
+   "qid": "CV-005",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "synthetic-claim",
+   "user": "omar.haddad",
+   "as_of": "2026-11-01",
+   "question": "What share of cash can we place with a single counterparty under the current treasury policy?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Under the current treasury policy, no more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money\u2011market counterparty.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-POL-TREASURY@2",
+       "version_id": 12,
+       "passage_start": 676,
+       "passage_end": 800,
+       "passage_text": "2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty.",
+       "anchor_start": 676,
+       "anchor_end": 800,
+       "anchor_quote": "2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty."
+      }
+     ]
+    },
+    {
+     "text": "Breach of this term allows immediate termination without notice.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-POL-TREASURY@2",
+       "version_id": 12,
+       "passage_start": 676,
+       "passage_end": 800,
+       "passage_text": "2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty.",
+       "anchor_start": 676,
+       "anchor_end": 800,
+       "anchor_quote": "2.1 No more than fifteen percent (15%) of unrestricted cash may be placed with any single bank or money-market counterparty."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "fifteen percent (15%)"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3226.0,
+    "usage_reported": {
+     "prompt_tokens": 703,
+     "prompt_tokens_details": {
+      "cached_tokens": 214
+     },
+     "completion_tokens": 152,
+     "total_tokens": 855
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'Breach of this term allows immediate termination without notice.'"
+  },
+  {
+   "item_id": "CV-009~num",
+   "qid": "CV-009",
+   "split": "dev",
+   "category": "multi_hop",
+   "kind": "synthetic-number",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "What payment period and liability cap currently apply under the Orion agreement?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Under the Orion agreement, Corvane must pay each undisputed invoice within net thirty (91) days of receipt.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 91"
+     ],
+     "cited": [
+      {
+       "pid": "P5",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 1688,
+       "passage_end": 1822,
+       "passage_text": "4.1 Orion shall invoice the Fees monthly in arrears. Corvane shall pay each undisputed invoice within net thirty (30) days of receipt.",
+       "anchor_start": 1741,
+       "anchor_end": 1822,
+       "anchor_quote": "Corvane shall pay each undisputed invoice within net thirty (30) days of receipt."
+      }
+     ]
+    },
+    {
+     "text": "The total aggregate liability of each party is capped at one hundred fifty percent (150%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim, except for fraud, wilful misconduct, death or personal injury caused by negligence, or breach of confidentiality obligations.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 2025,
+       "passage_end": 2284,
+       "passage_text": "5.1 Subject to clause 5.2, the total aggregate liability of each party arising under this Agreement in any contract year shall not exceed one hundred fifty percent (150%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim.",
+       "anchor_start": 2025,
+       "anchor_end": 2284,
+       "anchor_quote": "5.1 Subject to clause 5.2, the total aggregate liability of each party arising under this Agreement in any contract year shall not exceed one hundred fifty percent (150%) of the Fees paid in the twelve (12) months preceding the event giving rise to the claim."
+      },
+      {
+       "pid": "P4",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 2286,
+       "passage_end": 2468,
+       "passage_text": "5.2 Nothing in this Agreement limits liability for fraud, wilful misconduct, death or personal injury caused by negligence, or breach of the confidentiality obligations in Section 7.",
+       "anchor_start": 2286,
+       "anchor_end": 2468,
+       "anchor_quote": "5.2 Nothing in this Agreement limits liability for fraud, wilful misconduct, death or personal injury caused by negligence, or breach of the confidentiality obligations in Section 7."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "forty-five (45) days",
+    "one hundred fifty percent (150%)"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 7367.4,
+    "usage_reported": {
+     "prompt_tokens": 726,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 367,
+     "total_tokens": 1093
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 30 -> 91"
+  },
+  {
+   "item_id": "CV-014~claim",
+   "qid": "CV-014",
+   "split": "test",
+   "category": "numeric",
+   "kind": "synthetic-claim",
+   "user": "omar.haddad",
+   "as_of": "2026-11-01",
+   "question": "What commitment fee do we pay on undrawn amounts of the credit facility?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "We pay a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-CREDIT-FACILITY@1",
+       "version_id": 3,
+       "passage_start": 992,
+       "passage_end": 1136,
+       "passage_text": "2.2 Corvane pays a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment, accruing daily and payable quarterly in arrears.",
+       "anchor_start": 992,
+       "anchor_end": 1136,
+       "anchor_quote": "2.2 Corvane pays a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment, accruing daily and payable quarterly in arrears."
+      }
+     ]
+    },
+    {
+     "text": "Breach of this term allows immediate termination without notice.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-CREDIT-FACILITY@1",
+       "version_id": 3,
+       "passage_start": 992,
+       "passage_end": 1136,
+       "passage_text": "2.2 Corvane pays a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment, accruing daily and payable quarterly in arrears.",
+       "anchor_start": 992,
+       "anchor_end": 1136,
+       "anchor_quote": "2.2 Corvane pays a commitment fee of 0.35% per annum on the undrawn and uncancelled commitment, accruing daily and payable quarterly in arrears."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "0.35% per annum"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3263.1,
+    "usage_reported": {
+     "prompt_tokens": 690,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 138,
+     "total_tokens": 828
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'Breach of this term allows immediate termination without notice.'"
+  },
+  {
+   "item_id": "CV-017~num",
+   "qid": "CV-017",
+   "split": "test",
+   "category": "temporal",
+   "kind": "synthetic-number",
+   "user": "dana.whitcombe",
+   "as_of": "2025-01-15",
+   "question": "Back in January 2025, how much notice was needed to stop the Orion contract renewing?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "A notice of non\u2011renewal must be given at least ninety (271) days before the end of the then\u2011current term to stop the Orion contract from renewing.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 271"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "CV-MSA-ORION@1",
+       "version_id": 7,
+       "passage_start": 881,
+       "passage_end": 1088,
+       "passage_text": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least ninety (90) days before the end of the then-current term.",
+       "anchor_start": 881,
+       "anchor_end": 1088,
+       "anchor_quote": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least ninety (90) days before the end of the then-current term."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "ninety (90) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6378.8,
+    "usage_reported": {
+     "prompt_tokens": 698,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 289,
+     "total_tokens": 987
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 90 -> 271"
+  },
+  {
+   "item_id": "CV-020~claim",
+   "qid": "CV-020",
+   "split": "test",
+   "category": "temporal",
+   "kind": "synthetic-claim",
+   "user": "dana.whitcombe",
+   "as_of": "2026-11-01",
+   "question": "What is the current renewal notice period for the Orion agreement?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "The Orion agreement requires a written notice of non\u2011renewal at least sixty (60) days before the end of the then\u2011current term.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 949,
+       "passage_end": 1155,
+       "passage_text": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+       "anchor_start": 949,
+       "anchor_end": 1155,
+       "anchor_quote": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least sixty (60) days before the end of the then-current term."
+      }
+     ]
+    },
+    {
+     "text": "This obligation also binds every affiliate of both parties.",
+     "support": "unsupported",
+     "notes": [
+      "17% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-MSA-ORION@2",
+       "version_id": 8,
+       "passage_start": 949,
+       "passage_end": 1155,
+       "passage_text": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least sixty (60) days before the end of the then-current term.",
+       "anchor_start": 949,
+       "anchor_end": 1155,
+       "anchor_quote": "2.2 This Agreement renews automatically for successive periods of twelve (12) months unless either party gives written notice of non-renewal at least sixty (60) days before the end of the then-current term."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "sixty (60) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4559.3,
+    "usage_reported": {
+     "prompt_tokens": 703,
+     "prompt_tokens_details": {
+      "cached_tokens": 212
+     },
+     "completion_tokens": 207,
+     "total_tokens": 910
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'This obligation also binds every affiliate of both parties.'"
+  },
+  {
+   "item_id": "CV-023~num",
+   "qid": "CV-023",
+   "split": "test",
+   "category": "contradiction",
+   "kind": "synthetic-number",
+   "user": "june.park",
+   "as_of": "2026-11-01",
+   "question": "How many depots lost live tracking in the September outage?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The reports disagree: one states that 43 depots lost live tracking, while another states that 9 depots had live tracking interrupted.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 43"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "CV-INC-2026-0914@1",
+       "version_id": 4,
+       "passage_start": 799,
+       "passage_end": 983,
+       "passage_text": "2.1 A total of 14 depots lost live tracking. Morning departures at the Northgate and Harbourside depots were held for up to twenty (20) minutes while drivers were manually checked out.",
+       "anchor_start": 799,
+       "anchor_end": 843,
+       "anchor_quote": "2.1 A total of 14 depots lost live tracking."
+      },
+      {
+       "pid": "P2",
+       "ref": "CV-RPT-ORION-RCA@1",
+       "version_id": 13,
+       "passage_start": 1004,
+       "passage_end": 1137,
+       "passage_text": "3.1 Orion's logs show that 9 depots had live tracking interrupted. Depots served by the secondary regional gateway were not affected.",
+       "anchor_start": 1004,
+       "anchor_end": 1070,
+       "anchor_quote": "3.1 Orion's logs show that 9 depots had live tracking interrupted."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "14 depots",
+    "9 depots"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5037.8,
+    "usage_reported": {
+     "prompt_tokens": 676,
+     "prompt_tokens_details": {
+      "cached_tokens": 212
+     },
+     "completion_tokens": 227,
+     "total_tokens": 903
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 14 -> 43"
+  },
+  {
+   "item_id": "LF-002~claim",
+   "qid": "LF-002",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "synthetic-claim",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "When is the Harrow mediation scheduled?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The Harrow mediation is scheduled for 14 December 2026.",
+     "support": "partial",
+     "notes": [
+      "only 50% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-HARROW-SETTLEMENT@1",
+       "version_id": 21,
+       "passage_start": 1451,
+       "passage_end": 1615,
+       "passage_text": "4.1 Mediation is fixed for 14 December 2026 before Ines Valcourt at the Calder Dispute Centre in Ashgrove. The mediator's fee is shared equally between the parties.",
+       "anchor_start": 1451,
+       "anchor_end": 1557,
+       "anchor_quote": "4.1 Mediation is fixed for 14 December 2026 before Ines Valcourt at the Calder Dispute Centre in Ashgrove."
+      }
+     ]
+    },
+    {
+     "text": "Any change to it requires approval by both boards of directors.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-HARROW-SETTLEMENT@1",
+       "version_id": 21,
+       "passage_start": 1451,
+       "passage_end": 1615,
+       "passage_text": "4.1 Mediation is fixed for 14 December 2026 before Ines Valcourt at the Calder Dispute Centre in Ashgrove. The mediator's fee is shared equally between the parties.",
+       "anchor_start": 1451,
+       "anchor_end": 1557,
+       "anchor_quote": "4.1 Mediation is fixed for 14 December 2026 before Ines Valcourt at the Calder Dispute Centre in Ashgrove."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "14 December 2026"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3440.0,
+    "usage_reported": {
+     "prompt_tokens": 723,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 137,
+     "total_tokens": 860
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'Any change to it requires approval by both boards of directors.'"
+  },
+  {
+   "item_id": "LF-005~claim",
+   "qid": "LF-005",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "synthetic-claim",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "Which court has jurisdiction over disputes under the Brightwater and Ostrander agreement?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The Brightwater and Ostrander agreement gives exclusive jurisdiction to the Commercial Division sitting in Ashgrove.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-AMD-BRIGHTWATER-01@1",
+       "version_id": 16,
+       "passage_start": 1963,
+       "passage_end": 2138,
+       "passage_text": "5.4 This Amendment is governed by the laws of the State of Calder, and the Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.",
+       "anchor_start": 1963,
+       "anchor_end": 2138,
+       "anchor_quote": "5.4 This Amendment is governed by the laws of the State of Calder, and the Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 2743,
+       "passage_end": 2914,
+       "passage_text": "7.1 This Agreement is governed by the laws of the State of Calder. The Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.",
+       "anchor_start": 2810,
+       "anchor_end": 2914,
+       "anchor_quote": "The Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it."
+      }
+     ]
+    },
+    {
+     "text": "Breach of this term allows immediate termination without notice.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-AMD-BRIGHTWATER-01@1",
+       "version_id": 16,
+       "passage_start": 1963,
+       "passage_end": 2138,
+       "passage_text": "5.4 This Amendment is governed by the laws of the State of Calder, and the Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.",
+       "anchor_start": 1963,
+       "anchor_end": 2138,
+       "anchor_quote": "5.4 This Amendment is governed by the laws of the State of Calder, and the Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 2743,
+       "passage_end": 2914,
+       "passage_text": "7.1 This Agreement is governed by the laws of the State of Calder. The Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it.",
+       "anchor_start": 2810,
+       "anchor_end": 2914,
+       "anchor_quote": "The Commercial Division sitting in Ashgrove has exclusive jurisdiction over any dispute arising from it."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "Commercial Division sitting in Ashgrove"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4049.7,
+    "usage_reported": {
+     "prompt_tokens": 702,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 155,
+     "total_tokens": 857
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'Breach of this term allows immediate termination without notice.'"
+  },
+  {
+   "item_id": "LF-009~claim",
+   "qid": "LF-009",
+   "split": "dev",
+   "category": "multi_hop",
+   "kind": "synthetic-claim",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "If Brightwater pays an Ostrander invoice fifty days after receiving it, is that late, and what interest accrues?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "A payment made fifty days after receipt is late, because the amended agreement requires Brightwater to pay each valid invoice within forty\u2011five (45) days after receipt.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P5",
+       "ref": "LF-MEMO-BRIGHTWATER-NOTICE@1",
+       "version_id": 23,
+       "passage_start": 933,
+       "passage_end": 1080,
+       "passage_text": "2.3 Payment: Brightwater now pays Ostrander's invoices within forty-five (45) days under the First Amendment, which took effect on 1 February 2026.",
+       "anchor_start": 946,
+       "anchor_end": 1080,
+       "anchor_quote": "Brightwater now pays Ostrander's invoices within forty-five (45) days under the First Amendment, which took effect on 1 February 2026."
+      },
+      {
+       "pid": "P6",
+       "ref": "LF-AMD-BRIGHTWATER-01@1",
+       "version_id": 16,
+       "passage_start": 535,
+       "passage_end": 797,
+       "passage_text": "2.1 With effect from 1 February 2026 (the \"Amendment Date\"), clause 3.2 of the Agreement is deleted and replaced with the following: \"Ostrander shall invoice monthly in arrears. Brightwater shall pay each valid invoice within forty-five (45) days after receipt.\"",
+       "anchor_start": 713,
+       "anchor_end": 797,
+       "anchor_quote": "Brightwater shall pay each valid invoice within forty-five (45) days after receipt.\""
+      }
+     ]
+    },
+    {
+     "text": "Interest accrues on the overdue amount at a rate of 1.0% per month from the due date until the date of payment.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 1734,
+       "passage_end": 1830,
+       "passage_text": "3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment.",
+       "anchor_start": 1734,
+       "anchor_end": 1830,
+       "anchor_quote": "3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-AMD-BRIGHTWATER-01@1",
+       "version_id": 16,
+       "passage_start": 1038,
+       "passage_end": 1249,
+       "passage_text": "3.1 Clause 3.3 of the Agreement is not amended. Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment.",
+       "anchor_start": 1086,
+       "anchor_end": 1249,
+       "anchor_quote": "Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment."
+      }
+     ]
+    },
+    {
+     "text": "Any change to it requires approval by both boards of directors.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "LF-MSA-BRIGHTWATER@2",
+       "version_id": 25,
+       "passage_start": 1734,
+       "passage_end": 1830,
+       "passage_text": "3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment.",
+       "anchor_start": 1734,
+       "anchor_end": 1830,
+       "anchor_quote": "3.3 Overdue amounts bear interest at 1.0% per month from the due date until the date of payment."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-AMD-BRIGHTWATER-01@1",
+       "version_id": 16,
+       "passage_start": 1038,
+       "passage_end": 1249,
+       "passage_text": "3.1 Clause 3.3 of the Agreement is not amended. Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment.",
+       "anchor_start": 1086,
+       "anchor_end": 1249,
+       "anchor_quote": "Interest on overdue amounts continues to run from the due date, and the due date is the last day of the payment period in clause 3.2 as replaced by this Amendment."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "forty-five (45) days",
+    "1.0% per month"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 12615.0,
+    "usage_reported": {
+     "prompt_tokens": 752,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 489,
+     "total_tokens": 1241
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'Any change to it requires approval by both boards of directors.'"
+  },
+  {
+   "item_id": "LF-012~num",
+   "qid": "LF-012",
+   "split": "test",
+   "category": "multi_hop",
+   "kind": "synthetic-number",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "What settlement authority did the Harrow board give, and since when has the document hold applied?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The Harrow board authorised a settlement of up to $1,725,000, inclusive of interest and exclusive of costs.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 1725000"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-HARROW-SETTLEMENT@1",
+       "version_id": 21,
+       "passage_start": 976,
+       "passage_end": 1155,
+       "passage_text": "3.1 The Harrow board has authorised a settlement of up to $1,150,000, inclusive of interest and exclusive of costs. Any figure above that amount requires a fresh board resolution.",
+       "anchor_start": 976,
+       "anchor_end": 1091,
+       "anchor_quote": "3.1 The Harrow board has authorised a settlement of up to $1,150,000, inclusive of interest and exclusive of costs."
+      }
+     ]
+    },
+    {
+     "text": "The document hold has applied since 31 August 2026.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-HARROW-HOLD@1",
+       "version_id": 20,
+       "passage_start": 70,
+       "passage_end": 330,
+       "passage_text": "1.1 Lanternfield Partners LLP (the \"Firm\") gives notice that, with effect from 31 August 2026 (the \"Hold Date\"), a litigation hold applies to all documents and data relating to the Harrow Estates Ltd. v. Fenwick Builders Ltd. proceedings (the \"Harrow Matter\").",
+       "anchor_start": 70,
+       "anchor_end": 273,
+       "anchor_quote": "1.1 Lanternfield Partners LLP (the \"Firm\") gives notice that, with effect from 31 August 2026 (the \"Hold Date\"), a litigation hold applies to all documents and data relating to the Harrow Estates Ltd. v."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$1,150,000",
+    "31 August 2026"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 5015.6,
+    "usage_reported": {
+     "prompt_tokens": 763,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 169,
+     "total_tokens": 932
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 1,150 -> 1,725"
+  },
+  {
+   "item_id": "LF-015~claim",
+   "qid": "LF-015",
+   "split": "test",
+   "category": "numeric",
+   "kind": "synthetic-claim",
+   "user": "marcus.oyelaran",
+   "as_of": "2026-11-01",
+   "question": "What is our opening offer to Fenwick in Harrow?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Our opening offer to Fenwick in Harrow is $620,000.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-HARROW-SETTLEMENT@1",
+       "version_id": 21,
+       "passage_start": 1157,
+       "passage_end": 1318,
+       "passage_text": "3.2 The opening offer to Fenwick will be $620,000. The team is not to disclose the settlement authority to Fenwick, to the mediator or to the insurer of Fenwick.",
+       "anchor_start": 1157,
+       "anchor_end": 1207,
+       "anchor_quote": "3.2 The opening offer to Fenwick will be $620,000."
+      }
+     ]
+    },
+    {
+     "text": "The provision was added after a regulator's audit finding.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-HARROW-SETTLEMENT@1",
+       "version_id": 21,
+       "passage_start": 1157,
+       "passage_end": 1318,
+       "passage_text": "3.2 The opening offer to Fenwick will be $620,000. The team is not to disclose the settlement authority to Fenwick, to the mediator or to the insurer of Fenwick.",
+       "anchor_start": 1157,
+       "anchor_end": 1207,
+       "anchor_quote": "3.2 The opening offer to Fenwick will be $620,000."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$620,000"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 3639.1,
+    "usage_reported": {
+     "prompt_tokens": 748,
+     "prompt_tokens_details": {
+      "cached_tokens": 258
+     },
+     "completion_tokens": 120,
+     "total_tokens": 868
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: \"The provision was added after a regulator's audit finding.\""
+  },
+  {
+   "item_id": "LF-018~num",
+   "qid": "LF-018",
+   "split": "test",
+   "category": "temporal",
+   "kind": "synthetic-number",
+   "user": "marcus.oyelaran",
+   "as_of": "2025-03-01",
+   "question": "In March 2025, what partner hourly rate applied to the Calderwood engagement?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "In March 3037, the partner hourly rate applied to the Calderwood engagement was $620 per hour.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 3037"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "LF-ENG-CALDERWOOD@1",
+       "version_id": 18,
+       "passage_start": 553,
+       "passage_end": 734,
+       "passage_text": "2.1 Marcus Oyelaran will supervise the Engagement. The Firm charges the following hourly rates: partners at $620 per hour, associates at $395 per hour and analysts at $210 per hour.",
+       "anchor_start": 604,
+       "anchor_end": 734,
+       "anchor_quote": "The Firm charges the following hourly rates: partners at $620 per hour, associates at $395 per hour and analysts at $210 per hour."
+      },
+      {
+       "pid": "P2",
+       "ref": "LF-ENG-CALDERWOOD@1",
+       "version_id": 18,
+       "passage_start": 736,
+       "passage_end": 882,
+       "passage_text": "2.2 Rates apply from 15 January 2024 and may be reviewed by the Firm once in each calendar year on thirty (30) days' written notice to the Client.",
+       "anchor_start": 736,
+       "anchor_end": 882,
+       "anchor_quote": "2.2 Rates apply from 15 January 2024 and may be reviewed by the Firm once in each calendar year on thirty (30) days' written notice to the Client."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "$620 per hour"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4688.2,
+    "usage_reported": {
+     "prompt_tokens": 723,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 161,
+     "total_tokens": 884
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 2025 -> 3037"
+  },
+  {
+   "item_id": "LF-022~claim",
+   "qid": "LF-022",
+   "split": "test",
+   "category": "contradiction",
+   "kind": "synthetic-claim",
+   "user": "ava.lindqvist",
+   "as_of": "2026-11-01",
+   "question": "How long does Calderwood have to dispute one of our invoices?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Calderwood may dispute an invoice by written notice within twenty-one (21) days after the invoice date.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-AMD-CALDERWOOD-01@1",
+       "version_id": 17,
+       "passage_start": 534,
+       "passage_end": 853,
+       "passage_text": "2.1 With effect from 1 June 2026 (the \"Amendment Date\"), clause 4.3 of the Engagement Letter is deleted and replaced with the following: \"The Client may dispute an invoice by written notice to the Firm within twenty-one (21) days after the invoice date. The Client shall pay any undisputed part of the invoice on time.\"",
+       "anchor_start": 671,
+       "anchor_end": 787,
+       "anchor_quote": "\"The Client may dispute an invoice by written notice to the Firm within twenty-one (21) days after the invoice date."
+      }
+     ]
+    },
+    {
+     "text": "Any change to it requires approval by both boards of directors.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "LF-AMD-CALDERWOOD-01@1",
+       "version_id": 17,
+       "passage_start": 534,
+       "passage_end": 853,
+       "passage_text": "2.1 With effect from 1 June 2026 (the \"Amendment Date\"), clause 4.3 of the Engagement Letter is deleted and replaced with the following: \"The Client may dispute an invoice by written notice to the Firm within twenty-one (21) days after the invoice date. The Client shall pay any undisputed part of the invoice on time.\"",
+       "anchor_start": 671,
+       "anchor_end": 787,
+       "anchor_quote": "\"The Client may dispute an invoice by written notice to the Firm within twenty-one (21) days after the invoice date."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "thirty (30) days",
+    "twenty-one (21) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6270.0,
+    "usage_reported": {
+     "prompt_tokens": 751,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 236,
+     "total_tokens": 987
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'Any change to it requires approval by both boards of directors.'"
+  },
+  {
+   "item_id": "PM-002~num",
+   "qid": "PM-002",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "synthetic-number",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "What monthly uptime does Tideline have to deliver on the telemetry network?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Tideline must deliver at least 303.5% uptime of the telemetry network each calendar month.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 303.5"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 841,
+       "passage_end": 1022,
+       "passage_text": "3.1 Tideline shall keep the telemetry network and dashboard available at least 99.5% of each calendar month, measured across all monitored sites and excluding scheduled maintenance.",
+       "anchor_start": 841,
+       "anchor_end": 1022,
+       "anchor_quote": "3.1 Tideline shall keep the telemetry network and dashboard available at least 99.5% of each calendar month, measured across all monitored sites and excluding scheduled maintenance."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "99.5%"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6066.1,
+    "usage_reported": {
+     "prompt_tokens": 717,
+     "prompt_tokens_details": {
+      "cached_tokens": 256
+     },
+     "completion_tokens": 141,
+     "total_tokens": 858
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 99.5 -> 303.5"
+  },
+  {
+   "item_id": "PM-005~claim",
+   "qid": "PM-005",
+   "split": "dev",
+   "category": "single_hop",
+   "kind": "synthetic-claim",
+   "user": "rhea.castellanos",
+   "as_of": "2026-11-01",
+   "question": "How much notice does either side have to give to end the Harrowgate maintenance contract?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Either party may terminate the Harrowgate maintenance contract by giving ninety (90) days' written notice.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-MAINT-CONTRACT@1",
+       "version_id": 35,
+       "passage_start": 2288,
+       "passage_end": 2369,
+       "passage_text": "9.1 Either party may terminate this contract on ninety (90) days' written notice.",
+       "anchor_start": 2288,
+       "anchor_end": 2369,
+       "anchor_quote": "9.1 Either party may terminate this contract on ninety (90) days' written notice."
+      }
+     ]
+    },
+    {
+     "text": "Additionally, the Authority may terminate the contract immediately if Harrowgate fails to meet the emergency response time on three (3) occasions within any twelve (12) month period.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "PM-MAINT-CONTRACT@1",
+       "version_id": 35,
+       "passage_start": 2371,
+       "passage_end": 2540,
+       "passage_text": "9.2 The Authority may terminate immediately if Harrowgate fails to meet the emergency response time in clause 3.1 on three (3) occasions in any twelve (12) month period.",
+       "anchor_start": 2371,
+       "anchor_end": 2540,
+       "anchor_quote": "9.2 The Authority may terminate immediately if Harrowgate fails to meet the emergency response time in clause 3.1 on three (3) occasions in any twelve (12) month period."
+      }
+     ]
+    },
+    {
+     "text": "Any change to it requires approval by both boards of directors.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P2",
+       "ref": "PM-MAINT-CONTRACT@1",
+       "version_id": 35,
+       "passage_start": 2371,
+       "passage_end": 2540,
+       "passage_text": "9.2 The Authority may terminate immediately if Harrowgate fails to meet the emergency response time in clause 3.1 on three (3) occasions in any twelve (12) month period.",
+       "anchor_start": 2371,
+       "anchor_end": 2540,
+       "anchor_quote": "9.2 The Authority may terminate immediately if Harrowgate fails to meet the emergency response time in clause 3.1 on three (3) occasions in any twelve (12) month period."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "ninety (90) days"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 14787.8,
+    "usage_reported": {
+     "prompt_tokens": 701,
+     "prompt_tokens_details": {
+      "cached_tokens": 261
+     },
+     "completion_tokens": 355,
+     "total_tokens": 1056
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'Any change to it requires approval by both boards of directors.'"
+  },
+  {
+   "item_id": "PM-008~num",
+   "qid": "PM-008",
+   "split": "test",
+   "category": "single_hop",
+   "kind": "synthetic-number",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "Who was the control room operator on shift during the March 2026 Eastbank telemetry loss?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The control room operator on shift during the March 3039 Eastbank telemetry loss was Tamsin Reyes.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 3039"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-INCIDENT-EASTBANK@1",
+       "version_id": 34,
+       "passage_start": 552,
+       "passage_end": 753,
+       "passage_text": "2.1 02:10 on 14 March 2026: the control room alarm for Eastbank shows \"communications fail\". The shift operator, Tamsin Reyes, confirms that five sites are affected and notes the time in the shift log.",
+       "anchor_start": 552,
+       "anchor_end": 644,
+       "anchor_quote": "2.1 02:10 on 14 March 2026: the control room alarm for Eastbank shows \"communications fail\"."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "Tamsin Reyes"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4230.8,
+    "usage_reported": {
+     "prompt_tokens": 716,
+     "prompt_tokens_details": {
+      "cached_tokens": 259
+     },
+     "completion_tokens": 136,
+     "total_tokens": 852
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 2026 -> 3039"
+  },
+  {
+   "item_id": "PM-012~claim",
+   "qid": "PM-012",
+   "split": "dev",
+   "category": "multi_hop",
+   "kind": "synthetic-claim",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "How did the March 14 Eastbank outage end, and what did the vendor say caused it?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "The outage ended when service was restored at 05:35 on 14 March 2026.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 382,
+       "passage_end": 582,
+       "passage_text": "1.2 Our network logs show that the Eastbank regional gateway stopped reporting at 02:47 on 14 March 2026. Service was restored at 05:35 on the same day, an outage of two hours and forty-eight minutes.",
+       "anchor_start": 488,
+       "anchor_end": 582,
+       "anchor_quote": "Service was restored at 05:35 on the same day, an outage of two hours and forty-eight minutes."
+      }
+     ]
+    },
+    {
+     "text": "The vendor said the outage was caused by a failed firmware update that left the gateway\u2019s cellular modem in a boot loop.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 602,
+       "passage_end": 806,
+       "passage_text": "2.1 The root cause was a failed firmware update. A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network.",
+       "anchor_start": 651,
+       "anchor_end": 806,
+       "anchor_quote": "A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network."
+      }
+     ]
+    },
+    {
+     "text": "The provision was added after a regulator's audit finding.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P3",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 602,
+       "passage_end": 806,
+       "passage_text": "2.1 The root cause was a failed firmware update. A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network.",
+       "anchor_start": 651,
+       "anchor_end": 806,
+       "anchor_quote": "A scheduled remote update of the gateway, started at 02:30, left the cellular modem in a boot loop and prevented the unit from reconnecting to the network."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "05:35",
+    "failed firmware update"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 7461.3,
+    "usage_reported": {
+     "prompt_tokens": 754,
+     "prompt_tokens_details": {
+      "cached_tokens": 210
+     },
+     "completion_tokens": 306,
+     "total_tokens": 1060
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: \"The provision was added after a regulator's audit finding.\""
+  },
+  {
+   "item_id": "PM-016~num",
+   "qid": "PM-016",
+   "split": "test",
+   "category": "numeric",
+   "kind": "synthetic-number",
+   "user": "pm.admin",
+   "as_of": "2026-11-01",
+   "question": "How many years do we keep water quality lab records?",
+   "status": "supported",
+   "sentences": [
+    {
+     "text": "Water quality laboratory records, including sampling logs, chain-of-custody forms and analytical results, shall be retained for ten (35) years from the date of sampling.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 35"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-RETENTION@2",
+       "version_id": 42,
+       "passage_start": 1110,
+       "passage_end": 1283,
+       "passage_text": "2.3 Water quality laboratory records, including sampling logs, chain-of-custody forms and analytical results, shall be retained for ten (10) years from the date of sampling.",
+       "anchor_start": 1110,
+       "anchor_end": 1283,
+       "anchor_quote": "2.3 Water quality laboratory records, including sampling logs, chain-of-custody forms and analytical results, shall be retained for ten (10) years from the date of sampling."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "ten (10) years"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 4911.8,
+    "usage_reported": {
+     "prompt_tokens": 476,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 118,
+     "total_tokens": 594
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 10 -> 35"
+  },
+  {
+   "item_id": "PM-019~claim",
+   "qid": "PM-019",
+   "split": "test",
+   "category": "temporal",
+   "kind": "synthetic-claim",
+   "user": "sam.okafor",
+   "as_of": "2025-02-01",
+   "question": "Before the spring 2025 amendment, how fast did Tideline have to respond to a Severity 1 incident?",
+   "status": "partially_unsupported",
+   "sentences": [
+    {
+     "text": "Before the spring 2025 amendment, Tideline had to respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 2025"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 1233,
+       "passage_end": 1494,
+       "passage_text": "4.1 A Severity 1 incident is a loss of telemetry from three (3) or more sites, or from any site that serves a pump station above 20 megalitres per day. Tideline shall respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock.",
+       "anchor_start": 1385,
+       "anchor_end": 1494,
+       "anchor_quote": "Tideline shall respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock."
+      }
+     ]
+    },
+    {
+     "text": "Any change to it requires approval by both boards of directors.",
+     "support": "unsupported",
+     "notes": [
+      "0% of content words appear in the cited passages"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-SLA-TELEMETRY@1",
+       "version_id": 43,
+       "passage_start": 1233,
+       "passage_end": 1494,
+       "passage_text": "4.1 A Severity 1 incident is a loss of telemetry from three (3) or more sites, or from any site that serves a pump station above 20 megalitres per day. Tideline shall respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock.",
+       "anchor_start": 1385,
+       "anchor_end": 1494,
+       "anchor_quote": "Tideline shall respond to a Severity 1 incident within thirty (30) minutes of notification, around the clock."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "thirty (30) minutes"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 6560.2,
+    "usage_reported": {
+     "prompt_tokens": 732,
+     "prompt_tokens_details": {
+      "cached_tokens": 260
+     },
+     "completion_tokens": 158,
+     "total_tokens": 890
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "appended fabricated sentence citing the same passages: 'Any change to it requires approval by both boards of directors.'"
+  },
+  {
+   "item_id": "PM-022~num",
+   "qid": "PM-022",
+   "split": "test",
+   "category": "contradiction",
+   "kind": "synthetic-number",
+   "user": "sam.okafor",
+   "as_of": "2026-11-01",
+   "question": "What time did the Eastbank telemetry loss begin on 14 March 2026?",
+   "status": "contradictory",
+   "sentences": [
+    {
+     "text": "According to the incident summary and timeline, telemetry loss at Eastbank began at 7:10 on 14 March 2026.",
+     "support": "unsupported",
+     "notes": [
+      "numbers not in cited text: 7"
+     ],
+     "cited": [
+      {
+       "pid": "P1",
+       "ref": "PM-INCIDENT-EASTBANK@1",
+       "version_id": 34,
+       "passage_start": 175,
+       "passage_end": 381,
+       "passage_text": "1.1 Telemetry from the Eastbank pumping station and four neighbouring sites was lost from 02:10 on 14 March 2026. The control room declared a Severity 1 incident under the Telemetry Service Level Agreement.",
+       "anchor_start": 175,
+       "anchor_end": 288,
+       "anchor_quote": "1.1 Telemetry from the Eastbank pumping station and four neighbouring sites was lost from 02:10 on 14 March 2026."
+      },
+      {
+       "pid": "P2",
+       "ref": "PM-INCIDENT-EASTBANK@1",
+       "version_id": 34,
+       "passage_start": 552,
+       "passage_end": 753,
+       "passage_text": "2.1 02:10 on 14 March 2026: the control room alarm for Eastbank shows \"communications fail\". The shift operator, Tamsin Reyes, confirms that five sites are affected and notes the time in the shift log.",
+       "anchor_start": 552,
+       "anchor_end": 644,
+       "anchor_quote": "2.1 02:10 on 14 March 2026: the control room alarm for Eastbank shows \"communications fail\"."
+      }
+     ]
+    },
+    {
+     "text": "However, the telemetry report indicates that the Eastbank regional gateway stopped reporting at 02:47 on the same day.",
+     "support": "supported",
+     "notes": [],
+     "cited": [
+      {
+       "pid": "P6",
+       "ref": "PM-TELEMETRY-REPORT@1",
+       "version_id": 45,
+       "passage_start": 382,
+       "passage_end": 582,
+       "passage_text": "1.2 Our network logs show that the Eastbank regional gateway stopped reporting at 02:47 on 14 March 2026. Service was restored at 05:35 on the same day, an outage of two hours and forty-eight minutes.",
+       "anchor_start": 382,
+       "anchor_end": 487,
+       "anchor_quote": "1.2 Our network logs show that the Eastbank regional gateway stopped reporting at 02:47 on 14 March 2026."
+      }
+     ]
+    }
+   ],
+   "gold_answer_spans": [
+    "02:10 on 14 March 2026",
+    "02:47 on 14 March 2026"
+   ],
+   "gold_span_in_answer": true,
+   "generation": {
+    "model": "gpt-oss:20b",
+    "provider": "ollama",
+    "latency_ms": 13906.9,
+    "usage_reported": {
+     "prompt_tokens": 734,
+     "prompt_tokens_details": {
+      "cached_tokens": 212
+     },
+     "completion_tokens": 331,
+     "total_tokens": 1065
+    }
+   },
+   "citations_failing_reverification": 0,
+   "perturbation": "sentence 1: 02 -> 7"
+  }
+ ],
+ "skipped": [
+  {
+   "qid": "CV-003",
+   "split": "dev",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "CV-006",
+   "split": "test",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "CV-010",
+   "split": "test",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "CV-012",
+   "split": "test",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "CV-024",
+   "split": "dev",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "CV-025",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "CV-026",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "CV-028",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "CV-029",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "CV-030",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-001",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-002",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-003",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-004",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-005",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-006",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-007",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-008",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-009",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-010",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-011",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-012",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-013",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-014",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-015",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-016",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-017",
+   "split": "test",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "XT-018",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-019",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-020",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-021",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "XT-022",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "LF-007",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "LF-019",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "LF-024",
+   "split": "dev",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "LF-025",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "LF-026",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "LF-027",
+   "split": "dev",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "LF-028",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "LF-029",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "LF-030",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "PM-010",
+   "split": "test",
+   "reason": "generation ok: None"
+  },
+  {
+   "qid": "PM-015",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "PM-024",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "PM-025",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "PM-026",
+   "split": "test",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "PM-027",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "PM-029",
+   "split": "dev",
+   "reason": "abstained before generation"
+  },
+  {
+   "qid": "PM-030",
+   "split": "test",
+   "reason": "abstained before generation"
+  }
+ ]
+}

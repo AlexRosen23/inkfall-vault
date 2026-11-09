@@ -36,7 +36,7 @@ const STAGES = [
 type Stage = (typeof STAGES)[number]["id"];
 
 type Method = "bm25" | "dense" | "hybrid" | "rerank";
-type GenMode = "extractive" | "generative" | "lmstudio" | "ollama";
+type GenMode = "extractive" | "generative" | "lmstudio" | "ollama" | "claude";
 
 export default function WorkbenchPage() {
   const { me, system } = useSession();
@@ -61,6 +61,7 @@ export default function WorkbenchPage() {
   }, []);
 
   const backends = (system?.generation_backends ?? []).filter((b) => b.available);
+  const localBackends = backends.filter((b) => b.name !== "claude");
   const suggestions = SUGGESTED[me.tenant] ?? [];
   const current = STAGES.find((s) => !done.has(s.id))?.id;
 
@@ -179,11 +180,15 @@ export default function WorkbenchPage() {
                 <span>Answer mode</span>
                 <select value={genMode} onChange={(e) => setGenMode(e.target.value as GenMode)}>
                   <option value="extractive">Extractive (no model)</option>
-                  {backends.length > 0 && <option value="generative">Local model (auto)</option>}
+                  {localBackends.length > 0 && <option value="generative">Local model (auto)</option>}
                   {backends.map((b) =>
                     b.name === "lmstudio" || b.name === "ollama" ? (
                       <option key={b.name} value={b.name}>
                         Local model: {b.name}{b.chosen_model ? ` · ${b.chosen_model}` : ""}
+                      </option>
+                    ) : b.name === "claude" ? (
+                      <option key={b.name} value="claude">
+                        Claude citations API · {b.chosen_model} (sends authorized passages to Anthropic)
                       </option>
                     ) : null,
                   )}

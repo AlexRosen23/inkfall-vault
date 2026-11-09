@@ -867,6 +867,38 @@
      }
     }
    }
+  },
+  "/api/eval/adversarial-generative": {
+   "get": {
+    "summary": "Adversarial Generative Report",
+    "operationId": "adversarial_generative_report_api_eval_adversarial_generative_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/eval/faithfulness": {
+   "get": {
+    "summary": "Faithfulness Report",
+    "operationId": "faithfulness_report_api_eval_faithfulness_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
   }
  },
  "components": {
@@ -925,7 +957,8 @@
        "extractive",
        "generative",
        "lmstudio",
-       "ollama"
+       "ollama",
+       "claude"
       ],
       "title": "Generate",
       "default": "extractive"

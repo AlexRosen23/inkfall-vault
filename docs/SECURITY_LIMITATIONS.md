@@ -25,7 +25,10 @@ properties hold on this code and dataset. They do not make it production-secure,
 | Malware | No antivirus scanning of uploads. Uploads are never executed or written to disk outside SQLite. |
 | Side channels | In-tenant BM25 statistics include unreadable documents; superseded-version existence is disclosed. |
 | Injection | Regex flagging is heuristic and bypassable; safety rests on authorization + output validation. |
-| Generation faithfulness | Lexical/numeric support checks catch invented numbers and missing citations, not subtle misreadings. Stripping echoed passage markers can leave awkward prose ("According to, ..."). |
+| Generation faithfulness | Lexical/numeric support checks catch invented numbers and missing citations, not subtle misreadings; the LLM judge that complements them is calibrated only against AI-drafted labels and shares the generator's model. Stripping echoed passage markers can leave awkward prose ("According to, ..."). |
+| Remote model | The optional Claude provider sends the authorized source pack to the Anthropic API (third party). Opt-in per question, needs a key, never auto-selected; not used in any test or eval here. |
+| MCP | The stdio MCP server trusts whoever starts it and binds one identity per process; no client authentication. |
+| Tracing | OpenTelemetry spans are off by default and carry no content, but an OTLP endpoint receives model names, counts and latencies; point it only at a collector you control. |
 | Monitoring | No alerting, SIEM export, or anomaly detection on the audit log. |
 | Supply chain | Dependencies pinned; `make audit-deps` runs pip-audit/npm audit on demand; no SBOM signing, no CI (Actions disabled by policy). |
 | Evaluation | 45 documents and 112 questions written for this project; small and self-authored, so metrics are optimistic about real-world corpora. |

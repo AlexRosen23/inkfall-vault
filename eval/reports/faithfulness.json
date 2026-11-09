@@ -1,0 +1,294 @@
+{
+ "generated_at": "2026-11-09T17:51:43+00:00",
+ "provenance": {
+  "git_commit": "96eecc8",
+  "command": "python -m inkfall.eval_faithfulness report --prompt v2",
+  "answers_file": "eval/reports/faithfulness_answers.json",
+  "answers_generated_at": "2026-11-09T16:43:26+00:00",
+  "generator": {
+   "provider": "ollama",
+   "model": "gpt-oss:20b"
+  },
+  "judge_test_file": "eval/reports/faithfulness_judge_test_v2.json",
+  "judge_prompt": "eval/faithfulness/judge_prompt_v2.txt",
+  "labels_file": "eval/faithfulness/labels.jsonl",
+  "labeler": "claude-code (AI), pending owner review",
+  "same_model_limitation": "The judge and the generator are the same local model (gpt-oss:20b) with different prompts."
+ },
+ "criterion": "every claim in the answer is supported by the spans it cites (binary PASS/FAIL)",
+ "positive_class": "PASS",
+ "dev_iterations": {
+  "v1": {
+   "all": {
+    "judge": {
+     "n": 32,
+     "ref_pass": 25,
+     "ref_fail": 7,
+     "tp": 22,
+     "fn": 3,
+     "tn": 6,
+     "fp": 1,
+     "tpr": 0.88,
+     "tnr": 0.857,
+     "agreement": 0.875
+    },
+    "deterministic": {
+     "n": 32,
+     "ref_pass": 25,
+     "ref_fail": 7,
+     "tp": 20,
+     "fn": 5,
+     "tn": 7,
+     "fp": 0,
+     "tpr": 0.8,
+     "tnr": 1.0,
+     "agreement": 0.844
+    }
+   },
+   "natural": {
+    "judge": {
+     "n": 26,
+     "ref_pass": 25,
+     "ref_fail": 1,
+     "tp": 22,
+     "fn": 3,
+     "tn": 0,
+     "fp": 1,
+     "tpr": 0.88,
+     "tnr": 0.0,
+     "agreement": 0.846
+    },
+    "deterministic": {
+     "n": 26,
+     "ref_pass": 25,
+     "ref_fail": 1,
+     "tp": 20,
+     "fn": 5,
+     "tn": 1,
+     "fp": 0,
+     "tpr": 0.8,
+     "tnr": 1.0,
+     "agreement": 0.808
+    }
+   },
+   "synthetic": {
+    "judge": {
+     "n": 6,
+     "ref_pass": 0,
+     "ref_fail": 6,
+     "tp": 0,
+     "fn": 0,
+     "tn": 6,
+     "fp": 0,
+     "tpr": null,
+     "tnr": 1.0,
+     "agreement": 1.0
+    },
+    "deterministic": {
+     "n": 6,
+     "ref_pass": 0,
+     "ref_fail": 6,
+     "tp": 0,
+     "fn": 0,
+     "tn": 6,
+     "fp": 0,
+     "tpr": null,
+     "tnr": 1.0,
+     "agreement": 1.0
+    }
+   }
+  },
+  "v2": {
+   "all": {
+    "judge": {
+     "n": 32,
+     "ref_pass": 25,
+     "ref_fail": 7,
+     "tp": 22,
+     "fn": 3,
+     "tn": 6,
+     "fp": 1,
+     "tpr": 0.88,
+     "tnr": 0.857,
+     "agreement": 0.875
+    },
+    "deterministic": {
+     "n": 32,
+     "ref_pass": 25,
+     "ref_fail": 7,
+     "tp": 20,
+     "fn": 5,
+     "tn": 7,
+     "fp": 0,
+     "tpr": 0.8,
+     "tnr": 1.0,
+     "agreement": 0.844
+    }
+   },
+   "natural": {
+    "judge": {
+     "n": 26,
+     "ref_pass": 25,
+     "ref_fail": 1,
+     "tp": 22,
+     "fn": 3,
+     "tn": 0,
+     "fp": 1,
+     "tpr": 0.88,
+     "tnr": 0.0,
+     "agreement": 0.846
+    },
+    "deterministic": {
+     "n": 26,
+     "ref_pass": 25,
+     "ref_fail": 1,
+     "tp": 20,
+     "fn": 5,
+     "tn": 1,
+     "fp": 0,
+     "tpr": 0.8,
+     "tnr": 1.0,
+     "agreement": 0.808
+    }
+   },
+   "synthetic": {
+    "judge": {
+     "n": 6,
+     "ref_pass": 0,
+     "ref_fail": 6,
+     "tp": 0,
+     "fn": 0,
+     "tn": 6,
+     "fp": 0,
+     "tpr": null,
+     "tnr": 1.0,
+     "agreement": 1.0
+    },
+    "deterministic": {
+     "n": 6,
+     "ref_pass": 0,
+     "ref_fail": 6,
+     "tp": 0,
+     "fn": 0,
+     "tn": 6,
+     "fp": 0,
+     "tpr": null,
+     "tnr": 1.0,
+     "agreement": 1.0
+    }
+   }
+  }
+ },
+ "test": {
+  "all": {
+   "judge": {
+    "n": 52,
+    "ref_pass": 37,
+    "ref_fail": 15,
+    "tp": 35,
+    "fn": 2,
+    "tn": 14,
+    "fp": 1,
+    "tpr": 0.946,
+    "tnr": 0.933,
+    "agreement": 0.942
+   },
+   "deterministic": {
+    "n": 52,
+    "ref_pass": 37,
+    "ref_fail": 15,
+    "tp": 27,
+    "fn": 10,
+    "tn": 15,
+    "fp": 0,
+    "tpr": 0.73,
+    "tnr": 1.0,
+    "agreement": 0.808
+   }
+  },
+  "natural": {
+   "judge": {
+    "n": 37,
+    "ref_pass": 37,
+    "ref_fail": 0,
+    "tp": 35,
+    "fn": 2,
+    "tn": 0,
+    "fp": 0,
+    "tpr": 0.946,
+    "tnr": null,
+    "agreement": 0.946
+   },
+   "deterministic": {
+    "n": 37,
+    "ref_pass": 37,
+    "ref_fail": 0,
+    "tp": 27,
+    "fn": 10,
+    "tn": 0,
+    "fp": 0,
+    "tpr": 0.73,
+    "tnr": null,
+    "agreement": 0.73
+   }
+  },
+  "synthetic": {
+   "judge": {
+    "n": 15,
+    "ref_pass": 0,
+    "ref_fail": 15,
+    "tp": 0,
+    "fn": 0,
+    "tn": 14,
+    "fp": 1,
+    "tpr": null,
+    "tnr": 0.933,
+    "agreement": 0.933
+   },
+   "deterministic": {
+    "n": 15,
+    "ref_pass": 0,
+    "ref_fail": 15,
+    "tp": 0,
+    "fn": 0,
+    "tn": 15,
+    "fp": 0,
+    "tpr": null,
+    "tnr": 1.0,
+    "agreement": 1.0
+   }
+  }
+ },
+ "test_pass_rates_natural": {
+  "n": 37,
+  "reference_labels": 1.0,
+  "judge_raw": 0.946,
+  "judge_corrected": 1.0,
+  "correction_note": "Rogan-Gladen correction using TPR/TNR from all judge-test items; TNR comes mostly from synthetic negatives, so the correction is optimistic for subtle natural failures"
+ },
+ "deterministic_metrics_natural": {
+  "natural_answers": 63,
+  "sentences": 73,
+  "sentence_support": {
+   "supported": 57,
+   "partial": 8,
+   "unsupported": 8
+  },
+  "answers_all_sentences_supported": 47,
+  "answers_with_gold_span": 53,
+  "citations_reverified_ok": 92,
+  "citations_total": 92,
+  "skipped_questions": 49
+ },
+ "judge_parse_errors_test": 0,
+ "latency_ms": {
+  "generation_p50": 5037.8,
+  "generation_max": 14787.8,
+  "judge_p50": 28239.8
+ },
+ "label_counts": {
+  "total": 84,
+  "pass": 62,
+  "fail": 22
+ }
+}

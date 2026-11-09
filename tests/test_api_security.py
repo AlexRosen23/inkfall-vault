@@ -330,3 +330,18 @@ def test_eval_report_is_tenant_filtered(client, tokens):
         assert q["id"].startswith(("LF-", "XT-"))
         for ref in q["relevant"]:
             assert not ref.startswith(("CV-", "PM-"))
+
+
+def test_new_eval_endpoints_do_not_leak_other_tenants(client, tokens, directory):
+    """Real-model adversarial cases are filtered to the caller's tenant; the faithfulness report is aggregates only."""
+    r = client.get("/api/eval/adversarial-generative", headers=tokens["ava.lindqvist"])
+    if r.status_code == 200:
+        for cs in r.json()["cases"]:
+            if cs.get("user"):
+                assert directory.users[cs["user"]].tenant == "lanternfield"
+    f = client.get("/api/eval/faithfulness", headers=tokens["ava.lindqvist"])
+    if f.status_code == 200:
+        blob = f.text
+        for marker in ('"question"', '"passage_text"', '"critique"', '"answer"', "CV-", "PM-"):
+            assert marker not in blob
+    assert client.get("/api/eval/faithfulness").status_code == 401

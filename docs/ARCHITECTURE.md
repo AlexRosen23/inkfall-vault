@@ -111,3 +111,27 @@ sequenceDiagram
 
 `access.authorized_versions` / `access.get_authorized_version` → `authz.decide`. Everything else (search, the
 model, the UI) is downstream of it and is treated as untrusted with respect to access decisions.
+
+## Generation providers, MCP and tracing (added on `feat/ai-engineer-readiness`)
+
+| Piece | Where | What it does |
+|---|---|---|
+| Local OpenAI-compatible model | `providers.py`, `generate.py` | LM Studio / Ollama; JSON `{sentences:[{text, cites:["P1"]}]}`; unknown ids reject the output; each sentence support-checked and anchored to a stored sentence span. |
+| Claude (Anthropic Citations API) | `claude_citations.py` | One **custom-content document per authorized passage**, whose content blocks are the passage's sentence spans cut from the stored version text. Claude's `content_block_location` citations (`document_index`, `start_block_index`..`end_block_index`, end exclusive) map back to `(version_id, char_start, char_end)`; `cited_text` must equal the stored blocks; support is re-checked against the exact cited spans. No structured outputs (incompatible with citations). Never auto-selected; needs `ANTHROPIC_API_KEY`; offline tests use fixtures built from the documented response schema. |
+| Citation re-verification | `service.run_query` | After any provider returns, every citation goes through `verify_citation` (asker's ACL + exact stored text) before it is shown; one failure rejects the output. |
+| MCP server | `mcp_server.py`, [MCP_SERVER.md](MCP_SERVER.md) | stdio server (official `mcp` SDK) with read-only `search`, `fetch_document`, `cite`; identity bound at launch from `INKFALL_MCP_USER`. |
+| Tracing | `telemetry.py` | OpenTelemetry spans `retrieval` and `chat {model}` with GenAI semantic-convention attributes (status: Development). Off by default; `INKFALL_OTEL=console` or `otlp`. No query/document/prompt/output text in spans. |
+
+```mermaid
+sequenceDiagram
+  participant SV as service.run_query
+  participant CC as claude_citations
+  participant API as Anthropic Messages API
+  SV->>CC: question + authorized pack + version texts
+  CC->>CC: per passage: document{source.type=content, blocks = stored sentence spans}
+  CC->>API: messages.create(model=claude-opus-5-5, documents, citations enabled)
+  API-->>CC: text blocks with content_block_location citations
+  CC->>CC: doc index → passage, block range → char offsets; cited_text == stored text?; support check per sentence
+  CC-->>SV: sentences + citations (or rejected)
+  SV->>SV: verify_citation for every citation (ACL + stored text)
+```
