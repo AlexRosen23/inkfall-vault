@@ -279,11 +279,68 @@ function GenericReport({ data }: { data: unknown }) {
   );
 }
 
+
+type Confusion = { n: number; ref_pass: number; ref_fail: number; tpr: number | null; tnr: number | null; agreement: number | null };
+type FaithReport = {
+  generated_at: string;
+  provenance: { generator: { model: string; provider: string }; labeler: string; judge_prompt: string; git_commit: string };
+  criterion: string;
+  test: Record<string, { judge: Confusion; deterministic: Confusion }>;
+  dev_iterations: Record<string, Record<string, { judge: Confusion }>>;
+  deterministic_metrics_natural: { natural_answers: number; answers_all_sentences_supported: number; answers_with_gold_span: number };
+};
+
+function rate(x: number | null) {
+  return x === null || x === undefined ? "n/a" : x.toFixed(3);
+}
+
+function FaithfulnessTable({ data }: { data: FaithReport }) {
+  const rows: [string, string, Confusion][] = [];
+  for (const [v, blk] of Object.entries(data.dev_iterations)) {
+    if (blk.all) rows.push([`judge-dev (prompt ${v})`, "LLM judge", blk.all.judge]);
+  }
+  for (const sub of ["all", "natural", "synthetic"]) {
+    const t = data.test[sub];
+    if (!t) continue;
+    rows.push([`judge-test · ${sub}`, "LLM judge", t.judge]);
+    rows.push([`judge-test · ${sub}`, "deterministic span check", t.deterministic]);
+  }
+  const d = data.deterministic_metrics_natural;
+  return (
+    <>
+      <p className="small">
+        Criterion: <em>{data.criterion}</em>. Generator and judge: <code>{data.provenance.generator.model}</code> (
+        {data.provenance.generator.provider}). Labels: {data.provenance.labeler}.
+      </p>
+      <div className="table-wrap">
+        <table className="data">
+          <thead>
+            <tr><th>Split / subset</th><th>Grader</th><th>n</th><th>ref PASS / FAIL</th><th>TPR</th><th>TNR</th><th>Agreement</th></tr>
+          </thead>
+          <tbody>
+            {rows.map(([split, grader, c]) => (
+              <tr key={split + grader}>
+                <td>{split}</td><td>{grader}</td><td>{c.n}</td><td>{c.ref_pass} / {c.ref_fail}</td>
+                <td>{rate(c.tpr)}</td><td>{rate(c.tnr)}</td><td>{rate(c.agreement)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="small muted">
+        Natural answers: {d.natural_answers}; every sentence passes the deterministic span check in {d.answers_all_sentences_supported};
+        a gold answer span appears in {d.answers_with_gold_span}. All test FAIL labels are synthetic negatives (changed number or
+        appended fabricated sentence). Commit {data.provenance.git_commit}, {when(data.generated_at)}.
+      </p>
+    </>
+  );
+}
+
 export default function LabPage() {
   const report = useLoad<EvalReport>("/api/eval/report");
   const adversarial = useLoad<unknown>("/api/eval/adversarial");
   const advGenerative = useLoad<unknown>("/api/eval/adversarial-generative");
-  const faithfulness = useLoad<unknown>("/api/eval/faithfulness");
+  const faithfulness = useLoad<FaithReport>("/api/eval/faithfulness");
   const reviews = useLoad<ReviewsResponse>("/api/reviews");
   const [split, setSplit] = useState("all");
   const [catMethod, setCatMethod] = useState("");
@@ -495,7 +552,7 @@ export default function LabPage() {
           </p>
           {faithfulness.missing && <p className="muted small">Not run yet (make eval-faithfulness).</p>}
           {faithfulness.error && !faithfulness.missing && <p className="error small" role="alert">{faithfulness.error}</p>}
-          {faithfulness.data !== undefined && <GenericReport data={faithfulness.data} />}
+          {faithfulness.data !== undefined && <FaithfulnessTable data={faithfulness.data} />}
         </Section>
         <Section title="Adversarial suite with a real local model" kicker="/api/eval/adversarial-generative" className="span-all">
           {advGenerative.missing && <p className="muted small">Not run yet (make security-test-generative).</p>}
