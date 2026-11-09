@@ -25,14 +25,16 @@ PACK_SIZE = 6
 PER_VERSION = 3
 
 INJECTION_PATTERNS = [
-    r"ignore (?:all |any )?(?:previous|prior|earlier|above|your)\s+(?:instructions|rules|directions|prompts?)",
-    r"disregard (?:all |any |the |your )?(?:previous |prior )?(?:instructions|rules|access|policy|policies|guidelines)",
-    r"(?:note|instruction|message|notice)s? (?:to|for) (?:any |all )?(?:ai|automated|llm|language model|assistant)",
-    r"\b(?:system prompt|developer message|jailbreak)\b",
-    r"you are now\b",
-    r"(?:treat|consider) (?:the )?(?:reader|user|requester) as (?:an? )?(?:admin|administrator|partner|superuser)",
-    r"(?:override|bypass|ignore) (?:the |any |your )?(?:access|permission|authori[sz]ation|security)",
-    r"(?:reveal|disclose|output|print) (?:the |all )?(?:restricted|confidential|privileged|hidden|secret)",
+    r"\b(?:ignore|disregard|forget|override|bypass)\s+(?:all\s+|any\s+)?(?:of\s+)?(?:your|their|its|the|my|these|those)?\s*"
+    r"(?:previous|prior|earlier|above|existing|own)?\s*(?:instructions|rules|directions|prompts?|guidelines|"
+    r"access(?:\s+(?:rules|policy|policies|controls|restrictions))?|permissions?|authori[sz]ation|security|policy|policies)",
+    r"(?:note|instruction|message|notice)s?\s+(?:to|for)\s+(?:any\s+|all\s+)?(?:ai|automated|llm|language model|assistant)",
+    r"\b(?:ai|automated)\s+(?:assistants?|tools?|reviewers?|readers?|systems?)\b[^.]{0,80}\b(?:must|should|shall)\b",
+    r"\b(?:system prompt|developer message|jailbreak|maintenance mode)\b",
+    r"\byou are now\b",
+    r"(?:treat|consider)\s+(?:the\s+)?(?:reader|user|requester|me)\s+as\s+(?:an?\s+)?(?:admin|administrator|partner|superuser)",
+    r"(?:reveal|disclose|output|print|append|paste)\s+(?:the\s+|all\s+|every\s+)?(?:full\s+text\s+of\s+)?"
+    r"(?:restricted|confidential|privileged|hidden|secret|closed-session)",
 ]
 INJECTION_RE = re.compile("|".join(f"(?:{p})" for p in INJECTION_PATTERNS), re.IGNORECASE)
 

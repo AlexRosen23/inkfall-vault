@@ -621,6 +621,24 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
                               f"{tenant_prefix}/XT questions asked by {user.tenant} identities, with "
                               f"references you cannot read hidden."}
 
+    @app.get("/api/eval/adversarial")
+    def adversarial_report(user: User = Depends(current_user)):
+        rep = _read_json(EVAL_DIR / "reports" / "adversarial.json")
+        if rep is None:
+            raise HTTPException(404, "no_report: run make security-test")
+        cases = []
+        for cs in rep.get("cases", []):
+            asker = st.directory.users.get(cs.get("user") or "")
+            if asker is not None and asker.tenant != user.tenant:
+                continue  # other tenants' probe details (questions, refs) stay private
+            cases.append(cs)
+        iso = dict(rep.get("isolation", {}))
+        iso["leak_examples"] = [e for e in iso.get("leak_examples", [])
+                                if st.directory.users.get(e.get("user", "")) and
+                                st.directory.users[e["user"]].tenant == user.tenant]
+        return {**{k: v for k, v in rep.items() if k not in ("cases", "isolation")}, "isolation": iso,
+                "cases": cases, "visibility": "Counts cover all tenants; case details limited to your tenant."}
+
     return app
 
 
