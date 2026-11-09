@@ -305,7 +305,69 @@ def main() -> None:
         post = rest.split(b, 1)[1]
         readme.write_text(pre + "\n".join(lines) + post)
     render_reviewer_block(readme, rep, adv, advg, fa)
+    render_readiness_block(ROOT / "docs" / "AI_ENGINEER_READINESS.md", adv, advg, load("adversarial_generative_run1.json"), fa)
     print("rendered docs/RETRIEVAL_EVAL.md, docs/RAG_EVALUATION.md, resume_evidence/metrics.json, README results")
+
+
+def render_readiness_block(path: Path, adv, advg, run1, fa) -> None:
+    a, b = "<!-- readiness:start -->", "<!-- readiness:end -->"
+    txt = path.read_text()
+    if a not in txt or b not in txt:
+        return
+    L = [a, "", "_Rendered by `scripts/render_eval_docs.py` from the saved reports named in each row._", "",
+         "| Added | What was measured | Result | File |", "|---|---|---|---|"]
+    L.append("| Claude provider (Anthropic Citations API, custom-content documents) | request shape, block-index → "
+             "char-offset mapping, re-verification, rejection of out-of-pack / out-of-range / tampered citations and "
+             "refusals | offline only: 13 tests against fixtures built from the documented response schema; **never "
+             "called live** (no API key) | `tests/test_claude_citations.py` |")
+    if run1:
+        g1 = run1["generation_run"]
+        L.append(f"| Adversarial sweep with a real model, run 1 | same sweep as the extractive run, {g1['model']} "
+                 f"answering | **{run1['isolation']['leaks']} leaks**, {g1['answers_generated']} generated answers, "
+                 f"{g1['prompt_canary_hits']}/{g1['prompts_checked']} prompts with forbidden content; **finding:** "
+                 "one generated answer repeated a vendor notice's instruction to AI tools (fixed: such sentences are "
+                 "now withheld) | `eval/reports/adversarial_generative_run1.json` |")
+    if advg:
+        g = advg["generation_run"]
+        L.append(f"| Adversarial sweep with a real model, run 2 (after the fix) | {advg['isolation']['search_probes']} "
+                 f"probes + {advg['isolation']['direct_read_attempts']} direct reads, 12 identities | **"
+                 f"{advg['isolation']['leaks']} leaks**; {g['answers_generated']} generated answers; "
+                 f"{g['prompt_canary_hits']}/{g['prompts_checked']} prompts and {g['output_canary_hits']} raw outputs "
+                 "with forbidden content; "
+                 + ", ".join(f"{k} {v['passed']}/{v['total']}" for k, v in advg["sections"].items())
+                 + " | `eval/reports/adversarial_generative.json` |")
+    if fa:
+        jt, dt_ = fa["test"]["all"]["judge"], fa["test"]["all"]["deterministic"]
+        dm = fa["deterministic_metrics_natural"]
+        L.append(f"| Faithfulness LLM judge (binary, critique first), calibrated | judge-test, n={jt['n']} "
+                 f"({jt['ref_pass']} PASS / {jt['ref_fail']} FAIL reference labels; all FAILs synthetic) | LLM judge "
+                 f"TPR **{f(jt['tpr'])}**, TNR **{f(jt['tnr'])}**; deterministic span check TPR {f(dt_['tpr'])}, "
+                 f"TNR {f(dt_['tnr'])} — against **AI-drafted labels pending owner review**; judge = generator model | "
+                 "`eval/reports/faithfulness.json` |")
+        L.append(f"| Deterministic metrics on the same answers | {dm['natural_answers']} natural answers, "
+                 f"{dm['sentences']} sentences | {dm['answers_all_sentences_supported']} answers fully 'supported'; "
+                 f"gold span present in {dm['answers_with_gold_span']}; citations re-verified "
+                 f"{dm['citations_reverified_ok']}/{dm['citations_total']}; generation p50 "
+                 f"{fa['latency_ms']['generation_p50']} ms, judge p50 {fa['latency_ms']['judge_p50']} ms | "
+                 "`eval/reports/faithfulness.json` |")
+    if adv:
+        pairs = adv["isolation"]["direct_read_attempts"] // 2
+        L.append(f"| MCP server (official SDK, stdio) | every identity × every unreadable version ({pairs} pairs) "
+                 "through `fetch_document`, `cite` and a `search` built from the forbidden text; identity-argument "
+                 "escalation; a real stdio subprocess | forbidden == missing (`not_found`) for every pair; 0 forbidden "
+                 "canaries in search results (test assertions) | `tests/test_mcp_server.py` |")
+    L.append("| OWASP Top 10 for LLM Apps 2025 mapping | LLM01-LLM10 → code + tests + residual risk | table | "
+             "`docs/OWASP_LLM_TOP10.md` |")
+    L.append("| OpenTelemetry GenAI spans (Development-status conventions) | span names/attributes; no content in spans | "
+             "3 tests | `tests/test_telemetry.py` |")
+    L.append("| npm audit (2026-11-09) | `npm audit` and `npm audit --omit=dev` | 8 moderate findings, all in dev-only lint "
+             "tooling (minimatch via typescript-eslint / eslint-config-next); `npm audit fix` changes nothing and the "
+             "only offered fix is a major downgrade, so none was applied; production dependencies: 0. `pip-audit` (incl. the "
+             "new anthropic, mcp and opentelemetry pins): no known vulnerabilities | "
+             "`web/package-lock.json` (unchanged) |")
+    L += ["", b]
+    pre, rest = txt.split(a, 1)
+    path.write_text(pre + "\n".join(L) + rest.split(b, 1)[1])
 
 
 def render_reviewer_block(readme: Path, rep, adv, advg, fa) -> None:

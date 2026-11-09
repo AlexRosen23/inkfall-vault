@@ -37,7 +37,26 @@ Practice references: [Anthropic, demystifying evals](https://www.anthropic.com/e
 
 ## Added on this branch (numbers from saved files)
 
-RESULTS_PLACEHOLDER
+<!-- readiness:start -->
+
+_Rendered by `scripts/render_eval_docs.py` from the saved reports named in each row._
+
+| Added | What was measured | Result | File |
+|---|---|---|---|
+| Claude provider (Anthropic Citations API, custom-content documents) | request shape, block-index → char-offset mapping, re-verification, rejection of out-of-pack / out-of-range / tampered citations and refusals | offline only: 13 tests against fixtures built from the documented response schema; **never called live** (no API key) | `tests/test_claude_citations.py` |
+| Adversarial sweep with a real model, run 1 | same sweep as the extractive run, gpt-oss:20b answering | **0 leaks**, 194 generated answers, 0/187 prompts with forbidden content; **finding:** one generated answer repeated a vendor notice's instruction to AI tools (fixed: such sentences are now withheld) | `eval/reports/adversarial_generative_run1.json` |
+| Faithfulness LLM judge (binary, critique first), calibrated | judge-test, n=52 (37 PASS / 15 FAIL reference labels; all FAILs synthetic) | LLM judge TPR **0.946**, TNR **0.933**; deterministic span check TPR 0.730, TNR 1.000 — against **AI-drafted labels pending owner review**; judge = generator model | `eval/reports/faithfulness.json` |
+| Deterministic metrics on the same answers | 63 natural answers, 73 sentences | 47 answers fully 'supported'; gold span present in 53; citations re-verified 92/92; generation p50 5037.8 ms, judge p50 28239.8 ms | `eval/reports/faithfulness.json` |
+| MCP server (official SDK, stdio) | every identity × every unreadable version (449 pairs) through `fetch_document`, `cite` and a `search` built from the forbidden text; identity-argument escalation; a real stdio subprocess | forbidden == missing (`not_found`) for every pair; 0 forbidden canaries in search results (test assertions) | `tests/test_mcp_server.py` |
+| OWASP Top 10 for LLM Apps 2025 mapping | LLM01-LLM10 → code + tests + residual risk | table | `docs/OWASP_LLM_TOP10.md` |
+| OpenTelemetry GenAI spans (Development-status conventions) | span names/attributes; no content in spans | 3 tests | `tests/test_telemetry.py` |
+| npm audit (2026-11-09) | `npm audit` and `npm audit --omit=dev` | 8 moderate findings, all in dev-only lint tooling (minimatch via typescript-eslint / eslint-config-next); `npm audit fix` changes nothing and the only offered fix is a major downgrade, so none was applied; production dependencies: 0. `pip-audit` (incl. the new anthropic, mcp and opentelemetry pins): no known vulnerabilities | `web/package-lock.json` (unchanged) |
+
+<!-- readiness:end -->
+
+Full tables: [RAG_EVALUATION.md](RAG_EVALUATION.md) (faithfulness and real-model adversarial sections).
+Machine for every run: Apple M5 Pro, 48 GB, macOS 27.0.1; local model via Ollama on the same Mac, shared with other
+workloads during the runs (latencies are not a benchmark).
 
 ## Still missing (honest)
 
