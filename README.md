@@ -129,13 +129,14 @@ the Next.js dev server on **5111**. No LLM is needed; to try local generation, l
 | `make security-test` | isolation/security/generation suites + adversarial eval → `eval/reports/adversarial.json` |
 | `make eval` | gold set × BM25/dense/hybrid(/rerank) → `eval/reports/latest.json` + rendered docs |
 | `make eval-generative` | opt-in: 6 dev questions through the local model (slow) |
+| `make eval-claude-live` | opt-in, **paid**: the same 6 questions through Claude's Citations API (needs `ANTHROPIC_API_KEY`) → `eval/reports/generative_claude.json` |
 | `make ci` | lint, typecheck, tests, adversarial eval, web build, license gate |
 | `make mcp` | MCP server on stdio (`MCP_USER=dana.whitcombe` by default) |
 | `make security-test-generative` | opt-in, slow: the adversarial sweep with `gpt-oss:20b` (Ollama) writing every answer |
 | `make eval-faithfulness` | opt-in, slow: re-judge the saved answers with the frozen judge prompt → `eval/reports/faithfulness.json` |
 
-CI is defined in `.github/workflows/ci.yml` but **GitHub Actions is disabled** on this private repository; run
-`make ci` locally.
+CI (`.github/workflows/ci.yml`) runs on GitHub Actions for pull requests and pushes to `main`; `make ci` runs the
+same checks locally.
 
 ## Demo identities (fictional)
 

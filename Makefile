@@ -61,6 +61,9 @@ eval-generative: ## Opt-in: 6 dev questions through a local LM Studio/Ollama mod
 	$(UV) run python -m inkfall.eval_generative
 	$(UV) run python scripts/render_eval_docs.py
 
+eval-claude-live: ## Opt-in, PAID: the same 6 dev questions through Claude (Citations API); needs ANTHROPIC_API_KEY; writes eval/reports/generative_claude.json
+	$(UV) run python -m inkfall.eval_generative --backend claude
+
 LOCAL_LLM ?= gpt-oss:20b
 JUDGE_PROMPT ?= v2
 
