@@ -28,7 +28,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from . import audit, embed, providers
+from . import audit, contract, embed, providers
 from .access import authorized_versions, get_authorized_version
 from .config import (
     DATA_DIR,
@@ -56,6 +56,12 @@ from .search import ensure_embeddings
 from .service import compare_versions, document_payload, new_request_id, run_query, verify_citation
 
 log = logging.getLogger("inkfall")
+CONTRACT_PATHS = {"/health", "/capabilities", "/runs"}
+FRAME_ANCESTORS = "'self' http://127.0.0.1:4520 http://127.0.0.1:4521 http://localhost:4520 http://localhost:4521"
+PAGE_CSP = ("default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; "
+            "img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; "
+            f"form-action 'self'; frame-ancestors {FRAME_ANCESTORS}")
+WEB_OUT = Path(__file__).resolve().parents[2] / "web" / "out"
 COOKIE = "inkfall_session"
 MAX_BODY = MAX_UPLOAD_BYTES * 2
 
@@ -174,10 +180,15 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
             resp = JSONResponse({"error": "internal_error", "request_id": rid}, status_code=500)
         resp.headers["X-Request-ID"] = rid
         resp.headers["X-Content-Type-Options"] = "nosniff"
-        resp.headers["Cache-Control"] = "no-store"
         resp.headers["Referrer-Policy"] = "no-referrer"
-        resp.headers["X-Frame-Options"] = "DENY"
-        resp.headers["Content-Security-Policy"] = "default-src 'none'; frame-ancestors 'none'"
+        path = request.url.path
+        if path.startswith("/api/") or path in CONTRACT_PATHS or path.startswith("/runs/"):
+            resp.headers["Cache-Control"] = "no-store"
+            resp.headers["X-Frame-Options"] = "DENY"
+            resp.headers["Content-Security-Policy"] = "default-src 'none'; frame-ancestors 'none'"
+        else:
+            # The built UI. Only this machine's Constellation (127.0.0.1:4520/4521) may frame it ("Open inside").
+            resp.headers["Content-Security-Policy"] = PAGE_CSP
         return resp
 
     @app.exception_handler(HTTPException)
@@ -623,6 +634,28 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
                               f"{tenant_prefix}/XT questions asked by {user.tenant} identities, with "
                               f"references you cannot read hidden."}
 
+    # ------------------------------------------------------------------ read-only project contract (no session)
+    # Aggregate numbers from saved reports only; never document text, titles, questions or tenant data.
+
+    @app.get("/health")
+    def contract_health():
+        return contract.health()
+
+    @app.get("/capabilities")
+    def contract_capabilities():
+        return contract.capabilities()
+
+    @app.get("/runs")
+    def contract_runs(limit: int = 20):
+        return contract.runs_page(limit)
+
+    @app.get("/runs/{run_id}")
+    def contract_run(run_id: str):
+        r = contract.run_by_id(run_id)
+        if r is None:
+            raise HTTPException(404, "not_found")
+        return r
+
     @app.get("/api/eval/adversarial")
     def adversarial_report(user: User = Depends(current_user)):
         rep = _read_json(EVAL_DIR / "reports" / "adversarial.json")
@@ -640,6 +673,12 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
                                 st.directory.users[e["user"]].tenant == user.tenant]
         return {**{k: v for k, v in rep.items() if k not in ("cases", "isolation")}, "isolation": iso,
                 "cases": cases, "visibility": "Counts cover all tenants; case details limited to your tenant."}
+
+    # ------------------------------------------------------------------ built UI (one port for API + pages)
+    if (WEB_OUT / "index.html").exists():
+        from fastapi.staticfiles import StaticFiles
+
+        app.mount("/", StaticFiles(directory=WEB_OUT, html=True), name="web")
 
     return app
 

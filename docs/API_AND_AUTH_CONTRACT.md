@@ -48,6 +48,31 @@ There are no passwords: this is a local fixture login, documented as a limitatio
 | `GET /api/system` | user | embedding/reranker status, detected generation backends, dataset version |
 | `GET /api/eval/report`, `GET /api/eval/adversarial` | user | saved reports; per-question/case rows limited to own tenant |
 
+## Read-only project contract (no session)
+
+For dashboards such as the owner's Constellation, which reads it from 127.0.0.1 only. Built from the saved reports
+in `eval/reports/`; it carries aggregate numbers and labels and **never** document text, titles, questions,
+identities or tenant data (`tests/test_contract.py` checks every document key, title and opening line against it).
+
+| Path | Returns |
+|---|---|
+| `GET /health` | `{status: ok \| degraded, project_id: "inkfall", mode, version, problems[], last_run}` |
+| `GET /capabilities` | `{project_id, name, version, implemented[], not_implemented[], disabled_by_design[], active_mode, dataset: {synthetic: true, …}, endpoints}` |
+| `GET /runs?limit=N` | `{project_id, total, runs[]}`, newest first; each run `{run_id, kind: eval \| adversarial \| generative, status: completed \| failed, mode: "recorded", started_at, ended_at, headline, provenance: {synthetic: true, git_commit, dataset_version, command}, artifacts}` |
+| `GET /runs/{run_id}` | one run, or 404 |
+
+A run is only ever a measurement this repository executed and saved (`make eval`, `make security-test`,
+`make eval-generative`). `provenance.synthetic` is true because the corpus is fictional, not because the run was
+simulated.
+
+## Pages and framing
+
+When `web/out` exists (`make web-export`, or `run.sh` builds it), the API also serves the static UI at `/`. Page
+responses carry a CSP of `default-src 'self'` (inline scripts/styles allowed for Next.js) and
+`frame-ancestors 'self' http://127.0.0.1:4520 http://127.0.0.1:4521 http://localhost:4520 http://localhost:4521`, so
+only this machine's Constellation can embed it. API and contract responses keep `frame-ancestors 'none'` and
+`X-Frame-Options: DENY`.
+
 ## `POST /api/ask`
 
 Request: `{question (1-500 chars), as_of?, method: bm25|dense|hybrid|rerank, collection?, include_history, generate: extractive|generative|lmstudio|ollama}`.
