@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {"name": "inkfall-api", "runtimeExecutable": "make", "runtimeArgs": ["api"], "port": 5110},
+    {"name": "inkfall-web", "runtimeExecutable": "make", "runtimeArgs": ["web"], "port": 5111}
+  ]
+}

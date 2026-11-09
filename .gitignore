@@ -13,3 +13,11 @@ node_modules/
 __pycache__/
 *.pyc
 .DS_Store
+# --- inkfall-vault ---
+data/
+.pytest_cache/
+.ruff_cache/
+web/.next/
+web/out/
+*.tsbuildinfo
+eval/reports/*.tmp.json

@@ -1,0 +1,115 @@
+# Deterministic demo identities. ALL names, organizations and people are fictional.
+# These are fixtures for a local demo, not accounts: there are no passwords. See docs/THREAT_MODEL.md
+# ("Mock authentication") for what that means and why it would not be acceptable in production.
+#
+# Access rule (src/inkfall/authz.py), evaluated server-side for every document version:
+#   same tenant  AND  classification <= clearance  AND  shares >= 1 ACL group  AND  not behind an ethical wall
+# Roles add *functions* (ingest, delete, audit view); they never add read access to document content.
+
+classification_levels: [public, internal, confidential, restricted]
+
+tenants:
+  - id: lanternfield
+    name: Lanternfield Partners LLP
+    kind: Fictional law firm
+    collections: [commercial, litigation, firm-policy]
+    groups: [lf-all, lf-commercial, lf-litigation, lf-partners]
+  - id: corvane
+    name: Corvane Freight Holdings
+    kind: Fictional logistics and finance group
+    collections: [vendor-contracts, finance, incidents]
+    groups: [cv-all, cv-procurement, cv-finance, cv-ops]
+  - id: pellmoor
+    name: Pellmoor Water Authority
+    kind: Fictional public water utility
+    collections: [policy, operations, board]
+    groups: [pm-all, pm-policy, pm-ops, pm-board]
+
+users:
+  # --- Lanternfield Partners LLP ---
+  - username: ava.lindqvist
+    display_name: Ava Lindqvist
+    tenant: lanternfield
+    title: Commercial analyst
+    roles: [analyst]
+    groups: [lf-all, lf-commercial]
+    clearance: confidential
+  - username: marcus.oyelaran
+    display_name: Marcus Oyelaran
+    tenant: lanternfield
+    title: Partner, commercial and litigation
+    roles: [counsel, reviewer]
+    groups: [lf-all, lf-commercial, lf-litigation, lf-partners]
+    clearance: restricted
+  - username: theo.brandt
+    display_name: Theo Brandt
+    tenant: lanternfield
+    title: Litigation associate (walled off the Harrow matter)
+    roles: [analyst]
+    groups: [lf-all, lf-litigation]
+    clearance: confidential
+  - username: lf.admin
+    display_name: Lanternfield records admin
+    tenant: lanternfield
+    title: Records administrator
+    roles: [admin]
+    groups: [lf-all]
+    clearance: internal
+  # --- Corvane Freight Holdings ---
+  - username: dana.whitcombe
+    display_name: Dana Whitcombe
+    tenant: corvane
+    title: Procurement analyst
+    roles: [analyst, reviewer]
+    groups: [cv-all, cv-procurement]
+    clearance: confidential
+  - username: omar.haddad
+    display_name: Omar Haddad
+    tenant: corvane
+    title: Treasury lead
+    roles: [analyst]
+    groups: [cv-all, cv-finance]
+    clearance: restricted
+  - username: june.park
+    display_name: June Park
+    tenant: corvane
+    title: Operations coordinator
+    roles: [analyst]
+    groups: [cv-all, cv-ops]
+    clearance: internal
+  - username: cv.admin
+    display_name: Corvane records admin
+    tenant: corvane
+    title: Records administrator
+    roles: [admin]
+    groups: [cv-all]
+    clearance: internal
+  # --- Pellmoor Water Authority ---
+  - username: rhea.castellanos
+    display_name: Rhea Castellanos
+    tenant: pellmoor
+    title: Policy analyst
+    roles: [analyst, reviewer]
+    groups: [pm-all, pm-policy]
+    clearance: confidential
+  - username: sam.okafor
+    display_name: Sam Okafor
+    tenant: pellmoor
+    title: Operations engineer
+    roles: [analyst]
+    groups: [pm-all, pm-ops]
+    clearance: internal
+  - username: nadia.voss
+    display_name: Nadia Voss
+    tenant: pellmoor
+    title: Board secretary
+    roles: [analyst]
+    groups: [pm-all, pm-policy, pm-board]
+    clearance: restricted
+  - username: pm.admin
+    display_name: Pellmoor records admin
+    tenant: pellmoor
+    title: Records administrator
+    roles: [admin]
+    groups: [pm-all]
+    clearance: internal

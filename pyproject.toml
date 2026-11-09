@@ -1,0 +1,61 @@
+[project]
+name = "inkfall-vault"
+version = "0.1.0"
+description = "Permission-aware evidence workbench over fictional legal, finance and policy documents"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = { text = "MIT" }
+dependencies = [
+    "fastapi==0.162.2",
+    "uvicorn==0.54.0",
+    "pydantic==2.14.3",
+    "sqlalchemy==2.1.8",
+    "pyyaml==6.0.3",
+    "pypdf==7.0.0",
+    "numpy==2.5.4",
+    "httpx==0.28.1",
+]
+
+[project.optional-dependencies]
+dense = [
+    "sentence-transformers==6.2.0",
+    "torch==2.15.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.2.0",
+    "ruff==0.17.4",
+    "pip-audit==2.10.1",
+    "pip-licenses==5.5.5",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/inkfall"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+    "dense: needs the local embedding model (skipped when it is not downloaded)",
+]
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S"]
+ignore = ["S101", "S311", "E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S"]
+"scripts/*" = ["S"]
+"src/inkfall/evaluate.py" = ["S603", "S607"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends"]

@@ -1,0 +1,73 @@
+{
+  "generated_from": [
+    "eval/reports/latest.json",
+    "eval/reports/adversarial.json"
+  ],
+  "generated_at": "2026-11-09T05:03:56+00:00",
+  "dataset_version": "648f953504a95e33",
+  "claims": [
+    {
+      "claim": "Zero cross-tenant / unauthorized leaks under a targeted attack sweep",
+      "metric": "0 leaks over 1796 search probes + 898 direct reads, 12 identities",
+      "source": "eval/reports/adversarial.json#isolation; tests/test_isolation.py::test_zero_leaks_through_search_and_ask",
+      "verify": "make security-test",
+      "status": "verified"
+    },
+    {
+      "claim": "Hybrid (BM25 + MiniLM, RRF) ranking quality on held-out test questions",
+      "metric": "MRR@10 0.966 vs BM25 0.938 vs title-only baseline 0.818; nDCG@10 0.971",
+      "source": "eval/reports/latest.json#summary.test",
+      "verify": "make seed && make eval",
+      "status": "verified"
+    },
+    {
+      "claim": "Every citation resolves to stored source text the asker may read",
+      "metric": "citation validity 100.0% over 102 test-split citations",
+      "source": "eval/reports/latest.json#summary.test.hybrid.citation_validity; tests/test_api_security.py::test_citations_resolve_to_stored_text",
+      "verify": "make eval",
+      "status": "verified"
+    },
+    {
+      "claim": "Abstains on unanswerable and permission-probe questions",
+      "metric": "abstention F1 0.923 (test, hybrid)",
+      "source": "eval/reports/latest.json#summary.test.hybrid.abstention",
+      "verify": "make eval",
+      "status": "verified"
+    },
+    {
+      "claim": "Contradiction detection generalizes to held-out questions",
+      "metric": "2/5 found, 6 false alarms (test, hybrid)",
+      "source": "eval/reports/latest.json#summary.test.hybrid.conflicts",
+      "verify": "make eval",
+      "status": "not supported by results - do not claim"
+    },
+    {
+      "claim": "Malicious-model outputs (spoofed ids, invented numbers, injected instructions) are rejected or labelled",
+      "metric": "5/5 scripted attacks handled",
+      "source": "eval/reports/adversarial.json (section generation); tests/test_generation.py",
+      "verify": "make security-test",
+      "status": "verified (scripted model, not a real LLM)"
+    },
+    {
+      "claim": "Sub-100 ms retrieval on CPU",
+      "metric": "hybrid p95 15.5 ms (test split, Apple M5 Pro)",
+      "source": "eval/reports/latest.json#summary.test.hybrid.latency_ms",
+      "verify": "make eval",
+      "status": "verified on this machine only"
+    },
+    {
+      "claim": "Time-to-task reduction for analysts",
+      "metric": null,
+      "source": null,
+      "verify": null,
+      "status": "planned - needs a timed user study; no number is claimed"
+    },
+    {
+      "claim": "Production deployment / real customers",
+      "metric": null,
+      "source": null,
+      "verify": null,
+      "status": "not applicable - synthetic demo only"
+    }
+  ]
+}
