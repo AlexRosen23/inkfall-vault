@@ -26,12 +26,29 @@ properties hold on this code and dataset. They do not make it production-secure,
 | Side channels | In-tenant BM25 statistics include unreadable documents; superseded-version existence is disclosed. |
 | Injection | Regex flagging is heuristic and bypassable; safety rests on authorization + output validation. |
 | Generation faithfulness | Lexical/numeric support checks catch invented numbers and missing citations, not subtle misreadings; the LLM judge that complements them is calibrated only against AI-drafted labels and shares the generator's model. Stripping echoed passage markers can leave awkward prose ("According to, ..."). |
-| Remote model | The optional Claude provider sends the authorized source pack to the Anthropic API (third party). Opt-in per question, needs a key, never auto-selected; not used in any test or eval here. |
+| Remote model | The optional Claude provider sends the authorized source pack to the Anthropic API (third party). Opt-in per question, needs a key, never auto-selected. Tests use offline fixtures; the only live use is one owner-run 6-question check (`eval/reports/generative_claude.json`). |
 | MCP | The stdio MCP server trusts whoever starts it and binds one identity per process; no client authentication. |
 | Tracing | OpenTelemetry spans are off by default and carry no content, but an OTLP endpoint receives model names, counts and latencies; point it only at a collector you control. |
 | Monitoring | No alerting, SIEM export, or anomaly detection on the audit log. |
 | Supply chain | Dependencies pinned; `make audit-deps` runs pip-audit/npm audit on demand; no SBOM signing; CI runs tests and the adversarial sweep on every PR, but no dependency audit in CI. |
 | Evaluation | 45 documents and 112 questions written for this project; small and self-authored, so metrics are optimistic about real-world corpora. |
+
+## Found and fixed in the 2026-11-09 audit
+
+A review of the paths *around* retrieval (reports, audit log, records management) found three ways to learn about
+documents without opening them. The 12-identity sweep didn't cover them, because it probes search and reads only.
+All three are fixed, with regression tests in `tests/test_report_visibility.py` and three new cases in the
+sweep's `api` section:
+
+- **The evaluation report showed walled content.** Per-question rows were filtered by tenant only. A walled
+  associate (theo.brandt) could read the gold questions and answers for the Harrow matter, including the
+  settlement authority. Rows about documents you can't read now keep their metrics but hide their question and
+  answer text, and unreadable refs are hidden wherever they appear.
+- **The audit view showed other users' questions and refs.** An admin or reviewer saw every question asked in the
+  tenant and the refs it hit, including restricted ones. Other users' question text is now hidden, and so are refs
+  and version ids the viewer can't read. Who acted, when, and with what outcome stay visible.
+- **An admin could replace or delete a document it couldn't read.** Adding a version to an existing doc key, or
+  deleting it, now needs read access to every active version (else 403, logged as denied).
 
 ## Reporting
 

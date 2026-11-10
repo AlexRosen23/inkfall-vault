@@ -41,12 +41,12 @@ There are no passwords: this is a local fixture login, documented as a limitatio
 | `POST /api/summaries/{id}/submit` | author | draft/rejected → pending |
 | `POST /api/summaries/{id}/decision` | reviewer, not author | approve / reject |
 | `POST /api/summaries/{id}/release` | author or approver | approved → released; writes `data/outbox/<tenant>/brief-<id>.md` only |
-| `POST /api/admin/ingest` | admin | JSON upload (`content_base64`), tenant forced from session; bad files → 422 + quarantine |
-| `DELETE /api/admin/documents/{doc_key}` | admin | soft delete versions, hard delete chunks/FTS/embeddings |
+| `POST /api/admin/ingest` | admin | JSON upload (`content_base64`), tenant forced from session; bad files → 422 + quarantine; a new version of an existing document needs read access to all its active versions (else 403) |
+| `DELETE /api/admin/documents/{doc_key}` | admin who can read every active version | soft delete versions, hard delete chunks/FTS/embeddings; 403 if any version is unreadable to the admin |
 | `GET /api/admin/quarantine`, `/api/admin/documents` | admin | quarantine list (no content); registry (titles hidden when unreadable) |
-| `GET /api/admin/audit` | admin, reviewer | tenant audit events (redacted) |
+| `GET /api/admin/audit` | admin, reviewer | tenant audit events (redacted). Other users' question text is hidden, and so are refs and version ids the viewer cannot read |
 | `GET /api/system` | user | embedding/reranker status, detected generation backends, dataset version |
-| `GET /api/eval/report`, `GET /api/eval/adversarial` | user | saved reports; per-question/case rows limited to own tenant |
+| `GET /api/eval/report`, `GET /api/eval/adversarial` | user | saved reports; per-question/case rows limited to own tenant. Refs you cannot read are hidden, and so are the question and gold answer text of rows about documents you cannot read |
 
 ## Read-only project contract (no session)
 

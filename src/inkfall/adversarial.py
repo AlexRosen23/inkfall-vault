@@ -20,6 +20,7 @@ import argparse
 import base64
 import datetime as dt
 import json
+import re
 import shutil
 import subprocess
 import tempfile
@@ -39,6 +40,9 @@ from .identities import load_directory
 from .providers import Provider, get_provider
 
 AS_OF = "2026-11-01"
+
+
+DOC_REF = re.compile(r"\b(?:LF|CV|PM)-[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*(?:@\d+)?\b")  # doc keys/refs, not question ids
 
 
 def _strings(o) -> str:
@@ -314,6 +318,46 @@ def run(out: Path | None = None, generate: str | None = None) -> dict:
                 "title": "t", "collection": "commercial", "acl_groups": ["lf-all"], "effective_date": "2026-01-01"})
             api_case(name, f"upload {fname!r}", "quarantined, content not stored", r.status_code == 422,
                      {"user": "lf.admin", "status": r.status_code, "reason": r.json().get("reason")})
+
+        # Side channels: saved reports, the audit view and records management follow the authorized view too.
+        refs_ok = {u: {ref for v, ref, *_ in vinfo if v.id in allowed[u]} for u in directory.users}
+        keys_ok = {u: {key for v, ref, key, *_ in vinfo if v.id in allowed[u]} for u in directory.users}
+        gold_rows = json.loads((EVAL_DIR / "reports" / "latest.json").read_text()).get("questions", []) \
+            if (EVAL_DIR / "reports" / "latest.json").exists() else []
+        exposed = []
+        for u in directory.users:
+            r = c.get("/api/eval/report", headers=tok[u])
+            if r.status_code != 200:
+                continue
+            shown = {q["id"]: q for q in r.json()["questions"]}
+            for g in gold_rows:
+                if g["id"] not in shown or g["user"] == u or not g["relevant"] or set(g["relevant"]) <= refs_ok[u]:
+                    continue
+                blob = _strings(shown[g["id"]])
+                if g["question"] in blob or any(sp in blob for sp in g["answer_spans"]):
+                    exposed.append(f"{u}:{g['id']}")
+        api_case("eval-report-unreadable-content", "open the evaluation report as every identity",
+                 "no question or gold answer text from rows about documents the viewer cannot read", not exposed,
+                 {"user": None, "rows_checked": len(gold_rows), "exposed": len(exposed)})
+        walled_q = "What settlement authority has the client given in the Harrow matter?"
+        c.post("/api/ask", headers=tok["marcus.oyelaran"], json={"question": walled_q, "as_of": AS_OF})
+        r = c.get("/api/admin/audit", headers=tok["lf.admin"])
+        foreign = sorted({m for m in DOC_REF.findall(r.text)
+                          if m not in refs_ok["lf.admin"] and m not in keys_ok["lf.admin"]})
+        api_case("audit-view-side-channel", "an admin reads the audit log after a partner asks about a walled matter",
+                 "no other user's question text, no refs the admin cannot read",
+                 r.status_code == 200 and walled_q not in r.text and not foreign,
+                 {"user": "lf.admin", "status": r.status_code, "unreadable_refs_shown": len(foreign)})
+        target = next(key for v, ref, key, *_ in vinfo
+                      if v.tenant_id == "lanternfield" and key not in keys_ok["lf.admin"])
+        r_ing = c.post("/api/admin/ingest", headers=tok["lf.admin"], json={
+            "filename": "swap.md", "content_base64": base64.b64encode(b"# Replacement\n\nNew terms. " * 10).decode(),
+            "doc_key": target, "title": "Replacement", "collection": "commercial", "acl_groups": ["lf-all"],
+            "effective_date": "2026-10-01", "classification": "internal"})
+        r_del = c.delete(f"/api/admin/documents/{target}", headers=tok["lf.admin"])
+        api_case("admin-replace-unreadable", "an admin adds a version to, then deletes, a document it cannot read",
+                 "403 for both; the document is unchanged", r_ing.status_code == 403 and r_del.status_code == 403,
+                 {"user": "lf.admin", "ingest_status": r_ing.status_code, "delete_status": r_del.status_code})
     with TestClient(create_app(work, rate_limit=5)) as c2:
         hh = {"Authorization": "Bearer " + c2.post("/api/auth/login", json={"username": "sam.okafor"}).json()["token"]}
         c2.cookies.clear()
