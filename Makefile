@@ -6,7 +6,7 @@ WEB_PORT ?= 5111
 
 MCP_USER ?= dana.whitcombe
 
-.PHONY: mcp security-test-generative eval-faithfulness help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
+.PHONY: smoke mcp security-test-generative eval-faithfulness help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*?## ' '{printf "  %-16s %s\n", $$1, $$2}'
@@ -98,6 +98,12 @@ ci: ## What .github/workflows/ci.yml runs on GitHub (ubuntu-24.04); run it local
 	$(UV) run python -m inkfall.adversarial
 	cd web && npm run build
 	$(MAKE) licenses
+	$(MAKE) smoke
+
+smoke: ## Browser smoke test of the one-port build in real Chromium (login, conflict, citation, ethical wall, eval lab)
+	cd web && INKFALL_EXPORT=1 ./node_modules/.bin/next build
+	$(UV) run --with playwright==1.64.0 playwright install chromium
+	$(UV) run --with playwright==1.64.0 python scripts/smoke_ui.py
 
 mcp: ## Permission-aware MCP server on stdio, identity bound at launch (MCP_USER=dana.whitcombe by default)
 	INKFALL_MCP_USER=$(MCP_USER) $(UV) run python -m inkfall.mcp_server

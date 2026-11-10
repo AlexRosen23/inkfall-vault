@@ -27,6 +27,7 @@ BM25 + extractive answers and reports dense/hybrid as unavailable.
 | `make security-test` | authz/isolation/security/generation suites + adversarial eval (`eval/reports/adversarial.json`) |
 | `make eval` | gold set through BM25/dense/hybrid(/rerank) → `eval/reports/latest.json` + rendered docs |
 | `make lint` | ruff + TypeScript typecheck + ESLint |
+| `make smoke` | builds the static UI, serves it on one port over a throwaway DB copy, and drives real Chromium through login, the conflicting-clause question, a citation highlight, the ethical wall and the eval lab (installs Playwright 1.64.0 + Chromium on demand) |
 | `make licenses`, `make audit-deps` | license inventory gate; pip-audit + npm audit |
 | `make ci` | everything `.github/workflows/ci.yml` does |
 
