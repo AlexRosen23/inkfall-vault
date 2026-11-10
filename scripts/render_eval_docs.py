@@ -353,7 +353,8 @@ def main() -> None:
                          f"reference labels pending owner review; {dm['answers_all_sentences_supported']}/"
                          f"{dm['natural_answers']} natural answers pass the deterministic span check.")
         lines += ["", "Recall@5 is 1.0 for every method because each identity can read only 3-15 versions; read MRR/nDCG. "
-                  "Contradiction detection is weak on held-out questions and is not claimed as a strength.", "", b]
+                  "Contradiction detection is not claimed as a strength: the rule was revised after its test-split misses were "
+                  "inspected, so the test split no longer gives it an independent estimate (docs/CONTRADICTION_RULE.md).", "", b]
         pre, rest = txt.split(a, 1)
         post = rest.split(b, 1)[1]
         readme.write_text(pre + "\n".join(lines) + post)
