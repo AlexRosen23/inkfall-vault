@@ -170,12 +170,22 @@ def verify_citation(session: Session, user: User, directory: Directory, version_
     return True, "ok"
 
 
+# Tags the dataset author used to build the evaluation (which documents carry a planted contradiction, an
+# injection fixture, a distractor). They are an answer key, not document metadata, so the API never shows them;
+# they stay in corpus/ for the dataset tests and the eval harness.
+EVAL_DESIGN_TAGS = frozenset({"contradiction", "distractor", "injection-fixture", "future-effective"})
+
+
+def public_tags(tags: list[str] | None) -> list[str]:
+    return [t for t in (tags or []) if t not in EVAL_DESIGN_TAGS]
+
+
 def document_payload(view: VersionView, history: list[VersionView]) -> dict:
     v, d = view.version, view.document
     return {
         "version_id": v.id, "ref": view.ref, "doc_key": d.doc_key, "version": v.version, "title": v.title,
         "collection": d.collection, "doc_type": d.doc_type, "matter": d.matter, "effective_date": v.effective_date.isoformat(),
-        "classification": v.classification, "parties": v.parties, "tags": v.tags, "amends": v.amends_key,
+        "classification": v.classification, "parties": v.parties, "tags": public_tags(v.tags), "amends": v.amends_key,
         "text": v.text,
         "chunks": [{"chunk_id": c.id, "heading": c.heading, "char_start": c.char_start, "char_end": c.char_end}
                    for c in v.chunks],

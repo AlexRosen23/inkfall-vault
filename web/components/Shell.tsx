@@ -9,6 +9,8 @@ import type { Me, SystemInfo } from "@/lib/types";
 interface SessionValue {
   me: Me;
   system: SystemInfo | null;
+  /** True while /api/system is still answering (the first call can load the embedding model). */
+  systemPending?: boolean;
 }
 
 const SessionContext = createContext<SessionValue | null>(null);
@@ -38,7 +40,14 @@ function Footer() {
   );
 }
 
-function SystemStrip({ system }: { system: SystemInfo | null }) {
+function SystemStrip({ system, pending }: { system: SystemInfo | null; pending?: boolean }) {
+  if (!system && pending) {
+    return (
+      <div className="system-strip muted" aria-live="polite">
+        Checking the embedding model and local generation backends…
+      </div>
+    );
+  }
   if (!system) return <div className="system-strip muted">System status unavailable.</div>;
   return (
     <div className="system-strip" aria-label="System status">
@@ -69,7 +78,7 @@ function SystemStrip({ system }: { system: SystemInfo | null }) {
   );
 }
 
-function Header({ me, system }: SessionValue) {
+function Header({ me, system, systemPending }: SessionValue) {
   const pathname = usePathname();
   const [busy, setBusy] = useState(false);
 
@@ -116,7 +125,7 @@ function Header({ me, system }: SessionValue) {
           </button>
         </div>
       </div>
-      <SystemStrip system={system} />
+      <SystemStrip system={system} pending={systemPending} />
     </header>
   );
 }
@@ -134,17 +143,15 @@ export function Shell({ children }: { children: ReactNode }) {
     if (isLogin) return;
     let cancelled = false;
     api<Me>("/api/auth/me")
-      .then(async (me) => {
-        let system: SystemInfo | null = null;
-        try {
-          system = await api<SystemInfo>("/api/system");
-        } catch {
-          system = null;
-        }
-        if (!cancelled) {
-          setSession({ me, system });
-          setError(null);
-        }
+      .then((me) => {
+        if (cancelled) return;
+        // Open the workbench as soon as the identity is known. System status (embedding model, local backends)
+        // fills in when it arrives; on a cold start it can take a while, and nothing on the page needs it to work.
+        setSession({ me, system: null, systemPending: true });
+        setError(null);
+        api<SystemInfo>("/api/system")
+          .then((system) => !cancelled && setSession({ me, system, systemPending: false }))
+          .catch(() => !cancelled && setSession({ me, system: null, systemPending: false }));
       })
       .catch((e: unknown) => {
         if (!cancelled) setError(errorText(e));
@@ -167,7 +174,7 @@ export function Shell({ children }: { children: ReactNode }) {
   return (
     <>
       <a className="skip-link" href="#main">Skip to content</a>
-      {session ? <Header me={session.me} system={session.system} /> : <div className="site-header placeholder" />}
+      {session ? <Header {...session} /> : <div className="site-header placeholder" />}
       <main id="main" tabIndex={-1}>
         {session ? (
           <SessionContext.Provider value={session}>{children}</SessionContext.Provider>

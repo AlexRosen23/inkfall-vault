@@ -1661,6 +1661,20 @@ details summary {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
+.paper-h {
+  font-weight: 650;
+  color: var(--ink);
+}
+.paper-h1 {
+  font-size: 1.25em;
+}
+.paper-h2 {
+  font-size: 1.08em;
+}
+.md-mark {
+  opacity: 0.32;
+  font-weight: 400;
+}
 .cite-mark {
   background: var(--mark);
   color: var(--ink);

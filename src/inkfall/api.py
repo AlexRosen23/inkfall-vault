@@ -54,7 +54,14 @@ from .identities import Directory, User, directory
 from .ingest import IngestError, VersionInput, delete_document, quarantine, sniff_and_extract, store_version
 from .redact import redact
 from .search import ensure_embeddings
-from .service import compare_versions, document_payload, new_request_id, run_query, verify_citation
+from .service import (
+    compare_versions,
+    document_payload,
+    new_request_id,
+    public_tags,
+    run_query,
+    verify_citation,
+)
 
 log = logging.getLogger("inkfall")
 CONTRACT_PATHS = {"/health", "/capabilities", "/runs"}
@@ -161,6 +168,9 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
     async def lifespan(_app):
         with st.Session.begin() as s:
             audit.purge_expired(s)
+        # Load the embedding model off the request path, so the first question after a start is not the one that
+        # waits for it. Failure is fine: dense retrieval reports itself unavailable and BM25 still works.
+        threading.Thread(target=embed.available, name="inkfall-embed-warmup", daemon=True).start()
         yield
         st.engine.dispose()
 
@@ -310,7 +320,7 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
                 "title": v.version.title, "collection": v.document.collection, "doc_type": v.document.doc_type,
                 "classification": v.version.classification, "effective_date": v.version.effective_date.isoformat(),
                 "in_force": v.in_force, "superseded_by": v.superseded_by, "amends": v.version.amends_key,
-                "tags": v.version.tags}
+                "tags": public_tags(v.version.tags)}
                for v in sorted(views, key=lambda x: (x.document.doc_key, x.version.version))]
         _audit(s, request, "list_documents", "ok", user, count=len(out), collection=collection)
         return out
