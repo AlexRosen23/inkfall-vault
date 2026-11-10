@@ -3,12 +3,17 @@ tests that mutate data copy it first."""
 
 from __future__ import annotations
 
+import atexit
 import os
+import shutil
 import sqlite3
 import tempfile
 from pathlib import Path
 
 _TMP = Path(tempfile.mkdtemp(prefix="inkfall-test-"))
+# The seeded base.db and every fresh copy live here; remove it when the test process exits (it was left behind before,
+# about 2-4 MB per run).
+atexit.register(shutil.rmtree, _TMP, ignore_errors=True)
 os.environ["INKFALL_DATA_DIR"] = str(_TMP / "data")
 os.environ["INKFALL_DB"] = str(_TMP / "base.db")
 
