@@ -16,10 +16,10 @@ The three organizations and all 45 documents are fictional.
 
 | | |
 |---|---|
-| **Status** | Working local demo. The build spec's phases 1–5 ([#1](https://github.com/AlexRosen23/inkfall-vault/pull/1)–[#3](https://github.com/AlexRosen23/inkfall-vault/pull/3)) and the AI Engineer readiness additions ([#4](https://github.com/AlexRosen23/inkfall-vault/pull/4)) are merged. Those additions are a Claude Citations provider, an MCP server, a real-model adversarial run, a calibrated faithfulness judge and tracing. Contradiction detection is partial, and login uses fixture identities. A 2026-11-09 audit found side-channel leaks around the read path (evaluation report, audit view, admin replace/delete). Fixes for those and for the other gaps it found are open in [#10](https://github.com/AlexRosen23/inkfall-vault/pull/10)–[#14](https://github.com/AlexRosen23/inkfall-vault/pull/14), not merged. |
+| **Status** | Working local demo. The build spec's phases 1–5 ([#1](https://github.com/AlexRosen23/inkfall-vault/pull/1)–[#3](https://github.com/AlexRosen23/inkfall-vault/pull/3)) and the AI Engineer readiness additions ([#4](https://github.com/AlexRosen23/inkfall-vault/pull/4)) are merged. Those additions are a Claude Citations provider, an MCP server, a real-model adversarial run, a calibrated faithfulness judge and tracing. Contradiction detection is partial, and login uses fixture identities. A 2026-11-09 audit found side-channel leaks around the read path (evaluation report, audit view, admin replace/delete). The side-channel fix is merged ([#10](https://github.com/AlexRosen23/inkfall-vault/pull/10)); fixes for the other gaps it found are open in [#11](https://github.com/AlexRosen23/inkfall-vault/pull/11)–[#14](https://github.com/AlexRosen23/inkfall-vault/pull/14). |
 | **Stack** | Python 3.12 (uv), FastAPI, SQLAlchemy, SQLite FTS5, sentence-transformers (`all-MiniLM-L6-v2`, CPU), Next.js 16 / React 19 / TypeScript, pytest. Opt-in: Anthropic SDK, MCP Python SDK, OpenTelemetry |
 | **Run it** | `make setup && make serve`, then open http://127.0.0.1:5110 |
-| **Verified** | README checked on 2026-11-09 against `main` at `10aee90`, merged into this branch. The quick start, the 101 tests and `make ci` were rerun on that tree. |
+| **Verified** | README checked on 2026-11-09 against `main` at `0b132e7`, merged into this branch. The quick start, the 106 tests and `make ci` were rerun on that tree. |
 | **License** | MIT ([LICENSE](LICENSE)) |
 
 ### For AI Engineer reviewers
@@ -135,7 +135,7 @@ command, commit and machine.
 | Capability | Status | How it was verified |
 |---|---|---|
 | Authorization (tenant, clearance, ACL groups, ethical walls, deleted) applied before every read path | Working | `tests/test_authz.py`, `tests/test_isolation.py`. The generated [authorization matrix](docs/AUTHORIZATION_MATRIX.md) shows all 540 user × version decisions. |
-| Zero cross-tenant or unauthorized leaks under attack | **Working for search and reads; a side-channel fix is open** | `make security-test` → `eval/reports/adversarial.json` (12 identities, 1,796 search probes, 898 direct reads, 0 leaks). Also `test_zero_leaks_through_search_and_ask`. The sweep covers search and reads only. An audit on 2026-11-09 found three side channels outside it. The worst: the evaluation report gave the walled associate the Harrow matter's gold questions and answers. All three are fixed and added to the sweep in [PR #10](https://github.com/AlexRosen23/inkfall-vault/pull/10) (open, not merged; see Limitations). |
+| Zero cross-tenant or unauthorized leaks under attack | Working | `make security-test` → `eval/reports/adversarial.json` (12 identities, 1,796 search probes, 898 direct reads, 0 leaks). Also `test_zero_leaks_through_search_and_ask`. The sweep covers search and reads only. An audit on 2026-11-09 found three side channels outside it. The worst: the evaluation report gave the walled associate the Harrow matter's gold questions and answers. All three were fixed and added to the sweep in [PR #10](https://github.com/AlexRosen23/inkfall-vault/pull/10), so the sweep's API section now runs 13 checks (see How it was built). |
 | BM25 retrieval (SQLite FTS5, one index per tenant) | Working | `make eval` → `eval/reports/latest.json`; `tests/test_retrieval.py` (dev-split MRR floor) |
 | Dense retrieval (`all-MiniLM-L6-v2`) and RRF hybrid | Working | `eval/reports/latest.json`. Needs the ~90 MB model from `make setup`; without it, BM25 still works. |
 | Cross-encoder rerank | Working, opt-in, off by default | `make rerank-model && make eval`. Measured no gain on this corpus at about 10× the latency (see Results). |
@@ -324,7 +324,7 @@ zero-leak tests had to pass before any LLM feature was added. Each phase is a co
 | CI seed fix + live Claude check | Seed the database before the adversarial step in CI; `make eval-claude-live` (opt-in, paid) | [PR #8](https://github.com/AlexRosen23/inkfall-vault/pull/8) |
 | First live Claude run | The owner's 6-question run, committed unedited; document titles sent with each passage; token-total fix | [PR #9](https://github.com/AlexRosen23/inkfall-vault/pull/9) |
 | This write-up + Linux CI | This README; CI moved from `macos-15` to `ubuntu-24.04` with CPU-only torch; Actions enabled | [PR #6](https://github.com/AlexRosen23/inkfall-vault/pull/6) |
-| Audit, 2026-11-09 (open, not merged) | Walked the demo as two identities as a skeptical security reviewer. Side channels closed ([PR #10](https://github.com/AlexRosen23/inkfall-vault/pull/10)); injection-shaped questions refused ([PR #11](https://github.com/AlexRosen23/inkfall-vault/pull/11)); contradiction rule revised ([PR #12](https://github.com/AlexRosen23/inkfall-vault/pull/12)); demo polish ([PR #13](https://github.com/AlexRosen23/inkfall-vault/pull/13)); browser smoke test ([PR #14](https://github.com/AlexRosen23/inkfall-vault/pull/14)). Merge #10 → #11 → #12 → #14 in order (stacked); #13 is independent. | [PR #10](https://github.com/AlexRosen23/inkfall-vault/pull/10)–[PR #14](https://github.com/AlexRosen23/inkfall-vault/pull/14) |
+| Audit, 2026-11-09 (#10 merged; #11–#14 open) | Walked the demo as two identities as a skeptical security reviewer. Side channels closed ([PR #10](https://github.com/AlexRosen23/inkfall-vault/pull/10)); injection-shaped questions refused ([PR #11](https://github.com/AlexRosen23/inkfall-vault/pull/11)); contradiction rule revised ([PR #12](https://github.com/AlexRosen23/inkfall-vault/pull/12)); demo polish ([PR #13](https://github.com/AlexRosen23/inkfall-vault/pull/13)); browser smoke test ([PR #14](https://github.com/AlexRosen23/inkfall-vault/pull/14)). Merge #10 → #11 → #12 → #14 in order (stacked); #13 is independent. | [PR #10](https://github.com/AlexRosen23/inkfall-vault/pull/10)–[PR #14](https://github.com/AlexRosen23/inkfall-vault/pull/14) |
 
 ### Key decisions and trade-offs
 
@@ -478,10 +478,6 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
 
 ### Known gaps, stated plainly
 
-- **Side channels around the read path (on `main` until [PR #10](https://github.com/AlexRosen23/inkfall-vault/pull/10) merges).** The evaluation report gives a user the
-  gold questions and answers of rows about documents they can't read, including a walled matter. The audit view
-  shows other users' questions and restricted refs to admins and reviewers. An admin can add a version to, or
-  delete, a document it can't read. Search, reads and citations are not affected.
 - **Contradiction detection catches 2 of 5 on the held-out split**, with 6 false alarms (hybrid). On the dev
   split, where its thresholds were tuned, it finds 4 of 4, so the rule overfits a small set of examples. It is
   marked "do not claim" in `resume_evidence/metrics.json`. [PR #12](https://github.com/AlexRosen23/inkfall-vault/pull/12) fixes the method gaps behind the misses:
@@ -519,7 +515,7 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
 
 ### Next steps, highest value first
 
-1. Review and merge the audit fixes: [PR #10](https://github.com/AlexRosen23/inkfall-vault/pull/10) (side channels) first, then [PR #11](https://github.com/AlexRosen23/inkfall-vault/pull/11), [PR #12](https://github.com/AlexRosen23/inkfall-vault/pull/12) and [PR #14](https://github.com/AlexRosen23/inkfall-vault/pull/14)
+1. Review and merge the rest of the audit fixes: [PR #11](https://github.com/AlexRosen23/inkfall-vault/pull/11), [PR #12](https://github.com/AlexRosen23/inkfall-vault/pull/12) and [PR #14](https://github.com/AlexRosen23/inkfall-vault/pull/14)
    (stacked), and [PR #13](https://github.com/AlexRosen23/inkfall-vault/pull/13) (independent). The README's results block re-renders from the reports they commit.
 2. Write new conflict questions without looking at the revised rule, to get a real held-out number for
    contradiction detection. Then tackle the remaining false alarms (CV-015, LF-008 on test).
@@ -555,7 +551,7 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
 make test
 ```
 
-This runs the dataset validator and the full pytest suite: **101 tests, all passing** on 2026-11-09 (this
+This runs the dataset validator and the full pytest suite: **106 tests, all passing** on 2026-11-09 (this
 branch, i.e. `main` at `02a5c9c` plus this PR's CI change). `make security-test` runs the isolation, security and generation suites, then the adversarial sweep.
 `make ci` runs everything the CI workflow would: Ruff, the TypeScript typecheck and ESLint, the dataset check,
 pytest, the adversarial sweep, the production web build and the license gate. It passed locally on 2026-11-09.
