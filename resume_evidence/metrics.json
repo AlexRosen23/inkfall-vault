@@ -5,7 +5,7 @@
     "eval/reports/adversarial_generative.json",
     "eval/reports/faithfulness.json"
   ],
-  "generated_at": "2026-11-09T05:52:59+00:00",
+  "generated_at": "2026-11-10T00:24:48+00:00",
   "dataset_version": "648f953504a95e33",
   "claims": [
     {
@@ -24,14 +24,14 @@
     },
     {
       "claim": "Every citation resolves to stored source text the asker may read",
-      "metric": "citation validity 100.0% over 102 test-split citations",
+      "metric": "citation validity 100.0% over 101 test-split citations",
       "source": "eval/reports/latest.json#summary.test.hybrid.citation_validity; tests/test_api_security.py::test_citations_resolve_to_stored_text",
       "verify": "make eval",
       "status": "verified"
     },
     {
       "claim": "Abstains on unanswerable and permission-probe questions",
-      "metric": "abstention F1 0.923 (test, hybrid)",
+      "metric": "abstention F1 0.943 (test, hybrid)",
       "source": "eval/reports/latest.json#summary.test.hybrid.abstention",
       "verify": "make eval",
       "status": "verified"
@@ -66,14 +66,14 @@
     },
     {
       "claim": "Sub-100 ms retrieval on CPU",
-      "metric": "hybrid p95 40.3 ms (test split, Apple M5 Pro)",
+      "metric": "hybrid p95 21.2 ms (test split, Apple M5 Pro)",
       "source": "eval/reports/latest.json#summary.test.hybrid.latency_ms",
       "verify": "make eval",
       "status": "verified on this machine only"
     },
     {
       "claim": "Cross-encoder reranking evaluated as an ablation",
-      "metric": "hybrid+rerank MRR@10 0.955 vs hybrid 0.966; p50 195.7 ms vs 19.8 ms (test split): no gain on this corpus",
+      "metric": "hybrid+rerank MRR@10 0.955 vs hybrid 0.966; p50 109.4 ms vs 11.5 ms (test split): no gain on this corpus",
       "source": "eval/reports/latest.json#summary.test.rerank",
       "verify": "make rerank-model && make eval",
       "status": "verified (negative result: reranking did not help here)"

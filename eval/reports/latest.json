@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-09T05:52:59+00:00",
+ "generated_at": "2026-11-10T00:24:48+00:00",
  "provenance": {
-  "git_commit": "2180604",
+  "git_commit": "bdff7c9",
   "uncommitted_changes_in_src_or_data": false,
   "dataset_version": "648f953504a95e33",
   "documents": 45,
@@ -18,7 +18,7 @@
    "python": "3.12.15",
    "device": "cpu"
   },
-  "wall_seconds": 28.9,
+  "wall_seconds": 17.9,
   "answer_mode": "extractive (no LLM)"
  },
  "methods_run": [
@@ -62,11 +62,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.6,
-     "p95": 9.3,
-     "max": 15.9
+     "p50": 3.6,
+     "p95": 6.9,
+     "max": 8.9
     },
-    "throughput_qps_sequential": 189.59
+    "throughput_qps_sequential": 246.7
    },
    "dense": {
     "questions": 43,
@@ -100,11 +100,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 18.4,
-     "p95": 36.6,
-     "max": 273.2
+     "p50": 12.0,
+     "p95": 24.0,
+     "max": 28.0
     },
-    "throughput_qps_sequential": 38.28
+    "throughput_qps_sequential": 75.21
    },
    "hybrid": {
     "questions": 43,
@@ -138,11 +138,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 18.6,
-     "p95": 38.3,
-     "max": 72.9
+     "p50": 11.4,
+     "p95": 22.7,
+     "max": 26.8
     },
-    "throughput_qps_sequential": 45.69
+    "throughput_qps_sequential": 73.09
    },
    "rerank": {
     "questions": 43,
@@ -176,11 +176,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 196.0,
-     "p95": 327.7,
-     "max": 354.7
+     "p50": 105.8,
+     "p95": 203.9,
+     "max": 254.9
     },
-    "throughput_qps_sequential": 4.88
+    "throughput_qps_sequential": 7.67
    },
    "baseline_title_only": {
     "recall_at_5": 0.8929,
@@ -197,18 +197,18 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 0.9375,
     "ndcg_at_10": 0.9501,
-    "citations": 112,
+    "citations": 110,
     "citation_validity": 1.0,
     "answered_answerable": 41,
     "answer_support_rate": 0.8537,
     "unsupported_answer_rate": 0.1463,
     "evidence_in_pack_rate": 0.9268,
     "abstention": {
-     "precision": 0.875,
-     "recall": 0.84,
-     "f1": 0.8571,
+     "precision": 0.88,
+     "recall": 0.88,
+     "f1": 0.88,
      "false_abstain_on_answerable": 3,
-     "missed_abstain": 4
+     "missed_abstain": 3
     },
     "conflicts": {
      "expected": 5,
@@ -220,11 +220,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.4,
-     "p95": 8.1,
-     "max": 8.5
+     "p50": 3.2,
+     "p95": 5.7,
+     "max": 10.2
     },
-    "throughput_qps_sequential": 216.57
+    "throughput_qps_sequential": 273.16
    },
    "dense": {
     "questions": 69,
@@ -235,18 +235,18 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 0.9621,
     "ndcg_at_10": 0.9729,
-    "citations": 99,
+    "citations": 98,
     "citation_validity": 1.0,
     "answered_answerable": 41,
     "answer_support_rate": 0.8537,
     "unsupported_answer_rate": 0.1463,
     "evidence_in_pack_rate": 0.9756,
     "abstention": {
-     "precision": 0.8889,
-     "recall": 0.96,
-     "f1": 0.9231,
+     "precision": 0.8929,
+     "recall": 1.0,
+     "f1": 0.9434,
      "false_abstain_on_answerable": 3,
-     "missed_abstain": 1
+     "missed_abstain": 0
     },
     "conflicts": {
      "expected": 5,
@@ -258,11 +258,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 18.9,
-     "p95": 42.1,
-     "max": 76.8
+     "p50": 11.1,
+     "p95": 19.8,
+     "max": 43.1
     },
-    "throughput_qps_sequential": 43.97
+    "throughput_qps_sequential": 79.62
    },
    "hybrid": {
     "questions": 69,
@@ -273,18 +273,18 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 0.9659,
     "ndcg_at_10": 0.9708,
-    "citations": 102,
+    "citations": 101,
     "citation_validity": 1.0,
     "answered_answerable": 41,
     "answer_support_rate": 0.878,
     "unsupported_answer_rate": 0.122,
     "evidence_in_pack_rate": 0.9756,
     "abstention": {
-     "precision": 0.8889,
-     "recall": 0.96,
-     "f1": 0.9231,
+     "precision": 0.8929,
+     "recall": 1.0,
+     "f1": 0.9434,
      "false_abstain_on_answerable": 3,
-     "missed_abstain": 1
+     "missed_abstain": 0
     },
     "conflicts": {
      "expected": 5,
@@ -296,11 +296,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 19.8,
-     "p95": 40.3,
-     "max": 90.2
+     "p50": 11.5,
+     "p95": 21.2,
+     "max": 40.2
     },
-    "throughput_qps_sequential": 43.29
+    "throughput_qps_sequential": 75.17
    },
    "rerank": {
     "questions": 69,
@@ -311,18 +311,18 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 0.9545,
     "ndcg_at_10": 0.9675,
-    "citations": 112,
+    "citations": 109,
     "citation_validity": 1.0,
     "answered_answerable": 39,
     "answer_support_rate": 0.8718,
     "unsupported_answer_rate": 0.1282,
     "evidence_in_pack_rate": 0.9744,
     "abstention": {
-     "precision": 0.8148,
-     "recall": 0.88,
-     "f1": 0.8462,
+     "precision": 0.8214,
+     "recall": 0.92,
+     "f1": 0.8679,
      "false_abstain_on_answerable": 5,
-     "missed_abstain": 3
+     "missed_abstain": 2
     },
     "conflicts": {
      "expected": 5,
@@ -334,11 +334,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 195.7,
-     "p95": 319.0,
-     "max": 553.2
+     "p50": 109.4,
+     "p95": 230.9,
+     "max": 276.5
     },
-    "throughput_qps_sequential": 4.91
+    "throughput_qps_sequential": 7.92
    },
    "baseline_title_only": {
     "recall_at_5": 0.8977,
@@ -355,18 +355,18 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 0.9479,
     "ndcg_at_10": 0.9573,
-    "citations": 192,
+    "citations": 190,
     "citation_validity": 1.0,
     "answered_answerable": 69,
     "answer_support_rate": 0.8551,
     "unsupported_answer_rate": 0.1449,
     "evidence_in_pack_rate": 0.9275,
     "abstention": {
-     "precision": 0.9167,
-     "recall": 0.825,
-     "f1": 0.8684,
+     "precision": 0.9189,
+     "recall": 0.85,
+     "f1": 0.8831,
      "false_abstain_on_answerable": 3,
-     "missed_abstain": 7
+     "missed_abstain": 6
     },
     "conflicts": {
      "expected": 9,
@@ -378,11 +378,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.5,
-     "p95": 8.1,
-     "max": 15.9
+     "p50": 3.3,
+     "p95": 6.9,
+     "max": 10.2
     },
-    "throughput_qps_sequential": 205.35
+    "throughput_qps_sequential": 262.36
    },
    "dense": {
     "questions": 112,
@@ -393,18 +393,18 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 0.956,
     "ndcg_at_10": 0.9689,
-    "citations": 178,
+    "citations": 177,
     "citation_validity": 1.0,
     "answered_answerable": 69,
     "answer_support_rate": 0.8696,
     "unsupported_answer_rate": 0.1304,
     "evidence_in_pack_rate": 0.9565,
     "abstention": {
-     "precision": 0.925,
-     "recall": 0.925,
-     "f1": 0.925,
+     "precision": 0.9268,
+     "recall": 0.95,
+     "f1": 0.9383,
      "false_abstain_on_answerable": 3,
-     "missed_abstain": 3
+     "missed_abstain": 2
     },
     "conflicts": {
      "expected": 9,
@@ -416,11 +416,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 18.7,
-     "p95": 42.1,
-     "max": 273.2
+     "p50": 11.5,
+     "p95": 23.2,
+     "max": 43.1
     },
-    "throughput_qps_sequential": 41.6
+    "throughput_qps_sequential": 77.87
    },
    "hybrid": {
     "questions": 112,
@@ -431,18 +431,18 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 0.9722,
     "ndcg_at_10": 0.977,
-    "citations": 181,
+    "citations": 180,
     "citation_validity": 1.0,
     "answered_answerable": 69,
     "answer_support_rate": 0.8986,
     "unsupported_answer_rate": 0.1014,
     "evidence_in_pack_rate": 0.971,
     "abstention": {
-     "precision": 0.925,
-     "recall": 0.925,
-     "f1": 0.925,
+     "precision": 0.9268,
+     "recall": 0.95,
+     "f1": 0.9383,
      "false_abstain_on_answerable": 3,
-     "missed_abstain": 3
+     "missed_abstain": 2
     },
     "conflicts": {
      "expected": 9,
@@ -454,11 +454,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 19.5,
-     "p95": 40.3,
-     "max": 90.2
+     "p50": 11.4,
+     "p95": 22.7,
+     "max": 40.2
     },
-    "throughput_qps_sequential": 44.18
+    "throughput_qps_sequential": 74.36
    },
    "rerank": {
     "questions": 112,
@@ -469,18 +469,18 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 0.9479,
     "ndcg_at_10": 0.9606,
-    "citations": 191,
+    "citations": 188,
     "citation_validity": 1.0,
     "answered_answerable": 66,
     "answer_support_rate": 0.8636,
     "unsupported_answer_rate": 0.1364,
     "evidence_in_pack_rate": 0.9242,
     "abstention": {
-     "precision": 0.8571,
-     "recall": 0.9,
-     "f1": 0.878,
+     "precision": 0.8605,
+     "recall": 0.925,
+     "f1": 0.8916,
      "false_abstain_on_answerable": 6,
-     "missed_abstain": 4
+     "missed_abstain": 3
     },
     "conflicts": {
      "expected": 9,
@@ -492,11 +492,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 195.7,
-     "p95": 327.7,
-     "max": 553.2
+     "p50": 106.8,
+     "p95": 225.9,
+     "max": 276.5
     },
-    "throughput_qps_sequential": 4.9
+    "throughput_qps_sequential": 7.82
    },
    "baseline_title_only": {
     "recall_at_5": 0.8958,
@@ -538,11 +538,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.7,
-     "p95": 7.5,
-     "max": 7.5
+     "p50": 3.1,
+     "p95": 5.5,
+     "max": 5.5
     },
-    "throughput_qps_sequential": 223.33
+    "throughput_qps_sequential": 282.13
    },
    "dense": {
     "questions": 9,
@@ -576,11 +576,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 16.3,
-     "p95": 30.3,
-     "max": 30.3
+     "p50": 11.7,
+     "p95": 28.0,
+     "max": 28.0
     },
-    "throughput_qps_sequential": 54.25
+    "throughput_qps_sequential": 73.11
    },
    "hybrid": {
     "questions": 9,
@@ -614,11 +614,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 14.6,
-     "p95": 31.4,
-     "max": 31.4
+     "p50": 12.2,
+     "p95": 23.8,
+     "max": 23.8
     },
-    "throughput_qps_sequential": 53.48
+    "throughput_qps_sequential": 73.53
    },
    "rerank": {
     "questions": 9,
@@ -652,11 +652,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 209.5,
-     "p95": 263.7,
-     "max": 263.7
+     "p50": 175.2,
+     "p95": 243.4,
+     "max": 243.4
     },
-    "throughput_qps_sequential": 5.42
+    "throughput_qps_sequential": 6.67
    }
   },
   "contradiction": {
@@ -692,11 +692,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.8,
-     "p95": 8.4,
-     "max": 8.4
+     "p50": 3.7,
+     "p95": 6.9,
+     "max": 6.9
     },
-    "throughput_qps_sequential": 199.12
+    "throughput_qps_sequential": 234.38
    },
    "dense": {
     "questions": 9,
@@ -730,11 +730,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 14.4,
-     "p95": 28.0,
-     "max": 28.0
+     "p50": 10.9,
+     "p95": 34.0,
+     "max": 34.0
     },
-    "throughput_qps_sequential": 55.66
+    "throughput_qps_sequential": 65.6
    },
    "hybrid": {
     "questions": 9,
@@ -768,11 +768,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 18.5,
-     "p95": 31.6,
-     "max": 31.6
+     "p50": 11.2,
+     "p95": 36.5,
+     "max": 36.5
     },
-    "throughput_qps_sequential": 52.08
+    "throughput_qps_sequential": 61.9
    },
    "rerank": {
     "questions": 9,
@@ -806,11 +806,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 181.4,
-     "p95": 304.3,
-     "max": 304.3
+     "p50": 126.9,
+     "p95": 212.5,
+     "max": 212.5
     },
-    "throughput_qps_sequential": 5.44
+    "throughput_qps_sequential": 7.67
    }
   },
   "injection": {
@@ -823,7 +823,7 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 1.0,
     "ndcg_at_10": 1.0,
-    "citations": 11,
+    "citations": 9,
     "citation_validity": 1.0,
     "answered_answerable": 3,
     "answer_support_rate": 1.0,
@@ -831,10 +831,10 @@
     "evidence_in_pack_rate": 1.0,
     "abstention": {
      "precision": 1.0,
-     "recall": 0.8333,
-     "f1": 0.9091,
+     "recall": 0.9167,
+     "f1": 0.9565,
      "false_abstain_on_answerable": 0,
-     "missed_abstain": 2
+     "missed_abstain": 1
     },
     "conflicts": {
      "expected": 0,
@@ -846,11 +846,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.3,
-     "p95": 9.3,
-     "max": 9.3
+     "p50": 3.3,
+     "p95": 5.3,
+     "max": 5.3
     },
-    "throughput_qps_sequential": 215.83
+    "throughput_qps_sequential": 287.91
    },
    "dense": {
     "questions": 15,
@@ -861,7 +861,7 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 1.0,
     "ndcg_at_10": 1.0,
-    "citations": 9,
+    "citations": 8,
     "citation_validity": 1.0,
     "answered_answerable": 3,
     "answer_support_rate": 1.0,
@@ -869,10 +869,10 @@
     "evidence_in_pack_rate": 1.0,
     "abstention": {
      "precision": 1.0,
-     "recall": 0.9167,
-     "f1": 0.9565,
+     "recall": 1.0,
+     "f1": 1.0,
      "false_abstain_on_answerable": 0,
-     "missed_abstain": 1
+     "missed_abstain": 0
     },
     "conflicts": {
      "expected": 0,
@@ -884,11 +884,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 21.0,
-     "p95": 54.1,
-     "max": 54.1
+     "p50": 14.7,
+     "p95": 24.0,
+     "max": 24.0
     },
-    "throughput_qps_sequential": 42.66
+    "throughput_qps_sequential": 68.37
    },
    "hybrid": {
     "questions": 15,
@@ -899,7 +899,7 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 1.0,
     "ndcg_at_10": 1.0,
-    "citations": 9,
+    "citations": 8,
     "citation_validity": 1.0,
     "answered_answerable": 3,
     "answer_support_rate": 1.0,
@@ -907,10 +907,10 @@
     "evidence_in_pack_rate": 1.0,
     "abstention": {
      "precision": 1.0,
-     "recall": 0.9167,
-     "f1": 0.9565,
+     "recall": 1.0,
+     "f1": 1.0,
      "false_abstain_on_answerable": 0,
-     "missed_abstain": 1
+     "missed_abstain": 0
     },
     "conflicts": {
      "expected": 0,
@@ -922,11 +922,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 20.3,
-     "p95": 90.2,
-     "max": 90.2
+     "p50": 15.8,
+     "p95": 20.3,
+     "max": 20.3
     },
-    "throughput_qps_sequential": 39.03
+    "throughput_qps_sequential": 66.25
    },
    "rerank": {
     "questions": 15,
@@ -937,7 +937,7 @@
     "hit_at_5": 1.0,
     "mrr_at_10": 1.0,
     "ndcg_at_10": 1.0,
-    "citations": 12,
+    "citations": 9,
     "citation_validity": 1.0,
     "answered_answerable": 3,
     "answer_support_rate": 0.6667,
@@ -945,10 +945,10 @@
     "evidence_in_pack_rate": 1.0,
     "abstention": {
      "precision": 1.0,
-     "recall": 0.9167,
-     "f1": 0.9565,
+     "recall": 1.0,
+     "f1": 1.0,
      "false_abstain_on_answerable": 0,
-     "missed_abstain": 1
+     "missed_abstain": 0
     },
     "conflicts": {
      "expected": 0,
@@ -960,11 +960,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 198.8,
-     "p95": 303.3,
-     "max": 303.3
+     "p50": 174.4,
+     "p95": 254.9,
+     "max": 254.9
     },
-    "throughput_qps_sequential": 4.71
+    "throughput_qps_sequential": 6.09
    }
   },
   "multi_hop": {
@@ -1000,11 +1000,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.4,
-     "p95": 8.1,
-     "max": 8.1
+     "p50": 3.9,
+     "p95": 8.4,
+     "max": 8.4
     },
-    "throughput_qps_sequential": 205.13
+    "throughput_qps_sequential": 229.89
    },
    "dense": {
     "questions": 12,
@@ -1038,11 +1038,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 19.1,
-     "p95": 71.4,
-     "max": 71.4
+     "p50": 10.9,
+     "p95": 19.8,
+     "max": 19.8
     },
-    "throughput_qps_sequential": 37.85
+    "throughput_qps_sequential": 82.64
    },
    "hybrid": {
     "questions": 12,
@@ -1076,11 +1076,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 16.9,
-     "p95": 34.6,
-     "max": 34.6
+     "p50": 11.1,
+     "p95": 24.2,
+     "max": 24.2
     },
-    "throughput_qps_sequential": 47.23
+    "throughput_qps_sequential": 76.0
    },
    "rerank": {
     "questions": 12,
@@ -1114,11 +1114,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 195.7,
-     "p95": 343.7,
-     "max": 343.7
+     "p50": 93.9,
+     "p95": 189.2,
+     "max": 189.2
     },
-    "throughput_qps_sequential": 4.58
+    "throughput_qps_sequential": 8.49
    }
   },
   "numeric": {
@@ -1154,11 +1154,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.6,
+     "p50": 2.9,
      "p95": 6.9,
      "max": 6.9
     },
-    "throughput_qps_sequential": 204.08
+    "throughput_qps_sequential": 285.71
    },
    "dense": {
     "questions": 12,
@@ -1192,11 +1192,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 14.4,
-     "p95": 30.0,
-     "max": 30.0
+     "p50": 10.1,
+     "p95": 23.2,
+     "max": 23.2
     },
-    "throughput_qps_sequential": 63.59
+    "throughput_qps_sequential": 87.27
    },
    "hybrid": {
     "questions": 12,
@@ -1230,11 +1230,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 14.0,
-     "p95": 29.6,
-     "max": 29.6
+     "p50": 11.0,
+     "p95": 21.7,
+     "max": 21.7
     },
-    "throughput_qps_sequential": 62.4
+    "throughput_qps_sequential": 82.87
    },
    "rerank": {
     "questions": 12,
@@ -1268,11 +1268,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 147.8,
-     "p95": 260.6,
-     "max": 260.6
+     "p50": 93.1,
+     "p95": 230.9,
+     "max": 230.9
     },
-    "throughput_qps_sequential": 6.08
+    "throughput_qps_sequential": 8.4
    }
   },
   "permission": {
@@ -1308,11 +1308,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.0,
-     "p95": 13.6,
-     "max": 13.6
+     "p50": 2.8,
+     "p95": 5.6,
+     "max": 5.6
     },
-    "throughput_qps_sequential": 209.94
+    "throughput_qps_sequential": 292.76
    },
    "dense": {
     "questions": 19,
@@ -1346,11 +1346,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 25.2,
-     "p95": 76.8,
-     "max": 76.8
+     "p50": 12.6,
+     "p95": 15.1,
+     "max": 15.1
     },
-    "throughput_qps_sequential": 35.97
+    "throughput_qps_sequential": 82.18
    },
    "hybrid": {
     "questions": 19,
@@ -1384,11 +1384,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 28.0,
-     "p95": 72.9,
-     "max": 72.9
+     "p50": 13.5,
+     "p95": 21.6,
+     "max": 21.6
     },
-    "throughput_qps_sequential": 31.37
+    "throughput_qps_sequential": 74.77
    },
    "rerank": {
     "questions": 19,
@@ -1422,11 +1422,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 260.0,
-     "p95": 553.2,
-     "max": 553.2
+     "p50": 161.7,
+     "p95": 276.5,
+     "max": 276.5
     },
-    "throughput_qps_sequential": 3.8
+    "throughput_qps_sequential": 6.76
    }
   },
   "single_hop": {
@@ -1462,11 +1462,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.5,
-     "p95": 8.5,
-     "max": 15.9
+     "p50": 3.5,
+     "p95": 8.9,
+     "max": 10.2
     },
-    "throughput_qps_sequential": 189.87
+    "throughput_qps_sequential": 240.24
    },
    "dense": {
     "questions": 24,
@@ -1500,11 +1500,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 18.1,
-     "p95": 31.0,
-     "max": 273.2
+     "p50": 10.3,
+     "p95": 25.5,
+     "max": 43.1
     },
-    "throughput_qps_sequential": 33.78
+    "throughput_qps_sequential": 80.94
    },
    "hybrid": {
     "questions": 24,
@@ -1538,11 +1538,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 19.0,
-     "p95": 29.9,
-     "max": 36.6
+     "p50": 10.6,
+     "p95": 21.2,
+     "max": 40.2
     },
-    "throughput_qps_sequential": 49.54
+    "throughput_qps_sequential": 81.27
    },
    "rerank": {
     "questions": 24,
@@ -1576,11 +1576,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 179.0,
-     "p95": 220.5,
-     "max": 273.7
+     "p50": 90.2,
+     "p95": 167.3,
+     "max": 186.8
     },
-    "throughput_qps_sequential": 5.61
+    "throughput_qps_sequential": 10.61
    }
   },
   "temporal": {
@@ -1616,11 +1616,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 4.4,
-     "p95": 7.6,
-     "max": 7.6
+     "p50": 3.4,
+     "p95": 6.0,
+     "max": 6.0
     },
-    "throughput_qps_sequential": 213.52
+    "throughput_qps_sequential": 263.74
    },
    "dense": {
     "questions": 12,
@@ -1654,11 +1654,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 24.1,
-     "p95": 32.5,
-     "max": 32.5
+     "p50": 10.2,
+     "p95": 22.0,
+     "max": 22.0
     },
-    "throughput_qps_sequential": 44.59
+    "throughput_qps_sequential": 80.97
    },
    "hybrid": {
     "questions": 12,
@@ -1692,11 +1692,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 19.6,
-     "p95": 40.3,
-     "max": 40.3
+     "p50": 10.6,
+     "p95": 22.7,
+     "max": 22.7
     },
-    "throughput_qps_sequential": 43.94
+    "throughput_qps_sequential": 75.05
    },
    "rerank": {
     "questions": 12,
@@ -1730,11 +1730,11 @@
     "injection_sentences_quoted": 0,
     "errors": 0,
     "latency_ms": {
-     "p50": 215.3,
-     "p95": 319.0,
-     "max": 319.0
+     "p50": 89.8,
+     "p95": 237.2,
+     "max": 237.2
     },
-    "throughput_qps_sequential": 4.79
+    "throughput_qps_sequential": 8.44
    }
   }
  },
@@ -1757,7 +1757,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 15.9,
+     "latency_ms": 8.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -1788,7 +1788,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 273.2,
+     "latency_ms": 25.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -1817,7 +1817,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 27.2,
+     "latency_ms": 9.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -1847,7 +1847,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 273.7,
+     "latency_ms": 81.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -1904,7 +1904,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 8.5,
+     "latency_ms": 2.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -1933,7 +1933,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 25.0,
+     "latency_ms": 9.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -1962,7 +1962,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 25.6,
+     "latency_ms": 7.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -1991,7 +1991,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 214.8,
+     "latency_ms": 72.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -2046,7 +2046,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.3,
+     "latency_ms": 2.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2075,7 +2075,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.0,
+     "latency_ms": 7.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -2103,7 +2103,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 23.1,
+     "latency_ms": 8.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2132,7 +2132,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 183.5,
+     "latency_ms": 62.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -2188,7 +2188,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.9,
+     "latency_ms": 2.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2218,7 +2218,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 19.1,
+     "latency_ms": 7.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2247,7 +2247,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.8,
+     "latency_ms": 8.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2276,7 +2276,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 218.4,
+     "latency_ms": 77.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -2336,7 +2336,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.9,
+     "latency_ms": 2.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2366,7 +2366,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 17.8,
+     "latency_ms": 7.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2396,7 +2396,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 21.7,
+     "latency_ms": 8.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2426,7 +2426,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 196.5,
+     "latency_ms": 63.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -2482,7 +2482,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.8,
+     "latency_ms": 2.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2509,7 +2509,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.2,
+     "latency_ms": 6.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2537,7 +2537,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.7,
+     "latency_ms": 6.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2565,7 +2565,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 151.9,
+     "latency_ms": 55.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -2620,7 +2620,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.8,
+     "latency_ms": 2.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2650,7 +2650,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.4,
+     "latency_ms": 6.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2680,7 +2680,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 19.8,
+     "latency_ms": 7.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2710,7 +2710,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 199.6,
+     "latency_ms": 61.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -2765,7 +2765,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 8.1,
+     "latency_ms": 2.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2792,7 +2792,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 31.0,
+     "latency_ms": 7.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2818,7 +2818,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 24.5,
+     "latency_ms": 7.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2844,7 +2844,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 196.6,
+     "latency_ms": 52.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -2899,7 +2899,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.7,
+     "latency_ms": 2.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -2930,7 +2930,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 19.1,
+     "latency_ms": 7.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -2960,7 +2960,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.3,
+     "latency_ms": 8.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -2990,7 +2990,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 343.7,
+     "latency_ms": 82.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -3052,7 +3052,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 8.1,
+     "latency_ms": 2.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3083,7 +3083,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 33.9,
+     "latency_ms": 8.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3113,7 +3113,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 28.5,
+     "latency_ms": 9.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3143,7 +3143,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 276.6,
+     "latency_ms": 89.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -3202,7 +3202,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.7,
+     "latency_ms": 2.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -3232,7 +3232,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 34.5,
+     "latency_ms": 8.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -3263,7 +3263,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 34.6,
+     "latency_ms": 10.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -3294,7 +3294,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 263.0,
+     "latency_ms": 78.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -3355,7 +3355,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 2.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -3378,7 +3378,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 19.6,
+     "latency_ms": 7.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3405,7 +3405,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 16.2,
+     "latency_ms": 8.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3433,7 +3433,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 195.7,
+     "latency_ms": 66.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -3493,7 +3493,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 6.9,
+     "latency_ms": 2.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3523,7 +3523,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.3,
+     "latency_ms": 8.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3553,7 +3553,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.5,
+     "latency_ms": 8.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3582,7 +3582,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 183.7,
+     "latency_ms": 63.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -3643,7 +3643,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.3,
+     "latency_ms": 2.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3672,7 +3672,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 30.0,
+     "latency_ms": 7.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3701,7 +3701,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 29.6,
+     "latency_ms": 8.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -3730,7 +3730,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 222.4,
+     "latency_ms": 73.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -3786,7 +3786,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.3,
+     "latency_ms": 2.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -3816,7 +3816,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.3,
+     "latency_ms": 7.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -3845,7 +3845,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 19.5,
+     "latency_ms": 8.7,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -3874,7 +3874,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 260.6,
+     "latency_ms": 68.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -3934,7 +3934,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.8,
+     "latency_ms": 2.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -3965,7 +3965,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 19.1,
+     "latency_ms": 7.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -3994,7 +3994,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.2,
+     "latency_ms": 8.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -4024,7 +4024,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 259.5,
+     "latency_ms": 74.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -4080,7 +4080,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.0,
+     "latency_ms": 3.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -4111,7 +4111,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 28.0,
+     "latency_ms": 8.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -4142,7 +4142,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 40.3,
+     "latency_ms": 9.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -4173,7 +4173,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 263.8,
+     "latency_ms": 66.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -4231,7 +4231,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.1,
+     "latency_ms": 2.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -4261,7 +4261,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 27.8,
+     "latency_ms": 7.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -4291,7 +4291,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 37.0,
+     "latency_ms": 8.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -4321,7 +4321,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 319.0,
+     "latency_ms": 60.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -4372,7 +4372,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 7.6,
+     "latency_ms": 2.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -4399,7 +4399,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 32.5,
+     "latency_ms": 8.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -4428,7 +4428,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 38.3,
+     "latency_ms": 8.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -4457,7 +4457,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 285.7,
+     "latency_ms": 64.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -4512,7 +4512,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.3,
+     "latency_ms": 2.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -4543,7 +4543,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 25.0,
+     "latency_ms": 7.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -4573,7 +4573,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.2,
+     "latency_ms": 8.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -4603,7 +4603,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 263.7,
+     "latency_ms": 75.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -4665,7 +4665,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.5,
+     "latency_ms": 2.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -4695,7 +4695,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 24.2,
+     "latency_ms": 7.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -4724,7 +4724,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.3,
+     "latency_ms": 8.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -4754,7 +4754,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 304.3,
+     "latency_ms": 81.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -4816,7 +4816,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.8,
+     "latency_ms": 3.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -4844,7 +4844,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 26.5,
+     "latency_ms": 8.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -4872,7 +4872,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 31.6,
+     "latency_ms": 8.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -4900,7 +4900,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 237.5,
+     "latency_ms": 67.7,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -4958,7 +4958,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 8.4,
+     "latency_ms": 3.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -4987,7 +4987,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 28.0,
+     "latency_ms": 8.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -5015,7 +5015,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 27.0,
+     "latency_ms": 9.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -5043,7 +5043,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 264.7,
+     "latency_ms": 64.6,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -5094,7 +5094,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.0,
+     "latency_ms": 3.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -5116,7 +5116,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 30.3,
+     "latency_ms": 8.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -5138,7 +5138,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 31.4,
+     "latency_ms": 9.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -5161,7 +5161,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 263.7,
+     "latency_ms": 74.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -5205,7 +5205,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.1,
+     "latency_ms": 2.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -5228,7 +5228,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 26.1,
+     "latency_ms": 8.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5248,7 +5248,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 25.8,
+     "latency_ms": 9.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5268,7 +5268,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 251.7,
+     "latency_ms": 71.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -5312,7 +5312,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 7.5,
+     "latency_ms": 2.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -5332,7 +5332,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 17.9,
+     "latency_ms": 8.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5352,7 +5352,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 26.0,
+     "latency_ms": 8.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5372,7 +5372,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 240.7,
+     "latency_ms": 63.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -5418,7 +5418,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 9.3,
+     "latency_ms": 3.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -5448,7 +5448,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 20.4,
+     "latency_ms": 8.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -5478,7 +5478,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 24.3,
+     "latency_ms": 9.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -5508,7 +5508,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 278.4,
+     "latency_ms": 64.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -5566,7 +5566,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 5.0,
+     "latency_ms": 2.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5584,7 +5584,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 21.7,
+     "latency_ms": 7.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5602,7 +5602,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 34.1,
+     "latency_ms": 8.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5620,7 +5620,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 303.3,
+     "latency_ms": 64.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -5658,7 +5658,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.4,
+     "latency_ms": 2.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5676,7 +5676,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.9,
+     "latency_ms": 8.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5694,7 +5694,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 25.1,
+     "latency_ms": 8.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5712,7 +5712,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 231.6,
+     "latency_ms": 66.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -5750,7 +5750,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.8,
+     "latency_ms": 2.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5767,7 +5767,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 76.8,
+     "latency_ms": 9.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5787,7 +5787,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 64.7,
+     "latency_ms": 10.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5807,7 +5807,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 553.2,
+     "latency_ms": 102.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -5847,7 +5847,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 13.6,
+     "latency_ms": 5.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5867,7 +5867,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 62.4,
+     "latency_ms": 11.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5887,7 +5887,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 72.9,
+     "latency_ms": 11.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -5907,7 +5907,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 354.7,
+     "latency_ms": 79.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -5951,7 +5951,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.9,
+     "latency_ms": 2.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -5968,7 +5968,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 30.8,
+     "latency_ms": 9.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -5988,7 +5988,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 22.1,
+     "latency_ms": 10.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6008,7 +6008,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 219.4,
+     "latency_ms": 81.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6048,7 +6048,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 7.0,
+     "latency_ms": 5.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6066,7 +6066,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 19.4,
+     "latency_ms": 10.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6086,7 +6086,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 28.8,
+     "latency_ms": 11.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6106,7 +6106,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 327.7,
+     "latency_ms": 102.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6149,7 +6149,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.8,
+     "latency_ms": 4.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6166,7 +6166,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 25.8,
+     "latency_ms": 10.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6185,7 +6185,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 21.8,
+     "latency_ms": 10.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6204,7 +6204,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 269.5,
+     "latency_ms": 83.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6243,7 +6243,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.6,
+     "latency_ms": 2.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6257,7 +6257,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 24.9,
+     "latency_ms": 11.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6275,7 +6275,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 25.1,
+     "latency_ms": 11.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6293,7 +6293,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 260.0,
+     "latency_ms": 138.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6331,7 +6331,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.6,
+     "latency_ms": 2.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6347,7 +6347,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 24.3,
+     "latency_ms": 14.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6367,7 +6367,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 22.1,
+     "latency_ms": 13.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6387,7 +6387,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 270.9,
+     "latency_ms": 178.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6427,7 +6427,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 5.6,
+     "latency_ms": 5.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6447,7 +6447,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 25.2,
+     "latency_ms": 12.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6467,7 +6467,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 28.0,
+     "latency_ms": 13.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6487,7 +6487,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 298.8,
+     "latency_ms": 168.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6528,7 +6528,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 6.9,
+     "latency_ms": 4.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6547,7 +6547,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 35.5,
+     "latency_ms": 15.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6567,7 +6567,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 41.4,
+     "latency_ms": 15.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6587,7 +6587,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 343.8,
+     "latency_ms": 171.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6630,7 +6630,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.4,
+     "latency_ms": 2.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6646,7 +6646,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 26.6,
+     "latency_ms": 13.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6663,7 +6663,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 30.8,
+     "latency_ms": 12.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6680,7 +6680,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 365.5,
+     "latency_ms": 186.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6717,7 +6717,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 5.9,
+     "latency_ms": 3.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6733,7 +6733,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 26.9,
+     "latency_ms": 14.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6749,7 +6749,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 63.6,
+     "latency_ms": 17.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6765,7 +6765,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 242.0,
+     "latency_ms": 141.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6801,7 +6801,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 2.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6818,7 +6818,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 26.9,
+     "latency_ms": 13.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6835,7 +6835,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 31.7,
+     "latency_ms": 15.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6852,7 +6852,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 230.3,
+     "latency_ms": 184.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6889,7 +6889,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 2.7,
+     "latency_ms": 2.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -6905,7 +6905,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 23.5,
+     "latency_ms": 13.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -6921,7 +6921,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 39.0,
+     "latency_ms": 15.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -6937,7 +6937,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 216.0,
+     "latency_ms": 141.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -6973,7 +6973,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 3.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -6992,7 +6992,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 29.4,
+     "latency_ms": 13.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7009,7 +7009,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 32.0,
+     "latency_ms": 13.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -7026,7 +7026,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 316.6,
+     "latency_ms": 196.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7063,7 +7063,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.6,
+     "latency_ms": 3.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -7083,7 +7083,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 54.1,
+     "latency_ms": 14.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7103,7 +7103,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 90.2,
+     "latency_ms": 17.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -7123,7 +7123,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 289.4,
+     "latency_ms": 225.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7163,7 +7163,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.2,
+     "latency_ms": 3.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -7179,7 +7179,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 22.0,
+     "latency_ms": 16.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7215,7 +7215,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 266.5,
+     "latency_ms": 203.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7255,7 +7255,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 5.5,
+     "latency_ms": 4.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -7275,7 +7275,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 37.0,
+     "latency_ms": 17.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7295,7 +7295,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 24.2,
+     "latency_ms": 15.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -7315,7 +7315,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 242.4,
+     "latency_ms": 204.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7358,9 +7358,9 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 6.2,
+     "latency_ms": 5.3,
      "error": null,
-     "status": "supported",
+     "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
      "top_refs": [
       "CV-SCHED-ORION-PRICING@1",
@@ -7369,21 +7369,18 @@
       "CV-INC-2026-0914@1",
       "CV-AMEND-ORION-01@1"
      ],
-     "citations": 2,
-     "citations_valid": 2,
-     "cited_refs": [
-      "CV-MSA-VANTOR@1",
-      "CV-SCHED-ORION-PRICING@1"
-     ],
-     "abstained": false,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 42.1,
+     "latency_ms": 17.8,
      "error": null,
-     "status": "supported",
+     "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
      "top_refs": [
       "CV-SCHED-ORION-PRICING@1",
@@ -7392,20 +7389,18 @@
       "CV-SLA-ORION@1",
       "CV-MSA-ORION@2"
      ],
-     "citations": 1,
-     "citations_valid": 1,
-     "cited_refs": [
-      "CV-SCHED-ORION-PRICING@1"
-     ],
-     "abstained": false,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 32.0,
+     "latency_ms": 17.4,
      "error": null,
-     "status": "supported",
+     "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
      "top_refs": [
       "CV-SCHED-ORION-PRICING@1",
@@ -7414,20 +7409,18 @@
       "CV-SLA-ORION@1",
       "CV-INC-2026-0914@1"
      ],
-     "citations": 1,
-     "citations_valid": 1,
-     "cited_refs": [
-      "CV-SCHED-ORION-PRICING@1"
-     ],
-     "abstained": false,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 222.6,
+     "latency_ms": 172.8,
      "error": null,
-     "status": "supported",
+     "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
      "top_refs": [
       "CV-SCHED-ORION-PRICING@1",
@@ -7436,13 +7429,10 @@
       "CV-AMEND-ORION-01@1",
       "CV-SLA-ORION@1"
      ],
-     "citations": 3,
-     "citations_valid": 3,
-     "cited_refs": [
-      "CV-INC-2026-0914@1",
-      "CV-SCHED-ORION-PRICING@1"
-     ],
-     "abstained": false,
+     "citations": 0,
+     "citations_valid": 0,
+     "cited_refs": [],
+     "abstained": true,
      "conflict_flagged": false,
      "leaks": [],
      "injection_quoted": false
@@ -7474,7 +7464,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 2.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -7492,7 +7482,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 23.7,
+     "latency_ms": 12.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7510,7 +7500,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 18.6,
+     "latency_ms": 13.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -7528,7 +7518,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 217.8,
+     "latency_ms": 183.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7566,7 +7556,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 3.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -7584,7 +7574,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.5,
+     "latency_ms": 12.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7603,7 +7593,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 19.0,
+     "latency_ms": 11.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -7622,7 +7612,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 171.1,
+     "latency_ms": 89.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7664,7 +7654,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.6,
+     "latency_ms": 3.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -7682,7 +7672,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 21.0,
+     "latency_ms": 13.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7700,7 +7690,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 16.6,
+     "latency_ms": 20.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -7718,7 +7708,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 187.0,
+     "latency_ms": 149.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7777,7 +7767,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 22.9,
+     "latency_ms": 24.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7797,7 +7787,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.7,
+     "latency_ms": 17.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -7817,7 +7807,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 198.8,
+     "latency_ms": 144.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7859,7 +7849,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.2,
+     "latency_ms": 1.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -7873,7 +7863,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.3,
+     "latency_ms": 16.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -7891,7 +7881,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.7,
+     "latency_ms": 17.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -7909,7 +7899,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 178.3,
+     "latency_ms": 115.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -7949,7 +7939,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.8,
+     "latency_ms": 4.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -7979,7 +7969,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 19.9,
+     "latency_ms": 11.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8008,7 +7998,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.5,
+     "latency_ms": 17.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8037,7 +8027,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 220.5,
+     "latency_ms": 131.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -8095,7 +8085,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.6,
+     "latency_ms": 5.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8122,7 +8112,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.6,
+     "latency_ms": 11.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8151,7 +8141,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.8,
+     "latency_ms": 11.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8180,7 +8170,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 170.8,
+     "latency_ms": 98.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -8236,7 +8226,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.7,
+     "latency_ms": 5.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8261,7 +8251,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 20.1,
+     "latency_ms": 12.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8288,7 +8278,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.3,
+     "latency_ms": 10.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8315,7 +8305,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 179.8,
+     "latency_ms": 105.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -8368,7 +8358,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.2,
+     "latency_ms": 5.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8394,7 +8384,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.6,
+     "latency_ms": 10.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8420,7 +8410,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.5,
+     "latency_ms": 10.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8446,7 +8436,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 179.0,
+     "latency_ms": 91.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -8496,7 +8486,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.9,
+     "latency_ms": 3.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8526,7 +8516,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.9,
+     "latency_ms": 10.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -8551,7 +8541,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 23.3,
+     "latency_ms": 10.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8581,7 +8571,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 210.2,
+     "latency_ms": 108.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -8635,7 +8625,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.3,
+     "latency_ms": 3.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -8665,7 +8655,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 20.8,
+     "latency_ms": 9.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -8694,7 +8684,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.5,
+     "latency_ms": 10.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -8723,7 +8713,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 163.5,
+     "latency_ms": 90.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -8781,7 +8771,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 2.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -8804,7 +8794,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 20.8,
+     "latency_ms": 10.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -8827,7 +8817,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 19.5,
+     "latency_ms": 10.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -8850,7 +8840,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 178.1,
+     "latency_ms": 94.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -8928,7 +8918,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.8,
+     "latency_ms": 10.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -8957,7 +8947,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.3,
+     "latency_ms": 11.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -8986,7 +8976,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 134.6,
+     "latency_ms": 77.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -9045,7 +9035,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.0,
+     "latency_ms": 3.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9076,7 +9066,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 17.9,
+     "latency_ms": 10.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9107,7 +9097,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.9,
+     "latency_ms": 11.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9138,7 +9128,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 187.5,
+     "latency_ms": 106.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -9229,7 +9219,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 17.1,
+     "latency_ms": 11.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9260,7 +9250,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.0,
+     "latency_ms": 12.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -9290,7 +9280,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 295.5,
+     "latency_ms": 125.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -9351,7 +9341,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.5,
+     "latency_ms": 3.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9379,7 +9369,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 36.6,
+     "latency_ms": 9.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9407,7 +9397,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 28.2,
+     "latency_ms": 10.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9435,7 +9425,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 230.2,
+     "latency_ms": 93.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -9493,7 +9483,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.4,
+     "latency_ms": 4.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9523,7 +9513,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 20.4,
+     "latency_ms": 11.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9553,7 +9543,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.6,
+     "latency_ms": 11.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9583,7 +9573,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 161.4,
+     "latency_ms": 93.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -9641,7 +9631,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.0,
+     "latency_ms": 3.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9672,7 +9662,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.4,
+     "latency_ms": 10.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9703,7 +9693,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.5,
+     "latency_ms": 11.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9734,7 +9724,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 157.5,
+     "latency_ms": 95.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -9794,7 +9784,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 6.2,
+     "latency_ms": 2.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9819,7 +9809,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.1,
+     "latency_ms": 9.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9846,7 +9836,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.2,
+     "latency_ms": 9.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -9873,7 +9863,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 147.8,
+     "latency_ms": 84.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -9926,7 +9916,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.5,
+     "latency_ms": 3.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -9955,7 +9945,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.0,
+     "latency_ms": 11.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -9984,7 +9974,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.7,
+     "latency_ms": 11.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10013,7 +10003,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 145.8,
+     "latency_ms": 94.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -10069,7 +10059,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.9,
+     "latency_ms": 3.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10095,7 +10085,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.2,
+     "latency_ms": 10.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10121,7 +10111,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.0,
+     "latency_ms": 11.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10147,7 +10137,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 183.3,
+     "latency_ms": 93.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -10199,7 +10189,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.3,
+     "latency_ms": 3.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10228,7 +10218,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 24.2,
+     "latency_ms": 10.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10257,7 +10247,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 19.6,
+     "latency_ms": 11.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10286,7 +10276,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 278.3,
+     "latency_ms": 100.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -10342,7 +10332,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.0,
+     "latency_ms": 3.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10372,7 +10362,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 28.4,
+     "latency_ms": 10.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10400,7 +10390,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 22.1,
+     "latency_ms": 10.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10429,7 +10419,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 215.3,
+     "latency_ms": 89.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -10485,7 +10475,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.2,
+     "latency_ms": 3.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10512,7 +10502,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 24.1,
+     "latency_ms": 9.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -10534,7 +10524,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 18.1,
+     "latency_ms": 10.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -10556,7 +10546,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 164.0,
+     "latency_ms": 81.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -10609,7 +10599,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.4,
+     "latency_ms": 3.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10640,7 +10630,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 19.5,
+     "latency_ms": 10.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10669,7 +10659,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.0,
+     "latency_ms": 10.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -10699,7 +10689,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 264.7,
+     "latency_ms": 114.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -10756,7 +10746,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.8,
+     "latency_ms": 3.7,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -10786,7 +10776,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.4,
+     "latency_ms": 10.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -10816,7 +10806,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 18.5,
+     "latency_ms": 10.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -10846,7 +10836,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 129.0,
+     "latency_ms": 81.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -10907,7 +10897,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.8,
+     "latency_ms": 3.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -10938,7 +10928,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.8,
+     "latency_ms": 10.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -10969,7 +10959,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.7,
+     "latency_ms": 11.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -11000,7 +10990,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 181.4,
+     "latency_ms": 126.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -11060,7 +11050,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 6.0,
+     "latency_ms": 5.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -11090,7 +11080,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.1,
+     "latency_ms": 34.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -11120,7 +11110,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.4,
+     "latency_ms": 36.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -11150,7 +11140,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 197.4,
+     "latency_ms": 212.5,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -11204,7 +11194,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.7,
+     "latency_ms": 5.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11226,7 +11216,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.1,
+     "latency_ms": 28.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -11248,7 +11238,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 20.8,
+     "latency_ms": 23.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -11271,7 +11261,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 211.0,
+     "latency_ms": 222.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -11317,7 +11307,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.6,
+     "latency_ms": 4.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -11335,7 +11325,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.6,
+     "latency_ms": 14.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -11353,7 +11343,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.9,
+     "latency_ms": 12.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -11371,7 +11361,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 167.9,
+     "latency_ms": 185.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -11407,7 +11397,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.2,
+     "latency_ms": 4.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -11424,7 +11414,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.3,
+     "latency_ms": 17.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -11444,7 +11434,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.6,
+     "latency_ms": 17.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -11464,7 +11454,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 209.5,
+     "latency_ms": 243.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -11506,7 +11496,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.5,
+     "latency_ms": 4.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -11536,7 +11526,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 17.4,
+     "latency_ms": 15.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -11565,7 +11555,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 22.1,
+     "latency_ms": 15.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -11595,7 +11585,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 190.6,
+     "latency_ms": 198.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -11652,7 +11642,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.3,
+     "latency_ms": 3.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -11672,7 +11662,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.3,
+     "latency_ms": 14.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -11692,7 +11682,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 21.2,
+     "latency_ms": 14.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -11712,7 +11702,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 161.2,
+     "latency_ms": 217.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -11753,7 +11743,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.5,
+     "latency_ms": 2.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -11771,7 +11761,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.8,
+     "latency_ms": 12.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -11789,7 +11779,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.5,
+     "latency_ms": 12.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -11807,7 +11797,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 130.3,
+     "latency_ms": 161.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -11845,7 +11835,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 3.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -11865,7 +11855,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.2,
+     "latency_ms": 13.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -11885,7 +11875,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 16.0,
+     "latency_ms": 14.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -11905,7 +11895,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 139.7,
+     "latency_ms": 167.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -11947,7 +11937,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.3,
+     "latency_ms": 3.6,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -11974,7 +11964,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.4,
+     "latency_ms": 14.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12002,7 +11992,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 19.5,
+     "latency_ms": 14.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -12030,7 +12020,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 184.0,
+     "latency_ms": 186.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -12082,7 +12072,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.4,
+     "latency_ms": 10.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -12112,7 +12102,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 30.8,
+     "latency_ms": 43.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12141,7 +12131,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 29.9,
+     "latency_ms": 40.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -12171,7 +12161,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 178.1,
+     "latency_ms": 167.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -12231,7 +12221,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.8,
+     "latency_ms": 3.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -12260,7 +12250,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 16.3,
+     "latency_ms": 18.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12289,7 +12279,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 19.0,
+     "latency_ms": 21.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -12318,7 +12308,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 186.3,
+     "latency_ms": 106.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -12374,7 +12364,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.8,
+     "latency_ms": 2.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -12399,7 +12389,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.7,
+     "latency_ms": 9.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12424,7 +12414,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.2,
+     "latency_ms": 9.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -12449,7 +12439,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 129.4,
+     "latency_ms": 74.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -12500,7 +12490,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 6.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -12528,7 +12518,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.1,
+     "latency_ms": 11.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12557,7 +12547,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 16.7,
+     "latency_ms": 11.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -12586,7 +12576,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 137.7,
+     "latency_ms": 104.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -12642,7 +12632,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.5,
+     "latency_ms": 5.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -12670,7 +12660,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.4,
+     "latency_ms": 12.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12699,7 +12689,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 36.6,
+     "latency_ms": 14.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -12728,7 +12718,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 137.8,
+     "latency_ms": 109.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -12781,7 +12771,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.4,
+     "latency_ms": 4.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -12811,7 +12801,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.3,
+     "latency_ms": 12.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12841,7 +12831,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.2,
+     "latency_ms": 15.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -12870,7 +12860,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 116.8,
+     "latency_ms": 80.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -12927,7 +12917,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.7,
+     "latency_ms": 3.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -12956,7 +12946,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.2,
+     "latency_ms": 10.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -12985,7 +12975,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.3,
+     "latency_ms": 12.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -13014,7 +13004,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 135.0,
+     "latency_ms": 109.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -13075,7 +13065,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.3,
+     "latency_ms": 6.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -13106,7 +13096,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 15.2,
+     "latency_ms": 16.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -13136,7 +13126,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 16.9,
+     "latency_ms": 18.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -13166,7 +13156,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 196.0,
+     "latency_ms": 189.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -13229,7 +13219,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.9,
+     "latency_ms": 7.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -13257,7 +13247,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 71.4,
+     "latency_ms": 19.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -13286,7 +13276,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 30.9,
+     "latency_ms": 24.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -13315,7 +13305,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 191.1,
+     "latency_ms": 159.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -13368,7 +13358,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.0,
+     "latency_ms": 8.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -13398,7 +13388,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 17.2,
+     "latency_ms": 19.3,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -13428,7 +13418,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.7,
+     "latency_ms": 18.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -13458,7 +13448,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 166.1,
+     "latency_ms": 154.2,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -13520,7 +13510,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.6,
+     "latency_ms": 3.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -13549,7 +13539,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.1,
+     "latency_ms": 13.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -13578,7 +13568,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.3,
+     "latency_ms": 15.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -13607,7 +13597,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 111.8,
+     "latency_ms": 174.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -13659,7 +13649,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.3,
+     "latency_ms": 5.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -13688,7 +13678,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.8,
+     "latency_ms": 15.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -13717,7 +13707,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.7,
+     "latency_ms": 19.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -13746,7 +13736,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 104.4,
+     "latency_ms": 184.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -13799,7 +13789,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.6,
+     "latency_ms": 6.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -13828,7 +13818,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.9,
+     "latency_ms": 23.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -13858,7 +13848,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.3,
+     "latency_ms": 21.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -13887,7 +13877,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 115.7,
+     "latency_ms": 191.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -13947,7 +13937,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 3.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -13971,7 +13961,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.3,
+     "latency_ms": 14.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -14001,7 +13991,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.0,
+     "latency_ms": 14.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -14026,7 +14016,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 119.5,
+     "latency_ms": 174.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -14077,7 +14067,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 2.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -14102,7 +14092,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.3,
+     "latency_ms": 12.1,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -14127,7 +14117,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.1,
+     "latency_ms": 12.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -14152,7 +14142,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 74.2,
+     "latency_ms": 230.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -14203,7 +14193,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.2,
+     "latency_ms": 6.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -14231,7 +14221,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.4,
+     "latency_ms": 22.0,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -14259,7 +14249,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.2,
+     "latency_ms": 22.7,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -14287,7 +14277,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 108.5,
+     "latency_ms": 179.7,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -14339,7 +14329,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.4,
+     "latency_ms": 5.0,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -14364,7 +14354,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 18.0,
+     "latency_ms": 17.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -14389,7 +14379,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 17.3,
+     "latency_ms": 19.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -14414,7 +14404,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 115.4,
+     "latency_ms": 153.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -14465,7 +14455,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.6,
+     "latency_ms": 4.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -14493,7 +14483,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 17.5,
+     "latency_ms": 18.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -14520,7 +14510,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 15.3,
+     "latency_ms": 20.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -14547,7 +14537,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 120.0,
+     "latency_ms": 237.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -14601,7 +14591,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.1,
+     "latency_ms": 4.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -14627,7 +14617,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.7,
+     "latency_ms": 17.7,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -14653,7 +14643,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.7,
+     "latency_ms": 19.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -14679,7 +14669,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 108.5,
+     "latency_ms": 198.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -14733,7 +14723,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.9,
+     "latency_ms": 6.9,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "bm25",
@@ -14762,7 +14752,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.2,
+     "latency_ms": 21.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -14792,7 +14782,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.2,
+     "latency_ms": 26.8,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -14822,7 +14812,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 102.2,
+     "latency_ms": 197.6,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -14880,7 +14870,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.2,
+     "latency_ms": 4.8,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -14910,7 +14900,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.2,
+     "latency_ms": 20.4,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "dense",
@@ -14940,7 +14930,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.9,
+     "latency_ms": 18.1,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "hybrid",
@@ -14970,7 +14960,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 118.6,
+     "latency_ms": 171.6,
      "error": null,
      "status": "contradictory",
      "retrieval_method_used": "rerank",
@@ -15032,7 +15022,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 4.8,
+     "latency_ms": 4.9,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -15061,7 +15051,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.3,
+     "latency_ms": 15.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -15090,7 +15080,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.2,
+     "latency_ms": 16.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -15119,7 +15109,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 120.4,
+     "latency_ms": 169.6,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -15171,7 +15161,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.5,
+     "latency_ms": 2.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -15187,7 +15177,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.8,
+     "latency_ms": 11.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -15206,7 +15196,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 13.5,
+     "latency_ms": 14.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -15225,7 +15215,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 106.8,
+     "latency_ms": 175.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -15262,7 +15252,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 5.7,
+     "latency_ms": 4.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -15282,7 +15272,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 13.1,
+     "latency_ms": 14.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -15302,7 +15292,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.0,
+     "latency_ms": 15.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -15322,7 +15312,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 128.2,
+     "latency_ms": 186.3,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -15363,7 +15353,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 2.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -15379,7 +15369,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 14.7,
+     "latency_ms": 11.7,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -15395,7 +15385,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 10.3,
+     "latency_ms": 11.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -15411,7 +15401,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 81.8,
+     "latency_ms": 128.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -15447,7 +15437,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 3.2,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -15467,7 +15457,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 10.9,
+     "latency_ms": 15.4,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -15487,7 +15477,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 11.9,
+     "latency_ms": 15.0,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -15507,7 +15497,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 147.8,
+     "latency_ms": 254.9,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -15549,7 +15539,7 @@
    "forbidden": [],
    "methods": {
     "bm25": {
-     "latency_ms": 2.9,
+     "latency_ms": 4.3,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "bm25",
@@ -15579,7 +15569,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.3,
+     "latency_ms": 13.2,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "dense",
@@ -15608,7 +15598,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 16.4,
+     "latency_ms": 13.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "hybrid",
@@ -15637,7 +15627,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 130.1,
+     "latency_ms": 174.4,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
@@ -15694,7 +15684,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 4.0,
+     "latency_ms": 2.8,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -15713,7 +15703,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 12.1,
+     "latency_ms": 14.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -15733,7 +15723,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 14.0,
+     "latency_ms": 21.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -15753,7 +15743,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 121.7,
+     "latency_ms": 182.1,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "rerank",
@@ -15793,7 +15783,7 @@
    ],
    "methods": {
     "bm25": {
-     "latency_ms": 3.0,
+     "latency_ms": 4.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "bm25",
@@ -15812,7 +15802,7 @@
      "injection_quoted": false
     },
     "dense": {
-     "latency_ms": 11.8,
+     "latency_ms": 10.6,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "dense",
@@ -15831,7 +15821,7 @@
      "injection_quoted": false
     },
     "hybrid": {
-     "latency_ms": 12.0,
+     "latency_ms": 14.5,
      "error": null,
      "status": "insufficient_evidence",
      "retrieval_method_used": "hybrid",
@@ -15850,7 +15840,7 @@
      "injection_quoted": false
     },
     "rerank": {
-     "latency_ms": 103.9,
+     "latency_ms": 276.5,
      "error": null,
      "status": "supported",
      "retrieval_method_used": "rerank",
