@@ -17,7 +17,7 @@
 | 13 | **SQLite** | PostgreSQL + pgvector | Zero-ops local demo; FTS5 built in | No concurrency at scale; Postgres would need a tsvector/pgvector backend behind `search.py` (not implemented) |
 | 14 | **Fixture login, server-side sessions** | Client-side role switcher; real IdP | Honest demo boundary: the client can never choose its role | No real authentication (documented) |
 | 15 | **Approval = second person + citation re-verification + local outbox** | Auto-send; single-person release | Shows a human-in-the-loop gate before any external action without sending anything anywhere | The "external" action is simulated |
-| 16 | **CI defined but Actions disabled**; `make ci` runs the same steps locally | Enable Actions | Owner policy for private repos | Checks depend on running `make ci` |
+| 16 | **CI on a Linux runner with CPU-only torch**; `make ci` runs the same steps locally | macOS runner (matches the dev machine); default PyPI torch | Linux minutes cost a tenth of macOS minutes; the CPU index avoids gigabytes of CUDA wheels a CPU-only project never uses. Actions enabled 2026-11-09 on the owner's OK | Linux CI does not exercise macOS-specific paths; the dev machine still does via `make ci` |
 
 ## Performance and cost
 

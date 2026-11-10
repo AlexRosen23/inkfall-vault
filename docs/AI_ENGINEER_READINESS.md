@@ -75,8 +75,9 @@ workloads during the runs (latencies are not a benchmark).
   title, so a question naming the project only the title mentions was abstained on (fixed, not yet re-run live).
   Uncited connecting sentences ("The documents conflict on this point.") count as unsupported. Six questions are
   not a benchmark; the offline fixture tests remain the main coverage.
-- **No deployment, no cloud.** Everything runs on one Mac. No container image, no IaC. CI runs on GitHub Actions
-  (enabled 2026-11-09); a deployment is an owner decision.
+- **No deployment, no cloud.** Everything runs on one Mac. No container image, no IaC; a deployment is an owner
+  decision. CI does run: GitHub Actions on `ubuntu-24.04` (enabled 2026-11-09) runs the `make ci` checks on every
+  pull request and push to `main`.
 - **Small, self-authored data.** 45 fictional documents and 112 questions written for this project; numbers are
   optimistic relative to a real corpus.
 - **No agent loop.** The MCP server provides tools for someone else's agent; there is no multi-step agent with
