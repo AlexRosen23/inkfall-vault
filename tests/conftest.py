@@ -4,7 +4,7 @@ tests that mutate data copy it first."""
 from __future__ import annotations
 
 import os
-import shutil
+import sqlite3
 import tempfile
 from pathlib import Path
 
@@ -43,8 +43,17 @@ def base_db() -> Path:
 
 @pytest.fixture()
 def fresh_db(base_db, tmp_path) -> Path:
+    """A private copy of the seeded database, made with SQLite's online backup API. A plain file copy would open and
+    close base.db behind SQLite's back: on POSIX, closing any descriptor to a file drops every fcntl lock the
+    process holds on it, including those of the shared app's open WAL connections. On the macOS CI runner, later
+    connections then failed with "disk I/O error". A file copy would also miss pages still in the -wal file."""
     dst = tmp_path / "work.db"
-    shutil.copy(base_db, dst)
+    src, out = sqlite3.connect(base_db), sqlite3.connect(dst)
+    try:
+        src.backup(out)
+    finally:
+        out.close()
+        src.close()
     return dst
 
 
