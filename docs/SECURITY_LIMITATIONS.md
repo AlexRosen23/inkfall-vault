@@ -30,7 +30,7 @@ properties hold on this code and dataset. They do not make it production-secure,
 | MCP | The stdio MCP server trusts whoever starts it and binds one identity per process; no client authentication. |
 | Tracing | OpenTelemetry spans are off by default and carry no content, but an OTLP endpoint receives model names, counts and latencies; point it only at a collector you control. |
 | Monitoring | No alerting, SIEM export, or anomaly detection on the audit log. |
-| Supply chain | Dependencies pinned; `make audit-deps` runs pip-audit/npm audit on demand; no SBOM signing, no CI (Actions disabled by policy). |
+| Supply chain | Dependencies pinned; `make audit-deps` runs pip-audit/npm audit on demand; no SBOM signing; CI runs tests and the adversarial sweep on every PR, but no dependency audit in CI. |
 | Evaluation | 45 documents and 112 questions written for this project; small and self-authored, so metrics are optimistic about real-world corpora. |
 
 ## Found and fixed in the 2026-11-09 audit
