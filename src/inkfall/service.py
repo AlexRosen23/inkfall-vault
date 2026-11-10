@@ -47,6 +47,8 @@ def run_query(session: Session, user: User, directory: Directory, question: str,
     assessment = ev.assess(question, pack, extractive)
     conflicts, overrides = ev.find_conflicts(question, pack, texts)
     query_injection = ev.detect_injection(question)
+    if (follow := ev.instruction_request(question)) and follow not in query_injection:
+        query_injection.append(follow)
     answer = extractive
     mode = "extractive"
     gen_info: dict = {"requested": generate_mode != "extractive"}

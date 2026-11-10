@@ -45,7 +45,7 @@ Then look at:
 
 Headline numbers (rendered from saved runs by `scripts/render_eval_docs.py`):
 
-- Retrieval, held-out test split: hybrid MRR@10 **0.966**, citation validity **100.0%**, abstention F1 0.923 (`eval/reports/latest.json`).
+- Retrieval, held-out test split: hybrid MRR@10 **0.966**, citation validity **100.0%**, abstention F1 0.943 (`eval/reports/latest.json`).
 - Permission isolation: **0 leaks** in 1796 search probes + 898 direct reads (`eval/reports/adversarial.json`).
 - Same sweep with **gpt-oss:20b** writing the answers: **0 leaks**, 194 generated answers, 0 of 187 prompts contained forbidden content (`eval/reports/adversarial_generative.json`).
 - Faithfulness LLM judge on judge-test: TPR **0.946**, TNR **0.933** (n=52; natural answers only: n=37, TPR 0.946) against **AI-drafted reference labels pending owner review**; judge = generator model (`eval/reports/faithfulness.json`).
@@ -419,7 +419,7 @@ Every number below is rendered by `scripts/render_eval_docs.py` from saved repor
 
 <!-- results:start -->
 
-_From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit `2180604`) and `adversarial.json` (2026-11-10T00:19:14+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
+_From saved runs: `eval/reports/latest.json` (2026-11-10T00:24:48+00:00, commit `bdff7c9`) and `adversarial.json` (2026-11-10T00:25:32+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
 
 | | BM25 | Dense | Hybrid (RRF) | Hybrid + rerank | Title-only baseline |
 |---|---|---|---|---|---|
@@ -427,12 +427,12 @@ _From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit 
 | nDCG@10 | 0.950 | 0.973 | 0.971 | 0.968 | n/a |
 | Citation validity | 100.0% | 100.0% | 100.0% | 100.0% | n/a |
 | Answer support (gold span in cited text) | 85.4% | 85.4% | 87.8% | 87.2% | n/a |
-| Abstention F1 | 0.857 | 0.923 | 0.923 | 0.846 | n/a |
+| Abstention F1 | 0.880 | 0.943 | 0.943 | 0.868 | n/a |
 | Conflicts found / expected (false alarms) | 2/5 (6) | 2/5 (4) | 2/5 (6) | 3/5 (6) | n/a |
 | Leaks | 0 | 0 | 0 | 0 | n/a |
-| Latency p50 / p95 (ms) | 4.4 / 8.1 | 18.9 / 42.1 | 19.8 / 40.3 | 195.7 / 319.0 | n/a |
+| Latency p50 / p95 (ms) | 3.2 / 5.7 | 11.1 / 19.8 | 11.5 / 21.2 | 109.4 / 230.9 | n/a |
 
-Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 20/21, generation 5/5, api 13/13; documented quality miss: XT-017.
+Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 21/21, generation 5/5, api 13/13.
 
 Same sweep with a real local model (gpt-oss:20b via ollama) generating every non-abstained answer: **0 leaks**; 194 answers generated, 187 prompts checked for forbidden content (0 hits).
 
