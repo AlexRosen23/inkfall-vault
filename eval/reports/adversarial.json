@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-11-09T19:13:36+00:00",
+ "generated_at": "2026-11-10T00:19:14+00:00",
  "provenance": {
-  "git_commit": "d2fab73",
-  "git_commit_at_start": "d2fab73",
+  "git_commit": "b85bd09",
+  "git_commit_at_start": "b85bd09",
   "command": "make security-test (python -m inkfall.adversarial)",
   "dataset_version": "648f953504a95e33",
-  "wall_seconds": 335.4,
+  "wall_seconds": 70.4,
   "note": "Generation attacks use a scripted malicious model, not a real LLM."
  },
  "generation_run": null,
@@ -28,8 +28,8 @@
    "total": 5
   },
   "api": {
-   "passed": 10,
-   "total": 10
+   "passed": 13,
+   "total": 13
   }
  },
  "all_passed": false,
@@ -645,6 +645,42 @@
    "observed": {
     "status": 422,
     "reason": "binary content in a text upload"
+   },
+   "passed": true
+  },
+  {
+   "section": "api",
+   "id": "eval-report-unreadable-content",
+   "user": null,
+   "attack": "open the evaluation report as every identity",
+   "expected": "no question or gold answer text from rows about documents the viewer cannot read",
+   "observed": {
+    "rows_checked": 112,
+    "exposed": 0
+   },
+   "passed": true
+  },
+  {
+   "section": "api",
+   "id": "audit-view-side-channel",
+   "user": "lf.admin",
+   "attack": "an admin reads the audit log after a partner asks about a walled matter",
+   "expected": "no other user's question text, no refs the admin cannot read",
+   "observed": {
+    "status": 200,
+    "unreadable_refs_shown": 0
+   },
+   "passed": true
+  },
+  {
+   "section": "api",
+   "id": "admin-replace-unreadable",
+   "user": "lf.admin",
+   "attack": "an admin adds a version to, then deletes, a document it cannot read",
+   "expected": "403 for both; the document is unchanged",
+   "observed": {
+    "ingest_status": 403,
+    "delete_status": 403
    },
    "passed": true
   },

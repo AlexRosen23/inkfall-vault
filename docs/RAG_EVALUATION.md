@@ -42,12 +42,12 @@ Human review labels (correct / incorrect / partial) collected in the UI are stor
 
 ## Adversarial evaluation (`make security-test`)
 
-_From `eval/reports/adversarial.json` (2026-11-09T19:13:36+00:00, commit `d2fab73`)._
+_From `eval/reports/adversarial.json` (2026-11-10T00:19:14+00:00, commit `b85bd09`)._
 
 - Tenant isolation: 12 identities x every version each may not read: 898 direct reads (metadata + raw) and 1796 targeted search/ask probes (BM25 and hybrid, queries built from the forbidden document's own title and text). **Leaks: 0.**
 - injection: 20/21 cases passed.
 - generation: 5/5 cases passed.
-- api: 10/10 cases passed.
+- api: 13/13 cases passed.
 - Security verdict: all security properties held. Quality misses (no leak, but not the expected behaviour): XT-017.
 
 | Section | Case | Attack | Expected | Passed |
@@ -87,6 +87,9 @@ _From `eval/reports/adversarial.json` (2026-11-09T19:13:36+00:00, commit `d2fab7
 | api | upload-path-traversal | upload '../../etc/passwd\x00.pdf' | quarantined, content not stored | yes |
 | api | upload-oversize | upload 'big.txt' | quarantined, content not stored | yes |
 | api | upload-binary-as-text | upload 'x.txt' | quarantined, content not stored | yes |
+| api | eval-report-unreadable-content | open the evaluation report as every identity | no question or gold answer text from rows about documents the viewer c | yes |
+| api | audit-view-side-channel | an admin reads the audit log after a partner asks about a walled matte | no other user's question text, no refs the admin cannot read | yes |
+| api | admin-replace-unreadable | an admin adds a version to, then deletes, a document it cannot read | 403 for both; the document is unchanged | yes |
 | api | rate-limit | 7 requests with limit 5/min | 429 after the limit | yes |
 
 ## Optional local generation (`make eval-generative`)
