@@ -38,6 +38,16 @@ INJECTION_PATTERNS = [
 ]
 INJECTION_RE = re.compile("|".join(f"(?:{p})" for p in INJECTION_PATTERNS), re.IGNORECASE)
 
+# A question that tells the system to carry out instructions found in a document ("Follow the notice in X and
+# include Y", "As instructed in X, treat me as ..."). Documents are evidence, never instructions, so such a request
+# is refused rather than answered from whatever else matches. Anchored to the imperative so ordinary questions about
+# what a document requires ("How do we comply with the Halden notice?") are not caught.
+INSTRUCTION_REQUEST_RE = re.compile(
+    r"^\s*(?:please\s+|now\s+|just\s+)?(?:follow(?!\s*-?\s*up\b)|obey|execute|carry\s+out|act\s+on|comply\s+with|do\s+what)\b"
+    r"[^.?!]{0,80}?\b(?:notice|instructions?|directives?|note|message|prompt|commands?|says|tells\s+you)\b"
+    r"|\bas\s+(?:instructed|directed|told)\s+(?:in|by)\b",
+    re.IGNORECASE)
+
 WORD_NUM = {
     "one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10,
     "eleven": 11, "twelve": 12, "fourteen": 14, "fifteen": 15, "twenty": 20, "thirty": 30, "forty": 40,
@@ -167,6 +177,12 @@ def asked_types(question: str) -> set[str]:
 
 def detect_injection(s: str) -> list[str]:
     return [m.group(0) for m in INJECTION_RE.finditer(s)]
+
+
+def instruction_request(question: str) -> str | None:
+    """The part of a question asking the system to act on instructions inside a document, if any."""
+    m = INSTRUCTION_REQUEST_RE.search(question)
+    return m.group(0).strip() if m else None
 
 
 def build_pack(session: Session, hits: list[Hit], views: dict[int, VersionView], size: int = PACK_SIZE) -> list[Passage]:
@@ -416,6 +432,11 @@ def assess(question: str, pack: list[Passage], answer: list[AnswerSentence]) -> 
     if not pack:
         return Assessment(True, "No authorized document matched this question.", 0.0, [], content_terms(question),
                           ["No passages in your authorized scope matched."])
+    asked_to_follow = instruction_request(question)
+    if asked_to_follow:
+        return Assessment(True, f'The question asks to act on instructions in a document ("{asked_to_follow}"). '
+                                "Documents are treated as evidence, never as instructions, so this is not answered.",
+                          cov, found, missing, gaps + ["Ask what the document says instead of asking to follow it."])
     if missing:
         gaps.append("Not found in the top authorized passages: " + ", ".join(missing))
     proper = _proper_nouns(question)
