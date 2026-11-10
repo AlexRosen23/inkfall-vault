@@ -29,7 +29,8 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from . import audit, claude_citations, contract, embed, providers, telemetry
-from .access import authorized_versions, get_authorized_version
+from .access import acl_of, authorized_versions, get_authorized_version
+from .authz import decide
 from .config import (
     DATA_DIR,
     EVAL_DIR,
@@ -539,6 +540,11 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
                 audit.log(s, rid(request), "quarantine", "quarantined", user.username, user.tenant,
                           filename=fname, reason=str(exc), quarantine_id=q.id)
             return JSONResponse({"status": "quarantined", "reason": str(exc), "quarantine_id": q.id}, status_code=422)
+        existing = s.scalar(select(Document).where(Document.tenant_id == user.tenant, Document.doc_key == body.doc_key))
+        if existing is not None and not _may_manage(user, existing, st.directory):
+            with tx(s):
+                audit.log(s, rid(request), "ingest", "denied", user.username, user.tenant, doc_key=body.doc_key)
+            raise HTTPException(403, "you can only add a version to a document whose versions you can read")
         with tx(s):
             v = store_version(s, VersionInput(
                 tenant_id=user.tenant, doc_key=body.doc_key, version=None, title=body.title,
@@ -557,6 +563,12 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
     @app.delete("/api/admin/documents/{doc_key}")
     def delete_doc(doc_key: str, request: Request, user: User = Depends(current_user), s: Session = Depends(db)):
         require_role(user, "admin")
+        doc = s.scalar(select(Document).where(Document.tenant_id == user.tenant, Document.doc_key == doc_key,
+                                              Document.deleted_at.is_(None)))
+        if doc is not None and not _may_manage(user, doc, st.directory):
+            with tx(s):
+                audit.log(s, rid(request), "delete", "denied", user.username, user.tenant, doc_key=doc_key)
+            raise HTTPException(403, "you can only delete a document whose versions you can read")
         with tx(s):
             n = delete_document(s, user.tenant, doc_key)
             audit.log(s, rid(request), "delete", "ok" if n else "not_found", user.username, user.tenant,
@@ -574,11 +586,16 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
 
     @app.get("/api/admin/audit")
     def audit_view(request: Request, user: User = Depends(current_user), s: Session = Depends(db)):
+        """Who did what, when, with what outcome. Another user's question text, and references to versions the
+        viewer cannot read, are hidden: an audit role is not a read grant."""
         require_role(user, "admin", "reviewer")
         rows = audit.recent(s, user.tenant)
+        vis = _Visibility(s, user, st.directory)
         _audit(s, request, "audit_view", "ok", user, count=len(rows))
         return [{"id": r.id, "ts": r.ts.isoformat() + "Z", "request_id": r.request_id, "username": r.username,
-                 "action": r.action, "outcome": r.outcome, "detail": r.detail} for r in rows]
+                 "action": r.action, "outcome": r.outcome,
+                 "detail": r.detail if r.username == user.username else vis.audit_detail(r.detail or {})}
+                for r in rows]
 
     @app.get("/api/admin/documents")
     def admin_documents(user: User = Depends(current_user), s: Session = Depends(db)):
@@ -610,30 +627,32 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         rep = _read_json(EVAL_DIR / "reports" / "latest.json")
         if rep is None:
             raise HTTPException(404, "no_report: run make eval")
-        readable = {v.ref for v in authorized_versions(s, user, st.directory, None, True)}
+        vis = _Visibility(s, user, st.directory)
         tenant_prefix = {"lanternfield": "LF", "corvane": "CV", "pellmoor": "PM"}[user.tenant]
-
-        def scrub(refs):
-            shown = [r for r in refs if r in readable]
-            hidden = len(refs) - len(shown)
-            return shown + ([f"[{hidden} reference(s) outside your access hidden]"] if hidden else [])
-
         rows = []
         for row in rep.get("questions", []):
             asker = st.directory.users.get(row.get("user", ""))
             if asker is None or asker.tenant != user.tenant:
                 continue
-            r = dict(row)
+            r = json.loads(json.dumps(row))  # deep copy: the cached report is never mutated
+            if not vis.may_see_question(r):
+                # The question and its gold answer spans describe documents you cannot read (for example a
+                # walled matter); only the row's metrics stay visible.
+                r["question"], r["answer_spans"], r["content_hidden"] = HIDDEN_QUESTION, [], True
             for key in ("relevant", "forbidden"):
-                r[key] = scrub(r.get(key, []))
+                r[key] = vis.refs(r.get(key, []))
             for m in r.get("methods", {}).values():
-                m["top_refs"] = scrub(m.get("top_refs", []))
-                m["cited_refs"] = scrub(m.get("cited_refs", []))
-            rows.append(r)
+                for key in ("top_refs", "cited_refs", "leaks"):
+                    if key in m:
+                        m[key] = vis.refs(m[key])
+            if isinstance(r.get("baseline_title_only"), dict):
+                r["baseline_title_only"]["top_refs"] = vis.refs(r["baseline_title_only"].get("top_refs", []))
+            rows.append(vis.scrub(r))
         return {**{k: v for k, v in rep.items() if k != "questions"}, "questions": rows,
                 "visibility": f"Aggregate metrics cover all tenants; per-question rows are limited to "
-                              f"{tenant_prefix}/XT questions asked by {user.tenant} identities, with "
-                              f"references you cannot read hidden."}
+                              f"{tenant_prefix}/XT questions asked by {user.tenant} identities. References you "
+                              f"cannot read are hidden, and so are the question and answer text of rows about "
+                              f"documents you cannot read."}
 
     # ------------------------------------------------------------------ read-only project contract (no session)
     # Aggregate numbers from saved reports only; never document text, titles, questions or tenant data.
@@ -677,11 +696,13 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         if rep is None:
             raise HTTPException(404, f"no_report: run {cmd}")
         cases = []
+        with st.Session() as s:
+            vis = _Visibility(s, user, st.directory)
         for cs in rep.get("cases", []):
             asker = st.directory.users.get(cs.get("user") or "")
             if asker is not None and asker.tenant != user.tenant:
                 continue  # other tenants' probe details (questions, refs) stay private
-            cases.append(cs)
+            cases.append(vis.case(cs))
         iso = dict(rep.get("isolation", {}))
         iso["leak_examples"] = [e for e in iso.get("leak_examples", [])
                                 if st.directory.users.get(e.get("user", "")) and
@@ -698,6 +719,74 @@ def create_app(db_file: Path | None = None, rate_limit: int = RATE_LIMIT_PER_MIN
         app.mount("/", StaticFiles(directory=WEB_OUT, html=True), name="web")
 
     return app
+
+
+HIDDEN_QUESTION = "[question hidden: it concerns documents outside your access]"
+DOC_REF = re.compile(r"\b(?:LF|CV|PM)-[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*(?:@\d+)?\b")  # doc keys/refs, not question ids
+
+
+class _Visibility:
+    """What one identity may see of saved reports and audit events: the same authorized view as every read path."""
+
+    def __init__(self, s: Session, user: User, directory: Directory):
+        views = authorized_versions(s, user, directory, None, True)
+        self.user = user
+        self.refs_ok = {v.ref for v in views}
+        self.keys_ok = {v.document.doc_key for v in views}
+        self.vids_ok = {v.version.id for v in views}
+
+    def refs(self, refs: list[str]) -> list[str]:
+        shown = [r for r in refs if r in self.refs_ok or r in self.keys_ok]
+        hidden = len(refs) - len(shown)
+        return shown + ([f"[{hidden} reference(s) outside your access hidden]"] if hidden else [])
+
+    def may_see_question(self, row: dict) -> bool:
+        if row.get("user") == self.user.username:
+            return True
+        relevant = row.get("relevant") or []
+        if relevant:
+            return all(r in self.refs_ok for r in relevant)
+        return all(k.split("@")[0] in self.keys_ok for k in row.get("forbidden") or [])
+
+    def _ref_ok(self, ref: str) -> bool:
+        return ref in self.refs_ok or ref in self.keys_ok
+
+    def scrub(self, obj):
+        """Replace any document key or ref you cannot read, wherever it appears in a JSON value."""
+        if isinstance(obj, str):
+            return DOC_REF.sub(lambda m: m.group(0) if self._ref_ok(m.group(0)) else "[hidden]", obj)
+        if isinstance(obj, list):
+            return [self.scrub(x) for x in obj]
+        if isinstance(obj, dict):
+            return {k: self.scrub(v) for k, v in obj.items()}
+        return obj
+
+    def audit_detail(self, detail: dict) -> dict:
+        d = dict(detail)
+        if "query" in d:
+            d["query"] = "[hidden: another user's question]"
+        if "version_id" in d and d["version_id"] not in self.vids_ok:
+            d["version_id"] = "[hidden]"
+        return self.scrub(d)
+
+    def case(self, cs: dict) -> dict:
+        """An adversarial case asked by someone else: outcome kept; answer text kept only if every ref is readable."""
+        cs = json.loads(json.dumps(cs))
+        if cs.get("user") != self.user.username:
+            obs = cs.get("observed") or {}
+            refs = set(DOC_REF.findall(json.dumps(obs)))
+            if not all(self._ref_ok(r) for r in refs):
+                for key in ("answer", "raw_output", "answer_text"):
+                    if obs.get(key):
+                        obs[key] = "[hidden: cites documents outside your access]"
+        return self.scrub(cs)
+
+
+def _may_manage(user: User, doc: Document, directory: Directory) -> bool:
+    """Records management (new version, delete) needs read access to every active version: an admin role grants
+    functions, never content, so it must not let someone replace or remove a document they cannot read."""
+    active = [v for v in doc.versions if v.status == "active"]
+    return all(decide(user, acl_of(v, doc), directory).allowed for v in active)
 
 
 def _read_json(path: Path):

@@ -371,6 +371,8 @@ export interface EvalQuestion {
   as_of: string;
   relevant: string[];
   answer_spans: string[];
+  /** True when the question and answer text concern documents you cannot read (only metrics shown). */
+  content_hidden?: boolean;
   expect_abstain: boolean;
   expect_conflict: boolean;
   forbidden: string[];
