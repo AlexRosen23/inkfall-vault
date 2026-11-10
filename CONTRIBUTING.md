@@ -31,8 +31,8 @@ BM25 + extractive answers and reports dense/hybrid as unavailable.
 | `make licenses`, `make audit-deps` | license inventory gate; pip-audit + npm audit |
 | `make ci` | everything `.github/workflows/ci.yml` does |
 
-CI: `.github/workflows/ci.yml` is defined but **GitHub Actions is disabled** on this private repo (owner
-policy). Run `make ci` locally before opening a PR.
+CI: `.github/workflows/ci.yml` runs the `make ci` steps on an `ubuntu-24.04` runner for every pull request and
+push to `main`. Run `make ci` locally before opening a PR anyway; it is the same check and faster to iterate on.
 
 ## Changing data
 

@@ -45,6 +45,7 @@ test: ## Full test suite (unit, isolation, security, generation guardrails, API 
 	$(UV) run pytest
 
 security-test: ## Isolation + security + generation-guardrail suites, then the adversarial eval
+	@test -f data/inkfall.db || $(MAKE) seed
 	$(UV) run pytest tests/test_authz.py tests/test_isolation.py tests/test_api_security.py tests/test_generation.py -s
 	$(UV) run python -m inkfall.adversarial
 
@@ -89,7 +90,8 @@ audit-deps: ## Known-vulnerability scan of Python and npm dependencies
 licenses: ## Dependency license inventory (fails on GPL/AGPL in runtime deps)
 	$(UV) run python scripts/check_licenses.py
 
-ci: ## What .github/workflows/ci.yml runs (Actions are disabled on the repo; run this locally)
+ci: ## What .github/workflows/ci.yml runs on GitHub (ubuntu-24.04); run it locally before opening a PR
+	@test -f data/inkfall.db || $(MAKE) seed
 	$(MAKE) lint
 	$(UV) run python scripts/validate_dataset.py
 	$(UV) run pytest
