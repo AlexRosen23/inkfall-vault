@@ -19,7 +19,7 @@ The three organizations and all 45 documents are fictional.
 | **Status** | Working local demo. The build spec's phases 1–5 ([#1](https://github.com/AlexRosen23/inkfall-vault/pull/1)–[#3](https://github.com/AlexRosen23/inkfall-vault/pull/3)) and the AI Engineer readiness additions ([#4](https://github.com/AlexRosen23/inkfall-vault/pull/4)) are merged. Those additions are a Claude Citations provider, an MCP server, a real-model adversarial run, a calibrated faithfulness judge and tracing. Contradiction detection is partial, and login uses fixture identities. A 2026-11-09 audit found side-channel leaks around the read path (evaluation report, audit view, admin replace/delete) and several weaker spots; the fixes are merged ([#10](https://github.com/AlexRosen23/inkfall-vault/pull/10)–[#14](https://github.com/AlexRosen23/inkfall-vault/pull/14)). |
 | **Stack** | Python 3.12 (uv), FastAPI, SQLAlchemy, SQLite FTS5, sentence-transformers (`all-MiniLM-L6-v2`, CPU), Next.js 16 / React 19 / TypeScript, pytest. Opt-in: Anthropic SDK, MCP Python SDK, OpenTelemetry |
 | **Run it** | `make setup && make serve`, then open http://127.0.0.1:5110 |
-| **Verified** | README checked on 2026-11-10 against `main` at `SHA_PLACEHOLDER`, after PRs #10–#14 merged. The quick start, the 126 tests, `make ci` (which now includes the browser smoke test) and `make security-test` were rerun on that tree. |
+| **Verified** | README checked on 2026-11-10 against `main` at `4a5fd4c`, after PRs #10–#14 merged. The quick start, the 126 tests, `make ci` (which now includes the browser smoke test) and `make security-test` were rerun on that tree. |
 | **License** | MIT ([LICENSE](LICENSE)) |
 
 ### For AI Engineer reviewers
