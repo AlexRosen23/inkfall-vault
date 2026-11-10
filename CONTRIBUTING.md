@@ -27,11 +27,12 @@ BM25 + extractive answers and reports dense/hybrid as unavailable.
 | `make security-test` | authz/isolation/security/generation suites + adversarial eval (`eval/reports/adversarial.json`) |
 | `make eval` | gold set through BM25/dense/hybrid(/rerank) → `eval/reports/latest.json` + rendered docs |
 | `make lint` | ruff + TypeScript typecheck + ESLint |
+| `make smoke` | builds the static UI, serves it on one port over a throwaway DB copy, and drives real Chromium through login, the conflicting-clause question, a citation highlight, the ethical wall and the eval lab (installs Playwright 1.64.0 + Chromium on demand) |
 | `make licenses`, `make audit-deps` | license inventory gate; pip-audit + npm audit |
 | `make ci` | everything `.github/workflows/ci.yml` does |
 
-CI: `.github/workflows/ci.yml` is defined but **GitHub Actions is disabled** on this private repo (owner
-policy). Run `make ci` locally before opening a PR.
+CI: `.github/workflows/ci.yml` runs the `make ci` steps on an `ubuntu-24.04` runner for every pull request and
+push to `main`. Run `make ci` locally before opening a PR anyway; it is the same check and faster to iterate on.
 
 ## Changing data
 

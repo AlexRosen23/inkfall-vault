@@ -146,7 +146,7 @@ function FailuresExplorer({ report }: { report: EvalReport }) {
                   <div className="muted">{q.split} · {humanize(q.category)}</div>
                 </td>
                 <td className="small">
-                  {q.question}
+                  {q.content_hidden ? <span className="muted"><em>{q.question}</em></span> : q.question}
                   <div className="muted">asked by <span className="mono">{q.user}</span> · as of {q.as_of}</div>
                 </td>
                 <td className="mono small">{m}</td>

@@ -100,14 +100,19 @@ def content_terms(s: str) -> list[str]:
 
 
 def stem(t: str) -> str:
-    """Tiny suffix stripper for term-coverage checks (FTS5 uses Porter for ranking)."""
+    """Tiny suffix stripper for term-coverage checks (FTS5 uses Porter for ranking). A final silent "e" is dropped
+    after stripping so that invoice/invoices/invoiced, quote/quotes and dispute/disputed share one stem."""
+    base = t
     for suf in ("ations", "ation", "ings", "ing", "ies", "ied", "es", "ed", "s", "ly"):
-        if len(t) > len(suf) + 3 and t.endswith(suf):
+        short_plural = suf == "s" and len(t) == 4 and not t.endswith(("ss", "us", "is"))  # fees, days, caps
+        if (len(t) > len(suf) + 3 or short_plural) and t.endswith(suf):
             base = t[: -len(suf)] + ("y" if suf in ("ies", "ied") else "")
             if suf in ("ed", "ing", "ings") and len(base) > 3 and base[-1] == base[-2] and base[-1] not in "aeiouls":
                 base = base[:-1]  # committed -> commit, stopped -> stop
-            return base
-    return t
+            break
+    if len(base) > 4 and base.endswith("e") and not base.endswith(("ee", "ie")):
+        base = base[:-1]
+    return base
 
 
 def fts_query(q: str) -> str | None:

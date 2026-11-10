@@ -271,14 +271,17 @@ def test_new_version_supersedes_and_old_citations_stay_valid(fresh_client):
 def test_delete_removes_stale_hits(fresh_client):
     c = fresh_client
     ha, hadm = login(c, "dana.whitcombe"), login(c, "cv.admin")
-    assert any(r.startswith("CV-MSA-VANTOR") for r in ask(c, ha, "Vantor master services agreement")["ranked_refs"])
-    assert c.delete("/api/admin/documents/CV-MSA-VANTOR", headers=hadm).status_code == 200
+    key, q = "CV-INC-2026-0914", "September Orion outage incident depots lost tracking"
+    assert any(r.startswith(key) for r in ask(c, ha, q)["ranked_refs"])
+    assert c.delete(f"/api/admin/documents/{key}", headers=hadm).status_code == 200
     for method in ("bm25", "hybrid"):
-        body = ask(c, ha, "Vantor master services agreement", method=method, include_history=True)
-        assert not any(r.startswith("CV-MSA-VANTOR") for r in body["ranked_refs"])
-    assert all(not d["doc_key"].startswith("CV-MSA-VANTOR")
-               for d in c.get("/api/documents?include_history=true", headers=ha).json())
+        body = ask(c, ha, q, method=method, include_history=True)
+        assert not any(r.startswith(key) for r in body["ranked_refs"])
+    assert all(not d["doc_key"].startswith(key) for d in c.get("/api/documents?include_history=true", headers=ha).json())
     assert c.delete("/api/admin/documents/LF-MSA-BRIGHTWATER", headers=hadm).status_code == 404  # other tenant
+    # A document the admin cannot read (confidential, procurement group) is refused, and stays searchable.
+    assert c.delete("/api/admin/documents/CV-MSA-VANTOR", headers=hadm).status_code == 403
+    assert any(r.startswith("CV-MSA-VANTOR") for r in ask(c, ha, "Vantor master services agreement")["ranked_refs"])
 
 
 # ------------------------------------------------------------------ logs

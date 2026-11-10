@@ -29,7 +29,7 @@ Cmd-Shift-5 → "Record Selected Portion"). Don't record real browser tabs, book
 | 0:50 | **Switch identity** → **Theo Brandt** (walled off the Harrow matter). Ask *"What is the Harrow settlement authority?"* | "Theo is in the litigation group, but an ethical wall screens him from Harrow." |
 | 0:57 | Show **Insufficient evidence** (named subject not in authorized evidence), the graph with no Harrow node, then **Library**: no Harrow documents | "No title, snippet, citation or graph node. Direct API reads return the same 404 as a nonexistent id." |
 | 1:05 | **Evaluation lab**: provenance block, test-split table, adversarial section | "Numbers come from saved runs with the commit and dataset hash: zero leaks across 1,796 targeted probes; held-out MRR and nDCG against a title-only baseline." |
-| 1:15 | Failures explorer → filter *conflict false alarm* | "And the failures: contradiction detection is weak on held-out questions, and one injection probe (XT-017, visible to Corvane identities) gets an answer from authorized documents when it should abstain. Nothing leaks, but it's listed rather than hidden." |
+| 1:15 | Failures explorer → filter *conflict false alarm* | "And the failures are listed, not hidden: the false alarms below are contradiction flags on questions with no real conflict." (XT-017, the injection probe that used to be answered, now abstains: questions asking the vault to follow instructions inside a document are refused.) |
 | 1:25 | End on the footer | "Fictional data, decision support, not legal advice." |
 
 ## Optional extras (outside the 90 seconds)

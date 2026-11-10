@@ -1,5 +1,7 @@
-# CI definition. Runs on GitHub Actions (enabled with the owner's approval on 2026-11-09, when the repository
-# went public). The same checks run locally with `make ci`.
+# CI: the same checks as `make ci` (lint, typecheck, dataset integrity, tests, adversarial eval, web build,
+# licenses) on a Linux runner. Runs on GitHub Actions, enabled with the owner's approval on 2026-11-09. torch comes
+# from PyTorch's CPU-only index on Linux (pyproject [tool.uv.sources]), so no CUDA libraries are downloaded.
+# Locally, run `make ci`.
 name: ci
 on:
   pull_request:
@@ -9,13 +11,14 @@ permissions:
   contents: read
 jobs:
   test:
-    runs-on: macos-15
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
         with:
           version: "0.12.23"
+          enable-cache: true
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
@@ -32,11 +35,15 @@ jobs:
         run: uv run python scripts/validate_dataset.py
       - name: Tests (ACL/isolation, injection, citations, ingestion, retrieval, API contract)
         run: uv run pytest
-      - name: Seed the demo database (the adversarial run copies data/inkfall.db)
+      - name: Seed database (the adversarial sweep runs against data/inkfall.db; tests build their own)
         run: uv run python -m inkfall.seed
       - name: Adversarial evaluation
         run: uv run python -m inkfall.adversarial
       - name: Web build
         run: cd web && npm run build
+      - name: Browser smoke test (one-port build in real Chromium)
+        run: |
+          uv run --with playwright==1.64.0 playwright install --with-deps chromium
+          make smoke
       - name: Licenses
         run: make licenses
