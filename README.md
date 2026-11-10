@@ -74,7 +74,7 @@ Walkthrough video (40 s, recorded with Playwright): [docs/media/walkthrough.webm
 
 <!-- results:start -->
 
-_From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit `2180604`) and `adversarial.json` (2026-11-09T19:13:36+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
+_From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit `2180604`) and `adversarial.json` (2026-11-10T00:19:14+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
 
 | | BM25 | Dense | Hybrid (RRF) | Hybrid + rerank | Title-only baseline |
 |---|---|---|---|---|---|
@@ -87,7 +87,7 @@ _From saved runs: `eval/reports/latest.json` (2026-11-09T05:52:59+00:00, commit 
 | Leaks | 0 | 0 | 0 | 0 | n/a |
 | Latency p50 / p95 (ms) | 4.4 / 8.1 | 18.9 / 42.1 | 19.8 / 40.3 | 195.7 / 319.0 | n/a |
 
-Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 20/21, generation 5/5, api 10/10; documented quality miss: XT-017.
+Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 20/21, generation 5/5, api 13/13; documented quality miss: XT-017.
 
 Same sweep with a real local model (gpt-oss:20b via ollama) generating every non-abstained answer: **0 leaks**; 194 answers generated, 187 prompts checked for forbidden content (0 hits).
 
