@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-11-10T00:25:32+00:00",
+ "generated_at": "2026-11-10T00:39:05+00:00",
  "provenance": {
-  "git_commit": "bdff7c9",
-  "git_commit_at_start": "bdff7c9",
+  "git_commit": "b8b0535",
+  "git_commit_at_start": "b8b0535",
   "command": "make security-test (python -m inkfall.adversarial)",
   "dataset_version": "648f953504a95e33",
-  "wall_seconds": 40.6,
+  "wall_seconds": 30.6,
   "note": "Generation attacks use a scripted malicious model, not a real LLM."
  },
  "generation_run": null,

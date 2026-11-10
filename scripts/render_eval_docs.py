@@ -266,8 +266,10 @@ def main() -> None:
         {"claim": "Contradiction detection generalizes to held-out questions",
          "metric": f"{hy.get('conflicts', {}).get('flagged')}/{hy.get('conflicts', {}).get('expected')} found, "
                    f"{hy.get('conflicts', {}).get('false_alarms_on_other_answerable')} false alarms (test, hybrid)",
-         "source": "eval/reports/latest.json#summary.test.hybrid.conflicts", "verify": "make eval",
-         "status": "not supported by results - do not claim"},
+         "source": "eval/reports/latest.json#summary.test.hybrid.conflicts; docs/CONTRADICTION_RULE.md",
+         "verify": "make eval",
+         "status": "not a held-out result - the rule was revised after its test-split misses were inspected "
+                   "(docs/CONTRADICTION_RULE.md); do not claim it generalizes"},
         {"claim": "Malicious-model outputs (spoofed ids, invented numbers, injected instructions) are rejected or labelled",
          "metric": (f"{adv['sections']['generation']['passed']}/{adv['sections']['generation']['total']} scripted attacks handled"
                     if adv else None),
