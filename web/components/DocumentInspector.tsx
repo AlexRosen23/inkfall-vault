@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { api, errorText, when } from "@/lib/api";
 import type { AnswerSentence, Citation, CompareResult, DocumentPayload } from "@/lib/types";
 import { CitationChip, KV, SupportBadge } from "./Bits";
@@ -22,25 +22,62 @@ function reducedMotion(): boolean {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+/** The stored text, character for character. Markdown heading lines are styled and their "#" markers dimmed, but
+ *  every character stays in place so a citation's offsets always point at exactly what is on screen. */
 function PaperText({ text, span, pulse }: { text: string; span?: { start: number; end: number }; pulse: number }) {
   const markRef = useRef<HTMLElement>(null);
-  const valid = span && span.start >= 0 && span.end <= text.length && span.start < span.end;
+  const valid = !!span && span.start >= 0 && span.end <= text.length && span.start < span.end;
 
   useEffect(() => {
     if (!valid) return;
     markRef.current?.scrollIntoView({ block: "center", behavior: reducedMotion() ? "auto" : "smooth" });
   }, [valid, span?.start, span?.end, pulse]);
 
-  if (!valid || !span) return <div className="paper-text">{text}</div>;
-  return (
-    <div className="paper-text">
-      {text.slice(0, span.start)}
-      <mark ref={markRef} key={pulse} className="cite-mark" aria-label={`Highlighted span, characters ${span.start} to ${span.end}`}>
-        {text.slice(span.start, span.end)}
-      </mark>
-      {text.slice(span.end)}
-    </div>
-  );
+  const s = valid ? span : undefined;
+  let first = true;
+  const out: ReactNode[] = [];
+  let pos = 0;
+  const lines = text.split("\n");
+  lines.forEach((line, i) => {
+    const start = pos;
+    const end = pos + line.length;
+    const marker = /^#{1,6} /.exec(line)?.[0].length ?? 0;
+    const cuts = new Set([start, end, start + marker]);
+    if (s) {
+      if (s.start > start && s.start < end) cuts.add(s.start);
+      if (s.end > start && s.end < end) cuts.add(s.end);
+    }
+    const pts = [...cuts].sort((a, b) => a - b);
+    const kids: ReactNode[] = [];
+    for (let k = 0; k < pts.length - 1; k++) {
+      const a = pts[k]!;
+      const b = pts[k + 1]!;
+      if (a === b) continue;
+      let node: ReactNode = text.slice(a, b);
+      if (marker && a < start + marker) node = <span className="md-mark">{node}</span>;
+      if (s && a >= s.start && b <= s.end) {
+        node = (
+          <mark
+            ref={first ? markRef : undefined}
+            className="cite-mark"
+            aria-label={first ? `Highlighted span, characters ${s.start} to ${s.end}` : undefined}
+          >
+            {node}
+          </mark>
+        );
+        first = false;
+      }
+      kids.push(<Fragment key={`${a}-${pulse}`}>{node}</Fragment>);
+    }
+    out.push(
+      <span key={start} className={marker ? `paper-h paper-h${Math.min(marker - 1, 3)}` : undefined}>
+        {kids}
+      </span>,
+    );
+    if (i < lines.length - 1) out.push(s && end >= s.start && end < s.end ? <mark key={`n${end}`} className="cite-mark">{"\n"}</mark> : "\n");
+    pos = end + 1;
+  });
+  return <div className="paper-text">{out}</div>;
 }
 
 function AccessDrawer({ doc, onClose, onOpenVersion }: { doc: DocumentPayload; onClose: () => void; onOpenVersion: (vid: number) => void }) {

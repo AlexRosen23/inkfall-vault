@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import base64
 import datetime as dt
+import json
 
 from fastapi.testclient import TestClient
 from sqlalchemy import select
@@ -345,3 +346,13 @@ def test_new_eval_endpoints_do_not_leak_other_tenants(client, tokens, directory)
         for marker in ('"question"', '"passage_text"', '"critique"', '"answer"', "CV-", "PM-"):
             assert marker not in blob
     assert client.get("/api/eval/faithfulness").status_code == 401
+
+
+def test_evaluation_design_tags_are_not_shown_as_document_metadata(client, tokens):
+    """'contradiction' / 'injection-fixture' tags are how the dataset was built: an answer key, not metadata."""
+    h = tokens["ava.lindqvist"]
+    docs = client.get("/api/documents?include_history=true", headers=h).json()
+    assert docs and all(not set(d["tags"]) & {"contradiction", "distractor", "injection-fixture", "future-effective"}
+                        for d in docs)
+    one = client.get(f"/api/documents/{docs[0]['version_id']}", headers=h).json()
+    assert "contradiction" not in json.dumps(one.get("metadata", one))
