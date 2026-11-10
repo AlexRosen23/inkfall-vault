@@ -59,7 +59,9 @@ PCT_RE = re.compile(r"(\d+(?:\.\d+)?)\s?(?:%|percent\b)", re.IGNORECASE)
 DUR_RE = re.compile(
     r"(?:\b([a-z]+(?:-[a-z]+)?)\s+)?(?:\((\d+)\)|\b(\d+))?\s*(business days|calendar days|working days|days|months|"
     r"years|hours|minutes|weeks)\b", re.IGNORECASE)
-DATE_RE = re.compile(r"\b(" + "|".join(m.capitalize() for m in MONTHS) + r")\s+(\d{1,2}),\s+(\d{4})\b|\b(\d{4})-(\d{2})-(\d{2})\b")
+_MONTH_ALT = "|".join(m.capitalize() for m in MONTHS)
+DATE_RE = re.compile(r"\b(" + _MONTH_ALT + r")\s+(\d{1,2}),\s+(\d{4})\b|\b(\d{4})-(\d{2})-(\d{2})\b"
+                     r"|\b(\d{1,2})\s+(" + _MONTH_ALT + r")\s+(\d{4})\b")  # "14 December 2026" (day month year)
 TIME_RE = re.compile(r"\b(\d{1,2}):(\d{2})\b")
 
 
@@ -131,8 +133,33 @@ def _dur_value(m: re.Match) -> str | None:
     return f"{n} {unit}"
 
 
-def extract_values(s: str) -> dict[str, set[str]]:
-    out: dict[str, set[str]] = {"money": set(), "percent": set(), "duration": set(), "date": set(), "time": set()}
+COUNT_RE = re.compile(r"\b(\d+|" + "|".join(sorted(WORD_NUM, key=len, reverse=True)) + r")(?:\s*\((\d+)\))?"
+                      r"\s+([a-z-]+)(?:\s+([a-z]+))?", re.IGNORECASE)
+TIME_UNITS = {"day", "days", "week", "weeks", "month", "months", "year", "years", "hour", "hours", "minute", "minutes"}
+
+
+def count_nouns(question: str) -> set[str]:
+    """Stems of the thing a "how many X" question counts (X), unless X is a time unit (that is a duration)."""
+    out = set()
+    for m in re.finditer(r"\bhow many\s+([a-z-]+)", question.lower()):
+        if m.group(1) not in TIME_UNITS and m.group(1) not in STOP_COUNT:
+            out.add(stem(m.group(1)))
+    return out
+
+
+STOP_COUNT = {"of", "the", "more", "times", "other"}
+
+
+def extract_values(s: str, counted: set[str] | frozenset[str] = frozenset()) -> dict[str, set[str]]:
+    out: dict[str, set[str]] = {"money": set(), "percent": set(), "duration": set(), "date": set(), "time": set(),
+                                "count": set()}
+    for m in COUNT_RE.finditer(s) if counted else ():
+        noun = next((w for w in (m.group(3), m.group(4)) if w and stem(w.lower()) in counted), None)
+        if noun:  # "14 depots", "nine (9) regional depots"
+            raw = m.group(2) or m.group(1)
+            n = int(raw) if raw.isdigit() else WORD_NUM.get(raw.lower())
+            if n is not None:
+                out["count"].add(f"{n} {noun.lower()}")
     for m in MONEY_RE.finditer(s):
         num = float(m.group(1).replace(",", "") or 0)
         mult = (m.group(2) or "").lower()
@@ -147,6 +174,8 @@ def extract_values(s: str) -> dict[str, set[str]]:
     for m in DATE_RE.finditer(s):
         if m.group(1):
             out["date"].add(f"{int(m.group(3)):04d}-{MONTHS.index(m.group(1).lower()) + 1:02d}-{int(m.group(2)):02d}")
+        elif m.group(7):
+            out["date"].add(f"{int(m.group(9)):04d}-{MONTHS.index(m.group(8).lower()) + 1:02d}-{int(m.group(7)):02d}")
         else:
             out["date"].add(f"{m.group(4)}-{m.group(5)}-{m.group(6)}")
     for m in TIME_RE.finditer(s):
@@ -297,17 +326,23 @@ def extractive_answer(question: str, pack: list[Passage], texts: dict[int, str],
     return out
 
 
+UNIT_WORDS = TIME_UNITS | {"percent", "dollars", "dollar", "amount", "value", "number", "period", "time", "date"}
+
+
 def _concepts(question: str) -> dict[str, set[str]]:
-    """Query concept -> the stems that express it (the term itself plus its synonyms)."""
-    return {t: {stem(t)} | {stem(x) for x in SYNONYMS.get(t, [])} for t in content_terms(question)}
+    """Query concept -> the stems that express it (the term itself plus its synonyms). Unit and value words
+    ("months", "amount", "date") are left out: sharing the unit is not sharing the subject."""
+    return {t: {stem(t)} | {stem(x) for x in SYNONYMS.get(t, [])} for t in content_terms(question)
+            if t not in UNIT_WORDS}
 
 
-def _best_value_sentence(p: Passage, concepts: dict[str, set[str]], want: set[str], body: str):
+def _best_value_sentence(p: Passage, concepts: dict[str, set[str]], want: set[str], body: str,
+                         counted: set[str] | frozenset[str] = frozenset()):
     """Highest concept-overlap sentence in the passage that carries a value of an asked type."""
     best, best_s = None, 0
     for a, b in sentence_spans(body, p.char_start, p.char_end):
         seg = body[a:b]
-        vals = extract_values(seg)
+        vals = extract_values(seg, counted)
         if not any(vals[k] for k in want):
             continue
         st = {stem(t) for t in tokens(seg)}
@@ -318,58 +353,104 @@ def _best_value_sentence(p: Passage, concepts: dict[str, set[str]], want: set[st
 
 
 def _units(kind: str, values: set[str]) -> dict[str, set[str]]:
-    """Group values by unit so '5 business days' is never compared with '45 days'."""
-    if kind != "duration":
+    """Group values by unit so '5 business days' is never compared with '45 days' (and '14 depots' only with
+    other depot counts)."""
+    if kind not in ("duration", "count"):
         return {kind: values}
     out: dict[str, set[str]] = {}
     for v in values:
         n, unit = v.split(" ", 1)
-        out.setdefault(unit, set()).add(n)
+        out.setdefault(stem(unit) if kind == "count" else unit, set()).add(n)
     return out
 
 
 def _amendment_covers(base: Passage, cands: list[Passage], best: dict, kind: str, units: list[str]) -> bool:
-    """True when an in-force amendment of `base` in the evidence states a value of the same kind and unit."""
+    """True when an in-force amendment of `base` in the evidence states a *different* value of the same kind and
+    unit, i.e. actually changes it. An amendment that restates the base value ("clause 5.2 is not changed; the
+    $25,000 threshold continues to apply") confirms it, so the base value is still compared with other documents."""
+    base_vals = _units(kind, best[base.pid][3][kind]) if best.get(base.pid) else {}
     for amd in cands:
         if amd.amends_key != base.doc_key or not best.get(amd.pid):
             continue
-        vals = best[amd.pid][3][kind]
-        if vals and set(_units(kind, vals)) & set(units):
-            return True
+        amd_vals = _units(kind, best[amd.pid][3][kind])
+        for u in set(amd_vals) & set(units):
+            if not (amd_vals[u] & base_vals.get(u, set())):
+                return True
     return False
+
+
+FIRST_PERSON_RE = re.compile(r"\b(?:we|our|us|ours)\b", re.IGNORECASE)
+COMPARISON_RE = re.compile(r"\bcompare[sd]?\b|\bcomparison\b|\bdiffer(?:s|ent|ence)?\b|\bversus\b|\bvs\.?\s",
+                           re.IGNORECASE)
+# "... in the renewed engagement letter", "... for the Orion agreement": the question names ONE document, so values
+# in other documents are not a contradiction of the answer. Plural ("per the contract documents") is not scoped.
+SCOPED_RE = re.compile(r"\b(?:in|under|per|for|from)\s+(?:the|our|this|that)\s+(?:[A-Za-z'’-]+\s+){0,3}?"
+                       r"(?:letter|agreement|contract|policy|schedule|minutes|report|memo|sla|msa|amendment)\b"
+                       r"(?!s\b)(?!\s+(?:documents?|docs|papers|terms|files)\b)", re.IGNORECASE)
+
+
+def conflict_scope(question: str) -> str | None:
+    """Why contradiction flags are not raised for this question, or None when they are."""
+    if COMPARISON_RE.search(question):
+        return "The question asks for a comparison, so differing values are the answer, not a contradiction."
+    m = SCOPED_RE.search(question)
+    if m:
+        return f'The question is scoped to one document ("{m.group(0).strip()}"); other documents are not compared.'
+    return None
 
 
 def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], top: int = 6) -> tuple[list[Conflict], list[str]]:
     """Testable contradiction rule (no model involved). Two passages conflict when ALL hold:
     1. both versions are in force on the as-of date and belong to different documents;
-    2. the question asks for a value type (money, %, duration, date, time) and each passage has a sentence
-       carrying that type which matches >= 1 shared query concept (term or synonym);
+    2. the question asks for a value type (money, %, duration, date, time, or a count for "how many X") and
+       each passage has a sentence carrying that type; the two sentences share >= 1 query concept (term or
+       synonym) other than the named subject and the unit words;
     3. every named subject in the question (e.g. "Orion") appears in both documents (same subject, so
-       look-alike contracts with other parties are not compared);
+       look-alike contracts with other parties are not compared). A tenant-wide policy also qualifies when the
+       question is about the organization's own dealings ("our invoices", "do we"), and then needs two shared
+       concepts;
     4. for some unit present in both sentences, the value sets are disjoint.
-    If one document amends the other, the pair is reported as an amendment override instead, and a base
-    document with an in-force amendment in the pack is not compared on the amended value type.
+    No conflicts are raised for comparison questions ("how does X compare with Y") or questions scoped to one
+    named document ("in the renewed engagement letter"). If one document amends the other and changes the value,
+    the pair is reported as an amendment override instead; an amendment that restates the base value changes
+    nothing, so the base value is still compared with other documents.
+    Before/after on the frozen gold set: docs/CONTRADICTION_RULE.md.
     """
     want = asked_types(question)
-    if not want:
+    counted = count_nouns(question)
+    if counted:
+        want = {"count"}  # "how many depots": the value is a count of depots, not any money/percent/duration
+    if not want or conflict_scope(question):
         return [], []
     concepts = _concepts(question)
     subjects = [n.lower() for n in _proper_nouns(question)]
     cands = [p for p in pack[:top] if p.in_force]
     docs_text = {p.version_id: texts[p.version_id].lower() + " " + p.title.lower() for p in cands}
-    cands = [p for p in cands if all(sj in docs_text[p.version_id] for sj in subjects)]
+    # Same subject: a document must name every subject in the question, unless it is a tenant-wide policy, which
+    # applies to every client, matter and supplier without naming them.
+    names_all = {p.pid: all(sj in docs_text[p.version_id] for sj in subjects) for p in cands}
+    own_conduct = bool(FIRST_PERSON_RE.search(question))  # "our invoices", "do we": the tenant's own rules apply
+    cands = [p for p in cands if names_all[p.pid] or (own_conduct and p.doc_type == "policy")]
     amended = {p.amends_key for p in cands if p.amends_key}
-    best = {p.pid: _best_value_sentence(p, concepts, want, texts[p.version_id]) for p in cands}
+    best = {p.pid: _best_value_sentence(p, concepts, want, texts[p.version_id], counted) for p in cands}
     conflicts: list[Conflict] = []
     overrides: list[str] = []
     seen_pairs: set[tuple[str, str, str]] = set()
+    seen_values: set[tuple] = set()
+    doc_values: dict[tuple[str, str], set[str]] = {}  # (doc_key, kind) -> every value its passages state
+    for p in cands:
+        if best[p.pid]:
+            for kind, vals in best[p.pid][3].items():
+                doc_values.setdefault((p.doc_key, kind), set()).update(vals)
     for i, a in enumerate(cands):
         for b in cands[i + 1:]:
             if a.doc_key == b.doc_key or not best[a.pid] or not best[b.pid]:
                 continue
             (sa0, sa1, sta, va), (sb0, sb1, stb, vb) = best[a.pid], best[b.pid]
             shared = [c for c, forms in concepts.items() if forms & sta and forms & stb]
-            if not shared:
+            topical = [c for c in shared if c not in subjects]  # the subject name alone is not a shared topic
+            # A policy admitted without naming the subject needs stronger topical overlap (two shared concepts).
+            if not topical or (len(topical) < 2 and not (names_all[a.pid] and names_all[b.pid])):
                 continue
             for kind in sorted(want):
                 if not (va[kind] and vb[kind]):
@@ -384,15 +465,23 @@ def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], to
                 seen_pairs.add(key)
                 if a.amends_key == b.doc_key or b.amends_key == a.doc_key:
                     amd, base = (a, b) if a.amends_key == b.doc_key else (b, a)
-                    overrides.append(f"{amd.ref} amends {base.ref}: the {kind} differs; the amendment governs "
-                                     f"from {amd.effective_date}.")
+                    amd_vals = best[amd.pid][3][kind]
+                    if amd_vals & doc_values.get((base.doc_key, kind), set()):
+                        continue  # the amendment restates a value the base document states: nothing changed
+                    overrides.append(f"{amd.ref} amends {base.ref}: {', '.join(sorted(best[base.pid][3][kind]))} "
+                                     f"becomes {', '.join(sorted(amd_vals))} from {amd.effective_date}; the amendment "
+                                     "governs.")
                     continue
                 base = next((x for x in (a, b) if x.doc_key in amended and _amendment_covers(
                     x, cands, best, kind, common)), None)
                 if base is not None:
-                    overrides.append(f"{base.ref} has an in-force amendment in the evidence that restates this {kind}; "
-                                     "its original value is not treated as a contradiction.")
+                    overrides.append(f"{base.ref} has an in-force amendment in the evidence that changes this {kind}; "
+                                     "its original value is superseded, not a contradiction.")
                     continue
+                value_key = (kind, frozenset(va[kind]), frozenset(vb[kind]))
+                if value_key in seen_values or (kind, value_key[2], value_key[1]) in seen_values:
+                    continue  # same disagreement already shown (e.g. a base document and its restating amendment)
+                seen_values.add(value_key)
                 conflicts.append(Conflict(
                     kind, _cite(a, sa0, sa1, texts[a.version_id]), _cite(b, sb0, sb1, texts[b.version_id]),
                     sorted(va[kind]), sorted(vb[kind]),
