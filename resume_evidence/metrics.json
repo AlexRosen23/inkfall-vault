@@ -5,7 +5,7 @@
     "eval/reports/adversarial_generative.json",
     "eval/reports/faithfulness.json"
   ],
-  "generated_at": "2026-11-10T00:24:48+00:00",
+  "generated_at": "2026-11-10T00:38:31+00:00",
   "dataset_version": "648f953504a95e33",
   "claims": [
     {
@@ -17,7 +17,7 @@
     },
     {
       "claim": "Hybrid (BM25 + MiniLM, RRF) ranking quality on held-out test questions",
-      "metric": "MRR@10 0.966 vs BM25 0.938 vs title-only baseline 0.818; nDCG@10 0.971",
+      "metric": "MRR@10 0.966 vs BM25 0.938 vs title-only baseline 0.814; nDCG@10 0.971",
       "source": "eval/reports/latest.json#summary.test",
       "verify": "make seed && make eval",
       "status": "verified"
@@ -38,10 +38,10 @@
     },
     {
       "claim": "Contradiction detection generalizes to held-out questions",
-      "metric": "2/5 found, 6 false alarms (test, hybrid)",
-      "source": "eval/reports/latest.json#summary.test.hybrid.conflicts",
+      "metric": "5/5 found, 2 false alarms (test, hybrid)",
+      "source": "eval/reports/latest.json#summary.test.hybrid.conflicts; docs/CONTRADICTION_RULE.md",
       "verify": "make eval",
-      "status": "not supported by results - do not claim"
+      "status": "not a held-out result - the rule was revised after its test-split misses were inspected (docs/CONTRADICTION_RULE.md); do not claim it generalizes"
     },
     {
       "claim": "Malicious-model outputs (spoofed ids, invented numbers, injected instructions) are rejected or labelled",
@@ -66,14 +66,14 @@
     },
     {
       "claim": "Sub-100 ms retrieval on CPU",
-      "metric": "hybrid p95 21.2 ms (test split, Apple M5 Pro)",
+      "metric": "hybrid p95 15.8 ms (test split, Apple M5 Pro)",
       "source": "eval/reports/latest.json#summary.test.hybrid.latency_ms",
       "verify": "make eval",
       "status": "verified on this machine only"
     },
     {
       "claim": "Cross-encoder reranking evaluated as an ablation",
-      "metric": "hybrid+rerank MRR@10 0.955 vs hybrid 0.966; p50 109.4 ms vs 11.5 ms (test split): no gain on this corpus",
+      "metric": "hybrid+rerank MRR@10 0.955 vs hybrid 0.966; p50 89.8 ms vs 10.7 ms (test split): no gain on this corpus",
       "source": "eval/reports/latest.json#summary.test.rerank",
       "verify": "make rerank-model && make eval",
       "status": "verified (negative result: reranking did not help here)"

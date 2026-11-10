@@ -419,18 +419,18 @@ Every number below is rendered by `scripts/render_eval_docs.py` from saved repor
 
 <!-- results:start -->
 
-_From saved runs: `eval/reports/latest.json` (2026-11-10T00:24:48+00:00, commit `bdff7c9`) and `adversarial.json` (2026-11-10T00:25:32+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
+_From saved runs: `eval/reports/latest.json` (2026-11-10T00:38:31+00:00, commit `b8b0535`) and `adversarial.json` (2026-11-10T00:39:05+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
 
 | | BM25 | Dense | Hybrid (RRF) | Hybrid + rerank | Title-only baseline |
 |---|---|---|---|---|---|
-| MRR@10 | 0.938 | 0.962 | 0.966 | 0.955 | 0.818 |
+| MRR@10 | 0.938 | 0.962 | 0.966 | 0.955 | 0.814 |
 | nDCG@10 | 0.950 | 0.973 | 0.971 | 0.968 | n/a |
 | Citation validity | 100.0% | 100.0% | 100.0% | 100.0% | n/a |
-| Answer support (gold span in cited text) | 85.4% | 85.4% | 87.8% | 87.2% | n/a |
+| Answer support (gold span in cited text) | 87.8% | 87.8% | 87.8% | 87.2% | n/a |
 | Abstention F1 | 0.880 | 0.943 | 0.943 | 0.868 | n/a |
-| Conflicts found / expected (false alarms) | 2/5 (6) | 2/5 (4) | 2/5 (6) | 3/5 (6) | n/a |
+| Conflicts found / expected (false alarms) | 4/5 (3) | 4/5 (2) | 5/5 (2) | 5/5 (4) | n/a |
 | Leaks | 0 | 0 | 0 | 0 | n/a |
-| Latency p50 / p95 (ms) | 3.2 / 5.7 | 11.1 / 19.8 | 11.5 / 21.2 | 109.4 / 230.9 | n/a |
+| Latency p50 / p95 (ms) | 3.1 / 4.7 | 10.3 / 13.8 | 10.7 / 15.8 | 89.8 / 170.6 | n/a |
 
 Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 21/21, generation 5/5, api 13/13.
 
