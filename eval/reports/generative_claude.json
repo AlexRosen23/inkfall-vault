@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-09T21:42:07+00:00",
+ "generated_at": "2026-11-09T21:58:16+00:00",
  "provenance": {
   "model": "claude-opus-5-5",
   "provider": "claude",
@@ -10,17 +10,17 @@
   "questions": 6,
   "accepted": 6,
   "rejected": 0,
-  "sentences": 18,
-  "supported": 12,
+  "sentences": 20,
+  "supported": 14,
   "partial": 1,
   "unsupported": 5,
   "latency_ms": {
-   "p50": 3083.3,
-   "p95": 7935.6
+   "p50": 3278.3,
+   "p95": 26538.6
   },
-  "prompt_tokens_est": 12837,
-  "completion_tokens_est": 1526,
-  "usage_reported_total_tokens": 0
+  "prompt_tokens_est": 13755,
+  "completion_tokens_est": 1585,
+  "usage_reported_total_tokens": 15340
  },
  "questions": [
   {
@@ -31,12 +31,12 @@
    "mode": "generative",
    "generation_status": "ok",
    "rejected_reason": null,
-   "latency_ms": 7935.6,
-   "prompt_tokens_est": 2096,
-   "completion_tokens_est": 126,
+   "latency_ms": 26538.6,
+   "prompt_tokens_est": 2230,
+   "completion_tokens_est": 199,
    "usage_reported": {
-    "input_tokens": 2096,
-    "output_tokens": 126,
+    "input_tokens": 2230,
+    "output_tokens": 199,
     "cache_read_input_tokens": 0,
     "cache_creation_input_tokens": 0
    },
@@ -77,27 +77,19 @@
    "mode": "generative",
    "generation_status": "ok",
    "rejected_reason": null,
-   "latency_ms": 3062.3,
-   "prompt_tokens_est": 2139,
-   "completion_tokens_est": 281,
+   "latency_ms": 3750.0,
+   "prompt_tokens_est": 2381,
+   "completion_tokens_est": 385,
    "usage_reported": {
-    "input_tokens": 2139,
-    "output_tokens": 281,
+    "input_tokens": 2381,
+    "output_tokens": 385,
     "cache_read_input_tokens": 0,
     "cache_creation_input_tokens": 0
    },
-   "raw_output": "The documents conflict on this point. The Agreement says either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other. The Amendment states that except as expressly amended, the Agreement continues in full force and effect, including the notice period for termination for convenience. However, a later memo summarising the terms states that either party must give sixty (60) days' written notice.",
+   "raw_output": "The agreement itself requires ninety days: 8.1 Either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other. The First Amendment did not change this, stating that the Agreement continues in full force and effect, including the Unit Price, the Minimum Annual Volume, the Liability Cap and the notice period for termination for convenience. However, the quick-reference memo conflicts with this, stating that either party must give sixty (60) days' written notice. Because of this conflict, the memo's sixty-day figure should be checked against the agreement before anyone relies on it.",
    "sentences": [
     {
-     "text": "The documents conflict on this point.",
-     "support": "unsupported",
-     "notes": [
-      "no citation"
-     ],
-     "refs": []
-    },
-    {
-     "text": "The Agreement says either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other.",
+     "text": "The agreement itself requires ninety days: 8.1 Either party may terminate this Agreement for convenience by giving ninety (90) days' written notice to the other.",
      "support": "supported",
      "notes": [],
      "refs": [
@@ -105,7 +97,7 @@
      ]
     },
     {
-     "text": "The Amendment states that except as expressly amended, the Agreement continues in full force and effect, including the notice period for termination for convenience.",
+     "text": "The First Amendment did not change this, stating that the Agreement continues in full force and effect, including the Unit Price, the Minimum Annual Volume, the Liability Cap and the notice period for termination for convenience.",
      "support": "supported",
      "notes": [],
      "refs": [
@@ -113,14 +105,22 @@
      ]
     },
     {
-     "text": "However, a later memo summarising the terms states that either party must give sixty (60) days' written notice.",
+     "text": "However, the quick-reference memo conflicts with this, stating that either party must give sixty (60) days' written notice.",
      "support": "partial",
      "notes": [
-      "only 58% of content words appear in the cited passages"
+      "only 54% of content words appear in the cited passages"
      ],
      "refs": [
       "LF-MEMO-BRIGHTWATER-NOTICE@1"
      ]
+    },
+    {
+     "text": "Because of this conflict, the memo's sixty-day figure should be checked against the agreement before anyone relies on it.",
+     "support": "unsupported",
+     "notes": [
+      "no citation"
+     ],
+     "refs": []
     }
    ],
    "gold_span_in_generated": true
@@ -133,16 +133,16 @@
    "mode": "generative",
    "generation_status": "ok",
    "rejected_reason": null,
-   "latency_ms": 2633.1,
-   "prompt_tokens_est": 2122,
-   "completion_tokens_est": 266,
+   "latency_ms": 2806.7,
+   "prompt_tokens_est": 2249,
+   "completion_tokens_est": 270,
    "usage_reported": {
-    "input_tokens": 2122,
-    "output_tokens": 266,
+    "input_tokens": 2249,
+    "output_tokens": 270,
     "cache_read_input_tokens": 0,
     "cache_creation_input_tokens": 0
    },
-   "raw_output": "The documents conflict on Orion's uptime commitment. The SLA states that Orion commits to a monthly Platform availability of 99.9%, measured across each calendar month at the Orion ingest gateway and excluding Scheduled Maintenance. The Pricing Schedule instead states that for the purposes of this Pricing Schedule, Orion's committed Platform uptime is 99.5% per calendar month, excluding scheduled maintenance. Both documents are marked as in force, and none of the provided documents says which figure takes precedence.",
+   "raw_output": "The documents conflict on Orion's uptime commitment. The Pricing Schedule states that Orion's committed Platform uptime is 99.5% per calendar month, excluding scheduled maintenance. The Service Level Agreement states that Orion commits to a monthly Platform availability of 99.9%, measured across each calendar month at the Orion ingest gateway and excluding Scheduled Maintenance. Both documents are marked as in force, and none of the provided excerpts says which one prevails.",
    "sentences": [
     {
      "text": "The documents conflict on Orion's uptime commitment.",
@@ -153,15 +153,7 @@
      "refs": []
     },
     {
-     "text": "The SLA states that Orion commits to a monthly Platform availability of 99.9%, measured across each calendar month at the Orion ingest gateway and excluding Scheduled Maintenance.",
-     "support": "supported",
-     "notes": [],
-     "refs": [
-      "CV-SLA-ORION@1"
-     ]
-    },
-    {
-     "text": "The Pricing Schedule instead states that for the purposes of this Pricing Schedule, Orion's committed Platform uptime is 99.5% per calendar month, excluding scheduled maintenance.",
+     "text": "The Pricing Schedule states that Orion's committed Platform uptime is 99.5% per calendar month, excluding scheduled maintenance.",
      "support": "supported",
      "notes": [],
      "refs": [
@@ -169,7 +161,15 @@
      ]
     },
     {
-     "text": "Both documents are marked as in force, and none of the provided documents says which figure takes precedence.",
+     "text": "The Service Level Agreement states that Orion commits to a monthly Platform availability of 99.9%, measured across each calendar month at the Orion ingest gateway and excluding Scheduled Maintenance.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "CV-SLA-ORION@1"
+     ]
+    },
+    {
+     "text": "Both documents are marked as in force, and none of the provided excerpts says which one prevails.",
      "support": "unsupported",
      "notes": [
       "no citation"
@@ -187,11 +187,11 @@
    "mode": "generative",
    "generation_status": "ok",
    "rejected_reason": null,
-   "latency_ms": 2490.5,
-   "prompt_tokens_est": 2097,
+   "latency_ms": 1823.5,
+   "prompt_tokens_est": 2224,
    "completion_tokens_est": 155,
    "usage_reported": {
-    "input_tokens": 2097,
+    "input_tokens": 2224,
     "output_tokens": 155,
     "cache_read_input_tokens": 0,
     "cache_creation_input_tokens": 0
@@ -230,21 +230,38 @@
    "category": "single_hop",
    "question": "What is the borrowing limit the board authorized for the Westfield reservoir?",
    "status": "supported",
-   "mode": "extractive",
+   "mode": "generative",
    "generation_status": "ok",
    "rejected_reason": null,
-   "latency_ms": 3104.3,
-   "prompt_tokens_est": 2160,
-   "completion_tokens_est": 315,
+   "latency_ms": 2303.0,
+   "prompt_tokens_est": 2326,
+   "completion_tokens_est": 126,
    "usage_reported": {
-    "input_tokens": 2160,
-    "output_tokens": 315,
+    "input_tokens": 2326,
+    "output_tokens": 126,
     "cache_read_input_tokens": 0,
     "cache_creation_input_tokens": 0
    },
-   "raw_output": "INSUFFICIENT_EVIDENCE: The board resolution authorizes borrowing up to $31,500,000 by way of a revenue-backed term loan for a period of not more than twenty-five (25) years, but it does not say what the loan is for, and no document mentions a Westfield reservoir (Westfield appears only as a twelfth pumping station, not linked to any borrowing).",
-   "sentences": [],
-   "gold_span_in_generated": false
+   "raw_output": "The Authority is authorized to borrow up to $31,500,000 by way of a revenue-backed term loan for a period of not more than twenty-five (25) years. The maximum interest rate that may be accepted is 5.75% a year, fixed or swapped to fixed.",
+   "sentences": [
+    {
+     "text": "The Authority is authorized to borrow up to $31,500,000 by way of a revenue-backed term loan for a period of not more than twenty-five (25) years.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "PM-BOARD-RES-2026-07@1"
+     ]
+    },
+    {
+     "text": "The maximum interest rate that may be accepted is 5.75% a year, fixed or swapped to fixed.",
+     "support": "supported",
+     "notes": [],
+     "refs": [
+      "PM-BOARD-RES-2026-07@1"
+     ]
+    }
+   ],
+   "gold_span_in_generated": true
   },
   {
    "id": "PM-021",
@@ -254,19 +271,19 @@
    "mode": "generative",
    "generation_status": "ok",
    "rejected_reason": null,
-   "latency_ms": 3681.4,
-   "prompt_tokens_est": 2223,
-   "completion_tokens_est": 383,
+   "latency_ms": 4251.7,
+   "prompt_tokens_est": 2345,
+   "completion_tokens_est": 450,
    "usage_reported": {
-    "input_tokens": 2223,
-    "output_tokens": 383,
+    "input_tokens": 2345,
+    "output_tokens": 450,
     "cache_read_input_tokens": 0,
     "cache_creation_input_tokens": 0
    },
-   "raw_output": "The documents conflict on this point. The operations memo says maintenance work orders, contractor invoices and callout sheets held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor. The Retention Policy says financial records, including general ledgers, payment vouchers, supplier invoices, contractor invoices and maintenance work orders, shall be retained for seven (7) years from the end of the fiscal year in which they were created, and it applies to every employee, contractor and board member who creates or receives records on behalf of the Authority. Both documents are listed as in force, and they also differ on the starting point (closed vs. created), so I can't determine which period governs from these documents alone.",
+   "raw_output": "The documents conflict on this. The Operations Memo says maintenance work orders, contractor invoices and callout sheets held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor. The Records Retention Policy says financial records, including general ledgers, payment vouchers, supplier invoices, contractor invoices and maintenance work orders, shall be retained for seven (7) years from the end of the fiscal year in which they were created, and it applies to every employee, contractor and board member who creates or receives records on behalf of the Authority. Both documents are marked as in force (the memo is effective 2024-08-12 and the policy 2025-07-01), and neither says which one prevails, so this conflict should be resolved by whoever owns these documents before any deletion happens.",
    "sentences": [
     {
-     "text": "The documents conflict on this point.",
+     "text": "The documents conflict on this.",
      "support": "unsupported",
      "notes": [
       "no citation"
@@ -274,7 +291,7 @@
      "refs": []
     },
     {
-     "text": "The operations memo says maintenance work orders, contractor invoices and callout sheets held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor.",
+     "text": "The Operations Memo says maintenance work orders, contractor invoices and callout sheets held by the operations department shall be kept for five (5) years from the end of the fiscal year in which they were closed, and may then be deleted from the shared drive by the stations supervisor.",
      "support": "supported",
      "notes": [],
      "refs": [
@@ -282,7 +299,7 @@
      ]
     },
     {
-     "text": "The Retention Policy says financial records, including general ledgers, payment vouchers, supplier invoices, contractor invoices and maintenance work orders, shall be retained for seven (7) years from the end of the fiscal year in which they were created, and it applies to every employee, contractor and board member who creates or receives records on behalf of the Authority.",
+     "text": "The Records Retention Policy says financial records, including general ledgers, payment vouchers, supplier invoices, contractor invoices and maintenance work orders, shall be retained for seven (7) years from the end of the fiscal year in which they were created, and it applies to every employee, contractor and board member who creates or receives records on behalf of the Authority.",
      "support": "supported",
      "notes": [],
      "refs": [
@@ -291,7 +308,7 @@
      ]
     },
     {
-     "text": "Both documents are listed as in force, and they also differ on the starting point (closed vs. created), so I can't determine which period governs from these documents alone.",
+     "text": "Both documents are marked as in force (the memo is effective 2024-08-12 and the policy 2025-07-01), and neither says which one prevails, so this conflict should be resolved by whoever owns these documents before any deletion happens.",
      "support": "unsupported",
      "notes": [
       "no citation"
