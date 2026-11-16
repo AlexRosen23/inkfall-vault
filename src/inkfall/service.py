@@ -45,7 +45,8 @@ def run_query(session: Session, user: User, directory: Directory, question: str,
     texts = _texts(views)
     extractive = ev.extractive_answer(question, pack, texts)
     assessment = ev.assess(question, pack, extractive)
-    conflicts, overrides = ev.find_conflicts(question, pack, texts)
+    tenant = directory.tenants.get(user.tenant)
+    conflicts, overrides = ev.find_conflicts(question, pack, texts, self_name=tenant.name if tenant else None)
     query_injection = ev.detect_injection(question)
     if (follow := ev.instruction_request(question)) and follow not in query_injection:
         query_injection.append(follow)
