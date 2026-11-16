@@ -12,7 +12,7 @@
   "judge_test_file": "eval/reports/faithfulness_judge_test_v2.json",
   "judge_prompt": "eval/faithfulness/judge_prompt_v2.txt",
   "labels_file": "eval/faithfulness/labels.jsonl",
-  "labeler": "claude-code (AI), pending owner review",
+  "labeler": "claude-code (AI); 30 of 84 labels confirmed by the owner 2026-11-16, 54 not owner-reviewed",
   "same_model_limitation": "The judge and the generator are the same local model (gpt-oss:20b) with different prompts."
  },
  "criterion": "every claim in the answer is supported by the spans it cites (binary PASS/FAIL)",
