@@ -419,7 +419,7 @@ Every number below is rendered by `scripts/render_eval_docs.py` from saved repor
 
 <!-- results:start -->
 
-_From saved runs: `eval/reports/latest.json` (2026-11-10T00:38:31+00:00, commit `b8b0535`) and `adversarial.json` (2026-11-10T00:39:05+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
+_From saved runs: `eval/reports/latest.json` (2026-11-16T18:06:42+00:00, commit `aec3176`) and `adversarial.json` (2026-11-10T00:39:05+00:00). Held-out **test** split, 69 questions; CPU only (Apple M5 Pro)._
 
 | | BM25 | Dense | Hybrid (RRF) | Hybrid + rerank | Title-only baseline |
 |---|---|---|---|---|---|
@@ -430,7 +430,7 @@ _From saved runs: `eval/reports/latest.json` (2026-11-10T00:38:31+00:00, commit 
 | Abstention F1 | 0.880 | 0.943 | 0.943 | 0.868 | n/a |
 | Conflicts found / expected (false alarms) | 4/5 (3) | 4/5 (2) | 5/5 (2) | 5/5 (4) | n/a |
 | Leaks | 0 | 0 | 0 | 0 | n/a |
-| Latency p50 / p95 (ms) | 3.1 / 4.7 | 10.3 / 13.8 | 10.7 / 15.8 | 89.8 / 170.6 | n/a |
+| Latency p50 / p95 (ms) | 4.6 / 6.6 | 15.7 / 44.2 | 16.7 / 36.2 | 162.9 / 313.7 | n/a |
 
 Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes and 898 direct reads; injection 21/21, generation 5/5, api 13/13.
 
@@ -481,9 +481,14 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
 - **Contradiction detection has no clean held-out number.** It found 2 of 5 conflicts on the test split (6 false
   alarms) until [PR #12](https://github.com/AlexRosen23/inkfall-vault/pull/12) fixed the gaps behind those misses; now 5 of 5 with 2 false alarms. Because the misses were
   inspected, that's a fix, not an estimate. It is still marked "do not claim" in `resume_evidence/metrics.json`,
-  and the remaining false alarms (CV-015, LF-008 on test; PM-001, PM-017 on dev) are listed in
-  [docs/CONTRADICTION_RULE.md](docs/CONTRADICTION_RULE.md).
-- **Abstention misses 2 of the 9 plain "unanswerable" gold questions** across both splits (hybrid).
+  and the remaining false alarms (CV-015, LF-008 on test) are listed in
+  [docs/CONTRADICTION_RULE.md](docs/CONTRADICTION_RULE.md). The dev false alarms (PM-001, PM-017: a contractor's
+  duty compared with the organization's own rule) were fixed on 2026-11-16, without changing the test numbers.
+- **Abstention misses 2 of the 9 plain "unanswerable" gold questions** across both splits (hybrid): CV-024 and
+  LF-024, both on dev. The cause: coverage counts the party and agreement names, so a question passes without the
+  thing it asks for ("early termination fee", "insurance cover"). A rule requiring that thing to appear in one
+  sentence fixed both on dev, but on the held-out test split it refused 2 answerable questions (abstention F1 0.943
+  → 0.909). It was not shipped ([docs/ENGINEERING_DECISIONS.md](docs/ENGINEERING_DECISIONS.md) #17).
 - **No PostgreSQL backend.** Storage and search are SQLite only. Postgres isn't installed on the build machine,
   so no Postgres backend was built or tested.
 - **Login is mock.** You pick a fixture identity without a password: no MFA, no SSO, HTTP on localhost only.

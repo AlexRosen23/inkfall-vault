@@ -223,7 +223,8 @@ MCP client --stdio--> mcp_server.py ----------\
   evidence: Harrow"). Test-split abstention F1 is 0.943 (hybrid).
 - **Contradiction detection** *(Partial)*: a testable rule flags conflicts: same subject, shared concept, different
   values in compatible units. Status `contradictory` shows both sides with their spans. Handles counts, day-month-year
-  dates, firm policies and restating amendments. Rule write-up: `docs/CONTRADICTION_RULE.md`.
+  dates, firm policies and restating amendments; in "do we / our" questions it does not compare a counterparty's own
+  duty ("Harrowgate shall…") with the organization's rule. Rule write-up: `docs/CONTRADICTION_RULE.md`.
 - **Amendment overrides:** an amendment counts as an override only when it restates the same kind of quantity in the
   same unit, so a real memo-versus-agreement conflict is not hidden.
 - **Prompt-injection flagging** *(Partial, regex heuristic)*: sentences in documents or questions that look like
@@ -409,8 +410,8 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
 - CI: first run on Linux installed in 81 s; later runs are on the Actions tab.
 
 ## 8. Known limits and gaps
-- Contradiction detection has no clean held-out number; remaining false alarms listed in `docs/CONTRADICTION_RULE.md`.
-- Abstention misses 2 of the 9 plain "unanswerable" gold questions across both splits.
+- Contradiction detection has no clean held-out number. Remaining false alarms (CV-015, LF-008 on test) are listed in `docs/CONTRADICTION_RULE.md`; the dev ones (PM-001, PM-017) were fixed on 2026-11-16.
+- Abstention misses 2 of the 9 plain "unanswerable" gold questions across both splits (CV-024, LF-024; dev). A rule tried on 2026-11-16 fixed them on dev but refused 2 answerable held-out questions, so it was not shipped (`docs/ENGINEERING_DECISIONS.md` #17).
 - Login is mock: no password, MFA or SSO; HTTP on localhost only.
 - SQLite only; no PostgreSQL backend. No OCR or Office formats.
 - Data is small and self-written (45 documents, 112 questions), so metrics are optimistic. Recall@5 is 1.0 for every method.
@@ -432,6 +433,7 @@ authentication and TLS; a Postgres backend.
 ## 9. Change log
 | Date | PR | Change |
 | --- | --- | --- |
+| 2026-11-16 | #19 | Contradiction rule: a counterparty's duty is not our own rule (dev false alarms 2 → 0, hybrid; test unchanged); abstention rule tried and not shipped |
 | 2026-11-11 | #17 | Refresh the Claude generative report (owner re-run of 2026-11-09 21:58 UTC) |
 | 2026-11-10 | #16 | Fix the LICENSE text; stop tests leaking temp databases |
 | 2026-11-10 | #15 | README describes the merged audit fixes |
