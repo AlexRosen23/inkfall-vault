@@ -29,7 +29,7 @@ can see or use updates this file in the same PR (see "Keeping this file true").
 | Ports | API and one-port app 5110; Next.js dev server 5111 |
 | Code size | 5,467 lines of Python in `src/inkfall/` (26 modules plus `__init__`), 2,555 lines of TypeScript/TSX in `web/` (5 pages, 9 components) |
 | Data | 3 fictional organizations, 12 fictional identities, 45 documents (15 per organization), 646 chunks, 112 gold questions |
-| Tests | 16 test files, 103 `def test_` functions counted from source; README records 126 collected tests passing on 2026-11-10 |
+| Tests | 18 test files, 110 `def test_` functions counted from source; README records 126 collected tests passing on 2026-11-10 |
 | API | 32 route handlers in `src/inkfall/api.py` (session API under `/api/*`, plus a read-only contract) |
 | MCP tools | 3, all read-only: `search`, `fetch_document`, `cite` |
 | Headline results (saved runs) | hybrid MRR@10 0.966 and citation validity 100% on the held-out split; 0 leaks in 1,796 search probes and 898 direct reads |
@@ -154,8 +154,8 @@ MCP client --stdio--> mcp_server.py ----------\
 | `src/inkfall/` | The service. Core: `authz` (policy), `access` (authorized view), `ingest`, `search`, `evidence`, `generate` + `providers`, `service`, `api`, `audit` + `redact`, `contract`, `evaluate`, `adversarial`, `eval_generative`, `seed`, `db`, `config`, `corpus`, `identities`, `embed`, `gold`. Opt-in: `claude_citations`, `mcp_server`, `eval_faithfulness`, `telemetry` |
 | `web/` | Next.js 16 UI: `app/` (login, workbench, library, lab, admin), `components/` (9 files), `lib/` (API client, types) |
 | `corpus/` | 45 fictional documents in three tenant folders, plus `identities.yaml` |
-| `eval/` | `gold/` (4 files, 112 questions), `dataset_manifest.json`, `faithfulness/` (judge prompts v1 and v2, AI-drafted labels, owner-review CSV with the owner's 30 verdicts), `reports/` (saved runs) |
-| `tests/` | 16 test files |
+| `eval/` | `gold/` (4 files, 112 questions), `dataset_manifest.json`, `faithfulness/` (judge prompts v1 and v2, AI-drafted labels, owner-review CSV with the owner's 30 verdicts, AI second-review CSV for the other 54), `reports/` (saved runs) |
+| `tests/` | 18 test files |
 | `scripts/` | dataset validator, eval-doc renderer, authorization-matrix renderer, license gate, browser smoke test, walkthrough recorder |
 | `docs/` | 17 design, security and evaluation write-ups, `openapi.json`, `media/` (3 screenshots, 1 video) |
 | `resume_evidence/metrics.json` | each claim with its metric, source, verify command and status |
@@ -402,7 +402,7 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
   injection 21/21, generation 5/5, API 13/13.
 - Real-model sweep (`adversarial_generative.json`, `gpt-oss:20b`, 2026-11-09): 0 leaks, 194 answers, 0 of 187 prompts
   with forbidden content. The first run caught the model echoing an injected instruction; fixed, run 2 passed.
-- Faithfulness judge (judge-test, n=52): TPR 0.946, TNR 0.933 against AI-drafted labels; the owner reviewed 30 of the 84 on 2026-11-16 and agreed with all 30, the other 54 are not owner-reviewed.
+- Faithfulness judge (judge-test, n=52): TPR 0.946, TNR 0.933 against AI-drafted labels: 30 owner-reviewed (30/30 agreed, 2026-11-16); 54 AI-drafted and independently re-checked by a second AI pass (53 agree, 1 flagged for owner decision: LF-010); not human-reviewed.
 - Local generation sample (6 questions): 6 of 6 accepted; of 13 sentences, 10 supported, 2 partial, 1 unsupported.
 - Live Claude sample (2026-11-09, 6 dev questions): 6 of 6 accepted; of 18 sentences, 12 supported, 1 partial, 5
   unsupported (all uncited connecting sentences). PM-007 wrongly abstained; the title fix has not been re-run live.
@@ -416,8 +416,8 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
 - SQLite only; no PostgreSQL backend. No OCR or Office formats.
 - Data is small and self-written (45 documents, 112 questions), so metrics are optimistic. Recall@5 is 1.0 for every method.
 - Injection flagging and faithfulness checks are heuristic: they catch invented ids and numbers, not subtle misreadings.
-- Faithfulness judge: labels AI-drafted; owner confirmed a 30-label sample on 2026-11-16 (30/30 agreed) and the other
-  54 of 84 are not owner-reviewed; judge is the same model as the generator; all 15 FAIL labels in the test split are
+- Faithfulness judge: labels AI-drafted; owner confirmed a 30-label sample on 2026-11-16 (30/30 agreed); the other
+  54 of 84 were re-checked only by a second AI pass (53 agree, 1 flagged), not by a human; judge is the same model as the generator; all 15 FAIL labels in the test split are
   synthetic.
 - Claude provider has one small live run; uncited connecting sentences count as unsupported.
 - The MCP server trusts whoever starts it (one identity per process, no client authentication).
@@ -428,12 +428,14 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
 - No Dependabot configuration.
 
 **Next steps listed in the README (*Planned*):** new conflict questions for a real held-out number; extend the sweep to
-every endpoint returning saved data; owner review of the 54 faithfulness labels outside the reviewed 30; re-run the live Claude check; real
+every endpoint returning saved data; owner decision on LF-010 (flagged by the AI second review) and a human review of the other 53 labels outside the reviewed 30; re-run the live Claude check; real
 authentication and TLS; a Postgres backend.
 
 ## 9. Change log
 | Date | PR | Change |
 | --- | --- | --- |
+| 2026-11-16 | #21 | Faithfulness labels: AI second review of the 54 labels outside the owner's 30 (53 agree, LF-010 flagged for owner decision; not a human review, no label or metric changed) |
+| 2026-11-16 | #20 | Faithfulness labels: owner reviewed the 30-label sample (30/30 agreed) |
 | 2026-11-16 | #19 | Contradiction rule: a counterparty's duty is not our own rule (dev false alarms 2 → 0, hybrid; test unchanged); abstention rule tried and not shipped |
 | 2026-11-11 | #17 | Refresh the Claude generative report (owner re-run of 2026-11-09 21:58 UTC) |
 | 2026-11-10 | #16 | Fix the LICENSE text; stop tests leaking temp databases |
