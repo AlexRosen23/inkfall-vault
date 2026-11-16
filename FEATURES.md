@@ -27,10 +27,10 @@ can see or use updates this file in the same PR (see "Keeping this file true").
 | Stack | Python 3.12 (uv), FastAPI, SQLAlchemy, SQLite FTS5, sentence-transformers `all-MiniLM-L6-v2` (CPU), Next.js 16 / React 19 / TypeScript, pytest |
 | Opt-in extras | Anthropic SDK (Claude Citations), MCP Python SDK, OpenTelemetry, LM Studio / Ollama local models |
 | Ports | API and one-port app 5110; Next.js dev server 5111 |
-| Code size | 5,467 lines of Python in `src/inkfall/` (23 modules), 2,555 lines of TypeScript/TSX in `web/` (5 pages, 9 components) |
+| Code size | 5,467 lines of Python in `src/inkfall/` (26 modules plus `__init__`), 2,555 lines of TypeScript/TSX in `web/` (5 pages, 9 components) |
 | Data | 3 fictional organizations, 12 fictional identities, 45 documents (15 per organization), 646 chunks, 112 gold questions |
 | Tests | 16 test files, 103 `def test_` functions counted from source; README records 126 collected tests passing on 2026-11-10 |
-| API | 37 route handlers in `src/inkfall/api.py` (session API under `/api/*`, plus a read-only contract) |
+| API | 32 route handlers in `src/inkfall/api.py` (session API under `/api/*`, plus a read-only contract) |
 | MCP tools | 3, all read-only: `search`, `fetch_document`, `cite` |
 | Headline results (saved runs) | hybrid MRR@10 0.966 and citation validity 100% on the held-out split; 0 leaks in 1,796 search probes and 898 direct reads |
 | PRs | 17 PRs: 16 merged, 1 closed as a duplicate (#5) |
