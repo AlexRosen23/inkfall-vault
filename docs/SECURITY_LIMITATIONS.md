@@ -25,7 +25,7 @@ properties hold on this code and dataset. They do not make it production-secure,
 | Malware | No antivirus scanning of uploads. Uploads are never executed or written to disk outside SQLite. |
 | Side channels | In-tenant BM25 statistics include unreadable documents; superseded-version existence is disclosed. |
 | Injection | Regex flagging is heuristic and bypassable; safety rests on authorization + output validation. |
-| Generation faithfulness | Lexical/numeric support checks catch invented numbers and missing citations, not subtle misreadings; the LLM judge that complements them is calibrated only against AI-drafted labels and shares the generator's model. Stripping echoed passage markers can leave awkward prose ("According to, ..."). |
+| Generation faithfulness | Lexical/numeric support checks catch invented numbers and missing citations, not subtle misreadings; the LLM judge that complements them is calibrated only against AI-drafted labels (30 of 84 owner-confirmed, 54 not) and shares the generator's model. Stripping echoed passage markers can leave awkward prose ("According to, ..."). |
 | Remote model | The optional Claude provider sends the authorized source pack to the Anthropic API (third party). Opt-in per question, needs a key, never auto-selected. Tests use offline fixtures; the only live use is one owner-run 6-question check (`eval/reports/generative_claude.json`). |
 | MCP | The stdio MCP server trusts whoever starts it and binds one identity per process; no client authentication. |
 | Tracing | OpenTelemetry spans are off by default and carry no content, but an OTLP endpoint receives model names, counts and latencies; point it only at a collector you control. |

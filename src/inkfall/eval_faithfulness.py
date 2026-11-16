@@ -48,7 +48,7 @@ REPORTS = EVAL_DIR / "reports"
 FDIR = EVAL_DIR / "faithfulness"
 ANSWERS = REPORTS / "faithfulness_answers.json"
 LABELS = FDIR / "labels.jsonl"
-LABELER = "claude-code (AI), pending owner review"
+LABELER = "claude-code (AI); 30 of 84 labels confirmed by the owner 2026-11-16, 54 not owner-reviewed"
 
 # Fabricated claims for synthetic negatives (none of these facts exists in the fictional corpus; checked by the
 # reference labeler item by item). Picked deterministically per item.
@@ -390,7 +390,10 @@ def report(version: str, dev_versions: list[str]) -> dict:
 
 
 def write_owner_review(items: dict, labels: dict, judge_rows: dict, n: int = 30) -> Path:
-    """A fixed, seeded sample for the owner to confirm or correct the AI-drafted labels."""
+    """A fixed, seeded sample for the owner to confirm or correct the AI-drafted labels.
+
+    Owner verdicts already recorded in an existing CSV are carried over, so re-running the report never wipes them.
+    """
     rng = random.Random(7)
     ids = sorted(i for i in labels if i in items)
     fails = [i for i in ids if labels[i]["label"] == "FAIL"]
@@ -398,6 +401,11 @@ def write_owner_review(items: dict, labels: dict, judge_rows: dict, n: int = 30)
     pick = rng.sample(fails, min(len(fails), n // 2))
     pick += rng.sample(passes, min(len(passes), n - len(pick)))
     path = FDIR / "owner_review.csv"
+    prior: dict[str, tuple[str, str]] = {}
+    if path.exists():
+        with path.open(newline="", encoding="utf-8") as f:
+            prior = {r["item_id"]: (r.get("owner_label (PASS/FAIL)", ""), r.get("owner_note", ""))
+                     for r in csv.DictReader(f)}
     with path.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["item_id", "split", "kind", "question", "answer_and_cited_spans", "ai_label", "ai_critique",
@@ -405,7 +413,7 @@ def write_owner_review(items: dict, labels: dict, judge_rows: dict, n: int = 30)
         for i in sorted(pick):
             it, lab, jr = items[i], labels[i], judge_rows.get(i, {})
             w.writerow([i, it["split"], it["kind"], it["question"], render_for_judge(it), lab["label"], lab["critique"],
-                        jr.get("verdict", ""), jr.get("critique", ""), "", ""])
+                        jr.get("verdict", ""), jr.get("critique", ""), *prior.get(i, ("", ""))])
     return path
 
 

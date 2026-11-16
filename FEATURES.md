@@ -154,7 +154,7 @@ MCP client --stdio--> mcp_server.py ----------\
 | `src/inkfall/` | The service. Core: `authz` (policy), `access` (authorized view), `ingest`, `search`, `evidence`, `generate` + `providers`, `service`, `api`, `audit` + `redact`, `contract`, `evaluate`, `adversarial`, `eval_generative`, `seed`, `db`, `config`, `corpus`, `identities`, `embed`, `gold`. Opt-in: `claude_citations`, `mcp_server`, `eval_faithfulness`, `telemetry` |
 | `web/` | Next.js 16 UI: `app/` (login, workbench, library, lab, admin), `components/` (9 files), `lib/` (API client, types) |
 | `corpus/` | 45 fictional documents in three tenant folders, plus `identities.yaml` |
-| `eval/` | `gold/` (4 files, 112 questions), `dataset_manifest.json`, `faithfulness/` (judge prompts v1 and v2, AI-drafted labels, owner-review CSV), `reports/` (saved runs) |
+| `eval/` | `gold/` (4 files, 112 questions), `dataset_manifest.json`, `faithfulness/` (judge prompts v1 and v2, AI-drafted labels, owner-review CSV with the owner's 30 verdicts), `reports/` (saved runs) |
 | `tests/` | 16 test files |
 | `scripts/` | dataset validator, eval-doc renderer, authorization-matrix renderer, license gate, browser smoke test, walkthrough recorder |
 | `docs/` | 17 design, security and evaluation write-ups, `openapi.json`, `media/` (3 screenshots, 1 video) |
@@ -402,7 +402,7 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
   injection 21/21, generation 5/5, API 13/13.
 - Real-model sweep (`adversarial_generative.json`, `gpt-oss:20b`, 2026-11-09): 0 leaks, 194 answers, 0 of 187 prompts
   with forbidden content. The first run caught the model echoing an injected instruction; fixed, run 2 passed.
-- Faithfulness judge (judge-test, n=52): TPR 0.946, TNR 0.933 against AI-drafted labels pending owner review.
+- Faithfulness judge (judge-test, n=52): TPR 0.946, TNR 0.933 against AI-drafted labels; the owner reviewed 30 of the 84 on 2026-11-16 and agreed with all 30, the other 54 are not owner-reviewed.
 - Local generation sample (6 questions): 6 of 6 accepted; of 13 sentences, 10 supported, 2 partial, 1 unsupported.
 - Live Claude sample (2026-11-09, 6 dev questions): 6 of 6 accepted; of 18 sentences, 12 supported, 1 partial, 5
   unsupported (all uncited connecting sentences). PM-007 wrongly abstained; the title fix has not been re-run live.
@@ -416,8 +416,9 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
 - SQLite only; no PostgreSQL backend. No OCR or Office formats.
 - Data is small and self-written (45 documents, 112 questions), so metrics are optimistic. Recall@5 is 1.0 for every method.
 - Injection flagging and faithfulness checks are heuristic: they catch invented ids and numbers, not subtle misreadings.
-- Faithfulness judge: labels AI-drafted and pending owner review; judge is the same model as the generator; all 15 FAIL
-  labels in the test split are synthetic.
+- Faithfulness judge: labels AI-drafted; owner confirmed a 30-label sample on 2026-11-16 (30/30 agreed) and the other
+  54 of 84 are not owner-reviewed; judge is the same model as the generator; all 15 FAIL labels in the test split are
+  synthetic.
 - Claude provider has one small live run; uncited connecting sentences count as unsupported.
 - The MCP server trusts whoever starts it (one identity per process, no client authentication).
 - In-tenant BM25 statistics still include documents the user cannot read (a documented residual risk).
@@ -427,7 +428,7 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
 - No Dependabot configuration.
 
 **Next steps listed in the README (*Planned*):** new conflict questions for a real held-out number; extend the sweep to
-every endpoint returning saved data; owner review of the 30-item faithfulness CSV; re-run the live Claude check; real
+every endpoint returning saved data; owner review of the 54 faithfulness labels outside the reviewed 30; re-run the live Claude check; real
 authentication and TLS; a Postgres backend.
 
 ## 9. Change log
