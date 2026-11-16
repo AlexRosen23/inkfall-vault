@@ -4,16 +4,32 @@ generative_claude.json, faithfulness.json). No number is typed by hand."""
 
 from __future__ import annotations
 
+import csv
 import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 REP = ROOT / "eval" / "reports"
+FDIR = ROOT / "eval" / "faithfulness"
 
 
 def load(name):
     p = REP / name
     return json.loads(p.read_text()) if p.exists() else None
+
+
+def second_review() -> dict:
+    """The independent AI re-check of the labels outside the owner's sample (an AI pass, not a human review)."""
+    with (FDIR / "ai_second_review.csv").open(newline="", encoding="utf-8") as fh:
+        rows = list(csv.DictReader(fh))
+    flagged = [r for r in rows if r["agrees"] != "yes"]
+    return {"n": len(rows), "agree": len(rows) - len(flagged), "flagged": flagged}
+
+
+def review_status(sr: dict) -> str:
+    """One phrase for every doc: who reviewed which labels, never calling the AI pass a human review."""
+    return (f"30 owner-reviewed, 30/30 agreed; {sr['n']} AI-drafted and independently re-checked by a second AI pass, "
+            f"{sr['agree']} agree and {len(sr['flagged'])} flagged for owner decision; not human-reviewed")
 
 
 def f(x, pct=False):
@@ -96,6 +112,7 @@ def claude_live(cl: dict | None) -> dict | None:
 def main() -> None:
     rep, adv, gen = load("latest.json"), load("adversarial.json"), load("generative.json")
     advg, fa = load("adversarial_generative.json"), load("faithfulness.json")
+    sr = second_review()
     if rep is None:
         raise SystemExit("no eval/reports/latest.json - run make eval")
     pv = rep["provenance"]
@@ -206,7 +223,7 @@ def main() -> None:
                 f"- Latency per question: p50 {g['latency_ms']['p50']} ms, p95 (max) {g['latency_ms']['p95']} ms. "
                 f"Tokens reported by the API: {cl['tokens']} (input + output, summed per question; the run's own "
                 f"summary field read {g['usage_reported_total_tokens']} because of a summing bug fixed afterwards).", ""]
-    rag += advg_section(advg) + faithfulness_section(fa)
+    rag += advg_section(advg) + faithfulness_section(fa, sr)
     rag += ["## Findings during the build (each fixed and covered by a test or the adversarial run)", "",
             "1. A test client kept the last login's cookie and the server preferred cookies over the bearer header, so "
             "requests ran as the wrong identity. Not an authorization bypass, but the precedence was wrong: the explicit "
@@ -285,9 +302,10 @@ def main() -> None:
         {"claim": "LLM judge for answer faithfulness, calibrated with TPR/TNR on a held-out label split",
          "metric": (f"judge-test TPR {f(fa['test']['all']['judge']['tpr'])}, TNR {f(fa['test']['all']['judge']['tnr'])} "
                     f"(n={fa['test']['all']['judge']['n']}, {fa['test']['all']['judge']['ref_fail']} FAIL labels) vs "
-                    "AI-drafted reference labels; 30 of 84 owner-reviewed") if fa else None,
+                    f"AI-drafted reference labels ({review_status(sr)})") if fa else None,
          "source": "eval/reports/faithfulness.json", "verify": "see docs/RAG_EVALUATION.md (faithfulness)",
-         "status": ("measured against AI-drafted labels (30 of 84 confirmed by the owner 2026-11-16, the other 54 not owner-reviewed); judge = generator model" if fa else "not run")},
+         "status": (f"measured against AI-drafted labels ({review_status(sr)}); metrics unchanged by the reviews; "
+                    "judge = generator model" if fa else "not run")},
         {"claim": "Sub-100 ms retrieval on CPU", "metric": f"hybrid p95 {hy.get('latency_ms', {}).get('p95')} ms (test split, "
                    f"{mach['cpu']})", "source": "eval/reports/latest.json#summary.test.hybrid.latency_ms",
          "verify": "make eval", "status": "verified on this machine only"},
@@ -350,7 +368,7 @@ def main() -> None:
             dm = fa["deterministic_metrics_natural"]
             lines.append(f"\nAnswer faithfulness ({fa['provenance']['generator']['model']} answers, binary LLM judge): "
                          f"judge-test TPR **{f(jt['tpr'])}** / TNR **{f(jt['tnr'])}** (n={jt['n']}) against AI-drafted "
-                         f"reference labels (a 30-label sample was reviewed by the owner on 2026-11-16, who agreed with all 30; the other 54 of 84 are not owner-reviewed); {dm['answers_all_sentences_supported']}/"
+                         f"reference labels ({review_status(sr)}); {dm['answers_all_sentences_supported']}/"
                          f"{dm['natural_answers']} natural answers pass the deterministic span check.")
         lines += ["", "Recall@5 is 1.0 for every method because each identity can read only 3-15 versions; read MRR/nDCG. "
                   "Contradiction detection is not claimed as a strength: the rule was revised after its test-split misses were "
@@ -358,12 +376,13 @@ def main() -> None:
         pre, rest = txt.split(a, 1)
         post = rest.split(b, 1)[1]
         readme.write_text(pre + "\n".join(lines) + post)
-    render_reviewer_block(readme, rep, adv, advg, fa)
-    render_readiness_block(ROOT / "docs" / "AI_ENGINEER_READINESS.md", adv, advg, load("adversarial_generative_run1.json"), fa)
+    render_reviewer_block(readme, rep, adv, advg, fa, sr)
+    render_readiness_block(ROOT / "docs" / "AI_ENGINEER_READINESS.md", adv, advg, load("adversarial_generative_run1.json"), fa,
+                           sr)
     print("rendered docs/RETRIEVAL_EVAL.md, docs/RAG_EVALUATION.md, resume_evidence/metrics.json, README results")
 
 
-def render_readiness_block(path: Path, adv, advg, run1, fa) -> None:
+def render_readiness_block(path: Path, adv, advg, run1, fa, sr) -> None:
     a, b = "<!-- readiness:start -->", "<!-- readiness:end -->"
     txt = path.read_text()
     if a not in txt or b not in txt:
@@ -409,7 +428,7 @@ def render_readiness_block(path: Path, adv, advg, run1, fa) -> None:
         L.append(f"| Faithfulness LLM judge (binary, critique first), calibrated | judge-test, n={jt['n']} "
                  f"({jt['ref_pass']} PASS / {jt['ref_fail']} FAIL reference labels; all FAILs synthetic) | LLM judge "
                  f"TPR **{f(jt['tpr'])}**, TNR **{f(jt['tnr'])}**; deterministic span check TPR {f(dt_['tpr'])}, "
-                 f"TNR {f(dt_['tnr'])} — against **AI-drafted labels** (30 of 84 owner-reviewed 2026-11-16, 30/30 agreed; 54 not owner-reviewed); judge = generator model | "
+                 f"TNR {f(dt_['tnr'])} — against **AI-drafted labels** ({review_status(sr)}); judge = generator model | "
                  "`eval/reports/faithfulness.json` |")
         L.append(f"| Deterministic metrics on the same answers | {dm['natural_answers']} natural answers, "
                  f"{dm['sentences']} sentences | {dm['answers_all_sentences_supported']} answers fully 'supported'; "
@@ -437,7 +456,7 @@ def render_readiness_block(path: Path, adv, advg, run1, fa) -> None:
     path.write_text(pre + "\n".join(L) + rest.split(b, 1)[1])
 
 
-def render_reviewer_block(readme: Path, rep, adv, advg, fa) -> None:
+def render_reviewer_block(readme: Path, rep, adv, advg, fa, sr) -> None:
     """README 'For AI Engineer reviewers' headline numbers (between reviewers:start/end markers)."""
     a, b = "<!-- reviewers:start -->", "<!-- reviewers:end -->"
     txt = readme.read_text()
@@ -461,7 +480,7 @@ def render_reviewer_block(readme: Path, rep, adv, advg, fa) -> None:
         nat = fa["test"]["natural"]["judge"]
         lines.append(f"- Faithfulness LLM judge on judge-test: TPR **{f(jt['tpr'])}**, TNR **{f(jt['tnr'])}** (n={jt['n']}; "
                      f"natural answers only: n={nat['n']}, TPR {f(nat['tpr'])}) against **AI-drafted reference labels** "
-                     "(30 of 84 reviewed by the owner on 2026-11-16, 30/30 agreed; the other 54 are not owner-reviewed); judge = generator model (`eval/reports/faithfulness.json`).")
+                     f"({review_status(sr)}); judge = generator model (`eval/reports/faithfulness.json`).")
     lines += ["", b]
     pre, rest = txt.split(a, 1)
     readme.write_text(pre + "\n".join(lines) + rest.split(b, 1)[1])
@@ -504,7 +523,7 @@ def advg_section(advg) -> list[str]:
     return out
 
 
-def faithfulness_section(fa) -> list[str]:
+def faithfulness_section(fa, sr) -> list[str]:
     if not fa:
         return ["## Answer faithfulness (LLM judge)", "", "Not run in this report.", ""]
     pv, dm = fa["provenance"], fa["deterministic_metrics_natural"]
@@ -532,13 +551,25 @@ def faithfulness_section(fa) -> list[str]:
            "Agreement below is agreement with AI-drafted reference labels. On 2026-11-16 the owner reviewed a "
            "30-label sample (`eval/faithfulness/owner_review.csv`: 15 PASS and 15 FAIL; 16 judge-test and 14 judge-dev "
            "items; 16 natural answers (15 PASS, 1 FAIL), 7 synthetic-number and 7 synthetic-claim negatives) and agreed with all 30 "
-           "AI-drafted labels. The other 54 of the 84 labels (36 judge-test, 18 judge-dev) are not owner-reviewed and "
-           "stay AI-drafted. A 30/30 agreement on a sample is not a review of all 84, and it does not change any "
-           "metric below: the numbers are still computed against the AI-drafted labels.",
+           "AI-drafted labels. A 30/30 agreement on a sample is not a review of all 84.",
+           f"- AI second review (`eval/faithfulness/ai_second_review.csv`): the other {sr['n']} labels (36 judge-test, "
+           "18 judge-dev) are not owner-reviewed. On 2026-11-16 a second, independent AI pass (Claude) re-checked each of "
+           "them against the cited span text, deciding PASS/FAIL from the question, the answer and the verbatim cited "
+           "spans before looking at the drafted label or the judge's verdict. It agreed with "
+           f"{sr['agree']} of {sr['n']} and flagged {len(sr['flagged'])}. **This is an AI review, not a human review:** "
+           "the second reviewer is a Claude model, like the drafting labeler, so the two can share blind spots. No "
+           "reference label was changed, and no metric below changed: every number is still computed against the "
+           "AI-drafted labels.",
            f"- Labels: {fa['label_counts']['total']} ({fa['label_counts']['pass']} PASS, {fa['label_counts']['fail']} FAIL). "
            "Natural answers were almost all faithful, so seeded synthetic negatives (a changed number, or an appended "
-           "fabricated sentence citing the same passage) were added; they are reported separately.", "",
-           "| Split / subset | Grader | n | ref PASS / FAIL | TPR | TNR | Agreement |", "|---|---|---|---|---|---|---|"]
+           "fabricated sentence citing the same passage) were added; they are reported separately.", ""]
+    if sr["flagged"]:
+        out += ["**Flagged for owner decision** (the AI second review disagrees with the drafted label; the label is "
+                "unchanged until the owner decides):", ""]
+        out += [f"- `{r['item_id']}`: drafted {r['drafted_label']}, second review {r['second_review_label']}. "
+                f"{r['reason']}" for r in sr["flagged"]]
+        out += [""]
+    out += ["| Split / subset | Grader | n | ref PASS / FAIL | TPR | TNR | Agreement |", "|---|---|---|---|---|---|---|"]
     for v, blk in fa["dev_iterations"].items():
         out.append(f"| judge-dev, all (prompt {v}) | LLM judge | {cm(blk['all']['judge'])} |")
     for sub in ("all", "natural", "synthetic"):

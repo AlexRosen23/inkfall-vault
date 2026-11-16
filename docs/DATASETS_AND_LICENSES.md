@@ -35,9 +35,12 @@
 - `eval/faithfulness/labels.jsonl`: 84 PASS/FAIL labels with critiques for generated answers
   (`eval/reports/faithfulness_answers.json`). **Labeler: claude-code (AI).** Written blind
   (shuffled, opaque ids) by a separate Claude Code subagent from a written rubric. Not human-written labels.
-  30 were confirmed by the owner on 2026-11-16; the other 54 are not owner-reviewed.
+  30 were confirmed by the owner on 2026-11-16; the other 54 are not owner-reviewed (see the AI second review below).
 - `eval/faithfulness/owner_review.csv`: the 30-label sample the owner reviewed on 2026-11-16 (15 PASS, 15 FAIL;
   agreed with all 30 AI labels; no notes).
+- `eval/faithfulness/ai_second_review.csv`: a second, independent AI re-check (Claude, 2026-11-16) of the 54 labels
+  outside the owner's sample, each decided against the cited span text before the drafted label was read: 53 agree,
+  1 flagged for owner decision (LF-010). **Not a human review**; no label was changed.
 
 ## Software
 

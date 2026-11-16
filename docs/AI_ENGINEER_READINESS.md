@@ -28,7 +28,7 @@ Practice references: [Anthropic, demystifying evals](https://www.anthropic.com/e
 | Python LLM applications (9/9) | FastAPI service; three generation providers behind one validator (`generate.py`, `providers.py`, `claude_citations.py`) | Good (local demo, not deployed) |
 | Security, privacy, governance, human oversight (5/9) | Authorization before retrieval, 0-leak sweeps (extractive and with a real model), OWASP LLM mapping, second-person approval for releases, audit log | Strong for a demo |
 | Agents / tool design (6/9) | MCP server with three read-only, permission-aware tools and launch-bound identity | Partial: tools, not an agent loop |
-| Evals with graders calibrated against humans (4/9) | Deterministic retrieval/answer metrics on 112 gold questions; binary LLM judge with TPR/TNR on a held-out label split | Partial: labels are AI-drafted; 30 of 84 owner-reviewed (30/30 agreed), 54 not |
+| Evals with graders calibrated against humans (4/9) | Deterministic retrieval/answer metrics on 112 gold questions; binary LLM judge with TPR/TNR on a held-out label split | Partial: labels are AI-drafted; 30 of 84 owner-reviewed (30/30 agreed); the other 54 re-checked only by a second AI pass (53 agree, 1 flagged), not human-reviewed |
 | RAG / retrieval (4/9) | BM25 / dense / RRF hybrid / rerank ablation with dev/test split and a no-RAG baseline | Strong |
 | Observability / tracing (4/9) | OpenTelemetry GenAI spans (retrieval, chat), off by default, no content in spans | Basic |
 | Cost / latency (3/9) | Latency p50/p95 per method; per-answer token usage; Claude list-price estimate per answer | Basic |
@@ -47,7 +47,7 @@ _Rendered by `scripts/render_eval_docs.py` from the saved reports named in each 
 | Live Claude check (claude-opus-5-5, 2026-11-09) | the 6 dev questions from `make eval-generative` | 6/6 outputs accepted; 20 sentences: 14 supported, 1 partial, 5 unsupported (5 of them uncited connecting sentences such as "The documents conflict on this point."); gold span in 6/6; p50 3278.3 ms; 15340 tokens reported | `eval/reports/generative_claude.json` |
 | Adversarial sweep with a real model, run 1 | same sweep as the extractive run, gpt-oss:20b answering | **0 leaks**, 194 generated answers, 0/187 prompts with forbidden content; **finding:** one generated answer repeated a vendor notice's instruction to AI tools (fixed: such sentences are now withheld). Run 1 started at commit 97756f8; its `git_commit` field is the HEAD when it finished (later runs record both) | `eval/reports/adversarial_generative_run1.json` |
 | Adversarial sweep with a real model, run 2 (after the fix) | 1796 probes + 898 direct reads, 12 identities | **0 leaks**; 194 generated answers; 0/187 prompts and 0 raw outputs with forbidden content; injection 20/21, generation 5/5, api 10/10 | `eval/reports/adversarial_generative.json` |
-| Faithfulness LLM judge (binary, critique first), calibrated | judge-test, n=52 (37 PASS / 15 FAIL reference labels; all FAILs synthetic) | LLM judge TPR **0.946**, TNR **0.933**; deterministic span check TPR 0.730, TNR 1.000 — against **AI-drafted labels** (30 of 84 owner-reviewed 2026-11-16, 30/30 agreed; 54 not owner-reviewed); judge = generator model | `eval/reports/faithfulness.json` |
+| Faithfulness LLM judge (binary, critique first), calibrated | judge-test, n=52 (37 PASS / 15 FAIL reference labels; all FAILs synthetic) | LLM judge TPR **0.946**, TNR **0.933**; deterministic span check TPR 0.730, TNR 1.000 — against **AI-drafted labels** (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged for owner decision; not human-reviewed); judge = generator model | `eval/reports/faithfulness.json` |
 | Deterministic metrics on the same answers | 63 natural answers, 73 sentences | 47 answers fully 'supported'; gold span present in 53; citations re-verified 92/92; generation p50 5037.8 ms, judge p50 28239.8 ms | `eval/reports/faithfulness.json` |
 | MCP server (official SDK, stdio) | every identity × every unreadable version (449 pairs) through `fetch_document`, `cite` and a `search` built from the forbidden text; identity-argument escalation; a real stdio subprocess | forbidden == missing (`not_found`) for every pair; 0 forbidden canaries in search results (test assertions) | `tests/test_mcp_server.py` |
 | OWASP Top 10 for LLM Apps 2025 mapping | LLM01-LLM10 → code + tests + residual risk | table | `docs/OWASP_LLM_TOP10.md` |
@@ -64,7 +64,9 @@ workloads during the runs (latencies are not a benchmark).
 
 - **Human labels.** Reference labels for the faithfulness judge were written by an AI (a Claude Code subagent),
   blind to the judge. The owner reviewed a 30-label sample on 2026-11-16 (`eval/faithfulness/owner_review.csv`) and
-  agreed with all 30; the other 54 of 84 are not owner-reviewed. The TPR/TNR numbers remain agreement with
+  agreed with all 30. The other 54 of 84 are not owner-reviewed: a second, independent AI pass re-checked them
+  against the cited spans (`eval/faithfulness/ai_second_review.csv`: 53 agree, LF-010 flagged for owner decision),
+  which is not a human review. The TPR/TNR numbers remain agreement with
   AI-drafted labels, not with a human expert, and are unchanged.
 - **Independent judge.** The judge and the generator are the same local model (gpt-oss:20b) with different
   prompts. A judge from a different model family would reduce self-preference risk.

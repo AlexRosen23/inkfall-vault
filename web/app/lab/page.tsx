@@ -547,9 +547,9 @@ export default function LabPage() {
         </Section>
         <Section title="Answer faithfulness: LLM judge vs reference labels" kicker="/api/eval/faithfulness" className="span-all">
           <p className="small muted">
-            Reference labels are AI-drafted (Claude Code); the owner reviewed 30 of the 84 on 2026-11-16 and agreed with all 30, the
-            other 54 are not owner-reviewed. The judge and the generator are the same
-            local model with different prompts. TPR = PASS recall, TNR = FAIL recall.
+            Reference labels are AI-drafted (Claude Code); the owner reviewed 30 of the 84 on 2026-11-16 and agreed with all 30. The
+            other 54 were re-checked only by a second AI pass (53 agree, 1 flagged for owner decision), not by a human. The judge and
+            the generator are the same local model with different prompts. TPR = PASS recall, TNR = FAIL recall.
           </p>
           {faithfulness.missing && <p className="muted small">Not run yet (make eval-faithfulness).</p>}
           {faithfulness.error && !faithfulness.missing && <p className="error small" role="alert">{faithfulness.error}</p>}
