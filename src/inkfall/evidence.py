@@ -389,6 +389,29 @@ SCOPED_RE = re.compile(r"\b(?:in|under|per|for|from)\s+(?:the|our|this|that)\s+(
                        r"(?!s\b)(?!\s+(?:documents?|docs|papers|terms|files)\b)", re.IGNORECASE)
 
 
+# 'Harrowgate Pumpworks Ltd. ("Harrowgate")', 'Pellmoor Water Authority (the "Authority")': a party and its short name.
+PARTY_DEF_RE = re.compile(r"([A-Z][\w&.,'’ -]{2,80}?)\s+\((?:the\s+)?[\"“]([A-Z][\w’'-]+)[\"”]\)")
+
+
+# Defined terms that name a document or its subject matter, not a party ('Master Supply Agreement (the "Agreement")').
+NOT_PARTY = {"Agreement", "Amendment", "Contract", "SLA", "MSA", "Products", "Product", "Services", "Service",
+             "Engagement", "Facility", "Schedule", "Policy", "Letter", "Notice", "Order", "Term", "Effective", "Plan"}
+
+
+def counterparties(text: str, self_name: str) -> dict[str, str]:
+    """Short name -> full name of the parties a document defines, other than the organization itself (`self_name` is
+    the tenant's name, e.g. "Pellmoor Water Authority"; a party whose full name contains its first word is us)."""
+    own = self_name.split()[0].lower() if self_name.split() else ""
+    return {short: full for full, short in PARTY_DEF_RE.findall(text)
+            if short not in NOT_PARTY and not (own and own in full.lower())}
+
+
+def _third_party_duty(sentence: str, parties: set[str]) -> bool:
+    """True when the sentence states another party's own obligation ("Harrowgate shall obtain three written
+    quotes", "applies to Harrowgate's own purchases"), not a rule for the organization itself."""
+    return any(re.search(rf"\b{re.escape(n)}(?:['’]s\s+own\b|\s+(?:shall|must|will)\b)", sentence) for n in parties)
+
+
 def conflict_scope(question: str) -> str | None:
     """Why contradiction flags are not raised for this question, or None when they are."""
     if COMPARISON_RE.search(question):
@@ -399,7 +422,8 @@ def conflict_scope(question: str) -> str | None:
     return None
 
 
-def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], top: int = 6) -> tuple[list[Conflict], list[str]]:
+def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], top: int = 6,
+                   self_name: str | None = None) -> tuple[list[Conflict], list[str]]:
     """Testable contradiction rule (no model involved). Two passages conflict when ALL hold:
     1. both versions are in force on the as-of date and belong to different documents;
     2. the question asks for a value type (money, %, duration, date, time, or a count for "how many X") and
@@ -410,6 +434,10 @@ def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], to
        question is about the organization's own dealings ("our invoices", "do we"), and then needs two shared
        concepts;
     4. for some unit present in both sentences, the value sets are disjoint.
+    5. in a question about the organization's own conduct ("do we", "our"), a sentence stating another party's
+       obligation ("Harrowgate shall obtain three written quotes") is not compared unless the question names that
+       party: the counterparty's duty under its contract is not the organization's own rule. Needs `self_name` (the
+       tenant's name) to tell the organization from its counterparties.
     No conflicts are raised for comparison questions ("how does X compare with Y") or questions scoped to one
     named document ("in the renewed engagement letter"). If one document amends the other and changes the value,
     the pair is reported as an amendment override instead; an amendment that restates the base value changes
@@ -433,6 +461,15 @@ def find_conflicts(question: str, pack: list[Passage], texts: dict[int, str], to
     cands = [p for p in cands if names_all[p.pid] or (own_conduct and p.doc_type == "policy")]
     amended = {p.amends_key for p in cands if p.amends_key}
     best = {p.pid: _best_value_sentence(p, concepts, want, texts[p.version_id], counted) for p in cands}
+    if own_conduct and self_name:
+        for p in cands:
+            if not best[p.pid]:
+                continue
+            others = {n for n, full in counterparties(texts[p.version_id], self_name).items()
+                      if not any(sj == n.lower() or sj in full.lower() for sj in subjects)}
+            a, b = best[p.pid][0], best[p.pid][1]
+            if others and _third_party_duty(texts[p.version_id][a:b], others):
+                best[p.pid] = None
     conflicts: list[Conflict] = []
     overrides: list[str] = []
     seen_pairs: set[tuple[str, str, str]] = set()

@@ -65,12 +65,41 @@ The abstention numbers in the report also include the separate XT-017 fix (PR #1
 
 ## What is still wrong
 
-- One new false alarm: dev PM-001 under dense retrieval. It was already one under hybrid. It asks about the
-  sealed-bid threshold, and the amendment's $25,000 quote threshold is compared with the procurement policy's
-  $150,000. They share the topic "purchase" but not "sealed bid". PM-017 (dev) has the same shape and was already a
-  false alarm.
+- ~~One new false alarm: dev PM-001 under dense retrieval~~ (and PM-017, the same shape): fixed on 2026-11-16, see
+  below.
 - Remaining test false alarms (hybrid): CV-015 compares a service-credit percentage with an uptime percentage
   (both mention availability). LF-008 compares the indemnity limit with other money in the partners' minutes.
 - The rule is lexical. It can't tell that two percentages measure different things, and a real corpus with more
   phrasing variety would lower its recall. A held-out estimate needs new conflict questions written without
   looking at this rule.
+
+## 2026-11-16: a counterparty's duty is not the organization's own rule
+
+**Cause (dev split).** PM-001 ("Above what purchase value do **we** now have to run a formal sealed bid…") and
+PM-017 ("…at what purchase value did **we** need three written quotes?") ask about the Authority's own procurement
+rule. The rule compared that policy with the Harrowgate maintenance contract and its amendment. The contract sentences
+state *Harrowgate's* duty ("Harrowgate shall obtain three written quotes", "applies to Harrowgate's own purchases").
+The questions name no subject, so the "same subject" check (condition 3) let every document through.
+
+**Change (rule condition 5).** In a question about the organization's own conduct ("we", "our", "us"), a value
+sentence whose actor is another party, written as "X shall/must/will" or "X's own", is not compared unless the
+question names that party. Parties come from the document's own definitions ('Harrowgate Pumpworks Ltd.
+("Harrowgate")'). Document nouns ("Agreement", "Contract", …) are excluded. A party whose full name contains the
+tenant's name ("Pellmoor Water Authority (the "Authority")") is the organization itself. Questions that are not
+first-person, or that name the counterparty, are compared as before; tests cover both.
+
+**How it was measured.** The change was designed on the dev split only. The test split was then run once, as the
+held-out check. Same frozen 112 questions; nothing in the gold set was edited.
+
+| Split | Method | Before | After |
+|---|---|---|---|
+| dev | BM25 | 4/4, 1 false alarm | 4/4, **0** |
+| dev | dense | 3/4, 3 | 3/4, **1** |
+| dev | **hybrid** (default) | 4/4, 2 | 4/4, **0** |
+| dev | hybrid + rerank | 4/4, 3 | 4/4, **1** |
+| test | every method | unchanged (hybrid 5/5, 2) | unchanged |
+| all | hybrid | 9/9, 4 | 9/9, **2** |
+
+No other metric changed on either split (`eval/reports/latest.json`). The two remaining test false alarms (CV-015,
+LF-008) have different causes, listed above, and are not addressed by this change. The test split says nothing new
+about this rule's precision, because none of its false alarms had this shape.

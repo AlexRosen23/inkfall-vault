@@ -98,3 +98,30 @@ def test_comparison_questions_are_not_flagged(client):
     conflicts, _ = _conflicts(client, "omar.haddad", "How does our treasury minimum cash rule compare with the minimum "
                                                      "liquidity covenant in the credit facility?")
     assert conflicts == []
+
+
+def test_counterparty_definitions_exclude_the_organization_and_document_terms():
+    from inkfall.evidence import _third_party_duty, counterparties
+
+    text = ('This amendment is made between Pellmoor Water Authority (the "Authority") and Harrowgate Pumpworks Ltd. '
+            '("Harrowgate") and amends the Pump Station Maintenance Contract (the "Contract").')
+    assert counterparties(text, "Pellmoor Water Authority") == {"Harrowgate": "Harrowgate Pumpworks Ltd."}
+    assert _third_party_duty("Harrowgate shall obtain three written quotes.", {"Harrowgate"})
+    assert _third_party_duty("The threshold continues to apply to Harrowgate's own purchases.", {"Harrowgate"})
+    assert not _third_party_duty("Purchases above $40,000 require three written quotes.", {"Harrowgate"})
+    assert not _third_party_duty("The Authority shall pay within 30 days.", {"Harrowgate"})
+
+
+def test_a_counterpartys_duty_is_not_a_conflict_with_our_own_rule(client):
+    # "do we": the Authority's own procurement rule. The maintenance contract's quote threshold binds Harrowgate's
+    # purchases, so it is not compared (2026-11-16: the dev-split false alarm on PM-001 and PM-017).
+    conflicts, _ = _conflicts(client, "rhea.castellanos", "At what purchase value do we have to get three written quotes?")
+    assert not any("PM-MAINT-CONTRACT" in c["a"]["ref"] + c["b"]["ref"] for c in conflicts)
+
+
+def test_naming_the_counterparty_still_compares_its_contract(client):
+    # The same values are compared when the question is not about our own conduct (the spare-parts question above)
+    # or names the counterparty.
+    conflicts, _ = _conflicts(client, "rhea.castellanos", "What purchase value requires three written quotes when "
+                                                            "Harrowgate buys spare parts for us?")
+    assert any("PM-MAINT-CONTRACT" in c["a"]["ref"] + c["b"]["ref"] for c in conflicts)
