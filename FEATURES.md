@@ -434,7 +434,7 @@ authentication and TLS; a Postgres backend.
 ## 9. Change log
 | Date | PR | Change |
 | --- | --- | --- |
-| 2026-11-16 | — | Faithfulness labels: AI second review of the 54 labels outside the owner's 30 (53 agree, LF-010 flagged for owner decision; not a human review, no label or metric changed) |
+| 2026-11-16 | #21 | Faithfulness labels: AI second review of the 54 labels outside the owner's 30 (53 agree, LF-010 flagged for owner decision; not a human review, no label or metric changed) |
 | 2026-11-16 | #20 | Faithfulness labels: owner reviewed the 30-label sample (30/30 agreed) |
 | 2026-11-16 | #19 | Contradiction rule: a counterparty's duty is not our own rule (dev false alarms 2 → 0, hybrid; test unchanged); abstention rule tried and not shipped |
 | 2026-11-11 | #17 | Refresh the Claude generative report (owner re-run of 2026-11-09 21:58 UTC) |
