@@ -9,7 +9,7 @@ organizations and all 45 documents are fictional.
 **This is the source-of-truth features list.** Every PR that adds, changes, removes or switches off something a person
 can see or use updates this file in the same PR (see "Keeping this file true").
 
-- **Repo:** AlexRosen23/inkfall-vault (public) · **Folder:** `~/Desktop/Claude Projects/The Inkfall Vault`
+- **Repo:** AlexRosen23/inkfall-vault (public)
 - **Status:** Working local demo (not production-secure; mock login) · **Version:** 0.1.0 · **`main`:** `30da973` (2026-11-15)
 - **Last updated:** 2026-11-15, written from the code, README, docs and tests.
 
@@ -104,10 +104,10 @@ After that everything runs offline.
 | `make clean` | delete generated local data (database, outbox, caches); corpus and reports stay |
 
 **Environment variables (names only; nothing secret is required):** `INKFALL_DB`, `INKFALL_DATA_DIR`,
-`INKFALL_CORPUS_DIR`, `INKFALL_API_PORT`, `INKFALL_WEB_PORT`, `INKFALL_EMBED_MODEL`, `INKFALL_RERANK_MODEL`,
+`INKFALL_CORPUS_DIR`, `INKFALL_API_PORT`, `INKFALL_EMBED_MODEL`, `INKFALL_RERANK_MODEL`,
 `INKFALL_LMSTUDIO_URL`, `INKFALL_OLLAMA_URL`, `INKFALL_LLM_MODEL`, `INKFALL_LLM_MAX_TOKENS`,
 `INKFALL_AUDIT_RETENTION_DAYS`, `INKFALL_RATE_LIMIT_PER_MINUTE`, `INKFALL_API` (web proxy target),
-`INKFALL_MCP_USER` (MCP identity), `INKFALL_OTEL` (tracing mode). `ANTHROPIC_API_KEY` switches on the opt-in Claude
+`INKFALL_MCP_USER` (MCP identity), `INKFALL_OTEL` (tracing mode), `INKFALL_EXPORT` (static UI build), `INKFALL_CLAUDE_MODEL`, `INKFALL_CLAUDE_EFFORT`, `INKFALL_CLAUDE_MAX_TOKENS`, `INKFALL_CLAUDE_FALLBACKS`. `ANTHROPIC_API_KEY` switches on the opt-in Claude
 provider.
 
 **Demo identities (all fictional):**
