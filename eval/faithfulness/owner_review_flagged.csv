@@ -1,0 +1,14 @@
+item_id,split,kind,question,answer_and_cited_spans,ai_label,ai_critique,judge_verdict,judge_critique,owner_label (PASS/FAIL),owner_note
+LF-010,test,natural,"What is Calderwood's partner hourly rate in the renewed engagement letter, and how long does the client now have to dispute an invoice?","Question: What is Calderwood's partner hourly rate in the renewed engagement letter, and how long does the client now have to dispute an invoice?
+
+Answer sentences and the spans each one cites:
+
+[S1] The partner hourly rate in the renewed engagement letter is $650 per hour.
+  <span id=""P4"" source=""LF-PARTNERS-MINUTES-2026-05@1"">
+2.1 The partners considered the rate review for Calderwood Shipping Ltd. and resolved that the partner rate for the Calderwood engagement shall be $650 per hour with effect from 1 June 2026.
+  </span>
+
+[S2] The client now has fourteen (14) days to dispute an invoice.
+  <span id=""P1"" source=""LF-ENG-CALDERWOOD@2"">
+4.3 The Client may dispute an invoice by written notice to the Firm within fourteen (14) days after the invoice date. The Client shall pay any undisputed part of the invoice on time.
+  </span>",PASS,S1's $650 partner rate matches the minutes at 2.1 (the 'renewed engagement letter' attribution restates the question); S2's fourteen days matches clause 4.3 of the cited engagement letter version.,PASS,All factual claims are directly supported by the cited spans.,FAIL,"Owner decision 2026-11-19: FAIL. The answer cites $650 (partners' minutes) but the v2 engagement letter says $680 per hour (clause 2.1); the letter is the source of truth, so the $650 figure and its attribution to the letter are not supported. Relayed to the repo by the master session from the owner's chat decision; not signed by the owner in this file."

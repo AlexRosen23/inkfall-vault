@@ -167,6 +167,8 @@ _From `eval/reports/faithfulness.json` (2026-11-09T17:51:43+00:00, commit `96eec
 
 - `LF-010`: drafted PASS, second review FAIL. S1 attributes the $650 rate to "the renewed engagement letter", but its only cited span is the partners' minutes (LF-PARTNERS-MINUTES-2026-05, "the partner rate for the Calderwood engagement shall be $650 per hour"), not the letter, so the document attribution is unsupported. S2 (14 days, letter 4.3) is supported. Context outside the cited spans: the v2 letter's own clause 2.1 says partners at $680 per hour.
 
+**Owner decision recorded** (`eval/faithfulness/owner_review_flagged.csv`): `LF-010` is FAIL (2026-11-19). The reference label in `labels.jsonl` and every metric below are still computed against the drafted label until the owner approves the recomputation.
+
 | Split / subset | Grader | n | ref PASS / FAIL | TPR | TNR | Agreement |
 |---|---|---|---|---|---|---|
 | judge-dev, all (prompt v1) | LLM judge | 32 | 25 / 7 | 0.880 (22/25) | 0.857 (6/7) | 0.875 |
