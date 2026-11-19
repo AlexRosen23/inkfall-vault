@@ -1,5 +1,7 @@
 # The Inkfall Vault
 
+**Cited-answer document workbench**
+
 The Inkfall Vault is a local evidence workbench for legal, finance and policy documents. An analyst asks a
 question such as "which notice period applies to this supply agreement today?". The server searches only the
 documents that analyst is allowed to read, and answers with sentences quoted word for word, each linked to the
