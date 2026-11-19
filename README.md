@@ -8,6 +8,19 @@ disagree, it shows both side by side. A brief built from those citations can onl
 person approves it, and every step is written to an audit log. It runs on one laptop, on CPU; no model and no API key are needed.
 The three organizations and all 45 documents are fictional.
 
+## What it does
+
+- **Answers with proof:** every sentence is a word-for-word quote linked to the exact characters in the source document, and the citation is re-checked against the stored text.
+- **Respects who may read what:** search only covers documents the asker is permitted to see; forbidden documents look the same as missing ones. The permission sweep found 0 leaks across 1796 search probes and 898 direct reads.
+- **Says "not enough evidence"** instead of guessing, and shows both documents side by side when they disagree.
+- **Needs a second person** to approve a brief before it leaves the team, and logs every step in an audit log.
+
+**Who it is for:** teams that handle legal, finance or policy documents and need answers they can verify, and reviewers who want to see a permission-aware retrieval system tested end to end. It is a local demo on invented data, not a production system.
+
+**How it works:** a question is filtered by the asker's permissions, searched with keyword (SQLite FTS5) plus embedding retrieval, and answered from the matching spans only. Citations are verified before anything is shown.
+
+**Try it:** `make setup && make serve`, then open http://127.0.0.1:5110 (CPU only, no model or API key needed).
+
 > **Synthetic demo.** Every organization, person and document is invented. This is not legal advice, and the
 > project is not affiliated with any real firm or vendor. It is a tested local demo, not a production-secure or
 > certified system. See [docs/SECURITY_LIMITATIONS.md](docs/SECURITY_LIMITATIONS.md).

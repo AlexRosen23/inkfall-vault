@@ -11,7 +11,6 @@ EVAL_DIR = ROOT / "eval"
 DATA_DIR = Path(os.environ.get("INKFALL_DATA_DIR", ROOT / "data"))
 
 API_PORT = int(os.environ.get("INKFALL_API_PORT", "5110"))
-WEB_PORT = int(os.environ.get("INKFALL_WEB_PORT", "5111"))
 
 # Embedding model used for dense retrieval (Apache-2.0, ~90 MB). Recorded in docs/DATASETS_AND_LICENSES.md.
 EMBED_MODEL_ID = os.environ.get("INKFALL_EMBED_MODEL", "sentence-transformers/all-MiniLM-L6-v2")

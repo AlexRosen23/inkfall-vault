@@ -6,7 +6,7 @@ WEB_PORT ?= 5111
 
 MCP_USER ?= dana.whitcombe
 
-.PHONY: smoke mcp security-test-generative eval-faithfulness help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
+.PHONY: smoke mcp openapi eval-claude-live security-test-generative eval-faithfulness help setup setup-offline seed api web serve web-export demo test security-test eval eval-generative eval-docs lint audit-deps licenses ci rerank-model clean
 
 help:
 	@grep -E '^[a-z-]+:.*?## ' $(MAKEFILE_LIST) | awk -F':.*?## ' '{printf "  %-16s %s\n", $$1, $$2}'
