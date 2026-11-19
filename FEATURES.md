@@ -428,12 +428,13 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
 - No Dependabot configuration.
 
 **Next steps listed in the README (*Planned*):** new conflict questions for a real held-out number; extend the sweep to
-every endpoint returning saved data; owner decision on LF-010 (flagged by the AI second review) and a human review of the other 53 labels outside the reviewed 30; re-run the live Claude check; real
+every endpoint returning saved data; apply the owner's LF-010 decision (FAIL, recorded 2026-11-19; label and metrics not yet recomputed) and a human review of the other 53 labels outside the reviewed 30; re-run the live Claude check; real
 authentication and TLS; a Postgres backend.
 
 ## 9. Change log
 | Date | PR | Change |
 | --- | --- | --- |
+| 2026-11-19 | (this PR) | Faithfulness labels: owner decision on LF-010 recorded as FAIL ($650 cited vs $680 in the v2 engagement letter) in `owner_review_flagged.csv`; reference label and metrics unchanged until the owner approves the recomputation |
 | 2026-11-16 | #21 | Faithfulness labels: AI second review of the 54 labels outside the owner's 30 (53 agree, LF-010 flagged for owner decision; not a human review, no label or metric changed) |
 | 2026-11-16 | #20 | Faithfulness labels: owner reviewed the 30-label sample (30/30 agreed) |
 | 2026-11-16 | #19 | Contradiction rule: a counterparty's duty is not our own rule (dev false alarms 2 → 0, hybrid; test unchanged); abstention rule tried and not shipped |

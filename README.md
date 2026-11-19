@@ -519,7 +519,8 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
    contradiction detection. Then tackle the remaining false alarms (CV-015, LF-008 on test).
 2. Extend the adversarial sweep to every endpoint that returns saved data (reports, audit, admin views). The
    side channels were missed because the sweep only probed search and reads.
-3. Owner decision on LF-010, the one label the AI second review flagged; a human review of the other 53 labels
+3. Apply the owner's LF-010 decision (FAIL, 2026-11-19, recorded in `eval/faithfulness/owner_review_flagged.csv`) to the
+   reference label and recompute the judge metrics; a human review of the other 53 labels
    outside the owner's 30 (so far re-checked only by AI); then re-report the judge against human labels, with
    naturally wrong answers among the negatives.
 4. Re-run `make eval-claude-live` to confirm the PM-007 title fix, and decide whether uncited connecting sentences

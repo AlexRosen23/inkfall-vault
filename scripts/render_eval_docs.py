@@ -26,6 +26,15 @@ def second_review() -> dict:
     return {"n": len(rows), "agree": len(rows) - len(flagged), "flagged": flagged}
 
 
+def owner_flagged() -> list[dict]:
+    """The owner's decisions on labels the AI second review flagged (same columns as owner_review.csv)."""
+    p = FDIR / "owner_review_flagged.csv"
+    if not p.exists():
+        return []
+    with p.open(newline="", encoding="utf-8") as fh:
+        return list(csv.DictReader(fh))
+
+
 def review_status(sr: dict) -> str:
     """One phrase for every doc: who reviewed which labels, never calling the AI pass a human review."""
     return (f"30 owner-reviewed, 30/30 agreed; {sr['n']} AI-drafted and independently re-checked by a second AI pass, "
@@ -569,6 +578,14 @@ def faithfulness_section(fa, sr) -> list[str]:
         out += [f"- `{r['item_id']}`: drafted {r['drafted_label']}, second review {r['second_review_label']}. "
                 f"{r['reason']}" for r in sr["flagged"]]
         out += [""]
+        decided = {r["item_id"]: r for r in owner_flagged()}
+        for r in sr["flagged"]:
+            d = decided.get(r["item_id"])
+            if d:
+                out += [f"**Owner decision recorded** (`eval/faithfulness/owner_review_flagged.csv`): `{r['item_id']}` is "
+                        f"{d['owner_label (PASS/FAIL)']} (2026-11-19). The reference label in `labels.jsonl` and every "
+                        "metric below are still computed against the drafted label until the owner approves the "
+                        "recomputation.", ""]
     out += ["| Split / subset | Grader | n | ref PASS / FAIL | TPR | TNR | Agreement |", "|---|---|---|---|---|---|---|"]
     for v, blk in fa["dev_iterations"].items():
         out.append(f"| judge-dev, all (prompt {v}) | LLM judge | {cm(blk['all']['judge'])} |")
