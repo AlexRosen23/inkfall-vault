@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-09T17:51:43+00:00",
+ "generated_at": "2026-11-21T02:40:25+00:00",
  "provenance": {
-  "git_commit": "96eecc8",
+  "git_commit": "8f4826f",
   "command": "python -m inkfall.eval_faithfulness report --prompt v2",
   "answers_file": "eval/reports/faithfulness_answers.json",
   "answers_generated_at": "2026-11-09T16:43:26+00:00",
@@ -12,7 +12,7 @@
   "judge_test_file": "eval/reports/faithfulness_judge_test_v2.json",
   "judge_prompt": "eval/faithfulness/judge_prompt_v2.txt",
   "labels_file": "eval/faithfulness/labels.jsonl",
-  "labeler": "claude-code (AI); 30 of 84 labels confirmed by the owner 2026-11-16, 54 not owner-reviewed",
+  "labeler": "claude-code (AI); 31 of 84 labels owner-decided (30 confirmed 2026-11-16; LF-010 set to FAIL by the owner, applied 2026-11-20), 53 not owner-reviewed",
   "same_model_limitation": "The judge and the generator are the same local model (gpt-oss:20b) with different prompts."
  },
  "criterion": "every claim in the answer is supported by the spans it cites (binary PASS/FAIL)",
@@ -183,53 +183,53 @@
   "all": {
    "judge": {
     "n": 52,
-    "ref_pass": 37,
-    "ref_fail": 15,
-    "tp": 35,
+    "ref_pass": 36,
+    "ref_fail": 16,
+    "tp": 34,
     "fn": 2,
     "tn": 14,
-    "fp": 1,
-    "tpr": 0.946,
-    "tnr": 0.933,
-    "agreement": 0.942
+    "fp": 2,
+    "tpr": 0.944,
+    "tnr": 0.875,
+    "agreement": 0.923
    },
    "deterministic": {
     "n": 52,
-    "ref_pass": 37,
-    "ref_fail": 15,
-    "tp": 27,
+    "ref_pass": 36,
+    "ref_fail": 16,
+    "tp": 26,
     "fn": 10,
     "tn": 15,
-    "fp": 0,
-    "tpr": 0.73,
-    "tnr": 1.0,
-    "agreement": 0.808
+    "fp": 1,
+    "tpr": 0.722,
+    "tnr": 0.938,
+    "agreement": 0.788
    }
   },
   "natural": {
    "judge": {
     "n": 37,
-    "ref_pass": 37,
-    "ref_fail": 0,
-    "tp": 35,
+    "ref_pass": 36,
+    "ref_fail": 1,
+    "tp": 34,
     "fn": 2,
     "tn": 0,
-    "fp": 0,
-    "tpr": 0.946,
-    "tnr": null,
-    "agreement": 0.946
+    "fp": 1,
+    "tpr": 0.944,
+    "tnr": 0.0,
+    "agreement": 0.919
    },
    "deterministic": {
     "n": 37,
-    "ref_pass": 37,
-    "ref_fail": 0,
-    "tp": 27,
+    "ref_pass": 36,
+    "ref_fail": 1,
+    "tp": 26,
     "fn": 10,
     "tn": 0,
-    "fp": 0,
-    "tpr": 0.73,
-    "tnr": null,
-    "agreement": 0.73
+    "fp": 1,
+    "tpr": 0.722,
+    "tnr": 0.0,
+    "agreement": 0.703
    }
   },
   "synthetic": {
@@ -261,7 +261,7 @@
  },
  "test_pass_rates_natural": {
   "n": 37,
-  "reference_labels": 1.0,
+  "reference_labels": 0.973,
   "judge_raw": 0.946,
   "judge_corrected": 1.0,
   "correction_note": "Rogan-Gladen correction using TPR/TNR from all judge-test items; TNR comes mostly from synthetic negatives, so the correction is optimistic for subtle natural failures"
@@ -288,7 +288,7 @@
  },
  "label_counts": {
   "total": 84,
-  "pass": 62,
-  "fail": 22
+  "pass": 61,
+  "fail": 23
  }
 }

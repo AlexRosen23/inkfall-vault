@@ -59,10 +59,10 @@
     },
     {
       "claim": "LLM judge for answer faithfulness, calibrated with TPR/TNR on a held-out label split",
-      "metric": "judge-test TPR 0.946, TNR 0.933 (n=52, 15 FAIL labels) vs AI-drafted reference labels (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged for owner decision; not human-reviewed)",
+      "metric": "judge-test TPR 0.944, TNR 0.875 (n=52, 16 FAIL labels) vs AI-drafted reference labels (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged, decided by the owner; not human-reviewed)",
       "source": "eval/reports/faithfulness.json",
       "verify": "see docs/RAG_EVALUATION.md (faithfulness)",
-      "status": "measured against AI-drafted labels (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged for owner decision; not human-reviewed); metrics unchanged by the reviews; judge = generator model"
+      "status": "measured against AI-drafted labels (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged, decided by the owner; not human-reviewed); metrics recomputed with the owner's LF-010 decision (FAIL, 2026-11-20); judge = generator model"
     },
     {
       "claim": "Sub-100 ms retrieval on CPU",

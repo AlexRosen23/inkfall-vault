@@ -1,4 +1,5 @@
-"""The owner's decision on the one label the AI second review flagged (LF-010) is recorded in the owner-review format."""
+"""The owner's decision on the one label the AI second review flagged (LF-010) is recorded in the owner-review format
+and applied to the reference label."""
 import csv
 import json
 from pathlib import Path
@@ -28,5 +29,9 @@ def test_flagged_rows_are_exactly_the_second_review_disagreements_and_decided():
     labels = {r["item_id"]: r for r in (json.loads(x) for x in (FDIR / "labels.jsonl").read_text().splitlines() if x.strip())}
     for r in rows:
         assert r["owner_label (PASS/FAIL)"] == "FAIL"
-        assert r["ai_label"] == labels[r["item_id"]]["label"]
+        lab = labels[r["item_id"]]
+        assert r["ai_label"] == lab["drafted_label"] == "PASS"
+        # Applied 2026-11-20 on the owner's approval: the reference label is now the owner's verdict.
+        assert lab["label"] == r["owner_label (PASS/FAIL)"]
+        assert "owner decision FAIL" in lab["labeler"]
         assert "$680" in r["owner_note"] and "$650" in r["owner_note"]

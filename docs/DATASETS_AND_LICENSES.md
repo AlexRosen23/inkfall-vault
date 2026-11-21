@@ -40,7 +40,9 @@
   agreed with all 30 AI labels; no notes).
 - `eval/faithfulness/ai_second_review.csv`: a second, independent AI re-check (Claude, 2026-11-16) of the 54 labels
   outside the owner's sample, each decided against the cited span text before the drafted label was read: 53 agree,
-  1 flagged for owner decision (LF-010). **Not a human review**; no label was changed.
+  1 flagged for owner decision (LF-010). **Not a human review**; the review itself changed no label.
+- `eval/faithfulness/owner_review_flagged.csv`: the owner's decision on LF-010 (FAIL: $650 cited vs $680 in the v2
+  engagement letter; decided 2026-11-19), applied to `labels.jsonl` and the faithfulness metrics on 2026-11-20.
 
 ## Software
 

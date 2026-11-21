@@ -33,7 +33,8 @@ def test_second_review_rows_are_consistent_and_labelled_as_ai():
     with (FDIR / "ai_second_review.csv").open(newline="", encoding="utf-8") as f:
         assert next(csv.reader(f)) == COLUMNS
     for r in _csv("ai_second_review.csv"):
-        assert r["drafted_label"] == labels[r["item_id"]]["label"], r["item_id"]
+        lab = labels[r["item_id"]]
+        assert r["drafted_label"] == lab.get("drafted_label", lab["label"]), r["item_id"]
         assert r["second_review_label"] in {"PASS", "FAIL"}
         assert r["agrees"] == ("yes" if r["second_review_label"] == r["drafted_label"] else "no")
         assert r["reason"].strip()

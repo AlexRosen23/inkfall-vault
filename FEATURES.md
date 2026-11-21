@@ -402,7 +402,7 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
   injection 21/21, generation 5/5, API 13/13.
 - Real-model sweep (`adversarial_generative.json`, `gpt-oss:20b`, 2026-11-09): 0 leaks, 194 answers, 0 of 187 prompts
   with forbidden content. The first run caught the model echoing an injected instruction; fixed, run 2 passed.
-- Faithfulness judge (judge-test, n=52): TPR 0.946, TNR 0.933 against AI-drafted labels: 30 owner-reviewed (30/30 agreed, 2026-11-16); 54 AI-drafted and independently re-checked by a second AI pass (53 agree, 1 flagged for owner decision: LF-010); not human-reviewed.
+- Faithfulness judge (judge-test, n=52): TPR 0.944, TNR 0.875 against AI-drafted labels: 30 owner-reviewed (30/30 agreed, 2026-11-16); 54 AI-drafted and independently re-checked by a second AI pass (53 agree, 1 flagged: LF-010, set to FAIL by the owner, applied 2026-11-20); not human-reviewed.
 - Local generation sample (6 questions): 6 of 6 accepted; of 13 sentences, 10 supported, 2 partial, 1 unsupported.
 - Live Claude sample (2026-11-09, 6 dev questions): 6 of 6 accepted; of 18 sentences, 12 supported, 1 partial, 5
   unsupported (all uncited connecting sentences). PM-007 wrongly abstained; the title fix has not been re-run live.
@@ -428,13 +428,14 @@ Commands: `make test` (validator + pytest), `make security-test`, `make lint`, `
 - No Dependabot configuration.
 
 **Next steps listed in the README (*Planned*):** new conflict questions for a real held-out number; extend the sweep to
-every endpoint returning saved data; apply the owner's LF-010 decision (FAIL, recorded 2026-11-19; label and metrics not yet recomputed) and a human review of the other 53 labels outside the reviewed 30; re-run the live Claude check; real
+every endpoint returning saved data; a human review of the other 53 labels outside the reviewed 30; re-run the live Claude check; real
 authentication and TLS; a Postgres backend.
 
 ## 9. Change log
 | Date | PR | Change |
 | --- | --- | --- |
-| 2026-11-19 | (this PR) | Faithfulness labels: owner decision on LF-010 recorded as FAIL ($650 cited vs $680 in the v2 engagement letter) in `owner_review_flagged.csv`; reference label and metrics unchanged until the owner approves the recomputation |
+| 2026-11-20 | (this PR) | Faithfulness labels: owner-approved recomputation. LF-010 reference label set to FAIL (`labels.jsonl` keeps `drafted_label: PASS`); judge-test metrics recomputed from the saved judge verdicts (no model re-run): TPR 0.946 → 0.944, TNR 0.933 → 0.875, labels 62/22 → 61/23 PASS/FAIL. The owner-review sample is now frozen so a label change cannot reshuffle it |
+| 2026-11-19 | #23 | Faithfulness labels: owner decision on LF-010 recorded as FAIL ($650 cited vs $680 in the v2 engagement letter) in `owner_review_flagged.csv`; reference label and metrics unchanged until the owner approves the recomputation |
 | 2026-11-16 | #21 | Faithfulness labels: AI second review of the 54 labels outside the owner's 30 (53 agree, LF-010 flagged for owner decision; not a human review, no label or metric changed) |
 | 2026-11-16 | #20 | Faithfulness labels: owner reviewed the 30-label sample (30/30 agreed) |
 | 2026-11-16 | #19 | Contradiction rule: a counterparty's duty is not our own rule (dev false alarms 2 → 0, hybrid; test unchanged); abstention rule tried and not shipped |

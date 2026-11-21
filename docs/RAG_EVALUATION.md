@@ -153,34 +153,34 @@ injection 20/21, generation 5/5, api 10/10; quality misses (no leak): XT-017. Se
 
 ## Answer faithfulness: binary LLM judge calibrated against reference labels
 
-_From `eval/reports/faithfulness.json` (2026-11-09T17:51:43+00:00, commit `96eecc8`); answers from `eval/reports/faithfulness_answers.json` (2026-11-09T16:43:26+00:00)._
+_From `eval/reports/faithfulness.json` (2026-11-21T02:40:25+00:00, commit `8f4826f`); answers from `eval/reports/faithfulness_answers.json` (2026-11-09T16:43:26+00:00)._
 
 **Criterion:** every claim in the answer is supported by the spans it cites (binary PASS/FAIL). Positive class = PASS. Method after Hamel Husain's LLM-judge guide: binary verdict with a written critique, labels split into judge-dev (answers to dev-split gold questions) and judge-test (test-split questions), prompt changed only after reading judge-dev disagreements, then frozen and run once on judge-test; true-positive and true-negative rates reported separately.
 
-- Generator: **gpt-oss:20b** via ollama (local). Judge: the **same model** with a different prompt (`eval/faithfulness/judge_prompt_v2.txt`). **Limitation:** a judge that shares the generator's model can share its blind spots (self-preference). On judge-test every FAIL label is a synthetic negative, so the TNR says how well the judge catches changed numbers and fabricated sentences, not subtle natural misreadings.
+- Generator: **gpt-oss:20b** via ollama (local). Judge: the **same model** with a different prompt (`eval/faithfulness/judge_prompt_v2.txt`). **Limitation:** a judge that shares the generator's model can share its blind spots (self-preference). On judge-test all FAIL labels but one are synthetic negatives, so the TNR mostly says how well the judge catches changed numbers and fabricated sentences, not subtle natural misreadings. The one natural FAIL, `LF-010` (the owner's decision), is a subtle misattribution, and the judge passed it.
 - Prompt iteration: v2 added three rules after reading the v1 judge-dev disagreements. Aggregate dev agreement did not change (the disagreements moved to different items), so the tie was broken in favour of the more explicit v2, which was then frozen before the single judge-test run.
-- Reference labels: `eval/faithfulness/labels.jsonl`, **claude-code (AI); 30 of 84 labels confirmed by the owner 2026-11-16, 54 not owner-reviewed**. They were written blind (opaque ids, shuffled) by a separate Claude Code subagent from a written rubric; they are not human expert labels. Agreement below is agreement with AI-drafted reference labels. On 2026-11-16 the owner reviewed a 30-label sample (`eval/faithfulness/owner_review.csv`: 15 PASS and 15 FAIL; 16 judge-test and 14 judge-dev items; 16 natural answers (15 PASS, 1 FAIL), 7 synthetic-number and 7 synthetic-claim negatives) and agreed with all 30 AI-drafted labels. A 30/30 agreement on a sample is not a review of all 84.
-- AI second review (`eval/faithfulness/ai_second_review.csv`): the other 54 labels (36 judge-test, 18 judge-dev) are not owner-reviewed. On 2026-11-16 a second, independent AI pass (Claude) re-checked each of them against the cited span text, deciding PASS/FAIL from the question, the answer and the verbatim cited spans before looking at the drafted label or the judge's verdict. It agreed with 53 of 54 and flagged 1. **This is an AI review, not a human review:** the second reviewer is a Claude model, like the drafting labeler, so the two can share blind spots. No reference label was changed, and no metric below changed: every number is still computed against the AI-drafted labels.
-- Labels: 84 (62 PASS, 22 FAIL). Natural answers were almost all faithful, so seeded synthetic negatives (a changed number, or an appended fabricated sentence citing the same passage) were added; they are reported separately.
+- Reference labels: `eval/faithfulness/labels.jsonl`, **claude-code (AI); 31 of 84 labels owner-decided (30 confirmed 2026-11-16; LF-010 set to FAIL by the owner, applied 2026-11-20), 53 not owner-reviewed**. They were written blind (opaque ids, shuffled) by a separate Claude Code subagent from a written rubric; they are not human expert labels. Agreement below is agreement with AI-drafted reference labels. On 2026-11-16 the owner reviewed a 30-label sample (`eval/faithfulness/owner_review.csv`: 15 PASS and 15 FAIL; 16 judge-test and 14 judge-dev items; 16 natural answers (15 PASS, 1 FAIL), 7 synthetic-number and 7 synthetic-claim negatives) and agreed with all 30 AI-drafted labels. A 30/30 agreement on a sample is not a review of all 84.
+- AI second review (`eval/faithfulness/ai_second_review.csv`): the other 54 labels (36 judge-test, 18 judge-dev) are not owner-reviewed. On 2026-11-16 a second, independent AI pass (Claude) re-checked each of them against the cited span text, deciding PASS/FAIL from the question, the answer and the verbatim cited spans before looking at the drafted label or the judge's verdict. It agreed with 53 of 54 and flagged 1. **This is an AI review, not a human review:** the second reviewer is a Claude model, like the drafting labeler, so the two can share blind spots. The review itself changed no label; the one flagged label was changed only by the owner's decision below.
+- Labels: 84 (61 PASS, 23 FAIL). Natural answers were almost all faithful, so seeded synthetic negatives (a changed number, or an appended fabricated sentence citing the same passage) were added; they are reported separately.
 
-**Flagged for owner decision** (the AI second review disagrees with the drafted label; the label is unchanged until the owner decides):
+**Flagged for owner decision** (the AI second review disagreed with the drafted label):
 
 - `LF-010`: drafted PASS, second review FAIL. S1 attributes the $650 rate to "the renewed engagement letter", but its only cited span is the partners' minutes (LF-PARTNERS-MINUTES-2026-05, "the partner rate for the Calderwood engagement shall be $650 per hour"), not the letter, so the document attribution is unsupported. S2 (14 days, letter 4.3) is supported. Context outside the cited spans: the v2 letter's own clause 2.1 says partners at $680 per hour.
 
-**Owner decision recorded** (`eval/faithfulness/owner_review_flagged.csv`): `LF-010` is FAIL (2026-11-19). The reference label in `labels.jsonl` and every metric below are still computed against the drafted label until the owner approves the recomputation.
+**Owner decision recorded** (`eval/faithfulness/owner_review_flagged.csv`): `LF-010` is FAIL (decided 2026-11-19, recomputation approved 2026-11-20). The reference label in `labels.jsonl` is now the owner's, and every metric below is computed with it.
 
 | Split / subset | Grader | n | ref PASS / FAIL | TPR | TNR | Agreement |
 |---|---|---|---|---|---|---|
 | judge-dev, all (prompt v1) | LLM judge | 32 | 25 / 7 | 0.880 (22/25) | 0.857 (6/7) | 0.875 |
 | judge-dev, all (prompt v2) | LLM judge | 32 | 25 / 7 | 0.880 (22/25) | 0.857 (6/7) | 0.875 |
-| **judge-test, all** | LLM judge | 52 | 37 / 15 | 0.946 (35/37) | 0.933 (14/15) | 0.942 |
-| judge-test, all | deterministic span check | 52 | 37 / 15 | 0.730 (27/37) | 1.000 (15/15) | 0.808 |
-| **judge-test, natural** | LLM judge | 37 | 37 / 0 | 0.946 (35/37) | n/a (0/0) | 0.946 |
-| judge-test, natural | deterministic span check | 37 | 37 / 0 | 0.730 (27/37) | n/a (0/0) | 0.730 |
+| **judge-test, all** | LLM judge | 52 | 36 / 16 | 0.944 (34/36) | 0.875 (14/16) | 0.923 |
+| judge-test, all | deterministic span check | 52 | 36 / 16 | 0.722 (26/36) | 0.938 (15/16) | 0.788 |
+| **judge-test, natural** | LLM judge | 37 | 36 / 1 | 0.944 (34/36) | 0.000 (0/1) | 0.919 |
+| judge-test, natural | deterministic span check | 37 | 36 / 1 | 0.722 (26/36) | 0.000 (0/1) | 0.703 |
 | **judge-test, synthetic** | LLM judge | 15 | 0 / 15 | n/a (0/0) | 0.933 (14/15) | 0.933 |
 | judge-test, synthetic | deterministic span check | 15 | 0 / 15 | n/a (0/0) | 1.000 (15/15) | 1.000 |
 
-Pass rate on natural judge-test answers: reference labels 100.0%, judge raw 94.6%, judge corrected for its measured TPR/TNR 100.0% (Rogan-Gladen; optimistic, because the TNR it uses comes from synthetic negatives).
+Pass rate on natural judge-test answers: reference labels 97.3%, judge raw 94.6%, judge corrected for its measured TPR/TNR 100.0% (Rogan-Gladen; optimistic, because the TNR it uses comes from synthetic negatives).
 
 **Deterministic metrics on the same natural answers** (existing code grader, `generate.support_level`; no LLM):
 
@@ -201,5 +201,5 @@ Reading the two graders together: the deterministic check is strict about surfac
 5. The local model echoed passage markers like "(P1)" into prose and the numeric check treated the 1 as an invented number, mislabelling correct sentences as unsupported; markers are stripped before checking.
 6. LM Studio's Qwen3.6 build ignores every client-side switch to disable hidden reasoning, so short token budgets produced no JSON; the budget is now 4,096 tokens and an unparseable output falls back to extractive.
 7. With a real model answering the adversarial sweep (run 1, kept in `eval/reports/adversarial_generative_run1.json`), gpt-oss:20b paraphrased a vendor notice's instruction to AI tools into an answer sentence. No leak, but the extractive path's rule (never repeat an embedded instruction as an answer) was not enforced on generated text; generated sentences that match the injection patterns are now withheld, and run 2 re-checks it.
-8. The deterministic support check marks faithful paraphrases ('USD 30 million' for 'USD 30,000,000') and derived values (a computed monthly bill) as unsupported: on judge-test it caught 15 of 15 FAIL labels but passed only 27 of 37 faithful natural answers. It stays as a strict, cheap first pass; the calibrated LLM judge is the second.
+8. The deterministic support check marks faithful paraphrases ('USD 30 million' for 'USD 30,000,000') and derived values (a computed monthly bill) as unsupported: on judge-test it caught 15 of 16 FAIL labels but passed only 26 of 36 faithful natural answers. It stays as a strict, cheap first pass; the calibrated LLM judge is the second.
 9. The one-port static UI uses trailing-slash URLs (`/login/`), and the 401 handler compared against `/login`, so a signed-out browser reloaded the login page in a loop. Both checks now accept either form.

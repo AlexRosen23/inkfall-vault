@@ -38,7 +38,7 @@ def owner_flagged() -> list[dict]:
 def review_status(sr: dict) -> str:
     """One phrase for every doc: who reviewed which labels, never calling the AI pass a human review."""
     return (f"30 owner-reviewed, 30/30 agreed; {sr['n']} AI-drafted and independently re-checked by a second AI pass, "
-            f"{sr['agree']} agree and {len(sr['flagged'])} flagged for owner decision; not human-reviewed")
+            f"{sr['agree']} agree and {len(sr['flagged'])} flagged, decided by the owner; not human-reviewed")
 
 
 def f(x, pct=False):
@@ -313,7 +313,7 @@ def main() -> None:
                     f"(n={fa['test']['all']['judge']['n']}, {fa['test']['all']['judge']['ref_fail']} FAIL labels) vs "
                     f"AI-drafted reference labels ({review_status(sr)})") if fa else None,
          "source": "eval/reports/faithfulness.json", "verify": "see docs/RAG_EVALUATION.md (faithfulness)",
-         "status": (f"measured against AI-drafted labels ({review_status(sr)}); metrics unchanged by the reviews; "
+         "status": (f"measured against AI-drafted labels ({review_status(sr)}); metrics recomputed with the owner's LF-010 decision (FAIL, 2026-11-20); "
                     "judge = generator model" if fa else "not run")},
         {"claim": "Sub-100 ms retrieval on CPU", "metric": f"hybrid p95 {hy.get('latency_ms', {}).get('p95')} ms (test split, "
                    f"{mach['cpu']})", "source": "eval/reports/latest.json#summary.test.hybrid.latency_ms",
@@ -435,7 +435,7 @@ def render_readiness_block(path: Path, adv, advg, run1, fa, sr) -> None:
         jt, dt_ = fa["test"]["all"]["judge"], fa["test"]["all"]["deterministic"]
         dm = fa["deterministic_metrics_natural"]
         L.append(f"| Faithfulness LLM judge (binary, critique first), calibrated | judge-test, n={jt['n']} "
-                 f"({jt['ref_pass']} PASS / {jt['ref_fail']} FAIL reference labels; all FAILs synthetic) | LLM judge "
+                 f"({jt['ref_pass']} PASS / {jt['ref_fail']} FAIL reference labels; {fa['test']['synthetic']['judge']['ref_fail']} of the FAILs synthetic) | LLM judge "
                  f"TPR **{f(jt['tpr'])}**, TNR **{f(jt['tnr'])}**; deterministic span check TPR {f(dt_['tpr'])}, "
                  f"TNR {f(dt_['tnr'])} — against **AI-drafted labels** ({review_status(sr)}); judge = generator model | "
                  "`eval/reports/faithfulness.json` |")
@@ -549,9 +549,10 @@ def faithfulness_section(fa, sr) -> list[str]:
            "frozen and run once on judge-test; true-positive and true-negative rates reported separately.", "",
            f"- Generator: **{pv['generator']['model']}** via {pv['generator']['provider']} (local). Judge: the **same "
            f"model** with a different prompt (`{pv['judge_prompt']}`). **Limitation:** a judge that shares the "
-           "generator's model can share its blind spots (self-preference). On judge-test every FAIL label is a synthetic "
-           "negative, so the TNR says how well the judge catches changed numbers and fabricated sentences, not subtle "
-           "natural misreadings.",
+           "generator's model can share its blind spots (self-preference). On judge-test all FAIL labels but one are "
+           "synthetic negatives, so the TNR mostly says how well the judge catches changed numbers and fabricated "
+           "sentences, not subtle natural misreadings. The one natural FAIL, `LF-010` (the owner's decision), is a subtle "
+           "misattribution, and the judge passed it.",
            "- Prompt iteration: v2 added three rules after reading the v1 judge-dev disagreements. Aggregate dev "
            "agreement did not change (the disagreements moved to different items), so the tie was broken in favour of "
            "the more explicit v2, which was then frozen before the single judge-test run.",
@@ -566,15 +567,13 @@ def faithfulness_section(fa, sr) -> list[str]:
            "them against the cited span text, deciding PASS/FAIL from the question, the answer and the verbatim cited "
            "spans before looking at the drafted label or the judge's verdict. It agreed with "
            f"{sr['agree']} of {sr['n']} and flagged {len(sr['flagged'])}. **This is an AI review, not a human review:** "
-           "the second reviewer is a Claude model, like the drafting labeler, so the two can share blind spots. No "
-           "reference label was changed, and no metric below changed: every number is still computed against the "
-           "AI-drafted labels.",
+           "the second reviewer is a Claude model, like the drafting labeler, so the two can share blind spots. The "
+           "review itself changed no label; the one flagged label was changed only by the owner's decision below.",
            f"- Labels: {fa['label_counts']['total']} ({fa['label_counts']['pass']} PASS, {fa['label_counts']['fail']} FAIL). "
            "Natural answers were almost all faithful, so seeded synthetic negatives (a changed number, or an appended "
            "fabricated sentence citing the same passage) were added; they are reported separately.", ""]
     if sr["flagged"]:
-        out += ["**Flagged for owner decision** (the AI second review disagrees with the drafted label; the label is "
-                "unchanged until the owner decides):", ""]
+        out += ["**Flagged for owner decision** (the AI second review disagreed with the drafted label):", ""]
         out += [f"- `{r['item_id']}`: drafted {r['drafted_label']}, second review {r['second_review_label']}. "
                 f"{r['reason']}" for r in sr["flagged"]]
         out += [""]
@@ -583,9 +582,8 @@ def faithfulness_section(fa, sr) -> list[str]:
             d = decided.get(r["item_id"])
             if d:
                 out += [f"**Owner decision recorded** (`eval/faithfulness/owner_review_flagged.csv`): `{r['item_id']}` is "
-                        f"{d['owner_label (PASS/FAIL)']} (2026-11-19). The reference label in `labels.jsonl` and every "
-                        "metric below are still computed against the drafted label until the owner approves the "
-                        "recomputation.", ""]
+                        f"{d['owner_label (PASS/FAIL)']} (decided 2026-11-19, recomputation approved 2026-11-20). The reference "
+                        "label in `labels.jsonl` is now the owner's, and every metric below is computed with it.", ""]
     out += ["| Split / subset | Grader | n | ref PASS / FAIL | TPR | TNR | Agreement |", "|---|---|---|---|---|---|---|"]
     for v, blk in fa["dev_iterations"].items():
         out.append(f"| judge-dev, all (prompt {v}) | LLM judge | {cm(blk['all']['judge'])} |")
