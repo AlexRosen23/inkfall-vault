@@ -48,7 +48,8 @@ REPORTS = EVAL_DIR / "reports"
 FDIR = EVAL_DIR / "faithfulness"
 ANSWERS = REPORTS / "faithfulness_answers.json"
 LABELS = FDIR / "labels.jsonl"
-LABELER = "claude-code (AI); 30 of 84 labels confirmed by the owner 2026-11-16, 54 not owner-reviewed"
+LABELER = ("claude-code (AI); 31 of 84 labels owner-decided (30 confirmed 2026-11-16; LF-010 set to FAIL by the owner, "
+           "applied 2026-11-20), 53 not owner-reviewed")
 
 # Fabricated claims for synthetic negatives (none of these facts exists in the fictional corpus; checked by the
 # reference labeler item by item). Picked deterministically per item.
@@ -393,6 +394,8 @@ def write_owner_review(items: dict, labels: dict, judge_rows: dict, n: int = 30)
     """A fixed, seeded sample for the owner to confirm or correct the AI-drafted labels.
 
     Owner verdicts already recorded in an existing CSV are carried over, so re-running the report never wipes them.
+    Once the CSV exists its sample is frozen: a label change (for example an owner decision) must not reshuffle
+    which items the owner already reviewed.
     """
     rng = random.Random(7)
     ids = sorted(i for i in labels if i in items)
@@ -406,6 +409,9 @@ def write_owner_review(items: dict, labels: dict, judge_rows: dict, n: int = 30)
         with path.open(newline="", encoding="utf-8") as f:
             prior = {r["item_id"]: (r.get("owner_label (PASS/FAIL)", ""), r.get("owner_note", ""))
                      for r in csv.DictReader(f)}
+    frozen = [i for i in prior if i in items and i in labels]
+    if frozen:
+        pick = frozen
     with path.open("w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         w.writerow(["item_id", "split", "kind", "question", "answer_and_cited_spans", "ai_label", "ai_critique",

@@ -63,7 +63,7 @@ Headline numbers (rendered from saved runs by `scripts/render_eval_docs.py`):
 - Retrieval, held-out test split: hybrid MRR@10 **0.966**, citation validity **100.0%**, abstention F1 0.943 (`eval/reports/latest.json`).
 - Permission isolation: **0 leaks** in 1796 search probes + 898 direct reads (`eval/reports/adversarial.json`).
 - Same sweep with **gpt-oss:20b** writing the answers: **0 leaks**, 194 generated answers, 0 of 187 prompts contained forbidden content (`eval/reports/adversarial_generative.json`).
-- Faithfulness LLM judge on judge-test: TPR **0.946**, TNR **0.933** (n=52; natural answers only: n=37, TPR 0.946) against **AI-drafted reference labels** (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged for owner decision; not human-reviewed); judge = generator model (`eval/reports/faithfulness.json`).
+- Faithfulness LLM judge on judge-test: TPR **0.944**, TNR **0.875** (n=52; natural answers only: n=37, TPR 0.944) against **AI-drafted reference labels** (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged, decided by the owner; not human-reviewed); judge = generator model (`eval/reports/faithfulness.json`).
 
 <!-- reviewers:end -->
 
@@ -163,7 +163,7 @@ command, commit and machine.
 | Optional local generation (LM Studio / Ollama), validated per sentence | Working, optional | Validator: `tests/test_generation.py` plus a scripted malicious model (5/5 attacks handled). Real models: a 6-question sample with Qwen3.6-35B in LM Studio (`eval/reports/generative.json`), and gpt-oss:20b in Ollama answering the full adversarial sweep (next row). |
 | Adversarial sweep with a real model writing the answers | Working | `eval/reports/adversarial_generative.json` (gpt-oss:20b, 2026-11-09): 0 leaks, 194 generated answers, 0 of 187 prompts with forbidden content. The first run found the model echoing an injected instruction. That run is kept as `adversarial_generative_run1.json`, and the fix is below. |
 | Claude via the Anthropic Citations API (opt-in) | **Partial: one small live run** | `tests/test_claude_citations.py` uses fixtures built from the documented response schema. One live run on 2026-11-09 (`make eval-claude-live`, claude-opus-5-5, 6 dev questions) → `eval/reports/generative_claude.json`: 6/6 accepted, 12 of 18 sentences supported. It found a real defect, fixed but not yet re-run live (see Results). It's never auto-selected. |
-| Faithfulness LLM judge, calibrated | Working, with caveats | `eval/reports/faithfulness.json`: judge-test TPR 0.946 / TNR 0.933 (n=52). The reference labels are AI-drafted: 30 owner-reviewed (30/30 agreed, 2026-11-16); 54 AI-drafted and independently re-checked by a second AI pass (53 agree, 1 flagged for owner decision); not human-reviewed. The judge is the same model as the generator, and every test-split FAIL label is a synthetic negative. |
+| Faithfulness LLM judge, calibrated | Working, with caveats | `eval/reports/faithfulness.json`: judge-test TPR 0.944 / TNR 0.875 (n=52). The reference labels are AI-drafted: 30 owner-reviewed (30/30 agreed, 2026-11-16); 54 AI-drafted and independently re-checked by a second AI pass (53 agree, 1 flagged: LF-010, set to FAIL by the owner and applied 2026-11-20); not human-reviewed. The judge is the same model as the generator, and every test-split FAIL label but LF-010 is a synthetic negative (the judge passed LF-010). |
 | Permission-aware MCP server (stdio: `search`, `fetch_document`, `cite`) | Working | `tests/test_mcp_server.py`: 449 identity × unreadable-version pairs fetch and cite as missing, 0 forbidden canaries in 449 searches, plus a real stdio subprocess. See [docs/MCP_SERVER.md](docs/MCP_SERVER.md). |
 | OpenTelemetry GenAI spans | Working, off by default | `tests/test_telemetry.py`. Spans never carry question, document, prompt or output text. |
 | Briefs with second-person approval, released to a local outbox | Working; the "external" action is simulated | `test_external_release_requires_second_person_approval`. Nothing leaves the machine: release writes to `data/outbox/`. |
@@ -451,7 +451,7 @@ Adversarial run: **0 leaks** across 12 identities, 1796 targeted search probes a
 
 Same sweep with a real local model (gpt-oss:20b via ollama) generating every non-abstained answer: **0 leaks**; 194 answers generated, 187 prompts checked for forbidden content (0 hits).
 
-Answer faithfulness (gpt-oss:20b answers, binary LLM judge): judge-test TPR **0.946** / TNR **0.933** (n=52) against AI-drafted reference labels (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged for owner decision; not human-reviewed); 47/63 natural answers pass the deterministic span check.
+Answer faithfulness (gpt-oss:20b answers, binary LLM judge): judge-test TPR **0.944** / TNR **0.875** (n=52) against AI-drafted reference labels (30 owner-reviewed, 30/30 agreed; 54 AI-drafted and independently re-checked by a second AI pass, 53 agree and 1 flagged, decided by the owner; not human-reviewed); 47/63 natural answers pass the deterministic span check.
 
 Recall@5 is 1.0 for every method because each identity can read only 3-15 versions; read MRR/nDCG. Contradiction detection is not claimed as a strength: the rule was revised after its test-split misses were inspected, so the test split no longer gives it an independent estimate (docs/CONTRADICTION_RULE.md).
 
@@ -483,7 +483,7 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
   labels were written by a separate Claude Code subagent, blind to the answers' origin. On 2026-11-16 the owner
   reviewed a 30-label sample (`eval/faithfulness/owner_review.csv`: 15 PASS, 15 FAIL) and agreed with all 30. The
   other 54 are not owner-reviewed: a second, independent AI pass (Claude) re-checked each one against the cited
-  span text (`eval/faithfulness/ai_second_review.csv`), agreed with 53 and flagged 1 (LF-010) for owner decision.
+  span text (`eval/faithfulness/ai_second_review.csv`), agreed with 53 and flagged 1 (LF-010), which the owner decided is FAIL (applied to the label and metrics 2026-11-20).
   That second pass is an AI review, not a human review. No label and no metric changed. The judge is the same
   model as the generator. All 15 FAIL labels
   in the test split are synthetic perturbations, so the TNR says nothing yet about naturally wrong answers. On
@@ -534,8 +534,7 @@ Recall@5 is 1.0 for every method because each identity can read only 3-15 versio
    contradiction detection. Then tackle the remaining false alarms (CV-015, LF-008 on test).
 2. Extend the adversarial sweep to every endpoint that returns saved data (reports, audit, admin views). The
    side channels were missed because the sweep only probed search and reads.
-3. Apply the owner's LF-010 decision (FAIL, 2026-11-19, recorded in `eval/faithfulness/owner_review_flagged.csv`) to the
-   reference label and recompute the judge metrics; a human review of the other 53 labels
+3. A human review of the other 53 labels
    outside the owner's 30 (so far re-checked only by AI); then re-report the judge against human labels, with
    naturally wrong answers among the negatives.
 4. Re-run `make eval-claude-live` to confirm the PM-007 title fix, and decide whether uncited connecting sentences
